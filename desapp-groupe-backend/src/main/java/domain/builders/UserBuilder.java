@@ -58,6 +58,12 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder withVehicleCapacity(Integer capacity)
+    {
+        this.vehicle = VehicleBuilder.aVehicle().withCapacity(capacity).build();
+
+        return this;
+    }
 
     public UserBuilder withRoutes(List<Route> routes) {
         this.routes = routes;

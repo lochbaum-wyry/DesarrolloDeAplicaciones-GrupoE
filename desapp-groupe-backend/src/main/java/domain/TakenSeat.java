@@ -12,8 +12,20 @@ public class TakenSeat {
         this.getOffAt = getOffAt;
     }
 
-    public User getPassenger() {
+    public User getPassenger()
+    {
         return passenger;
     }
+
+    public Location getGetOffAt()
+    {
+        return getOffAt;
+    }
+
+    public Location getBoardingAt()
+    {
+        return boardingAt;
+    }
+
 
 }

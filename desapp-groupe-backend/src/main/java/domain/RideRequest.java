@@ -25,7 +25,8 @@ public class RideRequest {
         this.status = RequestStatus.Accepted;
     }
 
-    public void reject(){
+    public void reject()
+    {
         this.status = RequestStatus.Denied;
     }
 

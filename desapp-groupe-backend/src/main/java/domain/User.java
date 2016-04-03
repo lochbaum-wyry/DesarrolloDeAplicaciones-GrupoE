@@ -1,5 +1,7 @@
 package domain;
 
+import domain.exceptions.NoSeatsAvailableException;
+
 import java.lang.*;
 import java.util.*;
 
@@ -12,11 +14,6 @@ public class User {
     private String email;
     private Vehicle vehicle ;
     private List<Route> routes ;
-
-    public void setRoutes(List<Route> routes) {
-        this.routes = routes;
-    }
-
     private List<Ride> rides;
     private List<RideRequest> rideRequests;
     private List<RideRequest> requestedRides;
@@ -109,25 +106,26 @@ public class User {
         return this.wall;
     }
 
-    // TODO: Validar que se puede aceptar el rideRequest ( O sea, si hay asientos disponibles en ese tramo del viaje )
 
-    public void acceptRideRequest(RideRequest rideRequest)
-    {
-        rideRequest.accept();
-
-        // FIXME: hay que arreglar esto: no se tiene que agregar un ride cada vez que obtengo el adecuado para el rideRequest dado.
-        Ride ride = this.rideFromRequest(rideRequest);
-        addRide( ride );
+    public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException {
+        Ride ride = this.getOrAddRideForRequest(rideRequest);
         ride.takeSeat(rideRequest.getPassenger(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
-
         this.removeRideRequest(rideRequest);
+        rideRequest.accept();
     }
 
-
-    public Ride rideFromRequest(RideRequest rideRequest)
+    private Ride getOrAddRideForRequest(RideRequest rideRequest)
     {
+        Ride ride ;
         Optional<Ride> maybeRide = this.getRideSuitableForRideRequest(rideRequest);
-        return maybeRide.orElse(Ride.fromRideRequest(this,rideRequest));
+        if (maybeRide.isPresent())
+        {
+            ride = maybeRide.get();
+        } else {
+            ride = Ride.fromRideRequest(this,rideRequest);
+            addRide(ride);
+        }
+        return ride;
     }
 
     private Optional<Ride> getRideSuitableForRideRequest(RideRequest rideRequest)

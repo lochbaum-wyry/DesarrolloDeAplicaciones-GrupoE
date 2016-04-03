@@ -22,10 +22,18 @@ public class RouteBuilder {
 
     }
 
-    public RouteBuilder withLocationAt(Double longitude, Double latitude) {
+    public RouteBuilder withLocationAt(Double longitude, Double latitude)
+    {
         this.locations.add( new Location(longitude, latitude) );
         return this;
     }
+
+    public RouteBuilder withLocation(Location location)
+    {
+        this.locations.add( location );
+        return this;
+    }
+
 
     public RouteBuilder withLocations(List<Location> locations) {
         this.locations = locations;
