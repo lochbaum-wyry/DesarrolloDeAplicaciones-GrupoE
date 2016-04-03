@@ -44,75 +44,75 @@ public class RideTest {
         Assert.assertFalse(ride.seatTakenBy(passengerFede).isPresent());
     }
 
-//
-//
-//    @Test
-//    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsOverlapFromToThenItReturnsTrue()
-//    {
-//        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-//
-//        User passengerFede = UserBuilder.aUser().withName("Fede").build();
-//        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
-//
-//        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-//        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-//        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-//        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-//
-//        Route route = RouteBuilder.aRoute()
-//                .withLocation(route1)
-//                .withLocation(route2)
-//                .withLocation(route3)
-//                .withLocation(route4)
-//                .build();
-//
-//        TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
-//                                    .withPassenger( passengerFede )
-//                                    .withboardingAtLocation( route2 )
-//                                    .withgetOffAtLocation( route3 )
-//                                    .build();
-//
-//        Ride ride = RideBuilder.aRide().withDriver(driverMario)
-//                        .withRoute(route)
-//                        .withTakenSeatAt(takenSeatFede)
-//                        .build();
-//
-//        Assert.assertTrue(ride.seatIsTakenInSection(takenSeatFede, route2, route3));
-//    }
-//
-//    @Test
-//    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsDontOverlapFromToThenItReturnsFalse()
-//    {
-//        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-//
-//        User passengerFede = UserBuilder.aUser().withName("Fede").build();
-//        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
-//
-//        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-//        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-//        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-//        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-//
-//        Route route = RouteBuilder.aRoute()
-//                .withLocation(route1)
-//                .withLocation(route2)
-//                .withLocation(route3)
-//                .withLocation(route4)
-//                .build();
-//
-//        TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
-//                .withPassenger(passengerFede)
-//                .withboardingAtLocation(route3)
-//                .withgetOffAtLocation(route4)
-//                .build();
-//
-//        Ride ride = RideBuilder.aRide().withDriver(driverMario)
-//                .withRoute(route)
-//                .withTakenSeatAt(takenSeatFede)
-//                .build();
-//
-//        Assert.assertFalse(ride.seatIsTakenInSection(takenSeatFede, route1,route2));
-//    }
+
+
+    @Test
+    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsOverlapFromToThenItReturnsTrue()
+    {
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
+
+        User passengerFede = UserBuilder.aUser().withName("Fede").build();
+        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+
+        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+
+        Route route = RouteBuilder.aRoute()
+                .withLocation(route1)
+                .withLocation(route2)
+                .withLocation(route3)
+                .withLocation(route4)
+                .build();
+
+        TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
+                                    .withPassenger( passengerFede )
+                                    .withboardingAtLocation( route2 )
+                                    .withgetOffAtLocation( route3 )
+                                    .build();
+
+        Ride ride = RideBuilder.aRide().withDriver(driverMario)
+                        .withRoute(route)
+                        .withTakenSeatAt(takenSeatFede)
+                        .build();
+
+        Assert.assertTrue(ride.seatIsTakenInSection(takenSeatFede, route2, route3));
+    }
+
+    @Test
+    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsDontOverlapFromToThenItReturnsFalse()
+    {
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
+
+        User passengerFede = UserBuilder.aUser().withName("Fede").build();
+        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+
+        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+
+        Route route = RouteBuilder.aRoute()
+                .withLocation(route1)
+                .withLocation(route2)
+                .withLocation(route3)
+                .withLocation(route4)
+                .build();
+
+        TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
+                .withPassenger(passengerFede)
+                .withboardingAtLocation(route3)
+                .withgetOffAtLocation(route4)
+                .build();
+
+        Ride ride = RideBuilder.aRide().withDriver(driverMario)
+                .withRoute(route)
+                .withTakenSeatAt(takenSeatFede)
+                .build();
+
+        Assert.assertFalse(ride.seatIsTakenInSection(takenSeatFede, route1,route2));
+    }
 //
 //    @Test
 //    public void test_takenSeatsCountInSection_resultContainsPassengersThatOccupySeatsInTheGivenSectionOfTheRoute()
