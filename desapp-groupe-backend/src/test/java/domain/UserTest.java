@@ -134,6 +134,7 @@ public class UserTest extends AbstractDomainTest
 
     }
 
+    @Test
     public void test_rejectRideRequest_rideRequestIsSetToRejectedStatus()
     {
         User driver = driverWithVehicle(2);
@@ -146,6 +147,7 @@ public class UserTest extends AbstractDomainTest
         Assert.assertEquals(RequestStatus.Rejected, rideRequest.getStatus());
     }
 
+    @Test
     public void test_rejectRideRequest_rideRequestIsRemovedFromDriversRideRequests()
     {
         User driver = driverWithVehicle(2);

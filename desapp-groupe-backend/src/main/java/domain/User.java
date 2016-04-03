@@ -49,7 +49,7 @@ public class User {
     public void requestRide(User driver, RideRequest rideReq)
     {
         driver.addRideRequest(rideReq);
-        this.addRideRequest(rideReq);
+        this.addRequestedRide(rideReq);
     }
 
     public List<Route> getRoutes()
@@ -60,6 +60,7 @@ public class User {
     public void rejectRideRequest(RideRequest rideRequest)
     {
         rideRequest.reject();
+        this.removeRideRequest(rideRequest);
     }
 
     public void rate(User user, Ride ride, RateType rateType, RateValue rateValue, String comment)
