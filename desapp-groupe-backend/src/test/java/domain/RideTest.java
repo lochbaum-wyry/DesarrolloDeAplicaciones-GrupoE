@@ -11,7 +11,7 @@ public class RideTest {
     @Test
     public void test_seatTakenBy()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
 
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
         User passengerJorge = UserBuilder.aUser().withName("Jorge").build();
@@ -44,7 +44,7 @@ public class RideTest {
     @Test
     public void test_fromRideRequest_createdRideSuitsRideRequestDetails()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
         User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
         Route route = RouteBuilder.aRoute().withLocationAt(34.5,21.4).withLocationAt(59.3,100.2).withLocationAt(56.4,87.6).build();
 
