@@ -24,8 +24,14 @@ public class Route {
         this.locations.add(location);
     }
 
+    public void addSchedule(Schedule schedule){ this.schedules.add(schedule); }
+
     public List<Location> getLocations() {
         return locations;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
     }
 
 }
