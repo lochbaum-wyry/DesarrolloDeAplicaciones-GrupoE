@@ -132,9 +132,7 @@ public class User {
     private Optional<Ride> getRideSuitableForRideRequest(RideRequest rideRequest)
     {
         return this.rides.stream().
-            filter( ride -> {
-                return ride.suitsRideRequest(rideRequest);
-            } ).findFirst();
+            filter( ride -> ride.suitsRideRequest(rideRequest)).findFirst();
     }
 
     public void addRideRequest(RideRequest rideRequest)

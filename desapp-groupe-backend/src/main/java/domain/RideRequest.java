@@ -27,7 +27,7 @@ public class RideRequest {
 
     public void reject()
     {
-        this.status = RequestStatus.Denied;
+        this.status = RequestStatus.Rejected;
     }
 
     public User getPassenger() {

@@ -1,5 +1,5 @@
 package domain;
 
 public enum RequestStatus {
-    Pending, Accepted, Denied
+    Pending, Accepted, Rejected
 }

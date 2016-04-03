@@ -1,7 +1,5 @@
 package domain;
 
-import domain.RequestStatus;
-import domain.RideRequest;
 import domain.builders.RideRequestBuilder;
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,7 +26,7 @@ public class RideRequestTest {
 
         rideRequest.reject();
 
-        RequestStatus expected = RequestStatus.Denied;
+        RequestStatus expected = RequestStatus.Rejected;
         RequestStatus received = rideRequest.getStatus();
 
         Assert.assertEquals(expected,received);

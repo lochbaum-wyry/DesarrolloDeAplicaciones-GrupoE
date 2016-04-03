@@ -84,6 +84,16 @@ public class UserTest extends AbstractDomainTest
 
     }
 
+    public Boolean aRideContainsPassengerMatchingRideRequestDetails(List<Ride> rideList , RideRequest rideRequest)
+    {
+        User passenger = rideRequest.getPassenger();
+        return rideList.stream().anyMatch(ride -> {
+            return ride.suitsRideRequest(rideRequest) && ride.seatTakenBy(passenger).isPresent();
+        });
+    }
+
+
+
     @Test(expected = NoSeatsAvailableException.class)
     public void test_acceptRideRequest_NoSeatsAvailableExceptionIsThrownIfThereIsNoSeatsAvailbleForTheRequestedRide()
             throws NoSeatsAvailableException {
@@ -124,12 +134,29 @@ public class UserTest extends AbstractDomainTest
 
     }
 
-
-    public Boolean aRideContainsPassengerMatchingRideRequestDetails(List<Ride> rideList , RideRequest rideRequest)
+    public void test_rejectRideRequest_rideRequestIsSetToRejectedStatus()
     {
-        User passenger = rideRequest.getPassenger();
-        return rideList.stream().anyMatch(ride -> {
-            return ride.suitsRideRequest(rideRequest) && ride.seatTakenBy(passenger).isPresent();
-        });
+        User driver = driverWithVehicle(2);
+        User passenger = UserBuilder.aUser().build();
+        RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
+
+        passenger.requestRide(driver, rideRequest);
+        driver.rejectRideRequest(rideRequest);
+
+        Assert.assertEquals(RequestStatus.Rejected, rideRequest.getStatus());
     }
+
+    public void test_rejectRideRequest_rideRequestIsRemovedFromDriversRideRequests()
+    {
+        User driver = driverWithVehicle(2);
+        User passenger = UserBuilder.aUser().build();
+        RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
+
+        passenger.requestRide(driver, rideRequest);
+        driver.rejectRideRequest(rideRequest);
+
+        Assert.assertFalse(driver.getRideRequests().contains(rideRequest));
+
+    }
+
 }
