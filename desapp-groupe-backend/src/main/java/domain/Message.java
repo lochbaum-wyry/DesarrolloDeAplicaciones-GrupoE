@@ -23,7 +23,7 @@ public class Message {
     }
 
     public Boolean isSeenBy(User user){
-        return seenBy.stream().anyMatch(user1 -> user.equals(user));
+        return seenBy.stream().anyMatch(user1 -> user1.equals(user));
     }
 
     public String getContent() {
