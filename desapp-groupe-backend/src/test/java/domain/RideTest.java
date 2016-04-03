@@ -7,13 +7,13 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class RideTest {
+public class RideTest extends AbstractDomainTest
+{
 
     @Test
     public void test_seatTakenBy_whenPassengerIsIncludedInRideThenIsPresentIsTrue()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
 
@@ -34,8 +34,7 @@ public class RideTest {
     @Test
     public void test_seatTakenBy_whenPassengerNotIsIncludedInRideThenIsPresentIsFalse()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
 
@@ -49,10 +48,8 @@ public class RideTest {
     @Test
     public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsOverlapFromToThenItReturnsTrue()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
@@ -83,10 +80,8 @@ public class RideTest {
     @Test
     public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsDontOverlapFromToThenItReturnsFalse()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
@@ -117,11 +112,9 @@ public class RideTest {
     @Test
     public void test_takenSeatsCountInSection_resultContainsPassengersThatOccupySeatsInTheGivenSectionOfTheRoute()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).build();
-
         User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
         User notAnOccupier = UserBuilder.aUser().withName("Miguel Del Sel").build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
@@ -165,12 +158,8 @@ public class RideTest {
     @Test
     public void test_availableSeatsCountInSection_resultMatchesNumberOfNotOccupiedSeatsInTheGivenSectionOfTheRoute()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle()
-                .withCapacity(2)
-                .build();
-
         User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+        User driverMario = driverWithVehicle(2);
 
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
@@ -197,17 +186,20 @@ public class RideTest {
                 .withTakenSeatAt(occupiersSeat)
                 .build();
 
-        Assert.assertEquals((long)0,  (long) ride.availableSeatsCountInSection(route1,route2));
-        Assert.assertEquals((long)1,  (long) ride.availableSeatsCountInSection(route2,route4));
+        Assert.assertEquals((long) 0,  (long) ride.availableSeatsCountInSection(route1,route2));
+        Assert.assertEquals((long) 1,  (long) ride.availableSeatsCountInSection(route2,route4));
 
     }
 
     @Test
     public void test_fromRideRequest_createdRideSuitsRideRequestDetails()
     {
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(29.2).build();
-        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
-        Route route = RouteBuilder.aRoute().withLocationAt(34.5,21.4).withLocationAt(59.3,100.2).withLocationAt(56.4,87.6).build();
+        User driverMario = driverWithVehicle(2);
+        Route route = RouteBuilder.aRoute()
+                .withLocationAt(34.5,21.4)
+                .withLocationAt(59.3,100.2)
+                .withLocationAt(56.4,87.6)
+                .build();
 
         RideRequest rideRequest = RideRequestBuilder.aRideRequest()
                 .withRoute(route)

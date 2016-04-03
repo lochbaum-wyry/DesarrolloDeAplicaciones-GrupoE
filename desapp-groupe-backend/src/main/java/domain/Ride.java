@@ -3,12 +3,14 @@ package domain;
 import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 
+import java.lang.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class Ride {
+public class Ride
+{
 
     private Vehicle vehicle;
     private DateTime date;

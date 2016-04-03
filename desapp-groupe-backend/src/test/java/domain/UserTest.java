@@ -8,11 +8,10 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.*;
 import java.util.List;
 
 
-public class UserTest
+public class UserTest extends AbstractDomainTest
 {
     @Test
     public void test_requestRide_addsRideRequestToDriverRideRequests()
@@ -42,7 +41,7 @@ public class UserTest
     public void test_acceptRideRequest_setsRideRequestStatusToAccepted()
     {
         RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
-        User driver = UserBuilder.aUser().withVehicleCapacity(2).build();
+        User driver = driverWithVehicle(2);
 
         driver.addRideRequest(rideRequest);
 
@@ -58,7 +57,7 @@ public class UserTest
     @Test
     public void test_acceptRideRequest_passengerIsIncludedInARideCorrespondingToRequestDetails()
     {
-        User driver = UserBuilder.aUser().withVehicleCapacity(2).build();
+        User driver = driverWithVehicle(2);
 
         User passenger = UserBuilder.aUser().build();
         Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
@@ -84,6 +83,47 @@ public class UserTest
         }
 
     }
+
+    @Test(expected = NoSeatsAvailableException.class)
+    public void test_acceptRideRequest_NoSeatsAvailableExceptionIsThrownIfThereIsNoSeatsAvailbleForTheRequestedRide()
+            throws NoSeatsAvailableException {
+
+        User driver = driverWithVehicle(2);
+
+        User seatOccupier = UserBuilder.aUser().build();
+        User failerPassenger = UserBuilder.aUser().build();
+
+        Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
+        Location boardAt = route.getLocations().get(0);
+        Location getOffAt = route.getLocations().get( route.getLocations().size()-1 );
+
+        DateTime date = new DateTime();
+        RideRequest rideRequestOccupier = RideRequestBuilder.aRideRequest()
+                .withPassenger(seatOccupier)
+                .withBoardingAt(boardAt)
+                .withGetoffAt(getOffAt)
+                .withDate(date)
+                .withRoute(route)
+                .build();
+
+        RideRequest rideRequestFailer = RideRequestBuilder.aRideRequest()
+                .withPassenger(failerPassenger)
+                .withBoardingAt(boardAt)
+                .withGetoffAt(getOffAt)
+                .withDate( date )
+                .withRoute(route)
+                .build();
+
+        driver.addRoute(route);
+
+        seatOccupier.requestRide(driver, rideRequestOccupier);
+        seatOccupier.requestRide(driver, rideRequestFailer);
+
+        driver.acceptRideRequest(rideRequestOccupier);
+        driver.acceptRideRequest(rideRequestFailer);
+
+    }
+
 
     public Boolean aRideContainsPassengerMatchingRideRequestDetails(List<Ride> rideList , RideRequest rideRequest)
     {
