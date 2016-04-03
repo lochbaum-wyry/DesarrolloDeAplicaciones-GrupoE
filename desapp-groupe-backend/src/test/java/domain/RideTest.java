@@ -161,46 +161,46 @@ public class RideTest {
         Assert.assertFalse(takenSeatsInSection.contains(notAnOccupiersSeat));
 
     }
-//
-//    @Test
-//    public void test_availableSeatsCountInSection_resultMatchesNumberOfNotOccupiedSeatsInTheGivenSectionOfTheRoute()
-//    {
-//        Vehicle vehicle = VehicleBuilder.aVehicle()
-//                .withCapacity(2)
-//                .build();
-//
-//        User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
-//        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
-//
-//        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-//        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-//        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-//        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-//        Location route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
-//
-//        Route route = RouteBuilder.aRoute()
-//                .withLocation(route1)
-//                .withLocation(route2)
-//                .withLocation(route3)
-//                .withLocation(route4)
-//                .withLocation(route5)
-//                .build();
-//
-//        TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
-//                .withPassenger(occupier)
-//                .withboardingAtLocation(route1)
-//                .withgetOffAtLocation(route2)
-//                .build();
-//
-//        Ride ride = RideBuilder.aRide().withDriver(driverMario)
-//                .withRoute(route)
-//                .withTakenSeatAt(occupiersSeat)
-//                .build();
-//
-//        Assert.assertEquals((long)0,  (long) ride.availableSeatsCountInSection(route1,route2));
-//        Assert.assertEquals((long)1,  (long) ride.availableSeatsCountInSection(route2,route4));
-//
-//    }
+
+    @Test
+    public void test_availableSeatsCountInSection_resultMatchesNumberOfNotOccupiedSeatsInTheGivenSectionOfTheRoute()
+    {
+        Vehicle vehicle = VehicleBuilder.aVehicle()
+                .withCapacity(2)
+                .build();
+
+        User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
+        User driverMario = UserBuilder.aUser().withName("Mario").withVehicle(vehicle).build();
+
+        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        Location route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
+
+        Route route = RouteBuilder.aRoute()
+                .withLocation(route1)
+                .withLocation(route2)
+                .withLocation(route3)
+                .withLocation(route4)
+                .withLocation(route5)
+                .build();
+
+        TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
+                .withPassenger(occupier)
+                .withboardingAtLocation(route1)
+                .withgetOffAtLocation(route2)
+                .build();
+
+        Ride ride = RideBuilder.aRide().withDriver(driverMario)
+                .withRoute(route)
+                .withTakenSeatAt(occupiersSeat)
+                .build();
+
+        Assert.assertEquals((long)0,  (long) ride.availableSeatsCountInSection(route1,route2));
+        Assert.assertEquals((long)1,  (long) ride.availableSeatsCountInSection(route2,route4));
+
+    }
 
     @Test
     public void test_fromRideRequest_createdRideSuitsRideRequestDetails()
