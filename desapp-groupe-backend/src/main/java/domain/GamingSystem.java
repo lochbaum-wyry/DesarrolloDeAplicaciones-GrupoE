@@ -45,10 +45,10 @@ public class GamingSystem {
 
     public void userExchangeaProduct(User user,Product product) throws NotEnoughPointsException
     {
-        if(calculateUserPoints(user) > product.getCost()) {
+        if(calculateUserPoints(user) >= product.getCost()) {
             ProductExchange productExchange = new ProductExchange(user, product);
             this.getProductExchanges().add(productExchange);
-            user.setSpentPoints(user.getSpentPoints()-product.getCost());
+            user.setSpentPoints(user.getSpentPoints()+ product.getCost());
         }else
             throw new NotEnoughPointsException(user,product);
     }

@@ -18,8 +18,7 @@ public class PostBuilder {
         this.publisher = user;
         return this;
     }
-
-
+    
     public PostBuilder withDate(DateTime date) {
         this.date = date;
         return this;
@@ -33,4 +32,5 @@ public class PostBuilder {
     public Post build() {
         return new Post(this.publisher,this.date,this.content);
     }
+
 }

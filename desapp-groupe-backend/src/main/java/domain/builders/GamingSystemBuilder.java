@@ -26,4 +26,9 @@ public class GamingSystemBuilder {
         gamingSystem.getProductExchanges().addAll(productExchanges);
         return gamingSystem;
     }
+
+    public GamingSystemBuilder withProduct(Product product) {
+        this.availableProducts.add(product);
+        return this;
+    }
 }
