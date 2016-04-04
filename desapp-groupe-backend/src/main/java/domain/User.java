@@ -19,7 +19,7 @@ public class User {
     private List<RideRequest> rideRequests;
     private List<RideRequest> requestedRides;
     private List<Rate> rates;
-    private Integer points;
+    private Integer spentPoints;
     private List<Chat> chats;
 
     public User(String name,String lastName,String userName,String email)
@@ -34,7 +34,7 @@ public class User {
         this.rideRequests = new ArrayList<RideRequest>();
         this.requestedRides = new ArrayList<RideRequest>();
         this.rates = new ArrayList<Rate>();
-        this.points = 0;
+        this.spentPoints = 0;
         this.chats = new ArrayList<Chat>();
     }
 
@@ -82,6 +82,15 @@ public class User {
         Chat chat = this.getOrAddChatWith(user);
         chat.addMessage(this,content);
     }
+
+    public Integer getSpentPoints() {
+        return spentPoints;
+    }
+
+    public void setSpentPoints(Integer spentPoints) {
+        this.spentPoints = spentPoints;
+    }
+
 
     private Chat getOrAddChatWith(User user)
     {
