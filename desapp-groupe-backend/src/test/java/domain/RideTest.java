@@ -161,6 +161,8 @@ public class RideTest extends AbstractDomainTest
         User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
         User driverMario = driverWithVehicle(2);
 
+        Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5).withCapacity(2).build();
+
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
         Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
@@ -184,6 +186,7 @@ public class RideTest extends AbstractDomainTest
         Ride ride = RideBuilder.aRide().withDriver(driverMario)
                 .withRoute(route)
                 .withTakenSeatAt(occupiersSeat)
+                .withVehicle(vehicle)
                 .build();
 
         Assert.assertEquals((long) 0,  (long) ride.availableSeatsCountInSection(route1,route2));

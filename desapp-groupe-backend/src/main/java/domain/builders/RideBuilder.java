@@ -35,6 +35,7 @@ public class RideBuilder {
     public Ride build() {
         Ride ride = new Ride(this.route,this.date,this.driver);
         ride.getTakenSeats().addAll(this.takenSeats);
+        ride.setVehicle(this.vehicle);
         return ride;
     }
 
@@ -50,6 +51,11 @@ public class RideBuilder {
 
     public RideBuilder withRoute(Route route) {
         this.route = route;
+        return this;
+    }
+
+    public RideBuilder withVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
         return this;
     }
 }

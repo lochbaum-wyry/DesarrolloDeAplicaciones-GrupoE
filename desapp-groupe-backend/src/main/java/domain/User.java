@@ -62,7 +62,7 @@ public class User {
         user.addRate(rate);
     }
 
-    public void rateCar(User user, Ride ride, RateValue rateValue, String comment)
+    public void rateCar(Ride ride, RateValue rateValue, String comment)
     {
         Rate rate = new Rate(this, ride, rateValue, comment);
         ride.getVehicle().addRate(rate);
