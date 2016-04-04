@@ -161,4 +161,30 @@ public class UserTest extends AbstractDomainTest
 
     }
 
+    @Test
+    public void test_sendMessage_newChatIsCreatedWhenUsersMessageForTheFirstTime()
+    {
+        User user = UserBuilder.aUser().build();
+        User otherUser = UserBuilder.aUser().build();
+
+        Assert.assertTrue(user.getChats().isEmpty());
+
+        user.sendMessage(otherUser, "como estas cabezon???");
+
+        Assert.assertFalse(user.getChats().isEmpty());
+    }
+
+    @Test
+    public void test_sendMessage_newChatIsAddedToTheOtherUserWhenUsersMessageForTheFirstTime()
+    {
+        User user = UserBuilder.aUser().build();
+        User otherUser = UserBuilder.aUser().build();
+
+        Assert.assertTrue(otherUser.getChats().isEmpty());
+
+        user.sendMessage(otherUser, "como estas cabezon???");
+
+        Assert.assertFalse(otherUser.getChats().isEmpty());
+    }
+
 }

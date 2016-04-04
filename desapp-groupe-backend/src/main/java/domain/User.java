@@ -21,7 +21,6 @@ public class User {
     private List<Rate> rates;
     private Integer points;
     private List<Chat> chats;
-    private Wall wall;
 
     public User(String name,String lastName,String userName,String email)
     {
@@ -37,7 +36,6 @@ public class User {
         this.rates = new ArrayList<Rate>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
-        this.wall = new Wall();
     }
 
     public User(String name,String lastName,String userName,String email,Vehicle vehicle)
@@ -50,11 +48,6 @@ public class User {
     {
         driver.addRideRequest(rideReq);
         this.addRequestedRide(rideReq);
-    }
-
-    public List<Route> getRoutes()
-    {
-        return routes;
     }
 
     public void rejectRideRequest(RideRequest rideRequest)
@@ -76,18 +69,24 @@ public class User {
 
     public void sendMessage(User user, String content)
     {
-        Optional<Chat> chat = getChatWith(user);
+        Chat chat = getOrAddChatWith(user);
+        chat.addMessage(this,content);
+    }
 
-        if(chat.isPresent())
+    private Chat getOrAddChatWith(User user)
+    {
+        Chat chat ;
+        Optional<Chat> maybeChat = getChatWith(user);
+        if(maybeChat.isPresent())
         {
-            chat.get().addMessage(this, content);
+            chat = maybeChat.get();
         } else
         {
-            Chat newchat = new Chat(this.name.toString(),this,user);
-            addChat(newchat);
-            user.addChat(newchat);
-            newchat.addMessage(this,content);
+            chat = new Chat(this.name.toString(),this,user);
+            addChat(chat);
+            user.addChat(chat);
         }
+        return chat;
     }
 
     private Optional<Chat> getChatWith(User user)
@@ -99,15 +98,6 @@ public class User {
     {
         this.getChats().add(newchat);
     }
-
-    public void setWall(Wall wall) {
-        this.wall = wall;
-    }
-
-    public Wall getWall(){
-        return this.wall;
-    }
-
 
     public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException {
         Ride ride = this.getOrAddRideForRequest(rideRequest);
@@ -169,6 +159,11 @@ public class User {
     public List<Chat> getChats()
     {
         return chats;
+    }
+
+    public List<Route> getRoutes()
+    {
+        return routes;
     }
 
     public void addRoute(Route route)
