@@ -44,6 +44,10 @@ public class User {
         this.vehicle = vehicle;
     }
 
+    public List<Rate> getRates(){
+        return this.rates;
+    }
+
     public void requestRide(User driver, RideRequest rideReq)
     {
         driver.addRideRequest(rideReq);

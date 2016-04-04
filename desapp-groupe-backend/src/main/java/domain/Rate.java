@@ -1,5 +1,7 @@
 package domain;
 
+import java.awt.datatransfer.DataFlavor;
+
 public class Rate {
     private User user;
     private Ride ride;
@@ -14,6 +16,7 @@ public class Rate {
     }
 
 
-
-
+    public RateValue getValue() {
+        return rateValue;
+    }
 }
