@@ -56,10 +56,16 @@ public class User {
         this.removeRideRequest(rideRequest);
     }
 
-    public void rate(User user, Ride ride, RateType rateType, RateValue rateValue, String comment)
+    public void rateUser(User user, Ride ride, RateValue rateValue, String comment)
     {
-        Rate rate = new Rate(rateType, user, ride, rateValue, comment);
+        Rate rate = new Rate(this, ride, rateValue, comment);
         user.addRate(rate);
+    }
+
+    public void rateCar(User user, Ride ride, RateValue rateValue, String comment)
+    {
+        Rate rate = new Rate(this, ride, rateValue, comment);
+        ride.getVehicle().addRate(rate);
     }
 
     public void addRate(Rate rate)
@@ -69,7 +75,7 @@ public class User {
 
     public void sendMessage(User user, String content)
     {
-        Chat chat = getOrAddChatWith(user);
+        Chat chat = this.getOrAddChatWith(user);
         chat.addMessage(this,content);
     }
 

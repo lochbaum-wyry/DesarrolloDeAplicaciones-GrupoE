@@ -187,4 +187,24 @@ public class UserTest extends AbstractDomainTest
         Assert.assertFalse(otherUser.getChats().isEmpty());
     }
 
+    @Test
+    public void test_sendMessage_onlyOneChatPerUserIsCreatedOnEachUser()
+    {
+        User user = UserBuilder.aUser().build();
+        User otherUser = UserBuilder.aUser().build();
+
+        user.sendMessage(otherUser, "como estas cabezon???");
+        user.sendMessage(otherUser, "todo bien???");
+
+        Assert.assertEquals(1, this.numberOfChatsWithUser(user,otherUser));
+    }
+
+    public long numberOfChatsWithUser(User user, User searchedUser)
+    {
+        return user.getChats().stream()
+                .filter(p -> p.getUsers().contains(searchedUser))
+                .count();
+    }
+
+
 }
