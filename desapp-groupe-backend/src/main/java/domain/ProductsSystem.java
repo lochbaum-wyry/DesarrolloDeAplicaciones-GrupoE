@@ -29,8 +29,9 @@ public class ProductsSystem {
 
     public void userExchangeaProduct(User user,Product product) throws NotEnoughPointsException
     {
-        if(user.getPoints() >= product.getCost()) {
+        if(user.getPoints() >= product.getCost() && product.getStock()>0) {
             ProductExchange productExchange = new ProductExchange(user, product);
+            product.setStock(product.getStock()-1);
             this.getProductExchanges().add(productExchange);
             user.addPoints(-product.getCost());
         }else

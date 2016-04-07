@@ -16,6 +16,7 @@ public class UserBuilder {
     private Vehicle vehicle;
     private List<Route> routes;
     private GamingSystem gamingSystem;
+    private Integer points;
 
     public UserBuilder(){
         this.name = "";
@@ -25,6 +26,7 @@ public class UserBuilder {
         this.vehicle = null;
         this.routes  = new ArrayList<Route>();
         this.gamingSystem = null;
+        this.points = 0;
     }
     public static UserBuilder aUser(){
         return new UserBuilder();
@@ -33,6 +35,7 @@ public class UserBuilder {
     public User build(){
         User user =  new User(name,lastName,userName,email,vehicle,gamingSystem);
         routes.stream().forEach(route -> {user.addRoute(route);});
+        user.setPoints(this.points);
         return user;
     }
 
@@ -75,6 +78,11 @@ public class UserBuilder {
 
     public UserBuilder withGamingSystem(GamingSystem gamingSystem) {
         this.gamingSystem = gamingSystem;
+        return this;
+    }
+
+    public UserBuilder withPoints(Integer points) {
+        this.points = points;
         return this;
     }
 }

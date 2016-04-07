@@ -13,7 +13,7 @@ public class ProductsSystemTest {
 
     @Test
     public void test_exchangeableProductFor_aUserExchanged4ProductAndInsideInProductsSystem(){
-        //quise poner, un usuario canjea 4 productos y estan dentro del ProductsSystem
+        //TODO :quise poner, un usuario canjea 4 productos y estan dentro del ProductsSystem
         GamingSystem gamingSystem = GamingSystemBuilder.aGamingSystem().build();
         User user = UserBuilder.aUser().build();
         User fede = UserBuilder.aUser().withGamingSystem(gamingSystem).build();
@@ -42,5 +42,36 @@ public class ProductsSystemTest {
         }
     }
 
-    //TODO : falta testear userExchangeaProduct
+    @Test
+    public void test_userExchangeaProduct_aUserWith2000PointsCanExchangeaProductto1000Points(){
+        //TODO : quise poner,un usuario con 2000 puntos puede canjear un producto a 1000 puntos
+        GamingSystem gamingSystem = GamingSystemBuilder.aGamingSystem().build();
+        User fede = UserBuilder.aUser().withGamingSystem(gamingSystem).withPoints(2000).build();
+
+        Product product = ProductBuilder.aProduct().withName("1000 pesos de nafta").withCost(1000).withStock(2).build();
+
+        ProductsSystem productsSystem = ProductsSystemBuilder.aGamingSystem().withProduct(product).build();
+
+        try {
+            productsSystem.userExchangeaProduct(fede,product);
+
+            Assert.assertEquals(productsSystem.exchangeableProductFor(fede).size(),1);
+
+        } catch (NotEnoughPointsException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(expected = NotEnoughPointsException.class)
+    public void test_userExchangeaProduct_aUserWith1000PointsNoCanExchangeaProductto2000Points() throws NotEnoughPointsException {
+        //TODO : quise poner,un usuario con 1000 puntos NO puede canjear un producto a 2000 puntos
+        GamingSystem gamingSystem = GamingSystemBuilder.aGamingSystem().build();
+        User fede = UserBuilder.aUser().withGamingSystem(gamingSystem).withPoints(1000).build();
+
+        Product product = ProductBuilder.aProduct().withName("1000 pesos de nafta").withCost(2000).withStock(2).build();
+
+        ProductsSystem productsSystem = ProductsSystemBuilder.aGamingSystem().withProduct(product).build();
+
+        productsSystem.userExchangeaProduct(fede, product);
+    }
 }
