@@ -23,13 +23,17 @@ public class ProductsSystem {
         return productExchanges;
     }
 
-    public List<ProductExchange> exchangeableProductFor(User user){
-        return this.getProductExchanges().stream().filter(productExchange -> productExchange.getUser().equals(user)).collect(Collectors.toList());
+    public List<ProductExchange> exchangedProductsBy(User user)
+    {
+        return this.getProductExchanges().stream()
+                .filter(productExchange -> productExchange.getUser().equals(user))
+                .collect(Collectors.toList());
     }
 
-    public void userExchangeaProduct(User user,Product product) throws NotEnoughPointsException
+    public void userExchangesAProduct(User user, Product product) throws NotEnoughPointsException
     {
-        if(user.getPoints() >= product.getCost() && product.getStock()>0) {
+        if(user.getPoints() >= product.getCost() && product.getStock()>0)
+        {
             ProductExchange productExchange = new ProductExchange(user, product);
             product.setStock(product.getStock()-1);
             this.getProductExchanges().add(productExchange);
