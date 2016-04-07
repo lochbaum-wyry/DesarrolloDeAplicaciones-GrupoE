@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScoringSystem {
-    //TODO: aca ver donde metenemos el scoringSyste para que no sea statica
-    private static List<Scorer> scorers = new ArrayList<Scorer>();;
+    private static List<Scorer> scorers;
 
     public ScoringSystem(){
         scorers = new ArrayList<Scorer>();
