@@ -12,7 +12,7 @@ public class BadRatingScorer extends RateEventScorer {
     }
 
     private Boolean isEven(int number) {
-        return (number % 2) == 0;
+        return ((number % 2) == 0) && (number != 0);
     }
 
     public Integer calculatePointsFor(User user)

@@ -21,8 +21,9 @@ public class User {
     private List<Rate> rates;
     private Integer points;
     private List<Chat> chats;
+    private GamingSystem gamingSystem;
 
-    public User(String name,String lastName,String userName,String email)
+    public User(String name,String lastName,String userName,String email,GamingSystem gamingSystem)
     {
         this.name = name;
         this.lastName = lastName;
@@ -36,11 +37,12 @@ public class User {
         this.rates = new ArrayList<Rate>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
+        this.gamingSystem = gamingSystem;
     }
 
-    public User(String name,String lastName,String userName,String email,Vehicle vehicle)
+    public User(String name,String lastName,String userName,String email,Vehicle vehicle,GamingSystem gamingSystem)
     {
-        this(name, lastName, userName, email);
+        this(name, lastName, userName, email,gamingSystem);
         this.vehicle = vehicle;
     }
 
@@ -74,7 +76,7 @@ public class User {
 
     public void addRate(Rate rate)
     {
-        ScoringSystem.applyRateEventScorers(this);
+        gamingSystem.getScoringSystem().applyRateEventScorers(this);
         this.rates.add(rate);
     }
 

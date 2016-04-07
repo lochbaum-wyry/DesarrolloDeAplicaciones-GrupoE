@@ -6,13 +6,17 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.*;
+import java.lang.System;
+
 public class ProductsSystemTest {
 
     @Test
-    public void test_exchangeableProductFor_aUserExchanged4ProductAndInsideInGamingSystem(){
-        //quise poner, un usuario canjea 4 productos y estan dentro del gamingSystem
+    public void test_exchangeableProductFor_aUserExchanged4ProductAndInsideInProductsSystem(){
+        //quise poner, un usuario canjea 4 productos y estan dentro del ProductsSystem
+        GamingSystem gamingSystem = GamingSystemBuilder.aGamingSystem().build();
         User user = UserBuilder.aUser().build();
-        User fede = UserBuilder.aUser().build();
+        User fede = UserBuilder.aUser().withGamingSystem(gamingSystem).build();
 
         Product product = ProductBuilder.aProduct().withName("500 pesos de nafta").withCost(500).withStock(99).build();
         Product product1 = ProductBuilder.aProduct().withName("500 pesos de nafta").withCost(250).withStock(99).build();
@@ -27,7 +31,6 @@ public class ProductsSystemTest {
         user.rateUser(fede,ride,RateValue.GOOD,"es un gran cebador de mate");
         user.rateUser(fede,ride,RateValue.GOOD,"es un gran amigo");
         user.rateUser(fede,ride,RateValue.GOOD,"es la onda");
-
         try {
             productsSystem.userExchangeaProduct(fede,product);
             productsSystem.userExchangeaProduct(fede,product2);

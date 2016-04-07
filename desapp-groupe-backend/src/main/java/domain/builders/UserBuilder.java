@@ -1,5 +1,6 @@
 package domain.builders;
 
+import domain.GamingSystem;
 import domain.Route;
 import domain.User;
 import domain.Vehicle;
@@ -14,6 +15,7 @@ public class UserBuilder {
     private String email;
     private Vehicle vehicle;
     private List<Route> routes;
+    private GamingSystem gamingSystem;
 
     public UserBuilder(){
         this.name = "";
@@ -22,13 +24,14 @@ public class UserBuilder {
         this.email = "";
         this.vehicle = null;
         this.routes  = new ArrayList<Route>();
+        this.gamingSystem = null;
     }
     public static UserBuilder aUser(){
         return new UserBuilder();
     }
 
     public User build(){
-        User user =  new User(name,lastName,userName,email,vehicle);
+        User user =  new User(name,lastName,userName,email,vehicle,gamingSystem);
         routes.stream().forEach(route -> {user.addRoute(route);});
         return user;
     }
@@ -67,6 +70,11 @@ public class UserBuilder {
 
     public UserBuilder withRoutes(List<Route> routes) {
         this.routes = routes;
+        return this;
+    }
+
+    public UserBuilder withGamingSystem(GamingSystem gamingSystem) {
+        this.gamingSystem = gamingSystem;
         return this;
     }
 }
