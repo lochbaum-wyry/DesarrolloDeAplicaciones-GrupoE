@@ -19,7 +19,7 @@ public class User {
     private List<RideRequest> rideRequests;
     private List<RideRequest> requestedRides;
     private List<Rate> rates;
-    private Integer spentPoints;
+    private Integer points;
     private List<Chat> chats;
 
     public User(String name,String lastName,String userName,String email)
@@ -34,7 +34,7 @@ public class User {
         this.rideRequests = new ArrayList<RideRequest>();
         this.requestedRides = new ArrayList<RideRequest>();
         this.rates = new ArrayList<Rate>();
-        this.spentPoints = 0;
+        this.points = 0;
         this.chats = new ArrayList<Chat>();
     }
 
@@ -74,6 +74,7 @@ public class User {
 
     public void addRate(Rate rate)
     {
+        ScoringSystem.applyRateEventScorers(this);
         this.rates.add(rate);
     }
 
@@ -83,12 +84,12 @@ public class User {
         chat.addMessage(this,content);
     }
 
-    public Integer getSpentPoints() {
-        return spentPoints;
+    public Integer getPoints() {
+        return points;
     }
 
-    public void setSpentPoints(Integer spentPoints) {
-        this.spentPoints = spentPoints;
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 
 
@@ -193,5 +194,9 @@ public class User {
     public void addRide(Ride ride)
     {
         rides.add(ride);
+    }
+
+    public void addPoints(Integer points) {
+        this.points= this.points + points;
     }
 }

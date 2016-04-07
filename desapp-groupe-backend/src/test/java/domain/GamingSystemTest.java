@@ -133,6 +133,7 @@ public class GamingSystemTest {
         } catch (NotEnoughPointsException e) {
             e.printStackTrace();
         }
-
     }
+
+
 }
