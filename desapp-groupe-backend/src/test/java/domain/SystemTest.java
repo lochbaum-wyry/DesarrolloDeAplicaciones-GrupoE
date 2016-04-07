@@ -45,7 +45,7 @@ public class SystemTest {
         Location initiallocation = LocationBuilder.aLocation().withLongitude(230.0).withLatitude(400.0).build();
         Location endinglocation = LocationBuilder.aLocation().withLongitude(300.0).withLatitude(450.0).build();
 
-        List<Route> received = system.findRoutesSatisfying(new DateTime(),initiallocation,endinglocation);
+        List<Route> received = system.findRoutesSatisfying(new DateTime(), 1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();
 
         Assert.assertEquals(expected,received);
@@ -69,7 +69,7 @@ public class SystemTest {
         Location initiallocation = LocationBuilder.aLocation().withLongitude(200.0).withLatitude(200.0).build();
         Location endinglocation = LocationBuilder.aLocation().withLongitude(230.0).withLatitude(230.0).build();
 
-        List<Route> received = system.findRoutesSatisfying(new DateTime(),initiallocation,endinglocation);
+        List<Route> received = system.findRoutesSatisfying(new DateTime(),1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();
         expected.add(route);
 

@@ -17,10 +17,12 @@ public class System {
         return users;
     }
 
-    public List<Route> findRoutesSatisfying(DateTime date, Location departureLocation, Location getOffLocation) {
+    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness) {
         List<Route> result = users.stream().map(user -> user.getRoutes()).flatMap(routes -> routes.stream()).collect(Collectors.toList());
 
-        result = result.stream().filter(route ->  route.matchesRequestedRoute(date,departureLocation,getOffLocation)  ).collect(Collectors.toList());
+        result = result.stream()
+                .filter(route -> route.matchesRequestedRoute(date, secondsDateCloseness,departureLocation,getOffLocation,radioCloseness) )
+                .collect(Collectors.toList());
 
         return result;
     }

@@ -32,14 +32,14 @@ public class Location {
         this.longitude = longitude;
     }
 
-    public Boolean isNear(Location location)
+    public Boolean isNear(Location location, Float radioCloseness)
     {
-        return this.pointIsInCircle(location.getLongitude(),location.getLatitude());
+        return this.pointIsInCircle(location.getLongitude(),location.getLatitude(), radioCloseness);
     }
 
-    private Boolean pointIsInCircle(Double longitude, Double latitude)
+    private Boolean pointIsInCircle(Double longitude, Double latitude, Float radioCloseness)
     {
-        return (Math.pow(longitude-this.getLongitude(),2) + Math.pow(latitude-this.getLatitude() ,2)) < Math.pow(Route.radioCloseness,2);
+        return (Math.pow(longitude-this.getLongitude(),2) + Math.pow(latitude-this.getLatitude() ,2)) < Math.pow(radioCloseness,2);
     }
 
     @Override

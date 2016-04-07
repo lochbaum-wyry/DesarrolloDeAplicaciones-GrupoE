@@ -7,17 +7,19 @@ import java.util.List;
 
 public class Route {
 
-    public static Integer radioCloseness = 200;
     private List<Schedule> schedules = new ArrayList<Schedule>();
     private List<Location> locations = new ArrayList<Location>();
+    private Float distanceInKms;
 
-    public Boolean matchesRequestedRoute(DateTime date, Location departureLocation, Location getOffLocation) {
+    public Boolean matchesRequestedRoute(DateTime date, Integer secondsDateCloseness , Location departureLocation, Location getOffLocation, Float radioCloseness)
+    {
         // TODO: Fecha
-        return this.locationIsNearRoute(departureLocation) && this.locationIsNearRoute(getOffLocation);
+        return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
     }
 
-    public Boolean locationIsNearRoute(Location location){
-        return this.locations.stream().anyMatch(point -> point.isNear(location));
+    public Boolean locationIsNearRoute(Location location, Float radioCloseness)
+    {
+        return this.locations.stream().anyMatch(point -> point.isNear(location, radioCloseness));
     }
 
     public void addLocation(Location location) {
@@ -32,6 +34,16 @@ public class Route {
 
     public List<Schedule> getSchedules() {
         return schedules;
+    }
+
+    public Float getFixedCosts()
+    {
+        return 0f;
+    }
+
+    public Float getDistanceInKms()
+    {
+        return this.distanceInKms;
     }
 
 }
