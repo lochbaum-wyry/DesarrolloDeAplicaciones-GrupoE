@@ -17,7 +17,7 @@ public class ProductsSystemBuilder {
         this.productExchanges = new ArrayList<ProductExchange>();
     }
 
-    public static ProductsSystemBuilder aGamingSystem() {
+    public static ProductsSystemBuilder aProductSystem() {
         return new ProductsSystemBuilder();
     }
 

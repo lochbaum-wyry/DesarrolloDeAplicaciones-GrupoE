@@ -7,8 +7,8 @@ public class BadRatingScorer extends RateEventScorer {
 
     public Boolean canApplyTo(User user)
     {
-        List<Rate> badRates = user.getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
-        return isEven(badRates.size());
+        return isEven(user.getBadRates().size());
+
     }
 
     private Boolean isEven(int number) {

@@ -1,6 +1,7 @@
 package domain;
 
-public class GoodRatingScorer extends RateEventScorer{
+public class GoodRatingScorer extends RateEventScorer
+{
     public Boolean canApplyTo(User user)
     {
         return true;

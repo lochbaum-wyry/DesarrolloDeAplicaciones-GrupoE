@@ -5,6 +5,7 @@ import domain.exceptions.NoSeatsAvailableException;
 import java.lang.*;
 import java.lang.System;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class User {
@@ -21,9 +22,8 @@ public class User {
     private List<Rate> rates;
     private Integer points;
     private List<Chat> chats;
-    private GamingSystem gamingSystem;
 
-    public User(String name,String lastName,String userName,String email,GamingSystem gamingSystem)
+    public User(String name,String lastName,String userName,String email)
     {
         this.name = name;
         this.lastName = lastName;
@@ -37,12 +37,11 @@ public class User {
         this.rates = new ArrayList<Rate>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
-        this.gamingSystem = gamingSystem;
     }
 
-    public User(String name,String lastName,String userName,String email,Vehicle vehicle,GamingSystem gamingSystem)
+    public User(String name,String lastName,String userName,String email,Vehicle vehicle)
     {
-        this(name, lastName, userName, email,gamingSystem);
+        this(name, lastName, userName, email);
         this.vehicle = vehicle;
     }
 
@@ -76,7 +75,6 @@ public class User {
 
     public void addRate(Rate rate)
     {
-        gamingSystem.getScoringSystem().applyRateEventScorers(this);
         this.rates.add(rate);
     }
 
@@ -200,5 +198,10 @@ public class User {
 
     public void addPoints(Integer points) {
         this.points= this.points + points;
+    }
+
+    public List<Rate> getBadRates()
+    {
+        return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
     }
 }
