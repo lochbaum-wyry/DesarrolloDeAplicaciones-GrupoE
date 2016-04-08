@@ -15,10 +15,22 @@ public class Ranking {
     public Ranking(Integer month,Integer year,List<User> users){
         bestDrivers = calculateBestDrivers(users,month,year);
         worstDrivers = calculateWorstDrivers(users,month,year);
-        //bestPassenger = calculateBestPassenger(users,month,year);
-        //worstPassenger = calculateWorstPassenger(users,month,year);
+        bestPassenger = calculateBestPassenger(users,month,year);
+        worstPassenger = calculateWorstPassenger(users,month,year);
         //bestVehicles = calculateBestVehicles(users,month,year);
         //worstVehicles = calculateWorstVehicles(users,month,year);
+    }
+
+    private List<User> calculateWorstPassenger(List<User> users, Integer month, Integer year) {
+        return orderUsersbyPointMinToMax(passengerIn(users)).subList(0,19);
+    }
+
+    private List<User> calculateBestPassenger(List<User> users, Integer month, Integer year) {
+        return orderUsersbyPointMaxToMin(passengerIn(users)).subList(0,19);
+    }
+
+    private List<User> passengerIn(List<User> users) {
+        return users.stream().filter(user -> user.isPassenger()).collect(Collectors.toList());
     }
 
     private List<User> driversIn(List<User> users){

@@ -216,4 +216,8 @@ public class User {
     public boolean isDriver() {
         return getVehicle().getClass().equals(Vehicle.class);
     }
+
+    public boolean isPassenger() {
+        return getVehicle().equals(null);
+    }
 }
