@@ -6,12 +6,12 @@ import java.util.List;
 public class Vehicle {
 
     private Integer capacity;
-    private Double oilWasterPerHour;
+    private Double oilWastePerKm;
     private List<Rate> rates  ;
 
-    public Vehicle(Integer capacity,Double oilWasterPerHour){
+    public Vehicle(Integer capacity,Double oilWastePerKm){
         this.capacity = capacity;
-        this.oilWasterPerHour = oilWasterPerHour;
+        this.oilWastePerKm = oilWastePerKm;
         this.rates = new ArrayList<Rate>();
     }
 
@@ -22,5 +22,9 @@ public class Vehicle {
     public void addRate(Rate rate)
     {
         this.rates.add(rate);
+    }
+
+    public Double getOilWastePerKm() {
+        return oilWastePerKm;
     }
 }

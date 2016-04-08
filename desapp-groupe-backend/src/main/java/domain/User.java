@@ -23,6 +23,7 @@ public class User {
     private Integer points;
     private List<Chat> chats;
 
+
     public User(String name,String lastName,String userName,String email)
     {
         this.name = name;
@@ -134,9 +135,16 @@ public class User {
         {
             ride = maybeRide.get();
         } else {
-            ride = Ride.fromRideRequest(this,rideRequest);
+            ride = createRideForRideRequest(rideRequest);
             addRide(ride);
         }
+        return ride;
+    }
+
+    private Ride createRideForRideRequest(RideRequest rideRequest)
+    {
+        Ride ride = Ride.fromRideRequest(this,rideRequest);
+        ride.setOilPrice( SystemSettings.getInstance().getOilPrice() );
         return ride;
     }
 

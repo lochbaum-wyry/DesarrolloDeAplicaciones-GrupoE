@@ -5,7 +5,11 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RideTest extends AbstractDomainTest
 {
@@ -214,4 +218,52 @@ public class RideTest extends AbstractDomainTest
         Assert.assertTrue(received.suitsRideRequest(rideRequest));
 
     }
+
+    @Test
+    public void test_getTotalCost_isValueOfFixedCostsPlusOilCostsByDistance()
+    {
+        Float oilPrice = SystemSettings.getInstance().getOilPrice();
+        float routeDistanceInKms = 20f;
+
+        Route route = mock(Route.class);
+        when(route.getLocations()).thenReturn(alistOfLocations());
+        when(route.getFixedCosts()).thenReturn(100f);
+        when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getOilWastePerKm()).thenReturn(0.05);
+
+        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKm();
+
+        User driver = mock(User.class);
+        when(driver.getVehicle()).thenReturn(vehicle);
+
+        Ride ride = RideBuilder.aRide()
+                .withRoute(route)
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withOilPrice(oilPrice)
+                .build();
+
+        Double expected = (oilCostPerKm * routeDistanceInKms) + route.getFixedCosts();
+        Double totalCost = (double) ride.getTotalCost();
+
+        Assert.assertEquals(expected, totalCost);
+
+
+    }
+
+    private List<Location> alistOfLocations() {
+
+        List<Location> list = new ArrayList<Location>();
+
+        Double latLongValue = 50d;
+        for (int i = 0 ; i < 5 ; i++ , latLongValue += 50);
+        {
+            Location loc = new Location(latLongValue, latLongValue);
+            list.add(loc);
+        }
+        return list;
+    }
+
 }

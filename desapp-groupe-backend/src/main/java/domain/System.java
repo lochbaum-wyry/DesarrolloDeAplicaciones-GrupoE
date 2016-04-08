@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class System {
+public class System
+{
+    private SystemSettings settings ;
     private List<User> users = new ArrayList<User>();
 
     public void signUp(User user) {
@@ -17,7 +19,19 @@ public class System {
         return users;
     }
 
-    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness) {
+
+    public System()
+    {
+        this.settings = SystemSettings.getInstance();
+    }
+
+    public List<Route> findRoutesSatisfying(DateTime date, Location departureLocation, Location getOffLocation)
+    {
+        return findRoutesSatisfying(date, settings.getDefaultTimeClosenessInSecs(), departureLocation,  getOffLocation, settings.getDefaultRadioCloseness());
+    }
+
+    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness)
+    {
         List<Route> result = users.stream().map(user -> user.getRoutes()).flatMap(routes -> routes.stream()).collect(Collectors.toList());
 
         result = result.stream()

@@ -12,30 +12,25 @@ public class RideBuilder {
     private Route route;
     private User driver;
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
-    private Boolean cancelled;
-
-    public RideBuilder(){
-        this.vehicle = null;
-        this.date = null;
-        this.route = null;
-        this.driver = null;
-        this.cancelled = Boolean.FALSE;
-    }
-
+    private Boolean cancelled = Boolean.FALSE;
+    private Float oilPrice;
 
     public static RideBuilder aRide() {
         return new RideBuilder();
     }
 
-    public RideBuilder withTakenSeatAt(TakenSeat takenSeat1) {
+    public RideBuilder withTakenSeatAt(TakenSeat takenSeat1)
+    {
         this.takenSeats.add(takenSeat1);
         return this;
     }
 
-    public Ride build() {
+    public Ride build()
+    {
         Ride ride = new Ride(this.route,this.date,this.driver);
         ride.getTakenSeats().addAll(this.takenSeats);
         ride.setVehicle(this.vehicle);
+        ride.setOilPrice(oilPrice);
         return ride;
     }
 
@@ -56,6 +51,11 @@ public class RideBuilder {
 
     public RideBuilder withVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+        return this;
+    }
+
+    public RideBuilder withOilPrice(Float oilPrice) {
+        this.oilPrice = oilPrice;
         return this;
     }
 }

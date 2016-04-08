@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class Ride
 {
-
+    private Float oilPrice ;
     private Vehicle vehicle;
     private DateTime date;
     private Route route;
@@ -33,6 +33,17 @@ public class Ride
         this.setVehicle(driver.getVehicle());
         this.cancelled = Boolean.FALSE;
     }
+
+    public void setOilPrice(Float oilPrice)
+    {
+        this.oilPrice = oilPrice;
+    }
+
+    public Float getOilPrice()
+    {
+        return this.oilPrice;
+    }
+
 
     public void cancelledRide()
     {
@@ -171,5 +182,12 @@ public class Ride
         return  this.route == rideRequest.getRoute() &&
                 this.date == rideRequest.getDate()
                 ;
+    }
+
+    public Float getTotalCost()
+    {
+        return (float) (    this.getRoute().getFixedCosts()
+                        +   (this.getVehicle().getOilWastePerKm()
+                                * this.getRoute().getDistanceInKms() * this.oilPrice) );
     }
 }
