@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,6 +22,16 @@ public class Ranking {
         //worstVehicles = calculateWorstVehicles(users,month,year);
     }
 
+    //TODO : hacer un sorting generico, ya que ambos tienen getPoints
+    /*
+    private List<Vehicle> calculateWorstVehicles(List<User> users, Integer month, Integer year) {
+        return orderUsersbyPointMinToMax(getVehicles(driversIn(users))).subList(0,19);
+    }
+
+    private List<Vehicle> calculateBestVehicles(List<User> users, Integer month, Integer year) {
+        return orderUsersbyPointMaxToMin(getVehicles(driversIn(users))).subList(0,19);
+    }
+    */
     private List<User> calculateWorstPassenger(List<User> users, Integer month, Integer year) {
         return orderUsersbyPointMinToMax(passengerIn(users)).subList(0,19);
     }
@@ -42,16 +53,24 @@ public class Ranking {
     }
 
     private List<User> calculateBestDrivers(List<User> users, Integer month, Integer year) {
+        //TODO : lo de la fecha , no lo hice porque no estoy seguro de como hacerlo, a charlar desp
         return orderUsersbyPointMaxToMin(driversIn(users)).subList(0,19);
     }
 
-    //TODO : revisar, no estoy seguro de que cambiando el orden cambia el orden del resultado
+        //TODO : revisar, no estoy seguro de que cambiando el orden cambia el orden del resultado
     private List<User> orderUsersbyPointMaxToMin(List<User> users) {
         return users.stream().sorted((user1,user2) -> Integer.compare(user2.getPoints(),user1.getPoints())).collect(Collectors.toList());
     }
 
     private List<User> orderUsersbyPointMinToMax(List<User> users) {
         return users.stream().sorted((user1,user2) -> Integer.compare(user1.getPoints(),user2.getPoints())).collect(Collectors.toList());
+    }
+
+    private List<Vehicle> getVehicles(List<User> users) {
+        //TODO : calculo que sera mas facil de alguna manera, ahora no recuerdo como
+        List<Vehicle> vehicles = new ArrayList<Vehicle>();
+        users.stream().forEach(user -> vehicles.add(user.getVehicle()));
+        return vehicles;
     }
 
     public List<User> getBestDrivers() {
