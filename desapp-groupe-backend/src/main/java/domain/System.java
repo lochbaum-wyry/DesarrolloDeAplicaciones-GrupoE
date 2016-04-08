@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class System
 {
     private SystemSettings settings ;
+    private GamingSystem gamingSystem;
     private List<User> users = new ArrayList<User>();
 
     public void signUp(User user) {
@@ -22,6 +23,7 @@ public class System
 
     public System()
     {
+        this.gamingSystem = new GamingSystem(this);
         this.settings = SystemSettings.getInstance();
     }
 

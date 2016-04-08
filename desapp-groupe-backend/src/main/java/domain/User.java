@@ -212,4 +212,8 @@ public class User {
     {
         return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
     }
+
+    public boolean isDriver() {
+        return getVehicle().getClass().equals(Vehicle.class);
+    }
 }
