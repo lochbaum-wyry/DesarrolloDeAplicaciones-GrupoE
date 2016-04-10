@@ -17,7 +17,7 @@ public class RankingGoodRates extends MonthlyRankingCriteria{
 
         return (pointsO1  > pointsO2 ) ? 1 : -1;
         */
-        return 2;
+        return 0;
     }
 
 }

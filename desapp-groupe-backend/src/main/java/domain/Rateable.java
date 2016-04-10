@@ -23,6 +23,10 @@ public interface Rateable {
         return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
     }
 
+    default List<Rate>  getGoodRates() {
+        return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.GOOD)).collect(Collectors.toList());
+    }
+
     default Boolean rateIsOfMonthYear(Rate rate, Integer month, Integer year)
     {
         return rate.getMonth() == month && rate.getYear() == year;
