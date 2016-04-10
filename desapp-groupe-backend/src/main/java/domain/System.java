@@ -37,7 +37,7 @@ public class System
         List<Route> result = users.stream().map(user -> user.getRoutes()).flatMap(routes -> routes.stream()).collect(Collectors.toList());
 
         result = result.stream()
-                .filter(route -> route.matchesRequestedRoute(date, secondsDateCloseness,departureLocation,getOffLocation,radioCloseness) )
+                .filter(route -> route.matchesRequestedRoute(departureLocation,getOffLocation,radioCloseness) && route.isInDayAndHour(date,secondsDateCloseness) )
                 .collect(Collectors.toList());
 
         return result;

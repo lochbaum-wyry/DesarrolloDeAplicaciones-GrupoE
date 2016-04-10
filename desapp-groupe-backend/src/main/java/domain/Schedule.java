@@ -1,4 +1,6 @@
 package domain;
+import org.joda.time.DateTime;
+
 import java.time.DayOfWeek;
 
 public class Schedule {
@@ -34,5 +36,11 @@ public class Schedule {
 
     public Integer getDepartureTime() {
         return departureTime;
+    }
+
+
+    public boolean dayAndHourIsEquals(DateTime date, Integer secondsDateCloseness) {
+        //TODO :lo dejo asi, porque creo que no esta bien la logica filtrar la fecha por el horario de salida de la ruta
+        return getDay().equals(date.dayOfWeek()) && (getDepartureTime().equals(date.getHourOfDay()) && ((date.getHourOfDay()-getDepartureTime()) <= secondsDateCloseness));
     }
 }

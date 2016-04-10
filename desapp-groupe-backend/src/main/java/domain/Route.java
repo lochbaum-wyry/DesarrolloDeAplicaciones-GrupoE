@@ -11,11 +11,12 @@ public class Route {
     private List<Location> locations = new ArrayList<Location>();
     private Float distanceInKms;
 
-    public Boolean matchesRequestedRoute(DateTime date, Integer secondsDateCloseness , Location departureLocation, Location getOffLocation, Float radioCloseness)
+    public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
         // TODO: Fecha
         return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
     }
+
 
     public Boolean locationIsNearRoute(Location location, Float radioCloseness)
     {
@@ -46,4 +47,7 @@ public class Route {
         return this.distanceInKms;
     }
 
+    public boolean isInDayAndHour(DateTime date,Integer secondsDateCloseness) {
+        return schedules.stream().anyMatch(schedule -> schedule.dayAndHourIsEquals(date,secondsDateCloseness));
+    }
 }

@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class User {
+public class User implements Rateable{
 
     private String name;
     private String lastName;
@@ -19,7 +19,6 @@ public class User {
     private List<Ride> rides;
     private List<RideRequest> rideRequests;
     private List<RideRequest> requestedRides;
-    private List<Rate> rates;
     private Integer points;
     private List<Chat> chats;
 
@@ -35,7 +34,6 @@ public class User {
         this.rides = new ArrayList<Ride>();
         this.rideRequests = new ArrayList<RideRequest>();
         this.requestedRides = new ArrayList<RideRequest>();
-        this.rates = new ArrayList<Rate>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
     }
@@ -44,10 +42,6 @@ public class User {
     {
         this(name, lastName, userName, email);
         this.vehicle = vehicle;
-    }
-
-    public List<Rate> getRates(){
-        return this.rates;
     }
 
     public void requestRide(User driver, RideRequest rideReq)
@@ -72,11 +66,6 @@ public class User {
     {
         Rate rate = new Rate(this, ride, rateValue, comment);
         ride.getVehicle().addRate(rate);
-    }
-
-    public void addRate(Rate rate)
-    {
-        this.rates.add(rate);
     }
 
     public void sendMessage(User user, String content)
@@ -206,11 +195,6 @@ public class User {
 
     public void addPoints(Integer points) {
         this.points= this.points + points;
-    }
-
-    public List<Rate> getBadRates()
-    {
-        return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
     }
 
     public boolean isDriver() {
