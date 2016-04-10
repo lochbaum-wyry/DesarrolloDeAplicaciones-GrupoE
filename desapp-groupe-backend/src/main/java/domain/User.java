@@ -202,7 +202,7 @@ public class User implements Rateable{
     }
 
     public boolean isPassenger() {
-        return getVehicle().equals(null);
+        return getVehicle() == null;
     }
     
 }

@@ -27,37 +27,40 @@ public class Ranking {
 
     private List<Rateable> calculateWorstVehicles(List<User> users, Integer month, Integer year) {
         List<Rateable> list = getVehicles(driversIn(users)).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),19);
+        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),20);
     }
 
     private List<Rateable> calculateBestVehicles(List<User> users, Integer month, Integer year) {
         List<Rateable> list = getVehicles(driversIn(users)).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month, CriteriaOrder.ASC),19);
+        return getSortedByCriteria(list,new RankingRateCount(year,month, CriteriaOrder.ASC),20);
     }
 
     private List<Rateable> calculateWorstPassenger(List<User> users, Integer month, Integer year) {
         List<Rateable> list = passengerIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),19);
+        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),20);
     }
 
     private List<Rateable> calculateBestPassenger(List<User> users, Integer month, Integer year) {
         List<Rateable> list = passengerIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.ASC),19);
+        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.ASC),20);
     }
 
     private List<Rateable> calculateWorstDrivers(List<User> users, Integer month, Integer year) {
         List<Rateable> list = driversIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),19);
+        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),20);
     }
 
     private List<Rateable> calculateBestDrivers(List<User> users, Integer month, Integer year) {
         List<Rateable> list = driversIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount<>(year,month,CriteriaOrder.ASC),19);
+        return getSortedByCriteria(list,new RankingRateCount<>(year,month,CriteriaOrder.ASC),20);
     }
 
-    private List<Rateable> getSortedByCriteria(List<Rateable> list, RankingCriteria rc, Integer limitCount) {
+    private List<Rateable> getSortedByCriteria(List<Rateable> list, RankingCriteria rc, Integer limitCount)
+    {
         Collections.sort(list,rc);
-        return list.subList(0,limitCount);
+        Integer limit = list.size() <= limitCount-1 ? list.size() : limitCount ;
+
+        return list.subList(0,limit);
     }
 
     private List<User> passengerIn(List<User> users) {
