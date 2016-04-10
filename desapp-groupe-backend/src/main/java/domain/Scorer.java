@@ -7,6 +7,7 @@ public abstract class Scorer {
         if (canApplyTo(user))
             addScoreTo(user);
     }
+
     public void addScoreTo(User user)
     {
         user.addPoints(calculatePointsFor(user));

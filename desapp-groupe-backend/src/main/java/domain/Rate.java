@@ -29,4 +29,7 @@ public class Rate {
     public Integer getYear() {
         return date.getYearOfEra();
     }
+
+    public Ride getRide() { return this.ride ; }
+
 }

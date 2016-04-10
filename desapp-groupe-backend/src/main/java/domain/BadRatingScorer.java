@@ -1,14 +1,15 @@
 package domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class BadRatingScorer extends RateEventScorer {
-
+public class BadRatingScorer extends RateEventScorer
+{
     public Boolean canApplyTo(User user)
     {
-        return isEven(user.getBadRates().size());
+        return isEven((int)user.getBadRateCount());
+    }
 
+    public Boolean canApplyTo(User user, Rate rate)
+    {
+        return rate.getRide().getDriver().equals(user) && this.canApplyTo(user);
     }
 
     private Boolean isEven(int number) {
