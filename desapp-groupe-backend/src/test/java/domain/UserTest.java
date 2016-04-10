@@ -233,6 +233,35 @@ public class UserTest extends AbstractDomainTest
 
     }
 
+    @Test
+    public void test_isDriver_ReturnTrueIfaUserHaveAvehicle(){
+
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(23).withOilWasterPerHour(23.0).build();
+
+        User user = UserBuilder.aUser()
+                .withName("fede")
+                .withUserName("trimegisto")
+                .withLastName("lochbaum")
+                .withEmail("EmailBuilder.aEmail.build()")
+                .withVehicle(vehicle)
+                .build();
+
+        Assert.assertTrue(user.isDriver());
+    }
+
+    @Test
+    public void test_isPassenger_ReturnTrueIfaUserNotHaveAvehicle(){
+
+        User user = UserBuilder.aUser()
+                .withName("fede")
+                .withUserName("trimegisto")
+                .withLastName("lochbaum")
+                .withEmail("EmailBuilder.aEmail.build()")
+                .build();
+
+        Assert.assertTrue(user.isPassenger());
+    }
+
     public long numberOfChatsWithUser(User user, User searchedUser)
     {
         return user.getChats().stream()
