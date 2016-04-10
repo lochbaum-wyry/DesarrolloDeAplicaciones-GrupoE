@@ -266,4 +266,47 @@ public class RideTest extends AbstractDomainTest
         return list;
     }
 
+
+    @Test
+    public void test_costPerPassenger_isTotalCostDividedByPassengersNumberInRide()
+    {
+        Float oilPrice = SystemSettings.getInstance().getOilPrice();
+        float routeDistanceInKms = 20f;
+
+        Route route = mock(Route.class);
+        when(route.getLocations()).thenReturn(alistOfLocations());
+        when(route.getFixedCosts()).thenReturn(90f);
+        when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getOilWastePerKm()).thenReturn(0.05);
+
+        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKm();
+
+        User driver = mock(User.class);
+        when(driver.getVehicle()).thenReturn(vehicle);
+
+        TakenSeat seat1 = mock(TakenSeat.class);
+        TakenSeat seat2 = mock(TakenSeat.class);
+        TakenSeat seat3 = mock(TakenSeat.class);
+
+        RideCostCalculator rideCostCalculator = new RideCostPassengerDivision();
+        Ride ride = RideBuilder.aRide()
+                .withRoute(route)
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withOilPrice(oilPrice)
+                .withRideCostCalculator(rideCostCalculator)
+                .withTakenSeatAt(seat1)
+                .withTakenSeatAt(seat2)
+                .withTakenSeatAt(seat3)
+                .build();
+
+
+        Float expected = 25f;
+
+        Assert.assertEquals(expected, ride.getCostPerPassenger());
+    }
+
+
 }

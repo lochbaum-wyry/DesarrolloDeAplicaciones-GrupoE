@@ -14,6 +14,7 @@ public class RideBuilder {
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled = Boolean.FALSE;
     private Float oilPrice;
+    private RideCostCalculator rideCostCalculator;
 
     public static RideBuilder aRide() {
         return new RideBuilder();
@@ -28,9 +29,16 @@ public class RideBuilder {
     public Ride build()
     {
         Ride ride = new Ride(this.route,this.date,this.driver);
+
         ride.getTakenSeats().addAll(this.takenSeats);
         ride.setVehicle(this.vehicle);
         ride.setOilPrice(oilPrice);
+
+        if (this.rideCostCalculator instanceof RideCostCalculator)
+            this.rideCostCalculator.setRide(ride);
+
+        ride.setRideCostCalculator(rideCostCalculator);
+
         return ride;
     }
 
@@ -56,6 +64,12 @@ public class RideBuilder {
 
     public RideBuilder withOilPrice(Float oilPrice) {
         this.oilPrice = oilPrice;
+        return this;
+    }
+
+    public RideBuilder withRideCostCalculator(RideCostCalculator rideCostCalculator)
+    {
+        this.rideCostCalculator = rideCostCalculator;
         return this;
     }
 }

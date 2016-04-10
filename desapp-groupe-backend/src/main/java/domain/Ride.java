@@ -18,6 +18,7 @@ public class Ride
     private User driver;
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled;
+    private RideCostCalculator rideCostCalculator ;
 
     public static Ride fromRideRequest(User driver, RideRequest rideRequest)
     {
@@ -189,5 +190,23 @@ public class Ride
         return (float) (    this.getRoute().getFixedCosts()
                         +   (this.getVehicle().getOilWastePerKm()
                                 * this.getRoute().getDistanceInKms() * this.oilPrice) );
+    }
+
+    public RideCostCalculator getRideCostCalculator() {
+        return rideCostCalculator;
+    }
+
+    public void setRideCostCalculator(RideCostCalculator rideCostCalculator) {
+        this.rideCostCalculator = rideCostCalculator;
+    }
+
+    public Integer getNumberOfPassengers()
+    {
+        return this.getTakenSeats().size() + 1 ; /// + 1 is the driver
+    }
+
+    public Float getCostPerPassenger()
+    {
+        return rideCostCalculator.calculate();
     }
 }
