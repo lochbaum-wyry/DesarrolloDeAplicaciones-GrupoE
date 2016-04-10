@@ -27,10 +27,6 @@ public class System
         this.settings = SystemSettings.getInstance();
     }
 
-    public List<Route> findRoutesSatisfying(DateTime date, Location departureLocation, Location getOffLocation)
-    {
-        return findRoutesSatisfying(date, settings.getDefaultTimeClosenessInSecs(), departureLocation,  getOffLocation, settings.getDefaultRadioCloseness());
-    }
 
     public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness)
     {

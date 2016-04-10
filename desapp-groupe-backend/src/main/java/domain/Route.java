@@ -13,7 +13,6 @@ public class Route {
 
     public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
-        // TODO: Fecha
         return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
     }
 
@@ -48,6 +47,6 @@ public class Route {
     }
 
     public boolean isInDayAndHour(DateTime date,Integer secondsDateCloseness) {
-        return schedules.stream().anyMatch(schedule -> schedule.dayAndHourIsEquals(date,secondsDateCloseness));
+        return schedules.stream().anyMatch(schedule -> schedule.dayAndHourIsNear(date,secondsDateCloseness));
     }
 }

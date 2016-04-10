@@ -22,12 +22,6 @@ public class GamingSystem {
         return new Ranking(month,year,system.getUsers());
     }
 
-    public Float calculateReputation(User user){
-        return 0f;
-    }
 
-//    public Float calculateEfficiency(User user){
-        //TODO: deberia hacerlo GameSystem?
-//    }
 
 }

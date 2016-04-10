@@ -5,42 +5,40 @@ import java.time.DayOfWeek;
 
 public class Schedule {
     private DayOfWeek day;
-    private Integer departureTime;
-    private Integer arrivalTime;
+    private DateTime departureTime;
+    private DateTime arrivalTime;
 
-    public Schedule(DayOfWeek day,Integer departureTime,Integer arrivalTime){
+    public Schedule(DayOfWeek day, DateTime departureTime, DateTime arrivalTime){
         this.arrivalTime = arrivalTime;
         this.day = day;
         this.departureTime = departureTime;
-    }
-
-    public void setArrivalTime(Integer arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
-
-    public void setDay(DayOfWeek day) {
-        this.day = day;
-    }
-
-    public void setDepartureTime(Integer departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public Integer getArrivalTime() {
-        return arrivalTime;
     }
 
     public DayOfWeek getDay() {
         return day;
     }
 
-    public Integer getDepartureTime() {
+    public void setDay(DayOfWeek day) {
+        this.day = day;
+    }
+
+    public DateTime getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public DateTime getDepartureTime() {
         return departureTime;
     }
 
+    public boolean dayAndHourIsNear(DateTime date, Integer secondsDateCloseness)
+    {
+        return getDay().getValue() == date.getDayOfWeek() && timeIsNear(date, secondsDateCloseness);
+    }
 
-    public boolean dayAndHourIsEquals(DateTime date, Integer secondsDateCloseness) {
-        //TODO :lo dejo asi, porque creo que no esta bien la logica filtrar la fecha por el horario de salida de la ruta
-        return getDay().equals(date.dayOfWeek()) && (getDepartureTime().equals(date.getHourOfDay()) && ((date.getHourOfDay()-getDepartureTime()) <= secondsDateCloseness));
+    private boolean timeIsNear(DateTime date, Integer secondsDateCloseness) {
+        int toleranceBegin = departureTime.secondOfDay().get() - secondsDateCloseness;
+        int toleranceEnd = departureTime.secondOfDay().get() + secondsDateCloseness;
+
+        return   (toleranceBegin <= date.secondOfDay().get()) && (date.secondOfDay().get() >= toleranceEnd);
     }
 }

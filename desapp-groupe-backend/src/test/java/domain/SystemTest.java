@@ -61,7 +61,7 @@ public class SystemTest {
         Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(300.0,500.0).build();
 
         Schedule schedule = Mockito.mock(Schedule.class);
-        Mockito.when(schedule.dayAndHourIsEquals(Mockito.any(DateTime.class),Mockito.anyInt())).thenReturn(Boolean.TRUE);
+        Mockito.when(schedule.dayAndHourIsNear(Mockito.any(DateTime.class),Mockito.anyInt())).thenReturn(Boolean.TRUE);
 
         route.addSchedule(schedule);
 
