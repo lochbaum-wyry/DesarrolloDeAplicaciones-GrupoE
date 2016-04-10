@@ -11,6 +11,7 @@ import domain.builders.UserBuilder;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,11 @@ public class SystemTest {
         List<User> users = new ArrayList<User>();
 
         Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(300.0,500.0).build();
+
+        Schedule schedule = Mockito.mock(Schedule.class);
+        Mockito.when(schedule.dayAndHourIsEquals(Mockito.any(DateTime.class),Mockito.anyInt())).thenReturn(Boolean.TRUE);
+
+        route.addSchedule(schedule);
 
         routes.add(route);
 

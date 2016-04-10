@@ -14,14 +14,14 @@ public class Ranking {
     private List<Vehicle> worstVehicles;
 
     public Ranking(Integer month,Integer year,List<User> users){
-        bestDrivers = calculateBestDrivers(users,month,year);
-        worstDrivers = calculateWorstDrivers(users,month,year);
-        bestPassenger = calculateBestPassenger(users,month,year);
-        worstPassenger = calculateWorstPassenger(users,month,year);
-        bestVehicles = calculateBestVehicles(users,month,year);
-        worstVehicles = calculateWorstVehicles(users,month,year);
+        //bestDrivers = calculateBestDrivers(users,month,year);
+        //worstDrivers = calculateWorstDrivers(users,month,year);
+        //bestPassenger = calculateBestPassenger(users,month,year);
+        //worstPassenger = calculateWorstPassenger(users,month,year);
+        //bestVehicles = calculateBestVehicles(users,month,year);
+        //worstVehicles = calculateWorstVehicles(users,month,year);
     }
-
+    /*
     private List<Vehicle> calculateWorstVehicles(List<User> users, Integer month, Integer year) {
         return getSortedByCriteria(getVehicles(driversIn(users)),new RankingBadRates(year,month),19);
     }
@@ -47,7 +47,7 @@ public class Ranking {
     }
 
     private <T> List<T> getSortedByCriteria(List<T> list, RankingCriteria rc, Integer limitCount) {
-        return list.stream().sorted(rc).collect(Collectors.toList()).subList(0,limitCount.intValue());
+        return list.stream().sorted(rc).collect(Collectors.toList()).subList(0,limitCount);
     }
 
     private List<User> passengerIn(List<User> users) {
@@ -92,4 +92,5 @@ public class Ranking {
     public List<Vehicle> getWorstVehicles() {
         return worstVehicles;
     }
+    */
 }
