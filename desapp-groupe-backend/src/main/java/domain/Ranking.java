@@ -57,7 +57,7 @@ public class Ranking {
     private List<User> driversIn(List<User> users){
         return users.stream().filter(user -> user.isDriver()).collect(Collectors.toList());
     }
-    */
+    */ 
     private List<User> orderUsersbyPointMinToMax(List<User> users) {
         return users.stream().sorted((user1,user2) -> Integer.compare(user1.getPoints(),user2.getPoints())).collect(Collectors.toList());
     }
