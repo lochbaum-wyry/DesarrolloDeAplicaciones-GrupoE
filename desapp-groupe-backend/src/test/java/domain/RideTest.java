@@ -5,9 +5,12 @@ import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.*;
+import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -347,5 +350,64 @@ public class RideTest extends AbstractDomainTest
 
         Assert.assertEquals(expected, ride.getOilPrice());
 
+    }
+
+    @Test
+    public void test_getSavedAmount(){
+        User driver = mock(User.class) ;
+        User passenger1 = mock(User.class) ;
+        User passenger2 = mock(User.class) ;
+
+        RideCostCalculator rideCostCalculator = mock(RideCostCalculator.class);
+        when(rideCostCalculator.calculateCostForPassenger(any(User.class))).thenReturn(15f);
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withTakenSeatAt(TakenSeatBuilder.aTakenSeat().withPassenger(passenger1).build())
+                .withTakenSeatAt(TakenSeatBuilder.aTakenSeat().withPassenger(passenger2).build())
+                .withRideCostCalculator(rideCostCalculator)
+                .build();
+
+        Assert.assertEquals(ride.getSavedAmount().intValue(),30);
+    }
+
+    @Test
+    public void test_isDriver_whenUserIsDriverInRide(){
+        User driver = mock(User.class) ;
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .build();
+
+        Assert.assertTrue(ride.isDriver(driver));
+    }
+
+    @Test
+    public void test_getEfficiencyPercentage(){
+        User driver = mock(User.class) ;
+        User passenger1 = mock(User.class) ;
+        User passenger2 = mock(User.class) ;
+
+        RideCostCalculator rideCostCalculator = mock(RideCostCalculator.class);
+        when(rideCostCalculator.calculateCostForPassenger(any(User.class))).thenReturn(15f);
+
+        Route route = mock(Route.class);
+        when(route.getFixedCosts()).thenReturn(100f);
+        when(route.getDistanceInKms()).thenReturn(1.2f);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getOilUsePerKmInLts()).thenReturn(2f);
+
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withTakenSeatAt(TakenSeatBuilder.aTakenSeat().withPassenger(passenger1).build())
+                .withTakenSeatAt(TakenSeatBuilder.aTakenSeat().withPassenger(passenger2).build())
+                .withRideCostCalculator(rideCostCalculator)
+                .withRoute(route)
+                .withVehicle(vehicle)
+                .withOilPrice(3f)
+                .build();
+        Assert.assertEquals(ride.getEfficiencyPercentage().intValue(),27);
     }
 }
