@@ -1,4 +1,4 @@
-package domain;
+package domain.gaming_service.ranking;
 
 abstract class MonthlyRankingCriteria<T> extends RankingCriteria<T>{
     private Integer year;

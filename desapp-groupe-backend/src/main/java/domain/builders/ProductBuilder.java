@@ -1,6 +1,6 @@
 package domain.builders;
 
-import domain.Product;
+import domain.gaming_service.product_service.Product;
 
 import java.awt.*;
 import java.util.ArrayList;

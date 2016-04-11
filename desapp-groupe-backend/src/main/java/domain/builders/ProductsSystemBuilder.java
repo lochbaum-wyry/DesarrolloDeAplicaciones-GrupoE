@@ -1,9 +1,8 @@
 package domain.builders;
 
-import domain.GamingSystem;
-import domain.Product;
-import domain.ProductExchange;
-import domain.ProductsSystem;
+import domain.gaming_service.product_service.Product;
+import domain.gaming_service.product_service.ProductExchange;
+import domain.gaming_service.product_service.ProductsService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +20,11 @@ public class ProductsSystemBuilder {
         return new ProductsSystemBuilder();
     }
 
-    public ProductsSystem build() {
-        ProductsSystem productsSystem = new ProductsSystem();
-        productsSystem.getAvailableProducts().addAll(availableProducts);
-        productsSystem.getProductExchanges().addAll(productExchanges);
-        return productsSystem;
+    public ProductsService build() {
+        ProductsService productsService = new ProductsService();
+        productsService.getAvailableProducts().addAll(availableProducts);
+        productsService.getProductExchanges().addAll(productExchanges);
+        return productsService;
     }
 
     public ProductsSystemBuilder withProduct(Product product) {

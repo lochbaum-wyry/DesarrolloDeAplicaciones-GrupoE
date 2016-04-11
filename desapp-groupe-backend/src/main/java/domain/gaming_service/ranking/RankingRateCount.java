@@ -1,4 +1,6 @@
-package domain;
+package domain.gaming_service.ranking;
+
+import domain.Rateable;
 
 public class RankingRateCount<T extends Rateable> extends MonthlyRankingCriteria<T>
 {
@@ -13,8 +15,8 @@ public class RankingRateCount<T extends Rateable> extends MonthlyRankingCriteria
     {
         /*
 
-        Integer pointsO1 = scoring.calculatePoints(rateable1.ratesInMonthYear(rateable1, this.getMonth(), this.getYear()));
-        Integer pointsO2 = scoring.calculatePoints(rateable2.ratesInMonthYear(rateable2, this.getMonth(), this.getYear()));
+        Integer pointsO1 = scoring_service.calculatePoints(rateable1.ratesInMonthYear(rateable1, this.getMonth(), this.getYear()));
+        Integer pointsO2 = scoring_service.calculatePoints(rateable2.ratesInMonthYear(rateable2, this.getMonth(), this.getYear()));
 
         return (pointsO1  > pointsO2 ) ? 1 : -1 * getOrder();
         */

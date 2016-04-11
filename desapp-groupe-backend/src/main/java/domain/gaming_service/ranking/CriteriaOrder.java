@@ -1,4 +1,4 @@
-package domain;
+package domain.gaming_service.ranking;
 
 
 public enum CriteriaOrder

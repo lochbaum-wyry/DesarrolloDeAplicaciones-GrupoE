@@ -1,7 +1,5 @@
 package domain;
 
-import domain.Chat;
-import domain.User;
 import domain.builders.ChatBuilder;
 import domain.builders.UserBuilder;
 import org.junit.Assert;

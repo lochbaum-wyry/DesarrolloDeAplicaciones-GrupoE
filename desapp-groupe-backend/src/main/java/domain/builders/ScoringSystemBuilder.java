@@ -1,7 +1,7 @@
 package domain.builders;
 
-import domain.Scorer;
-import domain.ScoringSystem;
+import domain.gaming_service.scoring_service.Scorer;
+import domain.gaming_service.scoring_service.ScoringService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +13,11 @@ public class ScoringSystemBuilder {
         return new ScoringSystemBuilder();
     }
 
-    public ScoringSystem build()
+    public ScoringService build()
     {
-        ScoringSystem scoringSystem = new ScoringSystem();
-        scorers.stream().forEach( scorer -> scoringSystem.addScorer(scorer) );
-        return scoringSystem;
+        ScoringService scoringService = new ScoringService();
+        scorers.stream().forEach( scorer -> scoringService.addScorer(scorer) );
+        return scoringService;
     }
 
     public ScoringSystemBuilder withScorer(Scorer scorer)

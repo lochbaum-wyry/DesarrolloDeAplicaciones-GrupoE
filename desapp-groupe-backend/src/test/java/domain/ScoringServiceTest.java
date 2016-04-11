@@ -1,19 +1,23 @@
 package domain;
 
 import domain.builders.ScoringSystemBuilder;
+import domain.gaming_service.scoring_service.BadRatingScorer;
+import domain.gaming_service.scoring_service.GoodRatingScorer;
+import domain.gaming_service.scoring_service.Scorer;
+import domain.gaming_service.scoring_service.ScoringService;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-public class ScoringSystemTest extends AbstractDomainTest
+public class ScoringServiceTest extends AbstractDomainTest
 {
 
     @Test
     public void test_applyRateEventScorers_whenAUserIsRatedGoodThenItAddsPointsToUser()
     {
         GoodRatingScorer scorer = new GoodRatingScorer();
-        ScoringSystem scoringSystem = ScoringSystemBuilder
+        ScoringService scoringService = ScoringSystemBuilder
                 .aScoringSystem()
                 .withScorer(scorer)
                 .build();
@@ -29,7 +33,7 @@ public class ScoringSystemTest extends AbstractDomainTest
         when(rate.getValue()).thenReturn(RateValue.GOOD);
         when(rate.getRide()).thenReturn(ride);
 
-        scoringSystem.applyRateEventScorers(user, rate);
+        scoringService.applyRateEventScorers(user, rate);
 
         Integer pointsToBeAdded = scorer.calculatePointsFor(user);
         verify(user,times(1)).addPoints(pointsToBeAdded);
@@ -41,7 +45,7 @@ public class ScoringSystemTest extends AbstractDomainTest
 
         BadRatingScorer scorer = new BadRatingScorer();
 
-        ScoringSystem scoringSystem = ScoringSystemBuilder
+        ScoringService scoringService = ScoringSystemBuilder
                 .aScoringSystem()
                 .withScorer(scorer)
                 .build();
@@ -57,7 +61,7 @@ public class ScoringSystemTest extends AbstractDomainTest
         when(rate.getValue()).thenReturn(RateValue.BAD);
         when(rate.getRide()).thenReturn(ride);
 
-        scoringSystem.applyRateEventScorers(user, rate);
+        scoringService.applyRateEventScorers(user, rate);
 
         Integer pointsToBeAdded = scorer.calculatePointsFor(user);
         verify(user,times(0)).addPoints(pointsToBeAdded);
@@ -68,7 +72,7 @@ public class ScoringSystemTest extends AbstractDomainTest
     {
         BadRatingScorer scorer = new BadRatingScorer();
 
-        ScoringSystem scoringSystem = ScoringSystemBuilder
+        ScoringService scoringService = ScoringSystemBuilder
                 .aScoringSystem()
                 .withScorer(scorer)
                 .build();
@@ -84,7 +88,7 @@ public class ScoringSystemTest extends AbstractDomainTest
         when(rate.getValue()).thenReturn(RateValue.BAD);
         when(rate.getRide()).thenReturn(ride);
 
-        scoringSystem.applyRateEventScorers(user, rate);
+        scoringService.applyRateEventScorers(user, rate);
 
         Integer pointsToBeAdded = scorer.calculatePointsFor(user);
         verify(user,times(1)).addPoints(pointsToBeAdded);
@@ -96,7 +100,7 @@ public class ScoringSystemTest extends AbstractDomainTest
         Scorer badRatingScorer = new BadRatingScorer();
         Scorer goodRatingScorer = new GoodRatingScorer();
 
-        ScoringSystem scoringSystem = ScoringSystemBuilder
+        ScoringService scoringService = ScoringSystemBuilder
                 .aScoringSystem()
                 .withScorer(goodRatingScorer)
                 .withScorer(badRatingScorer)
@@ -126,18 +130,18 @@ public class ScoringSystemTest extends AbstractDomainTest
         Integer pointsToBeSubstracted = badRatingScorer.calculatePointsFor(user);
 
         user.addRate(goodRate);
-        scoringSystem.applyRateEventScorers(user, goodRate);
+        scoringService.applyRateEventScorers(user, goodRate);
 
         expected = pointsToBeAdded + expected ;
         Assert.assertEquals(expected, user.getPoints());
 
         user.addRate(badRate1);
-        scoringSystem.applyRateEventScorers(user, badRate1);
+        scoringService.applyRateEventScorers(user, badRate1);
 
         Assert.assertEquals(expected, user.getPoints());
 
         user.addRate(badRate2);
-        scoringSystem.applyRateEventScorers(user, badRate2);
+        scoringService.applyRateEventScorers(user, badRate2);
 
         expected = pointsToBeSubstracted + expected ;
         Assert.assertEquals(expected, user.getPoints());

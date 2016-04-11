@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 import java.lang.*;
-import java.lang.System;
 
 public class UserRateableTest {
 

@@ -1,7 +1,5 @@
 package domain;
 
-import domain.Message;
-import domain.User;
 import domain.builders.MessageBuilder;
 import domain.builders.UserBuilder;
 import org.joda.time.DateTime;

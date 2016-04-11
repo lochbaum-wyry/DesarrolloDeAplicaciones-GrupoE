@@ -1,6 +1,6 @@
 package domain.builders;
 
-import domain.GamingSystem;
+import domain.gaming_service.GamingService;
 import domain.System;
 
 public class GamingSystemBuilder {
@@ -17,7 +17,7 @@ public class GamingSystemBuilder {
         this.system = system;
         return this;
     }
-    public GamingSystem build() {
-        return new GamingSystem(this.system);
+    public GamingService build() {
+        return new GamingService(this.system);
     }
 }

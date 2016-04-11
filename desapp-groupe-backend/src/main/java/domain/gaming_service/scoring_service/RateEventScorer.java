@@ -1,4 +1,7 @@
-package domain;
+package domain.gaming_service.scoring_service;
+
+import domain.Rate;
+import domain.User;
 
 import java.lang.*;
 

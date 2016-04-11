@@ -1,5 +1,7 @@
 package domain;
 
+import domain.gaming_service.ranking.CriteriaOrder;
+import domain.gaming_service.ranking.RankingRateCount;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;

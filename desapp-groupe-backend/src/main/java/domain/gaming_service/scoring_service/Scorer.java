@@ -1,4 +1,6 @@
-package domain;
+package domain.gaming_service.scoring_service;
+
+import domain.User;
 
 public abstract class Scorer {
 

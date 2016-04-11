@@ -1,16 +1,17 @@
-package domain;
+package domain.gaming_service.product_service;
 
+import domain.User;
 import domain.exceptions.NotEnoughPointsException;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductsSystem {
+public class ProductsService {
     private List<Product> availableProducts;
     private List<ProductExchange> productExchanges;
 
-    public ProductsSystem(){
+    public ProductsService(){
         this.availableProducts = new ArrayList<Product>();
         this.productExchanges = new ArrayList<ProductExchange>();
     }

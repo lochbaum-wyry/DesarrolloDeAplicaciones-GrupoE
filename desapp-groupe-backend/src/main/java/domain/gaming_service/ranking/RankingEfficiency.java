@@ -1,4 +1,6 @@
-package domain;
+package domain.gaming_service.ranking;
+
+import domain.User;
 
 public class RankingEfficiency extends MonthlyRankingCriteria<User>{
 
@@ -11,7 +13,7 @@ public class RankingEfficiency extends MonthlyRankingCriteria<User>{
     @Override
     public int compare(User user, User t1)
     {
-        Integer valor = (getEfficiencyAvgForUser(user) < getEfficiencyAvgForUser(t1)) ? 1 : -1;
+        Integer valor = (getEfficiencyAvgForUser(user) > getEfficiencyAvgForUser(t1)) ? 1 : -1;
         return valor * this.getOrder().getValue();
     }
 

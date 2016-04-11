@@ -1,6 +1,5 @@
 package domain;
 
-import domain.Location;
 import domain.builders.LocationBuilder;
 import org.junit.Assert;
 import org.junit.Test;

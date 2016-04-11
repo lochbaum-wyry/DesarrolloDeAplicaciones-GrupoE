@@ -1,4 +1,4 @@
-package domain;
+package domain.gaming_service.product_service;
 
 import java.awt.*;
 import java.util.ArrayList;

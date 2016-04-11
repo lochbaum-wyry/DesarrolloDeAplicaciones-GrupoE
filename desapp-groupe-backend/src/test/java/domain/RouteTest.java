@@ -2,7 +2,6 @@ package domain;
 
 import domain.builders.LocationBuilder;
 import domain.builders.RouteBuilder;
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 

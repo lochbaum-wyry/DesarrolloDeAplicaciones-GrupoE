@@ -1,6 +1,5 @@
 package domain.builders;
 
-import domain.GamingSystem;
 import domain.Route;
 import domain.User;
 import domain.Vehicle;

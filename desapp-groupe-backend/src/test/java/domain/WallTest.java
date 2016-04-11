@@ -1,8 +1,5 @@
 package domain;
 
-import domain.Post;
-import domain.User;
-import domain.Wall;
 import domain.builders.PostBuilder;
 import domain.builders.UserBuilder;
 import domain.builders.WallBuilder;

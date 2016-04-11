@@ -1,5 +1,6 @@
 package domain;
 
+import domain.gaming_service.GamingService;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.stream.Collectors;
 public class System
 {
     private SystemSettings settings ;
-    private GamingSystem gamingSystem;
+    private GamingService gamingService;
     private List<User> users = new ArrayList<User>();
 
     public void signUp(User user) {
@@ -23,7 +24,7 @@ public class System
 
     public System()
     {
-        this.gamingSystem = new GamingSystem(this);
+        this.gamingService = new GamingService(this);
         this.settings = SystemSettings.getInstance();
     }
 

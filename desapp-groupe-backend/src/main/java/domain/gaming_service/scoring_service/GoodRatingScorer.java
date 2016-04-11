@@ -1,4 +1,8 @@
-package domain;
+package domain.gaming_service.scoring_service;
+
+import domain.Rate;
+import domain.RateValue;
+import domain.User;
 
 public class GoodRatingScorer extends RateEventScorer
 {

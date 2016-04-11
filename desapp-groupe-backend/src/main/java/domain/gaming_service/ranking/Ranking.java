@@ -1,4 +1,8 @@
-package domain;
+package domain.gaming_service.ranking;
+
+import domain.Rateable;
+import domain.User;
+import domain.Vehicle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,7 +33,7 @@ public class Ranking {
 
     private List<Rateable> calculateWorstVehicles(List<User> users, Integer month, Integer year) {
         List<Rateable> list = getVehicles(driversIn(users)).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
-        return getSortedByCriteria(list,new RankingRateCount(year,month,CriteriaOrder.DESC),20);
+        return getSortedByCriteria(list,new RankingRateCount(year,month, CriteriaOrder.DESC),20);
     }
 
     private List<Rateable> calculateBestVehicles(List<User> users, Integer month, Integer year) {

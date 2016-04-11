@@ -1,14 +1,17 @@
-package domain;
+package domain.gaming_service.scoring_service;
+
+import domain.Rate;
+import domain.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ScoringSystem
+public class ScoringService
 {
     private List<Scorer> scorers;
 
-    public ScoringSystem()
+    public ScoringService()
     {
         scorers = new ArrayList<Scorer>();
     }

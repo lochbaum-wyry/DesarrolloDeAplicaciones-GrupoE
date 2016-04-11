@@ -1,4 +1,6 @@
-package domain;
+package domain.gaming_service.product_service;
+
+import domain.User;
 
 public class ProductExchange {
     private User user;

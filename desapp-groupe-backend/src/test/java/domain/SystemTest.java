@@ -1,9 +1,5 @@
 package domain;
 
-import domain.Location;
-import domain.Route;
-import domain.System;
-import domain.User;
 import domain.builders.LocationBuilder;
 import domain.builders.RouteBuilder;
 import domain.builders.SystemBuilder;
