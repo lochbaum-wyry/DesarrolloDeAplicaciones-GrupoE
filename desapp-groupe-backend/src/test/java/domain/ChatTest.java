@@ -27,4 +27,12 @@ public class ChatTest {
         Assert.assertEquals(received,expected);
     }
 
+    @Test
+    public void test_getName(){
+        Chat chat = ChatBuilder.aChat().withName("Sara").build();
+        Assert.assertEquals(chat.getName(),"Sara");
+    }
+
+
+
 }

@@ -35,6 +35,27 @@ public class MessageTest {
         Assert.assertTrue(message.isSeenBy(fede));
 
         Assert.assertFalse(message.isSeenBy(antonio));
+    }
 
+    @Test
+    public void test_getContent(){
+        User sender = UserBuilder.aUser().withName("sender").build();
+        Message message = MessageBuilder.aMessage().withSender(sender).withContent("holaaa").withDate(new DateTime()).build();
+        Assert.assertEquals(message.getContent(),"holaaa");
+    }
+
+    @Test
+    public void test_getSender(){
+        User sender = UserBuilder.aUser().withName("sender").build();
+        Message message = MessageBuilder.aMessage().withSender(sender).withContent("holaaa").withDate(new DateTime()).build();
+        Assert.assertEquals(message.getSender(),sender);
+    }
+
+    @Test
+    public void test_getTimestamp(){
+        DateTime time = new DateTime();
+        User sender = UserBuilder.aUser().withName("sender").build();
+        Message message = MessageBuilder.aMessage().withSender(sender).withContent("holaaa").withDate(time).build();
+        Assert.assertEquals(message.getTimestamp(),time);
     }
 }
