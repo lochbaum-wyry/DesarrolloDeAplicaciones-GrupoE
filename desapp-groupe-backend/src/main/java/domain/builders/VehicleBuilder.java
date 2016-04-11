@@ -5,7 +5,7 @@ import domain.Vehicle;
 public class VehicleBuilder {
 
     private Integer capacity;
-    private Double oilWasterPerHour;
+    private Float oilWasterPerHour;
 
     public static VehicleBuilder aVehicle() {
         return new VehicleBuilder();
@@ -16,7 +16,7 @@ public class VehicleBuilder {
         return this;
     }
 
-    public VehicleBuilder withOilWasterPerHour(Double oilWasterPerHour){
+    public VehicleBuilder withOilWasterPerHour(Float oilWasterPerHour){
         this.oilWasterPerHour = oilWasterPerHour;
         return this;
     }

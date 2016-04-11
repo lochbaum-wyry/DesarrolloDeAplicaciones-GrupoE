@@ -6,10 +6,10 @@ import java.util.List;
 public class Vehicle implements Rateable{
 
     private Integer capacity;
-    private Double oilWastePerKm;
+    private Float oilWastePerKm;
     private List<Rate> rates;
 
-    public Vehicle(Integer capacity,Double oilWastePerKm){
+    public Vehicle(Integer capacity,Float oilWastePerKm){
         this.capacity = capacity;
         this.oilWastePerKm = oilWastePerKm;
         this.rates = new ArrayList<Rate>();
@@ -19,7 +19,7 @@ public class Vehicle implements Rateable{
         return capacity;
     }
 
-    public Double getOilWastePerKm() {
+    public Float getOilUsePerKmInLts() {
         return oilWastePerKm;
     }
 

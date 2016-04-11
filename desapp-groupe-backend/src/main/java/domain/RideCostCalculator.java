@@ -14,15 +14,10 @@ abstract public class RideCostCalculator
         this.ride = ride;
     }
 
-    public Ride getRide()
-    {
-        return ride;
-    }
-
     public void setRide(Ride ride)
     {
         this.ride = ride;
     }
 
-    abstract public Float calculate();
+    abstract public Float calculateCostForPassenger(User passenger);
 }

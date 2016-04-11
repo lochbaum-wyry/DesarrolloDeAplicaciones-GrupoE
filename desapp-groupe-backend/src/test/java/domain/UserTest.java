@@ -236,7 +236,7 @@ public class UserTest extends AbstractDomainTest
     @Test
     public void test_isDriver_ReturnTrueIfaUserHaveAvehicle(){
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(23).withOilWasterPerHour(23.0).build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(23).withOilWasterPerHour(23.0f).build();
 
         User user = UserBuilder.aUser()
                 .withName("fede")

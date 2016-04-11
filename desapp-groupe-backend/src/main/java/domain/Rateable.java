@@ -38,32 +38,32 @@ public interface Rateable
 
     default Float getGoodRatesPercentage()
     {
-        Long countTotalRate = getTotalRateCount();
-        Long countGoodRate = getGoodRateCount();
+        Integer countTotalRate = getTotalRateCount();
+        Integer countGoodRate = getGoodRateCount();
 
-        return ((float)countGoodRate* 100) / countTotalRate;
+        return ((float)(countGoodRate * 100)) / countTotalRate;
     }
 
     default Float getBadRatesPercentage()
     {
-        Long countTotalRate = getTotalRateCount();
-        Long countBadRate = getBadRateCount();
+        Integer countTotalRate = getTotalRateCount();
+        Integer countBadRate = getBadRateCount();
 
         return ((float)countBadRate * 100) / countTotalRate;
     }
 
-    default long getGoodRateCount() {
-        return this.getGoodRates().stream().count();
+    default Integer getGoodRateCount() {
+        return (Integer)(int)this.getGoodRates().stream().count();
     }
 
-    default long getBadRateCount()
+    default Integer getBadRateCount()
     {
-        return this.getBadRates().stream().count();
+        return (Integer)(int)this.getBadRates().stream().count();
     }
 
-    default long getTotalRateCount()
+    default Integer getTotalRateCount()
     {
-        return this.getRates().stream().count();
+        return (Integer)(int)this.getRates().stream().count();
     }
 
 }

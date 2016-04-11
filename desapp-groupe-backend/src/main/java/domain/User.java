@@ -210,5 +210,14 @@ public class User implements Rateable{
     public boolean isPassenger() {
         return getVehicle() == null;
     }
-    
+
+    public List<Ride> getRidesAsDriver() {
+        return this.getRides().stream()
+                .filter(ride -> ride.isDriver(this))
+                .collect(Collectors.toList());
+    }
+
+    public Integer getRidesCount() {
+        return this.getRides().size();
+    }
 }

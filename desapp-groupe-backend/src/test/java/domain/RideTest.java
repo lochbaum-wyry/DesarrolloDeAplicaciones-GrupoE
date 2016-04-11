@@ -165,7 +165,7 @@ public class RideTest extends AbstractDomainTest
         User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
         User driverMario = driverWithVehicle(2);
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5).withCapacity(2).build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5f).withCapacity(2).build();
 
         Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
         Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
@@ -231,9 +231,9 @@ public class RideTest extends AbstractDomainTest
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilWastePerKm()).thenReturn(0.05);
+        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
 
-        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKm();
+        double oilCostPerKm = oilPrice * vehicle.getOilUsePerKmInLts();
 
         User driver = mock(User.class);
         when(driver.getVehicle()).thenReturn(vehicle);
@@ -279,9 +279,9 @@ public class RideTest extends AbstractDomainTest
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilWastePerKm()).thenReturn(0.05);
+        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
 
-        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKm();
+        double oilCostPerKm = oilPrice * vehicle.getOilUsePerKmInLts();
 
         User driver = mock(User.class);
         when(driver.getVehicle()).thenReturn(vehicle);
@@ -305,8 +305,47 @@ public class RideTest extends AbstractDomainTest
 
         Float expected = 25f;
 
-        Assert.assertEquals(expected, ride.getCostPerPassenger());
+        User passenger1 = mock(User.class);
+        Assert.assertEquals(expected, ride.getCostForPassenger(passenger1));
     }
 
+    @Test
+    public void test_getDriver()
+    {
+        User driver = mock(User.class) ;
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .build();
 
+        Assert.assertEquals(driver, ride.getDriver());
+
+    }
+
+    @Test
+    public void test_getDate()
+    {
+        User driver = mock(User.class) ;
+        DateTime date = new DateTime();
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withDate(date)
+                .build();
+
+        Assert.assertEquals(date, ride.getDate());
+
+    }
+
+    @Test
+    public void test_getOilPrice()
+    {
+        User driver = mock(User.class) ;
+        Float expected = 100f;
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withOilPrice(expected)
+                .build();
+
+        Assert.assertEquals(expected, ride.getOilPrice());
+
+    }
 }

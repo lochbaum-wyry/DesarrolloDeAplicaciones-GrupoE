@@ -19,11 +19,11 @@ public class ScoringSystemTest extends AbstractDomainTest
                 .build();
 
         User user = mock(User.class);
-        when(user.getGoodRateCount()).thenReturn((long)1);
-
+        when(user.getGoodRateCount()).thenReturn(1);
 
         Ride ride = mock(Ride.class);
         when(ride.getDriver()).thenReturn(user);
+        when(ride.isDriver(user)).thenReturn(true);
 
         Rate rate = mock(Rate.class);
         when(rate.getValue()).thenReturn(RateValue.GOOD);
@@ -47,10 +47,11 @@ public class ScoringSystemTest extends AbstractDomainTest
                 .build();
 
         User user = mock(User.class);
-        when(user.getBadRateCount()).thenReturn((long)1);
+        when(user.getBadRateCount()).thenReturn(1);
 
         Ride ride = mock(Ride.class);
         when(ride.getDriver()).thenReturn(user);
+        when(ride.isDriver(user)).thenReturn(true);
 
         Rate rate = mock(Rate.class);
         when(rate.getValue()).thenReturn(RateValue.BAD);
@@ -73,10 +74,11 @@ public class ScoringSystemTest extends AbstractDomainTest
                 .build();
 
         User user = mock(User.class);
-        when(user.getBadRateCount()).thenReturn((long)2);
+        when(user.getBadRateCount()).thenReturn(2);
 
         Ride ride = mock(Ride.class);
         when(ride.getDriver()).thenReturn(user);
+        when(ride.isDriver(user)).thenReturn(true);
 
         Rate rate = mock(Rate.class);
         when(rate.getValue()).thenReturn(RateValue.BAD);
@@ -104,6 +106,7 @@ public class ScoringSystemTest extends AbstractDomainTest
 
         Ride ride = mock(Ride.class);
         when(ride.getDriver()).thenReturn(user);
+        when(ride.isDriver(user)).thenReturn(true);
 
         Rate goodRate = mock(Rate.class);
         when(goodRate.getValue()).thenReturn(RateValue.GOOD);

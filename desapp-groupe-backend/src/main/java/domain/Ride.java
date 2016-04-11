@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Ride
 {
@@ -45,8 +46,7 @@ public class Ride
         return this.oilPrice;
     }
 
-
-    public void cancelledRide()
+    public void cancelRide()
     {
         this.cancelled = Boolean.TRUE;
     }
@@ -96,16 +96,10 @@ public class Ride
         return takenSeats;
     }
 
-    public void setTakenSeats(List<TakenSeat> takenSeats)
-    {
-        this.takenSeats = takenSeats;
-    }
-
     public void addTakenSeat(TakenSeat takenSeat)
     {
         this.takenSeats.add(takenSeat);
     }
-
 
     public void takeSeat(User passenger, Location boardingAt, Location getOffAt) throws NoSeatsAvailableException
     {
@@ -187,9 +181,12 @@ public class Ride
 
     public Float getTotalCost()
     {
-        return (float) (    this.getRoute().getFixedCosts()
-                        +   (this.getVehicle().getOilWastePerKm()
-                                * this.getRoute().getDistanceInKms() * this.oilPrice) );
+        return (float) (    this.getRoute().getFixedCosts() + getVehicleUseCosts());
+    }
+
+    public Float getVehicleUseCosts() {
+        return this.getVehicle().getOilUsePerKmInLts()
+                * this.getRoute().getDistanceInKms() * this.oilPrice;
     }
 
     public RideCostCalculator getRideCostCalculator() {
@@ -202,11 +199,30 @@ public class Ride
 
     public Integer getNumberOfPassengers()
     {
-        return this.getTakenSeats().size() + 1 ; /// + 1 is the driver
+        return this.getTakenSeats().size()  ; /// + 1 is the driver
     }
 
-    public Float getCostPerPassenger()
+    public Float getCostForPassenger(User passenger)
     {
-        return rideCostCalculator.calculate();
+        return rideCostCalculator.calculateCostForPassenger(passenger);
+    }
+
+    public Float getSavedAmount()
+    {
+        return getPassengers().stream().map(passenger -> getCostForPassenger(passenger)).reduce(0f, Float::sum);
+    }
+
+    public List<User> getPassengers() {
+        return this.takenSeats.stream().map(takenSeat -> takenSeat.getPassenger()).collect(Collectors.toList());
+    }
+
+    public Boolean isDriver(User user)
+    {
+        return this.getDriver().equals(user);
+    }
+
+    public Float getEfficiencyPercentage()
+    {
+        return (getSavedAmount()*100)/getTotalCost();
     }
 }

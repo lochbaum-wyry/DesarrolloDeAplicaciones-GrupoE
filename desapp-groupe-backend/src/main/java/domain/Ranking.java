@@ -14,6 +14,7 @@ public class Ranking {
     private List<Rateable> worstPassenger;
     private List<Rateable> bestVehicles;
     private List<Rateable> worstVehicles;
+    private List<User> mostEfficientDrivers;
 
     public Ranking(Integer month,Integer year,List<User> users)
     {
@@ -23,6 +24,7 @@ public class Ranking {
         worstPassenger = calculateWorstPassenger(users,month,year);
         bestVehicles = calculateBestVehicles(users,month,year);
         worstVehicles = calculateWorstVehicles(users,month,year);
+        mostEfficientDrivers = calculateMostEfficientDrivers(users, month, year);
     }
 
     private List<Rateable> calculateWorstVehicles(List<User> users, Integer month, Integer year) {
@@ -53,6 +55,16 @@ public class Ranking {
     private List<Rateable> calculateBestDrivers(List<User> users, Integer month, Integer year) {
         List<Rateable> list = driversIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
         return getSortedByCriteria(list,new RankingRateCount<>(year,month,CriteriaOrder.ASC),20);
+    }
+
+    private List<User> calculateMostEfficientDrivers(List<User> users, Integer month, Integer year) {
+
+        List<Rateable> list = driversIn(users).stream().map(user -> ((Rateable) user)).collect(Collectors.toList());
+        RankingEfficiency rankingCriteria = new RankingEfficiency(year, month, CriteriaOrder.ASC);
+
+        return getSortedByCriteria(list, rankingCriteria, 20).stream()
+                .map(rateable -> (User) rateable)
+                .collect(Collectors.toList());
     }
 
     private List<Rateable> getSortedByCriteria(List<Rateable> list, RankingCriteria rc, Integer limitCount)

@@ -94,7 +94,6 @@ public class UserRateableTest {
         user.addRate(rate2);
         user.addRate(rate);
 
-        System.out.print(user.getRates().size());
         Assert.assertEquals(user.ratesInMonthYear(user,2,2016).size(),3);
     }
 
@@ -168,8 +167,8 @@ public class UserRateableTest {
         luis.addRate(badRate);
         luis.addRate(goodRate);
 
-        Assert.assertEquals(luis.getGoodRateCount(),2);
-        Assert.assertEquals(luis.getBadRateCount(),4);
-        Assert.assertEquals(luis.getTotalRateCount(),6);
+        Assert.assertEquals(luis.getGoodRateCount(),(Integer)2);
+        Assert.assertEquals(luis.getBadRateCount(),(Integer)4);
+        Assert.assertEquals(luis.getTotalRateCount(),(Integer)6);
     }
 }

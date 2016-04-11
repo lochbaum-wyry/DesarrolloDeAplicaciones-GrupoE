@@ -13,9 +13,9 @@ public class RideCostPassengerDivision extends RideCostCalculator
         super(ride);
     }
 
-    public Float calculate()
+    public Float calculateCostForPassenger(User passenger)
     {
-        int totalNumberOfPassengers = ride.getNumberOfPassengers();
+        int totalNumberOfPassengers = ride.getNumberOfPassengers() + 1;
         return  ride.getTotalCost() / totalNumberOfPassengers;
     }
 }

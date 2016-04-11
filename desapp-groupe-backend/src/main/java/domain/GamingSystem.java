@@ -22,6 +22,4 @@ public class GamingSystem {
         return new Ranking(month,year,system.getUsers());
     }
 
-
-
 }
