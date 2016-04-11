@@ -1,7 +1,6 @@
 package domain;
 
-import domain.Rate;
-
+import java.lang.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,16 +8,13 @@ import java.util.stream.Collectors;
 public interface Rateable
 {
     // TODO: java 8 cannot assign a value to final variable  (Integer totalRateCount)
-    List<Rate> rates = new ArrayList<Rate>();
 
     default void addRate(Rate rate)
     {
-        this.rates.add(rate);
+        getRates().add(rate);
     }
 
-    default List<Rate> getRates(){
-        return rates;
-    }
+    public List<Rate> getRates();
 
     default List<Rate> getBadRates()
     {
@@ -32,7 +28,7 @@ public interface Rateable
 
     default Boolean rateIsOfMonthYear(Rate rate, Integer month, Integer year)
     {
-        return rate.getMonth() == month && rate.getYear() == year;
+        return (rate.getMonth().equals(month)) && (rate.getYear().equals(year));
     }
 
     default List<Rate> ratesInMonthYear(Rateable user, Integer month, Integer year)
@@ -69,6 +65,5 @@ public interface Rateable
     {
         return this.getRates().stream().count();
     }
-
 
 }

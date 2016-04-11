@@ -22,6 +22,14 @@ public class Rate {
         return rateValue;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
     public Integer getMonth() {
         return date.getMonthOfYear();
     }

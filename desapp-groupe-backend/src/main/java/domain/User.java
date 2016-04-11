@@ -21,7 +21,7 @@ public class User implements Rateable{
     private List<RideRequest> requestedRides;
     private Integer points;
     private List<Chat> chats;
-
+    private List<Rate> rates;
 
     public User(String name,String lastName,String userName,String email)
     {
@@ -36,6 +36,12 @@ public class User implements Rateable{
         this.requestedRides = new ArrayList<RideRequest>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
+        this.rates = new ArrayList<Rate>();
+    }
+
+    @Override
+    public List<Rate> getRates() {
+        return rates;
     }
 
     public User(String name,String lastName,String userName,String email,Vehicle vehicle)
