@@ -20,7 +20,7 @@ public class RankingRateCountTest
         User userB = mock(User.class);
         when(userB.getGoodRateCount()).thenReturn(1);
 
-        Assert.assertEquals(1,rankCrit.compare(userA,userB));
+        Assert.assertEquals(-1,rankCrit.compare(userA,userB));
     }
 
     @Test
@@ -34,6 +34,20 @@ public class RankingRateCountTest
         User userB = mock(User.class);
         when(userB.getGoodRateCount()).thenReturn(1);
 
-        Assert.assertEquals(-1,rankCrit.compare(userA,userB));
+        Assert.assertEquals(1,rankCrit.compare(userA,userB));
+    }
+
+    @Test
+    public void test_getMoth(){
+        RankingRateCount<User> rankCrit = new RankingRateCount(2015, 12, CriteriaOrder.DESC);
+
+        Assert.assertEquals(rankCrit.getMonth().intValue(),12);
+    }
+
+    @Test
+    public void test_getYear(){
+        RankingRateCount<User> rankCrit = new RankingRateCount(2015, 12, CriteriaOrder.DESC);
+
+        Assert.assertEquals(rankCrit.getYear().intValue(),2015);
     }
 }
