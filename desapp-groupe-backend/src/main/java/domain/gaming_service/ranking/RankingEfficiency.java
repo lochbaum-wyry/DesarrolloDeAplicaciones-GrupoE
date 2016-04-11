@@ -19,6 +19,8 @@ public class RankingEfficiency extends MonthlyRankingCriteria<User>{
 
     public Float getEfficiencyAvgForUser(User user)
     {
+        if (user.getRidesCount() == 0 ) 
+            return 0f ; 
         Float effSumUser = user.getRidesAsDriver().stream()
                 .map(ride -> ride.getEfficiencyPercentage())
                 .reduce(0f, Float::sum);
