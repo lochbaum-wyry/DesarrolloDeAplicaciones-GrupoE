@@ -13,8 +13,9 @@ public class RankingRateCount<T extends Rateable> extends MonthlyRankingCriteria
     @Override
     public int compare(T o1, T o2)
     {
-        //TODO: Arreglar el algo para que sea la diferencia. y que filtre los rates por mes y anio
-        int valor = (o1.getGoodRateCount() > o2.getGoodRateCount()) ? -1 : 1;
+        int totalO1 = o1.getGoodRateCount() - o1.getBadRateCount();
+        int totalO2 = o2.getGoodRateCount() - o2.getBadRateCount();
+        int valor = totalO1 > totalO2 ? -1 : 1;
         return Math.multiplyExact(valor,getOrder().getValue());
     }
 }
