@@ -54,25 +54,6 @@ public class RideRequest {
         return status;
     }
 
-    public void setPassenger(User passenger) {
-        this.passenger = passenger;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
-
-    public void setDate(DateTime date) {
-        this.date = date;
-    }
-
-    public void setBoardingAt(Location boardingAt) {
-        this.boardingAt = boardingAt;
-    }
-
-    public void setGetOffAt(Location getOffAt) {
-        this.getOffAt = getOffAt;
-    }
 
 
 }
