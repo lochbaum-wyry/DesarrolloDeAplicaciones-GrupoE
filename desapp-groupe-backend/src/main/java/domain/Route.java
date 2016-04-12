@@ -9,7 +9,8 @@ public class Route {
 
     private List<Schedule> schedules = new ArrayList<Schedule>();
     private List<Location> locations = new ArrayList<Location>();
-    private Float distanceInKms;
+    private Float distanceInKms = 0f;
+    private Float fixedCosts = 0f;
 
     public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
@@ -36,9 +37,14 @@ public class Route {
         return schedules;
     }
 
+    public void setFixedCosts(Float fixedCosts)
+    {
+        this.fixedCosts = fixedCosts;
+    }
+
     public Float getFixedCosts()
     {
-        return 0f;
+        return this.fixedCosts;
     }
 
     public Float getDistanceInKms()
@@ -48,5 +54,9 @@ public class Route {
 
     public boolean isInDayAndHour(DateTime date,Integer secondsDateCloseness) {
         return schedules.stream().anyMatch(schedule -> schedule.dayAndHourIsNear(date,secondsDateCloseness));
+    }
+
+    public void setDistanceInKms(Float distanceInKms) {
+        this.distanceInKms = distanceInKms;
     }
 }
