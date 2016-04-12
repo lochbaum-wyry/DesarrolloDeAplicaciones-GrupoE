@@ -36,4 +36,25 @@ public class ScheduleTest
         Assert.assertFalse(schedule.dayAndHourIsNear(day,1500));
     }
 
+    @Test
+    public void test_getArrivalTime_returnsArrivalTimeSet()
+    {
+        DateTime departureTime = new DateTime();
+        DateTime arrivalTime = new DateTime();
+        Schedule schedule = new Schedule(DayOfWeek.FRIDAY, departureTime, arrivalTime);
+
+        Assert.assertEquals(arrivalTime,schedule.getArrivalTime());
+    }
+
+    @Test
+    public void test_getDepartureTime_returnsDepartureTimeSet()
+    {
+        DateTime departureTime = new DateTime();
+        DateTime arrivalTime = new DateTime();
+        Schedule schedule = new Schedule(DayOfWeek.FRIDAY, departureTime, arrivalTime);
+
+        Assert.assertEquals(departureTime,schedule.getDepartureTime());
+    }
+
+
 }

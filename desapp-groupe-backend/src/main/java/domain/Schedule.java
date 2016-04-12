@@ -1,6 +1,8 @@
 package domain;
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 
+import java.sql.Time;
 import java.time.DayOfWeek;
 
 public class Schedule {
@@ -16,10 +18,6 @@ public class Schedule {
 
     public DayOfWeek getDay() {
         return day;
-    }
-
-    public void setDay(DayOfWeek day) {
-        this.day = day;
     }
 
     public DateTime getArrivalTime() {
