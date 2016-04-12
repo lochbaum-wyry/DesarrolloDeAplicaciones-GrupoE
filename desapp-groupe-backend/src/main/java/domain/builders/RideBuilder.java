@@ -31,6 +31,7 @@ public class RideBuilder {
         Ride ride = new Ride(this.route,this.date,this.driver);
 
         ride.getTakenSeats().addAll(this.takenSeats);
+
         ride.setVehicle(this.vehicle);
         ride.setOilPrice(oilPrice);
 

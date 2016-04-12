@@ -1,9 +1,11 @@
 package domain;
 
 import domain.builders.*;
+import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+import org.mockito.internal.invocation.finder.VerifiableInvocationsFinder;
 
 import java.lang.*;
 import java.lang.System;
@@ -353,7 +355,7 @@ public class RideTest extends AbstractDomainTest
     }
 
     @Test
-    public void test_getSavedAmount(){
+    public void test_getSavedAmount_isTheSumOfCostsPerPassengerCalculatedByRideCostCalculator(){
         User driver = mock(User.class) ;
         User passenger1 = mock(User.class) ;
         User passenger2 = mock(User.class) ;
@@ -383,20 +385,28 @@ public class RideTest extends AbstractDomainTest
     }
 
     @Test
-    public void test_getEfficiencyPercentage(){
+    public void test_getEfficiencyPercentage_isThePercentageOfTheTotalCostOfRepresentedByTheSavedAmountForCarryingPassengers()
+    {
+        Float oilPrice = 10f;
+        Float vehicleOilWastePerKm = 1f;
+        Float routeFixedCosts = 80f;
+        Float routeDistanceInKms = 1f;
+
         User driver = mock(User.class) ;
         User passenger1 = mock(User.class) ;
         User passenger2 = mock(User.class) ;
 
-        RideCostCalculator rideCostCalculator = mock(RideCostCalculator.class);
-        when(rideCostCalculator.calculateCostForPassenger(any(User.class))).thenReturn(15f);
+        RideCostCalculator rideCostCalculator = mock(RideCostPassengerDivision.class);
+        when(rideCostCalculator.calculateCostForPassenger(any(User.class))).thenReturn(20f);
+
 
         Route route = mock(Route.class);
-        when(route.getFixedCosts()).thenReturn(100f);
-        when(route.getDistanceInKms()).thenReturn(1.2f);
+        when(route.getFixedCosts()).thenReturn(routeFixedCosts);
+        when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
+
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilUsePerKmInLts()).thenReturn(2f);
+        when(vehicle.getOilUsePerKmInLts()).thenReturn(vehicleOilWastePerKm);
 
 
         Ride ride = RideBuilder.aRide()
@@ -406,8 +416,91 @@ public class RideTest extends AbstractDomainTest
                 .withRideCostCalculator(rideCostCalculator)
                 .withRoute(route)
                 .withVehicle(vehicle)
-                .withOilPrice(3f)
+                .withOilPrice(oilPrice)
                 .build();
-        Assert.assertEquals(ride.getEfficiencyPercentage().intValue(),27);
+
+
+        Float savedAmount = rideCostCalculator.calculateCostForPassenger(passenger1) +
+                            rideCostCalculator.calculateCostForPassenger(passenger2);
+
+        Float expected = (savedAmount*100)/ride.getTotalCost() ;
+
+        Assert.assertEquals(ride.getEfficiencyPercentage(), expected);
     }
+
+    @Test
+    public void test_getCostRideCostCalculator_returnsTheActualRideCostCalculatorInstanceWhenIsSet()
+    {
+        User driver = mock(User.class);
+        Ride ride = RideBuilder.aRide().withDriver(driver).withRideCostCalculator(new RideCostPassengerDivision()).build();
+        Assert.assertTrue(ride.getRideCostCalculator() instanceof RideCostCalculator);
+    }
+
+    @Test
+    public void test_cancelRide_isCancelledReturnsTrueAfterCancellingRide()
+    {
+        User driver = mock(User.class);
+        Ride ride = RideBuilder.aRide().withDriver(driver).withRideCostCalculator(new RideCostPassengerDivision()).build();
+        ride.cancelRide();
+        Assert.assertTrue(ride.isCancelled());
+    }
+
+    @Test(expected = NoSeatsAvailableException.class)
+    public void test_takeSeat_NoSeatsAvailableExceptionIsThrownIfThereIsNoSeatsAvailbleForTheRequestedSectionOfTheRide()
+            throws NoSeatsAvailableException {
+
+        User driver = mock(User.class);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getCapacity()).thenReturn(2);
+
+        User occupierPassenger = mock(User.class);
+        User failerPassenger = mock(User.class);
+
+        Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
+        Location boardAt = route.getLocations().get(0);
+        Location getOffAt = route.getLocations().get( route.getLocations().size()-1 );
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withRoute(route)
+                .build();
+
+        ride.takeSeat(occupierPassenger ,boardAt, getOffAt);
+        ride.takeSeat(failerPassenger,boardAt, getOffAt);
+
+    }
+
+    @Test
+    public void test_takeSeat_addsATakenSeatToRideTakenSeatsIfThereIsSpaceAvailableForTheRequestedSectionOfTheRide()
+            throws NoSeatsAvailableException {
+
+        User driver = mock(User.class);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getCapacity()).thenReturn(2);
+
+        User occupierPassenger = mock(User.class);
+
+        Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
+        Location boardAt = route.getLocations().get(0);
+        Location getOffAt = route.getLocations().get( route.getLocations().size()-1 );
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withRoute(route)
+                .build();
+
+        Assert.assertTrue(ride.getTakenSeats().size() == 0);
+
+        ride.takeSeat(occupierPassenger ,boardAt, getOffAt);
+
+        Assert.assertTrue(ride.getTakenSeats().size() == 1);
+
+    }
+
+
+
 }

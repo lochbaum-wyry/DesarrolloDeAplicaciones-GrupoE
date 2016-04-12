@@ -181,7 +181,7 @@ public class Ride
 
     public Float getTotalCost()
     {
-        return (float) (    this.getRoute().getFixedCosts() + getVehicleUseCosts());
+        return this.getRoute().getFixedCosts() + this.getVehicleUseCosts();
     }
 
     public Float getVehicleUseCosts() {
@@ -224,5 +224,9 @@ public class Ride
     public Float getEfficiencyPercentage()
     {
         return (getSavedAmount()*100)/getTotalCost();
+    }
+
+    public Boolean isCancelled() {
+        return this.cancelled == true;
     }
 }
