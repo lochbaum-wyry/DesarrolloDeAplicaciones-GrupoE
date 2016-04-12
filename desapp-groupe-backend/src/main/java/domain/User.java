@@ -63,7 +63,7 @@ public class User implements Rateable{
 
     public void rateUser(User user, Ride ride, RateValue rateValue, String comment)
     {
-        Rate rate = new Rate(this, ride, rateValue, comment);
+        Rate rate = Rate.create(this, ride, rateValue, comment);
         user.addRate(rate);
     }
 
@@ -114,7 +114,8 @@ public class User implements Rateable{
         this.getChats().add(newchat);
     }
 
-    public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException {
+    public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException
+    {
         Ride ride = this.getOrAddRideForRequest(rideRequest);
         ride.takeSeat(rideRequest.getPassenger(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
         this.removeRideRequest(rideRequest);

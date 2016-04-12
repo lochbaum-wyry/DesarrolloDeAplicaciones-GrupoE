@@ -9,4 +9,6 @@ public enum RateValue {
     {
         this.value = value;
     }
+
+
 }

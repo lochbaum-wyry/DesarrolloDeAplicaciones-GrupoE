@@ -6,8 +6,6 @@ import java.util.stream.Collectors;
 
 public interface Rateable
 {
-    // TODO: java 8 cannot assign a value to final variable  (Integer totalRateCount)
-
     default void addRate(Rate rate)
     {
         getRates().add(rate);
@@ -17,12 +15,12 @@ public interface Rateable
 
     default List<Rate> getBadRates()
     {
-        return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.BAD)).collect(Collectors.toList());
+        return getRates().stream().filter(rate -> rate instanceof BadRate).collect(Collectors.toList());
     }
 
     default List<Rate>  getGoodRates()
     {
-        return getRates().stream().filter(rate -> rate.getValue().equals(RateValue.GOOD)).collect(Collectors.toList());
+        return getRates().stream().filter(rate -> rate instanceof GoodRate).collect(Collectors.toList());
     }
 
     default Boolean rateIsOfMonthYear(Rate rate, Integer month, Integer year)

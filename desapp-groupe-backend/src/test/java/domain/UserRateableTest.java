@@ -17,10 +17,10 @@ public class UserRateableTest {
                 .withEmail("EmailBuilder.aEmail.build()")
                 .build();
 
-        Rate goodRate = Mockito.mock(Rate.class);
+        Rate goodRate = Mockito.mock(GoodRate.class);
         Mockito.when(goodRate.getValue()).thenReturn(RateValue.GOOD);
 
-        Rate badRate = Mockito.mock(Rate.class);
+        Rate badRate = Mockito.mock(BadRate.class);
         Mockito.when(badRate.getValue()).thenReturn(RateValue.BAD);
 
         luis.addRate(goodRate);
@@ -105,10 +105,10 @@ public class UserRateableTest {
                 .withEmail("EmailBuilder.aEmail.build()")
                 .build();
 
-        Rate goodRate = Mockito.mock(Rate.class);
+        Rate goodRate = Mockito.mock(GoodRate.class);
         Mockito.when(goodRate.getValue()).thenReturn(RateValue.GOOD);
 
-        Rate badRate = Mockito.mock(Rate.class);
+        Rate badRate = Mockito.mock(BadRate.class);
         Mockito.when(badRate.getValue()).thenReturn(RateValue.BAD);
 
         luis.addRate(goodRate);
@@ -128,10 +128,10 @@ public class UserRateableTest {
                 .withEmail("EmailBuilder.aEmail.build()")
                 .build();
 
-        Rate goodRate = Mockito.mock(Rate.class);
+        Rate goodRate = Mockito.mock(GoodRate.class);
         Mockito.when(goodRate.getValue()).thenReturn(RateValue.GOOD);
 
-        Rate badRate = Mockito.mock(Rate.class);
+        Rate badRate = Mockito.mock(BadRate.class);
         Mockito.when(badRate.getValue()).thenReturn(RateValue.BAD);
 
         luis.addRate(goodRate);
@@ -153,10 +153,10 @@ public class UserRateableTest {
                 .withEmail("EmailBuilder.aEmail.build()")
                 .build();
 
-        Rate goodRate = Mockito.mock(Rate.class);
+        Rate goodRate = Mockito.mock(GoodRate.class);
         Mockito.when(goodRate.getValue()).thenReturn(RateValue.GOOD);
 
-        Rate badRate = Mockito.mock(Rate.class);
+        Rate badRate = Mockito.mock(BadRate.class);
         Mockito.when(badRate.getValue()).thenReturn(RateValue.BAD);
 
         luis.addRate(goodRate);

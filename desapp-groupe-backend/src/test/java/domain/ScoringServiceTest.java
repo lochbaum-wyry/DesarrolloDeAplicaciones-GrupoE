@@ -29,7 +29,7 @@ public class ScoringServiceTest extends AbstractDomainTest
         when(ride.getDriver()).thenReturn(user);
         when(ride.isDriver(user)).thenReturn(true);
 
-        Rate rate = mock(Rate.class);
+        Rate rate = mock(GoodRate.class);
         when(rate.getValue()).thenReturn(RateValue.GOOD);
         when(rate.getRide()).thenReturn(ride);
 
@@ -57,7 +57,7 @@ public class ScoringServiceTest extends AbstractDomainTest
         when(ride.getDriver()).thenReturn(user);
         when(ride.isDriver(user)).thenReturn(true);
 
-        Rate rate = mock(Rate.class);
+        Rate rate = mock(BadRate.class);
         when(rate.getValue()).thenReturn(RateValue.BAD);
         when(rate.getRide()).thenReturn(ride);
 
@@ -112,15 +112,15 @@ public class ScoringServiceTest extends AbstractDomainTest
         when(ride.getDriver()).thenReturn(user);
         when(ride.isDriver(user)).thenReturn(true);
 
-        Rate goodRate = mock(Rate.class);
+        Rate goodRate = mock(GoodRate.class);
         when(goodRate.getValue()).thenReturn(RateValue.GOOD);
         when(goodRate.getRide()).thenReturn(ride);
 
-        Rate badRate1 = mock(Rate.class);
+        Rate badRate1 = mock(BadRate.class);
         when(badRate1.getValue()).thenReturn(RateValue.BAD);
         when(badRate1.getRide()).thenReturn(ride);
 
-        Rate badRate2 = mock(Rate.class);
+        Rate badRate2 = mock(BadRate.class);
         when(badRate2.getValue()).thenReturn(RateValue.BAD);
         when(badRate2.getRide()).thenReturn(ride);
 

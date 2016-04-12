@@ -10,7 +10,9 @@ import org.mockito.Mockito;
 import java.util.List;
 
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 public class UserTest extends AbstractDomainTest
@@ -205,7 +207,7 @@ public class UserTest extends AbstractDomainTest
     public void test_rateUser_UserContainRateCreated(){
         //quise poner test_rateUser_el usuario contiene el rate creado
         User user = UserBuilder.aUser().withName("user").build();
-        User fede = Mockito.mock(User.class);
+        User fede = mock(User.class);
 
         Route route = RouteBuilder.aRoute().withLocationAt(23.4,12.3).build();
 
@@ -223,7 +225,7 @@ public class UserTest extends AbstractDomainTest
 
         Route route = RouteBuilder.aRoute().withLocationAt(23.4,12.3).build();
 
-        Vehicle vehicle = Mockito.mock(Vehicle.class);
+        Vehicle vehicle = mock(Vehicle.class);
 
         Ride ride = RideBuilder.aRide().withRoute(route).withDate(new DateTime()).withVehicle(vehicle).withDriver(user).build();
 
@@ -269,5 +271,31 @@ public class UserTest extends AbstractDomainTest
                 .count();
     }
 
+    @Test
+    public void test_getRidesAsDriver_returnsAListContainingAllTheRidesWhereUserIsDriver()
+    {
+
+        User user = UserBuilder.aUser().build();
+
+        Ride ride1 = mock(Ride.class);
+        when(ride1.isDriver(user)).thenReturn(true);
+
+        Ride ride2 = mock(Ride.class);
+        when(ride2.isDriver(user)).thenReturn(true);
+
+        Ride ride3 = mock(Ride.class);
+        when(ride3.isDriver(user)).thenReturn(false);
+
+        user.addRide(ride1);
+        user.addRide(ride2);
+        user.addRide(ride3);
+
+        user.getRidesAsDriver().stream().forEach(
+            ride -> Assert.assertTrue(ride.isDriver(user))
+        );
+
+        Assert.assertFalse(user.getRidesAsDriver().contains(ride3));
+
+    }
 
 }
