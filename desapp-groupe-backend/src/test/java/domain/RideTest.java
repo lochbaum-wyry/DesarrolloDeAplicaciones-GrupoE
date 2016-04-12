@@ -227,7 +227,7 @@ public class RideTest extends AbstractDomainTest
     @Test
     public void test_getTotalCost_isValueOfFixedCostsPlusOilCostsByDistance()
     {
-        Float oilPrice = SystemSettings.getInstance().getOilPrice();
+        Float oilPrice = 10f;
         float routeDistanceInKms = 20f;
 
         Route route = mock(Route.class);
@@ -275,7 +275,7 @@ public class RideTest extends AbstractDomainTest
     @Test
     public void test_costPerPassenger_isTotalCostDividedByPassengersNumberInRide()
     {
-        Float oilPrice = SystemSettings.getInstance().getOilPrice();
+        Float oilPrice = 10f;
         float routeDistanceInKms = 20f;
 
         Route route = mock(Route.class);

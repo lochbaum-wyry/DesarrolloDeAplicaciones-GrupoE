@@ -46,7 +46,9 @@ public class UserTest extends AbstractDomainTest
     {
         RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
         User driver = driverWithVehicle(2);
-
+        System system = new System();
+        system.setSettings( new SystemSettings());
+        driver.setSystem(system);
         driver.addRideRequest(rideRequest);
 
         try {
@@ -62,8 +64,12 @@ public class UserTest extends AbstractDomainTest
     public void test_acceptRideRequest_passengerIsIncludedInARideCorrespondingToRequestDetails()
     {
         User driver = driverWithVehicle(2);
+        System system = new System();
+        system.setSettings( new SystemSettings());
+        driver.setSystem(system);
 
         User passenger = UserBuilder.aUser().build();
+
         Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
 
         Location boardAt = route.getLocations().get(0);
@@ -102,7 +108,10 @@ public class UserTest extends AbstractDomainTest
     public void test_acceptRideRequest_NoSeatsAvailableExceptionIsThrownIfThereIsNoSeatsAvailbleForTheRequestedRide()
             throws NoSeatsAvailableException {
 
+        System system = new System();
+        system.setSettings( new SystemSettings());
         User driver = driverWithVehicle(2);
+        driver.setSystem(system);
 
         User seatOccupier = UserBuilder.aUser().build();
         User failerPassenger = UserBuilder.aUser().build();

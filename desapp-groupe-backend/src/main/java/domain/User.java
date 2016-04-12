@@ -7,8 +7,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-public class User implements Rateable{
 
+public class User implements Rateable
+{
+    protected System system ;
     private String name;
     private String lastName;
     private String userName;
@@ -36,6 +38,11 @@ public class User implements Rateable{
         this.points = 0;
         this.chats = new ArrayList<Chat>();
         this.rates = new ArrayList<Rate>();
+    }
+
+    public void setSystem(System system)
+    {
+        this.system = system ;
     }
 
     @Override
@@ -139,7 +146,7 @@ public class User implements Rateable{
     private Ride createRideForRideRequest(RideRequest rideRequest)
     {
         Ride ride = Ride.fromRideRequest(this,rideRequest);
-        ride.setOilPrice( SystemSettings.getInstance().getOilPrice() );
+        ride.setOilPrice( this.system.getSettings().getOilPrice() );
         return ride;
     }
 

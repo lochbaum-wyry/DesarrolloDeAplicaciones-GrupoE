@@ -25,9 +25,12 @@ public class System
     public System()
     {
         this.gamingService = new GamingService(this);
-        this.settings = SystemSettings.getInstance();
     }
 
+    public void setSettings(SystemSettings settings)
+    {
+        this.settings = settings;
+    }
 
     public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
@@ -41,4 +44,7 @@ public class System
     }
 
 
+    public SystemSettings getSettings() {
+        return settings;
+    }
 }

@@ -10,14 +10,7 @@ public class SystemSettings {
     private Float defaultRadioCloseness = 200f;
     private Integer defaultTimeClosenessInSecs = 1800 ;
     
-    public static SystemSettings getInstance()
-    {
-        if (SystemSettings._instance == null)
-            SystemSettings._instance = new SystemSettings();
 
-        return SystemSettings._instance;
-    }
-    
     public Float getOilPrice() {
         return oilPrice;
     }
