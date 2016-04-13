@@ -15,16 +15,18 @@ public class System
 
     public void signUp(User user) {
         users.add(user);
+        user.setSystem(this);
     }
 
     public List<User> getUsers() {
         return users;
     }
 
-
-    public System()
+    public System(SystemSettings systemSettings, GamingService gamingService)
     {
-        this.gamingService = new GamingService(this);
+        this.settings = systemSettings;
+        this.gamingService = gamingService;
+        gamingService.setSystem(this);
     }
 
     public void setSettings(SystemSettings settings)
