@@ -104,6 +104,12 @@
 	<!-- ________________________________________ -->
 	<!-- ________________________________________ -->
 
+
+	<bean id="persistence.vehiclerepository" class="domain.Repositories.VehicleRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+
 	<!--
 	<bean id="persistence.personrepository" class="ar.edu.unq.repositories.PersonRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />

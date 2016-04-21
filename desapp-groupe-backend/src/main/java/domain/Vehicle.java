@@ -37,4 +37,8 @@ public class Vehicle implements Rateable{
     public List<Rate> getRates() {
         return this.rates;
     }
+
+    public int getId() {
+        return id;
+    }
 }
