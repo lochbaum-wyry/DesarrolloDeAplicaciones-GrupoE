@@ -4,6 +4,10 @@
 # project specific
 desapp-groupe-backend.iml
 desapp-groupe-backend.ipr
+desapp-groupe-backend/.idea/compiler.xml
+desapp-groupe-backend/.idea/encodings.xml
+desapp-groupe-backend/.idea/misc.xml
+
 
 # sbt specific
 .cache
