@@ -109,6 +109,65 @@
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 
+	<bean id="persistence.wallrepository" class="domain.Repositories.WallRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.userrepository" class="domain.Repositories.UserRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.takenseatrepository" class="domain.Repositories.TakenSeatRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.schedulerepository" class="domain.Repositories.ScheduleRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.routerepository" class="domain.Repositories.RouteRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.riderequestrepository" class="domain.Repositories.RideRequestRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.riderepository" class="domain.Repositories.RideRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.raterepository" class="domain.Repositories.RateRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.rankingrepository" class="domain.Repositories.RankingRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.productrepository" class="domain.Repositories.ProductRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.productexchangerepository" class="domain.Repositories.ProductExchangeRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.postrepository" class="domain.Repositories.PostRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.messagerepository" class="domain.Repositories.MessageRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.locationrepository" class="domain.Repositories.LocationRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.chatrepository" class="domain.Repositories.ChatRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
 
 	<!--
 	<bean id="persistence.personrepository" class="ar.edu.unq.repositories.PersonRepository" >
