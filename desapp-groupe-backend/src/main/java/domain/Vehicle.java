@@ -8,14 +8,9 @@ import java.util.List;
 @Entity
 @Table(name="Vehicle")
 public class Vehicle implements Rateable{
-
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    
     private int id;
-    @Column(name="capacity")
     private Integer capacity;
-    @Column(name="oilWastePerKm")
     private Float oilWastePerKm;
     private List<Rate> rates;
 
