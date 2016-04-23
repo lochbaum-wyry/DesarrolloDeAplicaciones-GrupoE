@@ -239,4 +239,17 @@ public class Ride
     public Boolean isCancelled() {
         return this.cancelled == true;
     }
+
+
+    public Boolean getCancelled() {
+        return cancelled;
+    }
+
+    public void setCancelled(Boolean cancelled) {
+        this.cancelled = cancelled;
+    }
+
+    public void setTakenSeats(List<TakenSeat> takenSeats) {
+        this.takenSeats = takenSeats;
+    }
 }

@@ -33,5 +33,18 @@ public class Post {
     public User getPublisher() {
         return publisher;
     }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
+
+    public void setPublisher(User publisher) {
+        this.publisher = publisher;
+    }
+
 
 }

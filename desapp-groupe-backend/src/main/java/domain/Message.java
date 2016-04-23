@@ -53,5 +53,21 @@ public class Message {
     }
 
 
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setSeenBy(List<User> seenBy) {
+        this.seenBy = seenBy;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public void setTimestamp(DateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
 
 }

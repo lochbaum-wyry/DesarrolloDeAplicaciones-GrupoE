@@ -8,7 +8,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 public class Location {
-
     private Double longitude;
     private Double latitude;
     private int id;
@@ -66,4 +65,14 @@ public class Location {
                 .append(this.getLongitude())
                 .toHashCode();
     }
+
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
 }

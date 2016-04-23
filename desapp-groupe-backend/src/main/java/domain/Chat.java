@@ -50,4 +50,16 @@ public class Chat  {
     }
 
 
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
 }

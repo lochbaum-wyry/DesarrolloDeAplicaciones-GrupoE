@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 
 public class Ranking {
-
     private List<Rateable> bestDrivers;
     private List<Rateable> worstDrivers;
     private List<Rateable> bestPassenger;
@@ -125,6 +124,39 @@ public class Ranking {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+
+    public void setBestDrivers(List<Rateable> bestDrivers) {
+        this.bestDrivers = bestDrivers;
+    }
+
+    public void setBestPassenger(List<Rateable> bestPassenger) {
+        this.bestPassenger = bestPassenger;
+    }
+
+    public void setBestVehicles(List<Rateable> bestVehicles) {
+        this.bestVehicles = bestVehicles;
+    }
+
+    public List<User> getMostEfficientDrivers() {
+        return mostEfficientDrivers;
+    }
+
+    public void setMostEfficientDrivers(List<User> mostEfficientDrivers) {
+        this.mostEfficientDrivers = mostEfficientDrivers;
+    }
+
+    public void setWorstDrivers(List<Rateable> worstDrivers) {
+        this.worstDrivers = worstDrivers;
+    }
+
+    public void setWorstPassenger(List<Rateable> worstPassenger) {
+        this.worstPassenger = worstPassenger;
+    }
+
+    public void setWorstVehicles(List<Rateable> worstVehicles) {
+        this.worstVehicles = worstVehicles;
     }
 
 

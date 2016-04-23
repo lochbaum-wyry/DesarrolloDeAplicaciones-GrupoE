@@ -69,4 +69,14 @@ public class Route {
     public void setDistanceInKms(Float distanceInKms) {
         this.distanceInKms = distanceInKms;
     }
+
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
+    }
+
 }

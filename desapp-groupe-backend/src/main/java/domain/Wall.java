@@ -29,4 +29,8 @@ public class Wall {
     public void setId(int id) {
         this.id = id;
     }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }

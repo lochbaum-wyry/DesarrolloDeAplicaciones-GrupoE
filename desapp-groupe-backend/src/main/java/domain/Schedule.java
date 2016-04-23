@@ -50,4 +50,17 @@ public class Schedule {
 
         return   (toleranceBegin <= date.secondOfDay().get()) && (date.secondOfDay().get() >= toleranceEnd);
     }
+
+
+    public void setArrivalTime(DateTime arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public void setDay(DayOfWeek day) {
+        this.day = day;
+    }
+
+    public void setDepartureTime(DateTime departureTime) {
+        this.departureTime = departureTime;
+    }
 }

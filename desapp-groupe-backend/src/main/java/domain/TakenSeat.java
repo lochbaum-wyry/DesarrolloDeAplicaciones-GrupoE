@@ -5,6 +5,7 @@ public class TakenSeat {
     private Location boardingAt;
     private Location getOffAt;
     private int id;
+
     public TakenSeat(User passenger, Location boardingAt, Location getOffAt)
     {
         this.passenger = passenger;
@@ -34,6 +35,18 @@ public class TakenSeat {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setBoardingAt(Location boardingAt) {
+        this.boardingAt = boardingAt;
+    }
+
+    public void setGetOffAt(Location getOffAt) {
+        this.getOffAt = getOffAt;
+    }
+
+    public void setPassenger(User passenger) {
+        this.passenger = passenger;
     }
 
 

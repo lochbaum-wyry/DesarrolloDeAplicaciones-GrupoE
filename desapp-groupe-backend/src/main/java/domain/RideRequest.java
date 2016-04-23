@@ -64,4 +64,36 @@ public class RideRequest {
     }
 
 
+    public void setBoardingAt(Location boardingAt) {
+        this.boardingAt = boardingAt;
+    }
+
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
+
+    public DateTime getDateRequested() {
+        return dateRequested;
+    }
+
+    public void setDateRequested(DateTime dateRequested) {
+        this.dateRequested = dateRequested;
+    }
+
+    public void setGetOffAt(Location getOffAt) {
+        this.getOffAt = getOffAt;
+    }
+
+    public void setPassenger(User passenger) {
+        this.passenger = passenger;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public void setStatus(RequestStatus status) {
+        this.status = status;
+    }
+
 }
