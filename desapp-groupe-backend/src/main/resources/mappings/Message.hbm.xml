@@ -8,7 +8,7 @@
             <generator class="native" />
         </id>
 
-        <many-to-one name="sender" class="domain.User" />
+        <one-to-one name="sender" class="domain.User" />
         <property name="timestamp" />
         <property name="content" />
 

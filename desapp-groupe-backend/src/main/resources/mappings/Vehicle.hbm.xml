@@ -7,9 +7,9 @@
         <id column="ID" name="id">
             <generator class="native" />
         </id>
-
         <property name="capacity" />
         <property name="oilWastePerKm" />
+        <one-to-one name="owner" class="domain.User" />
 
     </class>
 </hibernate-mapping>

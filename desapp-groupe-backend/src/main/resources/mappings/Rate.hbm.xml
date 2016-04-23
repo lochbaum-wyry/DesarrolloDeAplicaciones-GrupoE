@@ -8,8 +8,8 @@
             <generator class="native" />
         </id>
 
-        <many-to-one name="user" class="domain.User" />
-        <many-to-one name="ride" class="domain.Ride" />
+        <one-to-one name="user" class="domain.User" />
+        <one-to-one name="ride" class="domain.Ride" />
         <property name="rateValue" />
         <property name="comment" />
         <property name="date" />

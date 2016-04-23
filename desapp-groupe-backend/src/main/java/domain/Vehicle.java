@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Vehicle implements Rateable{
     private int id;
+    private User owner;
     private Integer capacity;
     private Float oilWastePerKm;
     private List<Rate> rates;

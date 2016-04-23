@@ -4,6 +4,7 @@
 <hibernate-mapping default-access="field"
                    default-cascade="save-update">
     <class name="domain.gaming_service.product_service.Product">
+
         <id column="ID" name="id">
             <generator class="native" />
         </id>
@@ -11,14 +12,5 @@
         <property name="name" />
         <property name="cost" />
         <property name="stock" />
-<!--
-        <list name="pictures" lazy="false">
-            <key column="imageId" />
-            <list-index column="id" />
-            <one-to-many class="java.awt.Image" />
-        </list>
--->
-
-
     </class>
 </hibernate-mapping>

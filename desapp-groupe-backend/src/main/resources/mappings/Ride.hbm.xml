@@ -9,11 +9,12 @@
         </id>
 
         <property name="oilPrice" />
-        <one-to-one name="vehicle" class="domain.Vehicle" />
         <property name="date" />
-        <many-to-one name="route" class="domain.Route" />
-        <many-to-one name="driver" class="domain.User" />
         <property name="cancelled" />
+
+        <one-to-one name="vehicle" class="domain.Vehicle" />
+        <one-to-one name="route" class="domain.Route" />
+        <one-to-one name="driver" class="domain.User" />
 
         <list name="takenSeats" lazy="false">
             <key column="takenSeatId" />
