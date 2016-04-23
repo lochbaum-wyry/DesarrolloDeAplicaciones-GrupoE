@@ -5,11 +5,10 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Chat  {
+public class Chat  extends Entity{
     private List<User> users;
     private String name;
     private List<Message> messages;
-    private int id;
 
     public Chat(String name,User user1,User user2){
         this.name = name;
@@ -29,15 +28,6 @@ public class Chat  {
 
     public void setUser(User user) {
         this.users.add(user);
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<Message> getMessages() {

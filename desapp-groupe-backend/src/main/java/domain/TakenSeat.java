@@ -1,10 +1,9 @@
 package domain;
 
-public class TakenSeat {
+public class TakenSeat extends Entity{
     private User passenger;
     private Location boardingAt;
     private Location getOffAt;
-    private int id;
 
     public TakenSeat(User passenger, Location boardingAt, Location getOffAt)
     {
@@ -26,15 +25,6 @@ public class TakenSeat {
     public Location getBoardingAt()
     {
         return boardingAt;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setBoardingAt(Location boardingAt) {

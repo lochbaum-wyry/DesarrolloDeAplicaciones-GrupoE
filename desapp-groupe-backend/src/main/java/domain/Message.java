@@ -5,12 +5,11 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Message {
+public class Message extends Entity{
     private User sender;
     private List<User> seenBy;
     private DateTime timestamp;
     private String content;
-    private int id;
 
     public Message(User user, String content, DateTime timestamp){
         this.sender = user;
@@ -29,15 +28,6 @@ public class Message {
 
     public String getContent() {
         return content;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public List<User> getSeenBy() {

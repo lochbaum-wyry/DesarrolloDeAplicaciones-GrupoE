@@ -5,28 +5,17 @@ import org.joda.time.DateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Route {
+public class Route extends Entity{
 
     private List<Schedule> schedules = new ArrayList<Schedule>();
     private List<Location> locations = new ArrayList<Location>();
     private Float distanceInKms = 0f;
     private Float fixedCosts = 0f;
-    private int id;
 
     public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
         return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
     }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 
     public Boolean locationIsNearRoute(Location location, Float radioCloseness)
     {

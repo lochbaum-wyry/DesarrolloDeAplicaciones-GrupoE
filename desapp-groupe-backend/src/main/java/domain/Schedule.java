@@ -5,11 +5,10 @@ import org.joda.time.LocalTime;
 import java.sql.Time;
 import java.time.DayOfWeek;
 
-public class Schedule {
+public class Schedule extends Entity{
     private DayOfWeek day;
     private DateTime departureTime;
     private DateTime arrivalTime;
-    private int id;
 
     public Schedule(DayOfWeek day, DateTime departureTime, DateTime arrivalTime){
         this.arrivalTime = arrivalTime;
@@ -20,16 +19,6 @@ public class Schedule {
     public DayOfWeek getDay() {
         return day;
     }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
 
     public DateTime getArrivalTime() {
         return arrivalTime;

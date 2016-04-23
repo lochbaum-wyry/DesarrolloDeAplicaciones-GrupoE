@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Wall {
+public class Wall extends Entity{
     private List<Post> posts;
-    private int id;
 
     public Wall(){
         this.posts = new ArrayList<Post>();
@@ -20,14 +19,6 @@ public class Wall {
 
     public List<Post> getPosts() {
         return posts;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setPosts(List<Post> posts) {
