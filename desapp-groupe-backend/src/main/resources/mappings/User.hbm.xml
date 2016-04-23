@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+                   default-cascade="save-update">
+    <class name="domain.User">
+        <id column="ID" name="id">
+            <generator class="native" />
+        </id>
+
+        <property name="name" />
+        <property name="lastName" />
+        <property name="userName" />
+        <property name="email" />
+        <property name="vehicle" />
+        <list name="routes" lazy="false"> <!--no estoy seguro de que deban estar routes y rides-->
+            <key column="routeId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Route" />
+        </list>
+        <list name="rides" lazy="false">
+            <key column="rideId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Ride" />
+        </list>
+        <list name="rideRequests" lazy="false">
+            <key column="rideRequestId" />
+            <list-index column="id" />
+            <one-to-many class="domain.RideRequest" />
+        </list>
+        <list name="requestedRides" lazy="false">
+            <key column="requestRideId" />
+            <list-index column="id" />
+            <one-to-many class="domain.RideRequest" />
+        </list>
+        <property name="points" />
+        <list name="chats" lazy="false">
+            <key column="chatId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Chat" />
+        </list>
+        <list name="rates" lazy="false">
+            <key column="rateId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Rate" />
+        </list>
+
+
+
+    </class>
+</hibernate-mapping>

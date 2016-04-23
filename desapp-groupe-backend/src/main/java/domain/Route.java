@@ -11,10 +11,20 @@ public class Route {
     private List<Location> locations = new ArrayList<Location>();
     private Float distanceInKms = 0f;
     private Float fixedCosts = 0f;
+    private int id;
 
     public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
     {
         return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 

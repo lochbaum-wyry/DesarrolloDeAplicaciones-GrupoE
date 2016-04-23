@@ -1,14 +1,10 @@
 package domain;
 
-import javax.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="Vehicle")
+
 public class Vehicle implements Rateable{
-    
     private int id;
     private Integer capacity;
     private Float oilWastePerKm;
@@ -26,6 +22,10 @@ public class Vehicle implements Rateable{
 
     public Float getOilUsePerKmInLts() {
         return oilWastePerKm;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

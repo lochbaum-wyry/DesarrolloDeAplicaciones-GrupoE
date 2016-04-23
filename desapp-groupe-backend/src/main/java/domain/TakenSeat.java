@@ -4,7 +4,7 @@ public class TakenSeat {
     private User passenger;
     private Location boardingAt;
     private Location getOffAt;
-
+    private int id;
     public TakenSeat(User passenger, Location boardingAt, Location getOffAt)
     {
         this.passenger = passenger;
@@ -26,6 +26,16 @@ public class TakenSeat {
     {
         return boardingAt;
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 
 }

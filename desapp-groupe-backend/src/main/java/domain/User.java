@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class User implements Rateable
 {
+    private int id;
     protected System system ;
     private String name;
     private String lastName;
@@ -92,6 +93,14 @@ public class User implements Rateable
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
