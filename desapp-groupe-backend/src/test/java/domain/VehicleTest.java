@@ -26,13 +26,13 @@ public class VehicleTest
     public void test_save()
     {
 
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
+  //      ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
+ //       BeanFactory factory = context;
+//        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
 
-        Float oilWastePerKm = 0.05f;
-        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
-        vehicleRepository.save(vehicle);
+//        Float oilWastePerKm = 0.05f;
+//        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
+//        vehicleRepository.save(vehicle);
 //        Integer id =  vehicle.getId();
 //
 //        Vehicle vehicle1 = vehicleRepository.findById(id);
