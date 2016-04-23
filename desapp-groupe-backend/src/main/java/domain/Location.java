@@ -4,6 +4,9 @@ import java.lang.*;
 
 import static java.lang.StrictMath.abs;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 public class Location {
 
     private Double longitude;
@@ -48,19 +51,19 @@ public class Location {
     public boolean equals(Object other)
     {
         Location otherLoc = (Location) other;
-//        return  other instanceof domain.Location &&
-//                otherLoc.getLatitude() == latitude &&
-//                otherLoc.getLongitude() == longitude;
-        return otherLoc.hashCode() == hashCode();
+        return new EqualsBuilder()
+                .append(this.getLatitude(), otherLoc.getLatitude())
+                .append(this.getLongitude(), otherLoc.getLongitude())
+                .isEquals();
     }
 
 
     @Override
     public int hashCode()
     {
-        int hash = 111 ;
-        hash += latitude.hashCode();
-        hash += longitude.hashCode();
-        return hash;
+        return new HashCodeBuilder()
+                .append(this.getLatitude())
+                .append(this.getLongitude())
+                .toHashCode();
     }
 }
