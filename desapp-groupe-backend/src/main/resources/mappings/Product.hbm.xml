@@ -11,12 +11,13 @@
         <property name="name" />
         <property name="cost" />
         <property name="stock" />
+<!--
         <list name="pictures" lazy="false">
             <key column="imageId" />
             <list-index column="id" />
             <one-to-many class="java.awt.Image" />
         </list>
-
+-->
 
 
     </class>

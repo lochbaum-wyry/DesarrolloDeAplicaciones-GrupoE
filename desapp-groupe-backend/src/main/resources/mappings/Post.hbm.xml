@@ -8,7 +8,7 @@
             <generator class="native" />
         </id>
 
-        <property name="publisher" />
+        <many-to-one name="publisher" class="domain.User" />
         <property name="date" />
         <property name="content" />
     </class>

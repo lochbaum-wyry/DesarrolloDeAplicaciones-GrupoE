@@ -8,9 +8,9 @@
             <generator class="native" />
         </id>
 
-        <property name="passenger" />
-        <property name="boardingAt" />
-        <property name="getOffAt" />
+        <one-to-one name="passenger" class="domain.User" />
+        <one-to-one name="boardingAt" class="domain.Location" />
+        <one-to-one name="getOffAt" class="domain.Location" />
 
     </class>
 </hibernate-mapping>

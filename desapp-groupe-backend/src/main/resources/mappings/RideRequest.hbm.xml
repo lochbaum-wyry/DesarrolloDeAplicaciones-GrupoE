@@ -8,12 +8,12 @@
             <generator class="native" />
         </id>
 
-        <property name="passenger" />
-        <property name="route" />
+        <many-to-one name="passenger" class="domain.User" />
+        <one-to-one name="route" class="domain.Route" /> <!--esta relacion esta mal, deberia ser one-to-many...creo-->
         <property name="date" />
         <property name="dateRequested" />
-        <property name="boardingAt" />
-        <property name="getOffAt" />
+        <one-to-one name="boardingAt" class="domain.Location" />
+        <one-to-one name="getOffAt" class="domain.Location" />
         <property name="status" />
 
     </class>
