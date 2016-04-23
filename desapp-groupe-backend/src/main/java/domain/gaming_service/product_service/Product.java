@@ -9,6 +9,7 @@ public class Product {
     private List<Image> pictures;
     private Integer cost;
     private Integer stock;
+    private int id;
 
     public Product(String name,Integer cost,Integer stock){
         this.pictures = new ArrayList<Image>();
@@ -51,5 +52,13 @@ public class Product {
 
     public Integer getStock() {
         return stock;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

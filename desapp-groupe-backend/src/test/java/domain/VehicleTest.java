@@ -26,7 +26,7 @@ public class VehicleTest
     public void test_save()
     {
 
-  //      ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
+  //     ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
  //       BeanFactory factory = context;
 //        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
 
