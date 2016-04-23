@@ -8,6 +8,7 @@ public class Rate {
     private RateValue rateValue;
     private String comment;
     private DateTime date;
+    private int id;
 
     public Rate(User user, Ride ride, RateValue rateValue, String comment)
     {
@@ -44,6 +45,16 @@ public class Rate {
     public String getComment() {
         return comment;
     }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     public User getUser() {
         return user;

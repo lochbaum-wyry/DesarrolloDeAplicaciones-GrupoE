@@ -19,9 +19,11 @@ public class Ranking {
     private List<Rateable> bestVehicles;
     private List<Rateable> worstVehicles;
     private List<User> mostEfficientDrivers;
+    private int id;
 
     public Ranking(Integer month,Integer year,List<User> users)
     {
+        //TODO : aca creo que deberiamos guardar el mes y año
         bestDrivers = calculateBestDrivers(users,month,year);
         worstDrivers = calculateWorstDrivers(users,month,year);
         bestPassenger = calculateBestPassenger(users,month,year);
@@ -116,5 +118,14 @@ public class Ranking {
     public List<Rateable> getWorstVehicles() {
         return worstVehicles;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 }

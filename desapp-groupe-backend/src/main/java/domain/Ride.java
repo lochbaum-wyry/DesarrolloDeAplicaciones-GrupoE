@@ -20,6 +20,7 @@ public class Ride
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled;
     private RideCostCalculator rideCostCalculator ;
+    private int id;
 
     public static Ride fromRideRequest(User driver, RideRequest rideRequest)
     {
@@ -74,6 +75,15 @@ public class Ride
     public Route getRoute()
     {
         return route;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setRoute(Route route)

@@ -8,6 +8,7 @@ public class Location {
 
     private Double longitude;
     private Double latitude;
+    private int id;
 
     public Location(Double longitude,Double latitude){
         this.latitude = latitude;
@@ -33,6 +34,15 @@ public class Location {
     {
         return (Math.pow(longitude-this.getLongitude(),2) + Math.pow(latitude-this.getLatitude() ,2)) < Math.pow(radioCloseness,2);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
     @Override
     public boolean equals(Object other)

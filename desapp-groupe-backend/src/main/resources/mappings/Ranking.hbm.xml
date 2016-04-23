@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+                   default-cascade="save-update">
+    <class name="domain.gaming_service.ranking.Ranking">
+        <id column="ID" name="id">
+            <generator class="native" />
+        </id>
+
+        <list name="bestDrivers" lazy="false">
+            <key column="userId" />
+            <list-index column="id" />
+            <one-to-many class="domain.User" />
+        </list>
+        <list name="worstDrivers" lazy="false">
+            <key column="userId" />
+            <list-index column="id" />
+            <one-to-many class="domain.User" />
+        </list>
+        <list name="bestPassenger" lazy="false">
+            <key column="userId" />
+            <list-index column="id" />
+            <one-to-many class="domain.User" />
+        </list>
+        <list name="worstPassenger" lazy="false">
+            <key column="userId" />
+            <list-index column="id" />
+            <one-to-many class="domain.User" />
+        </list>
+        <list name="bestVehicles" lazy="false">
+            <key column="vehicleId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Vehicle" />
+        </list>
+        <list name="worstVehicles" lazy="false">
+            <key column="vehicleId" />
+            <list-index column="id" />
+            <one-to-many class="domain.Vehicle" />
+        </list>
+
+    </class>
+</hibernate-mapping>

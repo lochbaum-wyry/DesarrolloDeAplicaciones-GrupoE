@@ -10,6 +10,7 @@ public class RideRequest {
     private Location boardingAt;
     private Location getOffAt;
     private RequestStatus status;
+    private int id;
 
     public RideRequest(User passenger, DateTime date,Route route,Location boardingAt,Location getOffAt){
         this.dateRequested = DateTime.now();
@@ -54,6 +55,13 @@ public class RideRequest {
         return status;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
 }

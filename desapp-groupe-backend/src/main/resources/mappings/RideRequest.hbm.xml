@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+                   default-cascade="save-update">
+    <class name="domain.RideRequest">
+        <id column="ID" name="id">
+            <generator class="native" />
+        </id>
+
+        <property name="passenger" />
+        <property name="route" />
+        <property name="date" />
+        <property name="dateRequested" />
+        <property name="boardingAt" />
+        <property name="getOffAt" />
+        <property name="status" />
+
+    </class>
+</hibernate-mapping>

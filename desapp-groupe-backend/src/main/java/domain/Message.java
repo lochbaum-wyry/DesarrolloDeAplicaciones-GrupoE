@@ -10,6 +10,7 @@ public class Message {
     private List<User> seenBy;
     private DateTime timestamp;
     private String content;
+    private int id;
 
     public Message(User user, String content, DateTime timestamp){
         this.sender = user;
@@ -28,6 +29,15 @@ public class Message {
 
     public String getContent() {
         return content;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public List<User> getSeenBy() {

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field"
+                   default-cascade="save-update">
+    <class name="domain.Message">
+        <id column="ID" name="id">
+            <generator class="native" />
+        </id>
+
+        <property name="sender" />
+        <property name="timestamp" />
+        <property name="content" />
+
+        <list name="seenBy" lazy="false">
+            <key column="userId" />
+            <list-index column="id" />
+            <one-to-many class="domain.User" />
+        </list>
+
+
+    </class>
+</hibernate-mapping>
