@@ -1,5 +1,7 @@
 package domain;
 import domain.builders.RateBuilder;
+import domain.rating_service.Rate;
+import domain.rating_service.RateValue;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -44,7 +46,7 @@ public class RateTest {
                 .withRide(ride)
                 .build();
 
-        Assert.assertEquals(rate.getUser(),user);
+        Assert.assertEquals(rate.getRater(),user);
     }
 
     @Test

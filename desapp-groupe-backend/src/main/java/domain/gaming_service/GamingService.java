@@ -2,7 +2,7 @@ package domain.gaming_service;
 
 import domain.System;
 import domain.gaming_service.product_service.ProductsService;
-import domain.gaming_service.ranking.Ranking;
+import domain.gaming_service.ranking.MonthlyRanking;
 import domain.gaming_service.scoring_service.ScoringService;
 
 public class GamingService
@@ -30,8 +30,11 @@ public class GamingService
         return scoringService;
     }
 
-    public Ranking createRanking(Integer month, Integer year){
-        return new Ranking(month,year,system.getUsers());
+    public MonthlyRanking createRanking(Integer month, Integer year)
+    {
+        MonthlyRanking ranking = new MonthlyRanking(month,year);
+        ranking.generate();
+        return ranking ;
     }
 
     public void setSystem(System system) {

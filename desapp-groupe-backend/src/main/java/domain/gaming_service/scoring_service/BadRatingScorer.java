@@ -1,6 +1,6 @@
 package domain.gaming_service.scoring_service;
 
-import domain.Rate;
+import domain.rating_service.Rate;
 import domain.User;
 
 public class BadRatingScorer extends RateEventScorer

@@ -1,14 +1,14 @@
 package domain.Repositories;
 
-import domain.gaming_service.ranking.Ranking;
+import domain.gaming_service.ranking.MonthlyRanking;
 
-public class RankingRepository extends HibernateGenericDao<Ranking> implements
-        GenericRepository<Ranking> {
+public class RankingRepository extends HibernateGenericDao<MonthlyRanking> implements
+        GenericRepository<MonthlyRanking> {
 
     private static final long serialVersionUID = -8543996946304099004L;
 
     @Override
-    protected Class<Ranking> getDomainClass() {
-        return Ranking.class;
+    protected Class<MonthlyRanking> getDomainClass() {
+        return MonthlyRanking.class;
     }
 }

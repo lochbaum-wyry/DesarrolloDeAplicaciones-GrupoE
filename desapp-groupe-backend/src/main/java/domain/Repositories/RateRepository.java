@@ -1,6 +1,6 @@
 package domain.Repositories;
 
-import domain.Rate;
+import domain.rating_service.Rate;
 
 public class RateRepository extends HibernateGenericDao<Rate> implements
         GenericRepository<Rate> {

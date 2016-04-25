@@ -41,12 +41,6 @@
             <list-index column="id" />
             <one-to-many class="domain.Chat" />
         </list>
-        <list name="rates" lazy="false">
-            <key column="rateId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Rate" />
-        </list>
-
 
 
     </class>

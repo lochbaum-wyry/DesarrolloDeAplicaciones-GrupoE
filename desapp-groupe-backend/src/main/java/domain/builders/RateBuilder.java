@@ -1,13 +1,16 @@
 package domain.builders;
 
-import domain.Rate;
-import domain.RateValue;
+import domain.rating_service.Rate;
+import domain.rating_service.RateType;
+import domain.rating_service.RateValue;
 import domain.Ride;
 import domain.User;
 import org.joda.time.DateTime;
 
 public class RateBuilder {
     private User user;
+    private User ratedUser;
+    private RateType rateType;
     private Ride ride;
     private RateValue rateValue;
     private String comment;
@@ -20,6 +23,10 @@ public class RateBuilder {
 
     public RateBuilder withUser(User user) {
         this.user = user;
+        return this;
+    }
+    public RateBuilder withRateType(RateType rateType) {
+        this.rateType = rateType;
         return this;
     }
 
@@ -41,6 +48,7 @@ public class RateBuilder {
 
 
     public Rate build() {
-        return new Rate(user,ride,rateValue,comment);
+        if (rateType == null) rateType = RateType.Driving;
+        return new Rate(user, ratedUser, ride, rateType,rateValue,comment);
     }
 }

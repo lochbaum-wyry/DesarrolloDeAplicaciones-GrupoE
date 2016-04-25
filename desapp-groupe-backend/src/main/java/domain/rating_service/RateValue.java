@@ -1,4 +1,4 @@
-package domain;
+package domain.rating_service;
 
 public enum RateValue {
     GOOD(1), BAD(-1);

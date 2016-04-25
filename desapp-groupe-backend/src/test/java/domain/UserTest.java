@@ -2,6 +2,8 @@ package domain;
 
 import domain.builders.*;
 import domain.exceptions.NoSeatsAvailableException;
+import domain.rating_service.Rate;
+import domain.rating_service.RateValue;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -210,37 +212,6 @@ public class UserTest extends AbstractDomainTest
         Assert.assertEquals(1, this.numberOfChatsWithUser(user,otherUser));
     }
 
-    @Test
-    public void test_rateUser_UserContainRateCreated(){
-        //quise poner test_rateUser_el usuario contiene el rate creado
-        User user = UserBuilder.aUser().withName("user").build();
-        User fede = mock(User.class);
-
-        Route route = RouteBuilder.aRoute().withLocationAt(23.4,12.3).build();
-
-        Ride ride = RideBuilder.aRide().withRoute(route).withDate(new DateTime()).withDriver(user).build();
-
-        user.rateUser(fede,ride,RateValue.GOOD,"es un gran cebador de mate");
-
-        Mockito.verify(fede).addRate(any(Rate.class));
-    }
-
-    @Test
-    public void test_rateCar_VehicleContainRateCreated(){
-        //lo mismo que arriba
-        User user = UserBuilder.aUser().withName("user").build();
-
-        Route route = RouteBuilder.aRoute().withLocationAt(23.4,12.3).build();
-
-        Vehicle vehicle = mock(Vehicle.class);
-
-        Ride ride = RideBuilder.aRide().withRoute(route).withDate(new DateTime()).withVehicle(vehicle).withDriver(user).build();
-
-        user.rateCar(ride,RateValue.BAD,"este auto es una porqueria");
-
-        Mockito.verify(vehicle).addRate(any(Rate.class));
-
-    }
 
     @Test
     public void test_isDriver_ReturnTrueIfaUserHaveAvehicle(){

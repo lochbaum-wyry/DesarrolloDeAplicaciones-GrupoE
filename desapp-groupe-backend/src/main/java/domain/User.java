@@ -1,6 +1,7 @@
 package domain;
 
 import domain.exceptions.NoSeatsAvailableException;
+import domain.rating_service.Rate;
 
 import java.lang.*;
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 
 
 
-public class User implements Rateable
+public class User  extends Entity
 {
     private int id;
     protected System system ;
@@ -23,9 +24,13 @@ public class User implements Rateable
     private List<RideRequest> requestedRides;
     private Integer points;
     private List<Chat> chats;
-    private List<Rate> rates;
 
-    public User(String name,String lastName,String userName,String email)
+    private Integer totalRateCount = 0 ;
+    private Integer goodRateCount = 0 ;
+    private Integer badRateCount = 0 ;
+
+
+    public User(String name, String lastName, String userName, String email)
     {
         this.name = name;
         this.lastName = lastName;
@@ -38,17 +43,11 @@ public class User implements Rateable
         this.requestedRides = new ArrayList<RideRequest>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
-        this.rates = new ArrayList<Rate>();
     }
 
     public void setSystem(System system)
     {
         this.system = system ;
-    }
-
-    @Override
-    public List<Rate> getRates() {
-        return rates;
     }
 
     public User(String name,String lastName,String userName,String email,Vehicle vehicle)
@@ -67,18 +66,6 @@ public class User implements Rateable
     {
         rideRequest.reject();
         this.removeRideRequest(rideRequest);
-    }
-
-    public void rateUser(User user, Ride ride, RateValue rateValue, String comment)
-    {
-        Rate rate = Rate.create(this, ride, rateValue, comment);
-        user.addRate(rate);
-    }
-
-    public void rateCar(Ride ride, RateValue rateValue, String comment)
-    {
-        Rate rate = new Rate(this, ride, rateValue, comment);
-        ride.getVehicle().addRate(rate);
     }
 
     public void sendMessage(User user, String content)
@@ -235,5 +222,60 @@ public class User implements Rateable
 
     public Integer getRidesCount() {
         return this.getRides().size();
+    }
+
+
+    public void updateRateCounters(Rate rate)
+    {
+        this.setTotalRateCount(this.getTotalRateCount() + 1);
+        switch (rate.getValue())
+        {
+            case GOOD:
+                this.setGoodRateCount(this.getGoodRateCount() + 1);
+                break;
+            case BAD:
+                this.setBadRateCount(this.getBadRateCount() + 1);
+                break;
+        }
+    }
+
+    public Integer getTotalRateCount()
+    {
+        return totalRateCount;
+    }
+
+    public void setTotalRateCount(Integer totalRateCount)
+    {
+        this.totalRateCount = totalRateCount;
+    }
+
+    public Integer getGoodRateCount()
+    {
+        return goodRateCount;
+    }
+
+    public void setGoodRateCount(Integer goodRateCount)
+    {
+        this.goodRateCount = goodRateCount;
+    }
+
+    public Integer getBadRateCount()
+    {
+        return badRateCount;
+    }
+
+    public void setBadRateCount(Integer badRateCount)
+    {
+        this.badRateCount = badRateCount;
+    }
+
+    Float getGoodRatesPercentage()
+    {
+        return ((float)(getGoodRateCount() * 100)) / getTotalRateCount();
+    }
+
+    Float getBadRatesPercentage()
+    {
+        return ((float)getBadRateCount() * 100) / getTotalRateCount();
     }
 }

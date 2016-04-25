@@ -3,12 +3,12 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field"
                    default-cascade="save-update">
-    <class name="domain.Rate">
+    <class name="domain.rating_service.Rate">
         <id column="ID" name="id">
             <generator class="native" />
         </id>
 
-        <one-to-one name="user" class="domain.User" />
+        <one-to-one name="rater" class="domain.User" />
         <one-to-one name="ride" class="domain.Ride" />
         <property name="rateValue" />
         <property name="comment" />

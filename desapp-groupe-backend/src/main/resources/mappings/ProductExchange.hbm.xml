@@ -9,7 +9,6 @@
         </id>
 
         <one-to-one name="product" class="domain.gaming_service.product_service.Product" />
-        <one-to-one name="user" class="domain.User" />
 
     </class>
 </hibernate-mapping>

@@ -1,17 +1,20 @@
 package domain;
 
+import domain.rating_service.Rate;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Vehicle implements Rateable{
-    private int id;
+public class Vehicle  extends Entity
+{
     private User owner;
     private Integer capacity;
     private Float oilWastePerKm;
     private List<Rate> rates;
 
-    public Vehicle(Integer capacity,Float oilWastePerKm){
+    public Vehicle(Integer capacity,Float oilWastePerKm)
+    {
         this.capacity = capacity;
         this.oilWastePerKm = oilWastePerKm;
         this.rates = new ArrayList<Rate>();
@@ -25,16 +28,11 @@ public class Vehicle implements Rateable{
         return oilWastePerKm;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public User getOwner() {
+        return owner;
     }
 
-    @Override
-    public List<Rate> getRates() {
-        return this.rates;
-    }
-
-    public int getId() {
-        return id;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
