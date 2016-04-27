@@ -1,8 +1,15 @@
 package domain;
 
+import domain.Repositories.RideRepository;
+import domain.Repositories.UserRepository;
 import domain.Repositories.VehicleRepository;
+import domain.builders.RideBuilder;
+import domain.builders.RouteBuilder;
+import domain.builders.UserBuilder;
+import domain.builders.VehicleBuilder;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -16,6 +23,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.*;
+import java.lang.System;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -98,7 +106,8 @@ public class VehicleTest
     }
 
     @Test
-    public void test_findAll(){
+    public void test_findAll()
+    {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
         BeanFactory factory = context;
         VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
@@ -113,4 +122,36 @@ public class VehicleTest
 
         Assert.assertEquals(vehicleRepository.findAll().size(),3);
     }
+
+
+    @Test
+    public void test_prueba_userRepository()
+    {
+        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
+        BeanFactory factory = context;
+        UserRepository userRepository = (UserRepository) factory.getBean("persistence.userrepository");
+        RideRepository rideRepository = (RideRepository) factory.getBean("persistence.riderepository");
+
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(2f).build();
+        User fede = UserBuilder.aUser().withName("fede").withVehicle(vehicle).build();
+        User jorge = UserBuilder.aUser().withName("jorge").withVehicle(vehicle).build();
+        User nadie = UserBuilder.aUser().withName("nadie").build();
+
+        Route route = RouteBuilder.aRoute().build();
+
+        fede.setGoodRateCount(20);
+        jorge.setGoodRateCount(10);
+        Ride ride = RideBuilder.aRide().withDriver(fede).withDate(new DateTime(2/2)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
+
+        rideRepository.save(ride);
+
+
+        userRepository.save(fede);
+        userRepository.save(jorge);
+        userRepository.save(nadie);
+
+
+        System.out.print(userRepository.getBestPassengersInMonthYear(2,2,20));
+    }
+
 }

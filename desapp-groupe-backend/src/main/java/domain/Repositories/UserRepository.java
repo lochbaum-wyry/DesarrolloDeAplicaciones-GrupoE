@@ -1,6 +1,8 @@
 package domain.Repositories;
 
 import domain.User;
+import domain.gaming_service.ranking.MonthlyRanking;
+import org.hibernate.Query;
 
 import java.util.List;
 
@@ -14,22 +16,57 @@ public class UserRepository extends HibernateGenericDao<User> implements
         return User.class;
     }
 
-    public List<User> getBestDriversInMonthYear(Integer month, Integer year)
+    public List<User> getBestDriversInMonthYear(Integer month, Integer year,Integer cant)
     {
-        return null;
+        String hql = "SELECT u FROM " + persistentClass.getName() +  " as u " +
+                " INNER JOIN u.rides r " +
+                " WHERE month(r.date) = :month and year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount - u.badRateCount) DESC";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("month",month);
+        query.setParameter("year",year);
+        query.setFirstResult(0);
+        query.setMaxResults(cant);
+
+        return query.list();
     }
 
-    public List<User> getWorstDriversInMonthYear(Integer month, Integer year)
+    public List<User> getWorstDriversInMonthYear(Integer month, Integer year,Integer cant)
     {
-        return null;
+        String hql = "SELECT u FROM " + persistentClass.getName() +  " as u " +
+                " INNER JOIN u.rides r " +
+                " WHERE month(r.date) = :month and year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount - u.badRateCount) ASC";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("month",month);
+        query.setParameter("year",year);
+        query.setFirstResult(0);
+        query.setMaxResults(cant);
+
+        return query.list();
     }
 
-    public List<User> getBestPassengersInMonthYear(Integer month, Integer year)
+    public List<User> getBestPassengersInMonthYear(Integer month, Integer year,Integer cant)
     {
-        return null;
+        String hql = "SELECT distinct u FROM TakenSeat ts " +
+                " INNER JOIN ts.passenger u " +
+                " INNER JOIN ts.ride r  " +
+                " WHERE month(r.date) = :month and year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount - u.badRateCount) DESC";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("month",month);
+        query.setParameter("year",year);
+        query.setFirstResult(0);
+        query.setMaxResults(cant);
+
+        return query.list();
+
     }
 
-    public List<User> getWorstPassengersInMonthYear(Integer month, Integer year)
+    public List<User> getWorstPassengersInMonthYear(Integer month, Integer year,Integer cant)
     {
         return null;
     }

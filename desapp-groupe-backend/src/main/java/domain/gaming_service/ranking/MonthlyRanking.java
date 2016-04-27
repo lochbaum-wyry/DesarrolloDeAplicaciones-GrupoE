@@ -11,9 +11,6 @@ import java.util.List;
 
 public class MonthlyRanking extends Entity
 {
-    private UserRepository userRepository ;
-    private VehicleRepository vehicleRepository;
-
     private Integer month;
     private Integer year;
     private List<User> bestDrivers;
@@ -30,18 +27,78 @@ public class MonthlyRanking extends Entity
         this.year = year ;
     }
 
-    public void generate()
-    {
-        bestDrivers = userRepository.getBestDriversInMonthYear(month, year);
-        worstDrivers = userRepository.getWorstDriversInMonthYear(month,year);
 
-        bestPassenger = userRepository.getBestPassengersInMonthYear(month,year);
-        worstPassenger = userRepository.getWorstPassengersInMonthYear(month,year);
-
-        bestVehicles = vehicleRepository.getBestVehiclesInMonthYear(month,year);
-        worstVehicles = vehicleRepository.getWorstVehiclesInMonthYear(month,year);
-
-        mostEfficientDrivers = userRepository.getMostEfficientDriversInMonthYear(month, year);
+    public List<User> getBestDrivers() {
+        return bestDrivers;
     }
+
+    public void setBestDrivers(List<User> bestDrivers) {
+        this.bestDrivers = bestDrivers;
+    }
+
+    public List<User> getBestPassenger() {
+        return bestPassenger;
+    }
+
+    public void setBestPassenger(List<User> bestPassenger) {
+        this.bestPassenger = bestPassenger;
+    }
+
+    public List<Vehicle> getBestVehicles() {
+        return bestVehicles;
+    }
+
+    public void setBestVehicles(List<Vehicle> bestVehicles) {
+        this.bestVehicles = bestVehicles;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public List<User> getMostEfficientDrivers() {
+        return mostEfficientDrivers;
+    }
+
+    public void setMostEfficientDrivers(List<User> mostEfficientDrivers) {
+        this.mostEfficientDrivers = mostEfficientDrivers;
+    }
+
+    public List<User> getWorstDrivers() {
+        return worstDrivers;
+    }
+
+    public void setWorstDrivers(List<User> worstDrivers) {
+        this.worstDrivers = worstDrivers;
+    }
+
+    public List<User> getWorstPassenger() {
+        return worstPassenger;
+    }
+
+    public void setWorstPassenger(List<User> worstPassenger) {
+        this.worstPassenger = worstPassenger;
+    }
+
+    public List<Vehicle> getWorstVehicles() {
+        return worstVehicles;
+    }
+
+    public void setWorstVehicles(List<Vehicle> worstVehicles) {
+        this.worstVehicles = worstVehicles;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
 
 }

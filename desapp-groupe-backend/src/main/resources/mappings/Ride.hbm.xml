@@ -9,7 +9,7 @@
         </id>
 
         <property name="oilPrice" />
-        <property name="date" />
+        <property name="date"  type="org.joda.time.contrib.hibernate.PersistentDateTime" />
         <property name="cancelled" />
 
         <one-to-one name="vehicle" class="domain.Vehicle" />
