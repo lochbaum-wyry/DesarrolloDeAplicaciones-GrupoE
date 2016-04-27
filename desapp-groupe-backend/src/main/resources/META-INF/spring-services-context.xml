@@ -7,6 +7,15 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 	<!-- beans de spring -->
+
+	<bean id="services.general" class="domain.servicesRest.GeneralService">
+		<property name="userService" ref="services.user" />
+	</bean>
+
+	<bean id="services.user" class="domain.servicesRest.UserService">
+		<property name="repository" ref="persistence.userrepository" />
+	</bean>
+
 	<!--
 	<bean id="services.general" class="ar.edu.unq.services.GeneralService">
 		<property name="carService" ref="services.car" />
