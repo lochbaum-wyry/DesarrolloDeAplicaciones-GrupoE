@@ -3,12 +3,12 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field"
                    default-cascade="save-update">
-    <class name="domain.gaming_service.product_service.ProductExchange">
+    <class name="domain.ProductExchange">
         <id column="ID" name="id">
             <generator class="native" />
         </id>
 
-        <one-to-one name="product" class="domain.gaming_service.product_service.Product" />
+        <one-to-one name="product" class="domain.Product" />
 
     </class>
 </hibernate-mapping>

@@ -1,5 +1,7 @@
 package domain.servicesRest;
 
+import domain.services.UserService;
+
 public class GeneralService {
 
     private UserService userService;

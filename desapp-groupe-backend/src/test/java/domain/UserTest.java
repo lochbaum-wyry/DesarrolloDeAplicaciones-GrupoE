@@ -13,44 +13,6 @@ import static org.mockito.Mockito.when;
 public class UserTest extends AbstractDomainTest
 {
 
-    @Test
-    public void test_sendMessage_newChatIsCreatedWhenUsersMessageForTheFirstTime()
-    {
-        User user = UserBuilder.aUser().build();
-        User otherUser = UserBuilder.aUser().build();
-
-        Assert.assertTrue(user.getChats().isEmpty());
-
-        user.sendMessage(otherUser, "como estas cabezon???");
-
-        Assert.assertFalse(user.getChats().isEmpty());
-    }
-
-    @Test
-    public void test_sendMessage_newChatIsAddedToTheOtherUserWhenUsersMessageForTheFirstTime()
-    {
-        User user = UserBuilder.aUser().build();
-        User otherUser = UserBuilder.aUser().build();
-
-        Assert.assertTrue(otherUser.getChats().isEmpty());
-
-        user.sendMessage(otherUser, "como estas cabezon???");
-
-        Assert.assertFalse(otherUser.getChats().isEmpty());
-    }
-
-    @Test
-    public void test_sendMessage_onlyOneChatPerUserIsCreatedOnEachUser()
-    {
-        User user = UserBuilder.aUser().build();
-        User otherUser = UserBuilder.aUser().build();
-
-        user.sendMessage(otherUser, "como estas cabezon???");
-        user.sendMessage(otherUser, "todo bien???");
-
-        Assert.assertEquals(1, this.numberOfChatsWithUser(user,otherUser));
-    }
-
 
     @Test
     public void test_isDriver_ReturnTrueIfaUserHaveAvehicle(){
@@ -81,11 +43,5 @@ public class UserTest extends AbstractDomainTest
         Assert.assertTrue(user.isPassenger());
     }
 
-    public long numberOfChatsWithUser(User user, User searchedUser)
-    {
-        return user.getChats().stream()
-                .filter(p -> p.getUsers().contains(searchedUser))
-                .count();
-    }
 
 }

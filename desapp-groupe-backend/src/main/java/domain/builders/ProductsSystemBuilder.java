@@ -1,8 +1,8 @@
 package domain.builders;
 
-import domain.gaming_service.product_service.Product;
-import domain.gaming_service.product_service.ProductExchange;
-import domain.gaming_service.product_service.ProductsService;
+import domain.Product;
+import domain.ProductExchange;
+import domain.services.ProductsService;
 
 import java.util.ArrayList;
 import java.util.List;

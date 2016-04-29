@@ -1,7 +1,7 @@
 package domain.builders;
 
-import domain.gaming_service.scoring_service.Scorer;
-import domain.gaming_service.scoring_service.ScoringService;
+import domain.services.gaming_service.scoring_service.Scorer;
+import domain.services.gaming_service.scoring_service.ScoringService;
 
 import java.util.ArrayList;
 import java.util.List;

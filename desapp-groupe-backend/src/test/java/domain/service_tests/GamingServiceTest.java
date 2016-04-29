@@ -1,15 +1,12 @@
 package domain.service_tests;
 
-import domain.System;
-import domain.gaming_service.GamingService;
-import domain.gaming_service.product_service.ProductsService;
-import domain.gaming_service.ranking.MonthlyRanking;
-import domain.gaming_service.scoring_service.ScoringService;
+import domain.services.System;
+import domain.services.gaming_service.GamingService;
+import domain.services.ProductsService;
+import domain.services.gaming_service.scoring_service.ScoringService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.util.ArrayList;
 
 public class GamingServiceTest
 {

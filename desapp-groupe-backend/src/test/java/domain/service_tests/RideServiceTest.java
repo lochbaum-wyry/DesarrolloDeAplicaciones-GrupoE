@@ -1,21 +1,7 @@
 package domain.service_tests;
 
 
-import domain.*;
-import domain.System;
-import domain.builders.RideRequestBuilder;
-import domain.builders.RouteBuilder;
-import domain.builders.SystemBuilder;
-import domain.builders.UserBuilder;
-import domain.exceptions.NoSeatsAvailableException;
-import org.joda.time.DateTime;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.util.List;
-
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class RideServiceTest
 {
@@ -70,7 +56,7 @@ public class RideServiceTest
 //    {
 //        RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
 //        User driver = driverWithVehicle(2);
-//        domain.System system = SystemBuilder.aSystem().build();
+//        domain.services.System system = SystemBuilder.aSystem().build();
 //        driver.setSystem(system);
 //        driver.addRideRequest(rideRequest);
 //

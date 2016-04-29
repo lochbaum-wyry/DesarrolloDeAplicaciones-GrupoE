@@ -3,7 +3,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field"
                    default-cascade="save-update">
-    <class name="domain.rating_service.Rate">
+    <class name="domain.Rate">
         <id column="ID" name="id">
             <generator class="native" />
         </id>

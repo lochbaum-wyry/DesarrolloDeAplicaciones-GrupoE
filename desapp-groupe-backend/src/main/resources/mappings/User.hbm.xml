@@ -23,11 +23,5 @@
             <list-index column="id" />
             <one-to-many class="domain.Route" />
         </list>
-        <list name="chats" lazy="false">
-            <key column="chatId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Chat" />
-        </list>
-
     </class>
 </hibernate-mapping>

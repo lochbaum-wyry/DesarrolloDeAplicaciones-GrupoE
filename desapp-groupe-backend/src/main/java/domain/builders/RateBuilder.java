@@ -1,8 +1,8 @@
 package domain.builders;
 
-import domain.rating_service.Rate;
-import domain.rating_service.RateType;
-import domain.rating_service.RateValue;
+import domain.Rate;
+import domain.RateType;
+import domain.RateValue;
 import domain.Ride;
 import domain.User;
 import org.joda.time.DateTime;

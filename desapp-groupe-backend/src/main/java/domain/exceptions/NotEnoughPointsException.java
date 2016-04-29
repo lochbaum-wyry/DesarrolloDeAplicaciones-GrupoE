@@ -1,6 +1,6 @@
 package domain.exceptions;
 
-import domain.gaming_service.product_service.Product;
+import domain.Product;
 import domain.User;
 
 public class NotEnoughPointsException extends Exception {

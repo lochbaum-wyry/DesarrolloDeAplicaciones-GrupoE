@@ -1,9 +1,9 @@
 package domain.builders;
 
-import domain.System;
-import domain.SystemSettings;
+import domain.services.System;
+import domain.services.SystemSettings;
 import domain.User;
-import domain.gaming_service.GamingService;
+import domain.services.gaming_service.GamingService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class SystemBuilder {
 
         gamingService.setSystem(system);
 
-        users.stream().forEach(user -> {system.signUp(user);});
+//        users.stream().forEach(user -> {system.signUp(user);});
         return system;
     }
 

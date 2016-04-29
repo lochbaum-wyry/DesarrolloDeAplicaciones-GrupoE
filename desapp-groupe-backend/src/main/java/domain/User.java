@@ -1,12 +1,9 @@
 package domain;
 
-import domain.exceptions.NoSeatsAvailableException;
-import domain.rating_service.Rate;
+import domain.services.System;
 
 import java.lang.*;
 import java.util.*;
-import java.util.stream.Collectors;
-
 
 
 public class User  extends Entity
@@ -20,7 +17,6 @@ public class User  extends Entity
     private Vehicle vehicle ;
     private List<Route> routes ;
     private Integer points;
-    private List<Chat> chats;
 
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
@@ -33,10 +29,8 @@ public class User  extends Entity
         this.lastName = lastName;
         this.userName = userName;
         this.email = email;
-        this.vehicle = null;
         this.routes = new ArrayList<Route>();
         this.points = 0;
-        this.chats = new ArrayList<Chat>();
     }
 
     public void setSystem(System system)
@@ -50,12 +44,6 @@ public class User  extends Entity
         this.vehicle = vehicle;
     }
 
-    public void sendMessage(User user, String content)
-    {
-        Chat chat = this.getOrAddChatWith(user);
-        chat.addMessage(this,content);
-    }
-
     public Integer getPoints() {
         return points;
     }
@@ -64,40 +52,10 @@ public class User  extends Entity
         this.points = points;
     }
 
-    private Chat getOrAddChatWith(User user)
-    {
-        Chat chat ;
-        Optional<Chat> maybeChat = getChatWith(user);
-        if(maybeChat.isPresent())
-        {
-            chat = maybeChat.get();
-        } else
-        {
-            chat = new Chat(this.name.toString(),this,user);
-            addChat(chat);
-            user.addChat(chat);
-        }
-        return chat;
-    }
-
-    private Optional<Chat> getChatWith(User user)
-    {
-        return this.getChats().stream().filter(p -> p.getUsers().contains(user)).findFirst();
-    }
-
-    private void addChat(Chat newchat)
-    {
-        this.getChats().add(newchat);
-    }
 
     public Vehicle getVehicle()
     {
         return vehicle;
-    }
-
-    public List<Chat> getChats()
-    {
-        return chats;
     }
 
     public List<Route> getRoutes()

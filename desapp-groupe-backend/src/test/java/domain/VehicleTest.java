@@ -1,8 +1,8 @@
 package domain;
 
-import domain.Repositories.RideRepository;
-import domain.Repositories.UserRepository;
-import domain.Repositories.VehicleRepository;
+import domain.repositories.RideRepository;
+import domain.repositories.UserRepository;
+import domain.repositories.VehicleRepository;
 import domain.builders.RideBuilder;
 import domain.builders.RouteBuilder;
 import domain.builders.UserBuilder;

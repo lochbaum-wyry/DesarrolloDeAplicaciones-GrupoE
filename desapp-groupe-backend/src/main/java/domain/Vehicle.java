@@ -1,7 +1,5 @@
 package domain;
 
-import domain.rating_service.Rate;
-
 import java.util.ArrayList;
 import java.util.List;
 

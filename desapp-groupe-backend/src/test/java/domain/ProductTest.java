@@ -1,7 +1,6 @@
 package domain;
 
 import domain.builders.ProductBuilder;
-import domain.gaming_service.product_service.Product;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
