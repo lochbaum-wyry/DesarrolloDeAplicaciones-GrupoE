@@ -2,8 +2,10 @@ package domain;
 
 import org.joda.time.DateTime;
 
-public class RideRequest extends Entity{
-    private User passenger;
+public class RideRequest extends Entity
+{
+    private User requester;
+    private User driver;
     private Route route;
     private DateTime date;
     private DateTime dateRequested;
@@ -12,9 +14,11 @@ public class RideRequest extends Entity{
     private RequestStatus status;
 
 
-    public RideRequest(User passenger, DateTime date,Route route,Location boardingAt,Location getOffAt){
+    public RideRequest(User requester, User driver, DateTime date, Route route, Location boardingAt, Location getOffAt)
+    {
+        this.driver = driver;
         this.dateRequested = DateTime.now();
-        this.passenger = passenger;
+        this.requester = requester;
         this.route = route;
         this.date = date;
         this.boardingAt = boardingAt;
@@ -31,8 +35,8 @@ public class RideRequest extends Entity{
         this.status = RequestStatus.Rejected;
     }
 
-    public User getPassenger() {
-        return passenger;
+    public User getRequester() {
+        return requester;
     }
 
     public Route getRoute() {
@@ -75,8 +79,8 @@ public class RideRequest extends Entity{
         this.getOffAt = getOffAt;
     }
 
-    public void setPassenger(User passenger) {
-        this.passenger = passenger;
+    public void setRequester(User requester) {
+        this.requester = requester;
     }
 
     public void setRoute(Route route) {

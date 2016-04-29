@@ -2,12 +2,9 @@ package domain;
 
 import domain.builders.*;
 import domain.exceptions.NoSeatsAvailableException;
-import domain.rating_service.Rate;
-import domain.rating_service.RateValue;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -96,7 +93,7 @@ public class UserTest extends AbstractDomainTest
 
     public Boolean aRideContainsPassengerMatchingRideRequestDetails(List<Ride> rideList , RideRequest rideRequest)
     {
-        User passenger = rideRequest.getPassenger();
+        User passenger = rideRequest.getRequester();
         return rideList.stream().anyMatch(ride -> {
             return ride.suitsRideRequest(rideRequest) && ride.seatTakenBy(passenger).isPresent();
         });

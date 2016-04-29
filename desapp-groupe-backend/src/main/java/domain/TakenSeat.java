@@ -1,6 +1,8 @@
 package domain;
 
-public class TakenSeat extends Entity{
+public class TakenSeat extends Entity
+{
+    private Ride ride;
     private User passenger;
     private Location boardingAt;
     private Location getOffAt;

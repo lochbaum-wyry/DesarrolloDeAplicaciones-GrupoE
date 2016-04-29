@@ -19,9 +19,6 @@ public class User  extends Entity
     private String email;
     private Vehicle vehicle ;
     private List<Route> routes ;
-    private List<Ride> rides;
-    private List<RideRequest> rideRequests;
-    private List<RideRequest> requestedRides;
     private Integer points;
     private List<Chat> chats;
 
@@ -38,9 +35,6 @@ public class User  extends Entity
         this.email = email;
         this.vehicle = null;
         this.routes = new ArrayList<Route>();
-        this.rides = new ArrayList<Ride>();
-        this.rideRequests = new ArrayList<RideRequest>();
-        this.requestedRides = new ArrayList<RideRequest>();
         this.points = 0;
         this.chats = new ArrayList<Chat>();
     }
@@ -54,18 +48,6 @@ public class User  extends Entity
     {
         this(name, lastName, userName, email);
         this.vehicle = vehicle;
-    }
-
-    public void requestRide(User driver, RideRequest rideReq)
-    {
-        driver.addRideRequest(rideReq);
-        this.addRequestedRide(rideReq);
-    }
-
-    public void rejectRideRequest(RideRequest rideRequest)
-    {
-        rideRequest.reject();
-        this.removeRideRequest(rideRequest);
     }
 
     public void sendMessage(User user, String content)
@@ -117,69 +99,9 @@ public class User  extends Entity
         this.getChats().add(newchat);
     }
 
-    public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException
-    {
-        Ride ride = this.getOrAddRideForRequest(rideRequest);
-        ride.takeSeat(rideRequest.getPassenger(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
-        this.removeRideRequest(rideRequest);
-        rideRequest.accept();
-    }
-
-    private Ride getOrAddRideForRequest(RideRequest rideRequest)
-    {
-        Ride ride ;
-        Optional<Ride> maybeRide = this.getRideSuitableForRideRequest(rideRequest);
-        if (maybeRide.isPresent())
-        {
-            ride = maybeRide.get();
-        } else {
-            ride = createRideForRideRequest(rideRequest);
-            addRide(ride);
-        }
-        return ride;
-    }
-
-    private Ride createRideForRideRequest(RideRequest rideRequest)
-    {
-        Ride ride = Ride.fromRideRequest(this,rideRequest);
-        ride.setOilPrice( this.system.getSettings().getOilPrice() );
-        return ride;
-    }
-
-    private Optional<Ride> getRideSuitableForRideRequest(RideRequest rideRequest)
-    {
-        return this.rides.stream().
-            filter( ride -> ride.suitsRideRequest(rideRequest)).findFirst();
-    }
-
-    public void addRideRequest(RideRequest rideRequest)
-    {
-        this.rideRequests.add(rideRequest);
-    }
-
-    public void addRequestedRide(RideRequest rideRequest)
-    {
-        this.requestedRides.add(rideRequest);
-    }
-
-    public void removeRideRequest(RideRequest rideRequest)
-    {
-        this.rideRequests.remove(rideRequest);
-    }
-
     public Vehicle getVehicle()
     {
         return vehicle;
-    }
-
-    public List<Ride> getRides()
-    {
-        return rides;
-    }
-
-    public List<RideRequest> getRideRequests()
-    {
-        return rideRequests;
     }
 
     public List<Chat> getChats()
@@ -197,10 +119,6 @@ public class User  extends Entity
         routes.add(route);
     }
 
-    public void addRide(Ride ride)
-    {
-        rides.add(ride);
-    }
 
     public void addPoints(Integer points) {
         this.points= this.points + points;
@@ -212,16 +130,6 @@ public class User  extends Entity
 
     public boolean isPassenger() {
         return getVehicle() == null;
-    }
-
-    public List<Ride> getRidesAsDriver() {
-        return this.getRides().stream()
-                .filter(ride -> ride.isDriver(this))
-                .collect(Collectors.toList());
-    }
-
-    public Integer getRidesCount() {
-        return this.getRides().size();
     }
 
 

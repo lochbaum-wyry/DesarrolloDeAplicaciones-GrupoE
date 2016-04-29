@@ -9,7 +9,7 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="passenger" class="domain.User" />
+        <one-to-one name="requester" class="domain.User" />
         <one-to-one name="route" class="domain.Route" /> <!--esta relacion esta mal, deberia ser one-to-many...creo-->
         <property name="date" />
         <property name="dateRequested" />

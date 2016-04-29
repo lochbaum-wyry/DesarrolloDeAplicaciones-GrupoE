@@ -172,13 +172,6 @@ public class Ride extends Entity
         return takenSeats.stream().filter(seat -> seat.getPassenger() == passenger).findFirst();
     }
 
-    public Boolean suitsRideRequest(RideRequest rideRequest)
-    {
-        return  this.route == rideRequest.getRoute() &&
-                this.date == rideRequest.getDate()
-                ;
-    }
-
     public Float getTotalCost()
     {
         return this.getRoute().getFixedCosts() + this.getVehicleUseCosts();
@@ -227,7 +220,7 @@ public class Ride extends Entity
     }
 
     public Boolean isCancelled() {
-        return this.cancelled == true;
+        return this.cancelled;
     }
 
 

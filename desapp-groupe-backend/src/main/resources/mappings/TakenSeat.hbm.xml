@@ -11,6 +11,7 @@
         <one-to-one name="requester" class="domain.User" />
         <one-to-one name="boardingAt" class="domain.Location" />
         <one-to-one name="getOffAt" class="domain.Location" />
+        <one-to-one name="ride" class="domain.Ride" />
 
     </class>
 </hibernate-mapping>
