@@ -9,14 +9,14 @@
         </id>
 
         <property name="oilPrice" />
-        <property name="date" />
+        <property name="date"  />
         <property name="cancelled" />
 
         <one-to-one name="vehicle" class="domain.Vehicle" />
         <one-to-one name="route" class="domain.Route" />
         <one-to-one name="driver" class="domain.User" />
 
-        <list name="takenSeats" lazy="false">
+        <list name="takenSeats" lazy="false" cascade="save-update" >
             <key column="takenSeatId" />
             <list-index column="id" />
             <one-to-many class="domain.TakenSeat" />
