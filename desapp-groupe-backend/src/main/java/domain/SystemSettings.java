@@ -5,7 +5,6 @@ package domain;
  */
 public class SystemSettings {
 
-    private static  SystemSettings _instance;
     private Float oilPrice = 10f;
     private Float defaultRadioCloseness = 200f;
     private Integer defaultTimeClosenessInSecs = 1800 ;

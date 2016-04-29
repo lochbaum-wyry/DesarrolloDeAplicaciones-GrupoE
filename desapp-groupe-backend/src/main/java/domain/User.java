@@ -124,7 +124,7 @@ public class User  extends Entity
         this.points= this.points + points;
     }
 
-    public boolean isDriver() {
+    public boolean hasVehicle() {
         return getVehicle().getClass().equals(Vehicle.class);
     }
 

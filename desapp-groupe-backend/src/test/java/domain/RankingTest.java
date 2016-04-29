@@ -16,27 +16,27 @@ public class RankingTest {
 //        vehicle2 = Mockito.mock(Vehicle.class);
 //
 //        user1 = Mockito.mock(User.class);
-//        Mockito.when(user1.isDriver()).thenReturn(true);
+//        Mockito.when(user1.hasVehicle()).thenReturn(true);
 //        Mockito.when(user1.isPassenger()).thenReturn(false);
 //        Mockito.when(user1.getGoodRateCount()).thenReturn(5);
 //        Mockito.when(user1.getBadRateCount()).thenReturn(3);
 //        Mockito.when(user1.getVehicle()).thenReturn(vehicle1);
 //
 //        user2 = Mockito.mock(User.class);
-//        Mockito.when(user2.isDriver()).thenReturn(false);
+//        Mockito.when(user2.hasVehicle()).thenReturn(false);
 //        Mockito.when(user2.isPassenger()).thenReturn(true);
 //        Mockito.when(user2.getGoodRateCount()).thenReturn(1);
 //        Mockito.when(user2.getBadRateCount()).thenReturn(0);
 //
 //        user3 = Mockito.mock(User.class);
-//        Mockito.when(user3.isDriver()).thenReturn(true);
+//        Mockito.when(user3.hasVehicle()).thenReturn(true);
 //        Mockito.when(user3.isPassenger()).thenReturn(false);
 //        Mockito.when(user3.getGoodRateCount()).thenReturn(2);
 //        Mockito.when(user3.getBadRateCount()).thenReturn(20);
 //        Mockito.when(user3.getVehicle()).thenReturn(vehicle2);
 //
 //        user4 = Mockito.mock(User.class);
-//        Mockito.when(user4.isDriver()).thenReturn(false);
+//        Mockito.when(user4.hasVehicle()).thenReturn(false);
 //        Mockito.when(user4.isPassenger()).thenReturn(true);
 //        Mockito.when(user4.getGoodRateCount()).thenReturn(3);
 //        Mockito.when(user4.getBadRateCount()).thenReturn(1);

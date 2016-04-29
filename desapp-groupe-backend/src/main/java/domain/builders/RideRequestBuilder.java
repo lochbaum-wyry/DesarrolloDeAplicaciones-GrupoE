@@ -12,6 +12,7 @@ public class RideRequestBuilder {
     private Location getOffAt;
     private User passenger;
     private DateTime date;
+    private User driver;
 
     public RideRequestBuilder() {
         this.route = null;
@@ -50,8 +51,14 @@ public class RideRequestBuilder {
         return this;
     }
 
+    public RideRequestBuilder withDriver(User driver) {
+        this.driver = driver;
+        return this;
+    }
+
+
     public RideRequest build() {
-        RideRequest rideRequest = new RideRequest(passenger,date, route,boardingAt,getOffAt);
+        RideRequest rideRequest = new RideRequest(passenger,driver,date, route,boardingAt,getOffAt);
         return rideRequest;
     }
 }

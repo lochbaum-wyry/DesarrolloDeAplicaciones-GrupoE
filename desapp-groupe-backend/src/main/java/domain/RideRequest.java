@@ -91,4 +91,11 @@ public class RideRequest extends Entity
         this.status = status;
     }
 
+    public User getDriver() {
+        return driver;
+    }
+
+    public void setDriver(User driver) {
+        this.driver = driver;
+    }
 }

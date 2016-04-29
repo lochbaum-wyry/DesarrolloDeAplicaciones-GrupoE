@@ -5,27 +5,22 @@ import domain.*;
 import domain.Repositories.RideRepository;
 import domain.Repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
-import org.hibernate.Query;
 import org.joda.time.DateTime;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class RideService
 {
-//
-//    private List<Ride> rides;
-//    private List<RideRequest> rideRequests;
-//    private List<RideRequest> requestedRides;
-
+    private SystemSettings systemSettings;
     private RideRepository rideRepository ;
     private RideRequestRepository rideRequestRepository;
 
 
-    public RideService(RideRepository rideRepository)
+    public RideService(RideRepository rideRepository, RideRequestRepository rideRequestRepository)
     {
         this.rideRepository = rideRepository ;
+        this.rideRequestRepository = rideRequestRepository;
     }
 
     public List<Ride> getRidesOfUserAsDriver(User user)
@@ -51,81 +46,37 @@ public class RideService
 
     public void acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException
     {
-        Ride ride = getOrAddRideForRequest(rideRequest);
+        Ride ride = getOrCreateRideForRequest(rideRequest);
+
         ride.takeSeat(rideRequest.getRequester(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
         rideRequest.accept();
+
         rideRepository.save(ride);
     }
 
-    private Ride getOrAddRideForRequest(RideRequest rideRequest)
+    private Ride getOrCreateRideForRequest(RideRequest rideRequest)
     {
         Ride ride ;
-        Optional<Ride> maybeRide = getRideSuitableForRideRequest(rideRequest);
+        Optional<Ride> maybeRide = getRideOfDriverSuitableForRideRequest(rideRequest);
         if (maybeRide.isPresent())
         {
             ride = maybeRide.get();
         } else {
             ride = createRideForRideRequest(rideRequest);
-            addRide(ride);
         }
         return ride;
     }
 
     private Ride createRideForRideRequest(RideRequest rideRequest)
     {
-        Ride ride = Ride.fromRideRequest(this,rideRequest);
-        ride.setOilPrice( this.system.getSettings().getOilPrice() );
+        Ride ride = Ride.newFromRideRequest(rideRequest);
+        ride.setOilPrice( this.systemSettings.getOilPrice() );
         return ride;
     }
 
-    private Optional<Ride> getRideSuitableForRideRequest(RideRequest rideRequest)
+    private Optional<Ride> getRideOfDriverSuitableForRideRequest(RideRequest rideRequest)
     {
-        rideRepository.getRideSuitableForRideRequest(rideRequest);
+        return Optional.ofNullable( rideRepository.getRideOfDriverSuitableForRideRequest(rideRequest) );
     }
-
-    public Boolean suitsRideRequest(RideRequest rideRequest)
-    {
-        return  this.route == rideRequest.getRoute() &&
-                this.date == rideRequest.getDate()
-                ;
-    }
-
-
-    public void addRideRequest(RideRequest rideRequest)
-    {
-        this.rideRequests.add(rideRequest);
-    }
-
-    public void addRequestedRide(RideRequest rideRequest)
-    {
-        this.requestedRides.add(rideRequest);
-    }
-
-    public void removeRideRequest(RideRequest rideRequest)
-    {
-        this.rideRequests.remove(rideRequest);
-    }
-
-    public void addRide(Ride ride)
-    {
-        rides.add(ride);
-    }
-
-
-    public List<Ride> getRidesAsDriver() {
-        return this.getRides().stream()
-                .filter(ride -> ride.isDriver(this))
-                .collect(Collectors.toList());
-    }
-
-    public Integer getRidesCount() {
-        return this.getRides().size();
-    }
-
-    public List<RideRequest> getRideRequests()
-    {
-        return rideRequests;
-    }
-
 
 }

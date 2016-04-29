@@ -3,9 +3,6 @@ package domain.Repositories;
 import domain.Ride;
 import domain.RideRequest;
 import org.hibernate.Query;
-import org.hibernate.annotations.Type;
-
-import java.util.List;
 
 public class RideRepository extends HibernateGenericDao<Ride> implements
         GenericRepository<Ride> {
@@ -17,13 +14,16 @@ public class RideRepository extends HibernateGenericDao<Ride> implements
         return Ride.class;
     }
 
-    public Ride getRideSuitableForRideRequest(RideRequest rideRequest)
+    public Ride getRideOfDriverSuitableForRideRequest(RideRequest rideRequest)
     {
-        String hql = "SELECT r FROM Ride WHERE";
+        String hql = "SELECT r FROM Ride r WHERE r.route = :route AND r.date = :date AND driver = :driver";
 
         Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        q.setParameter("route", rideRequest.getRoute());
+        q.setParameter("date", rideRequest.getDate());
+        q.setParameter("driver", rideRequest.getDriver());
 
-        Ride ride =  (Ride)q.uniqueResult();
-
+        Ride ride = (Ride)q.uniqueResult();
+        return ride;
     }
 }

@@ -5,10 +5,8 @@ import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mockito.internal.invocation.finder.VerifiableInvocationsFinder;
 
 import java.lang.*;
-import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,26 +201,6 @@ public class RideTest extends AbstractDomainTest
 
     }
 
-    @Test
-    public void test_fromRideRequest_createdRideSuitsRideRequestDetails()
-    {
-        User driverMario = driverWithVehicle(2);
-        Route route = RouteBuilder.aRoute()
-                .withLocationAt(34.5,21.4)
-                .withLocationAt(59.3,100.2)
-                .withLocationAt(56.4,87.6)
-                .build();
-
-        RideRequest rideRequest = RideRequestBuilder.aRideRequest()
-                .withRoute(route)
-                .withDate(new DateTime(2016,05,16,12,0,0))
-                .build();
-
-        Ride received = Ride.fromRideRequest(driverMario,rideRequest);
-
-        Assert.assertTrue(received.suitsRideRequest(rideRequest));
-
-    }
 
     @Test
     public void test_getTotalCost_isValueOfFixedCostsPlusOilCostsByDistance()

@@ -23,21 +23,6 @@
             <list-index column="id" />
             <one-to-many class="domain.Route" />
         </list>
-        <list name="rides" lazy="false">
-            <key column="driverId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Ride" />
-        </list>
-        <list name="rideRequests" lazy="false">
-            <key column="rideRequestId" />
-            <list-index column="id" />
-            <one-to-many class="domain.RideRequest" />
-        </list>
-        <list name="requestedRides" lazy="false">
-            <key column="requestRideId" />
-            <list-index column="id" />
-            <one-to-many class="domain.RideRequest" />
-        </list>
         <list name="chats" lazy="false">
             <key column="chatId" />
             <list-index column="id" />

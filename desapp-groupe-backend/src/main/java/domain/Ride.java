@@ -21,9 +21,9 @@ public class Ride extends Entity
     private Boolean cancelled;
     private RideCostCalculator rideCostCalculator ;
 
-    public static Ride fromRideRequest(User driver, RideRequest rideRequest)
+    public static Ride newFromRideRequest(RideRequest rideRequest)
     {
-        Ride ride = new Ride(rideRequest.getRoute(), rideRequest.getDate(), driver);
+        Ride ride = new Ride(rideRequest.getRoute(), rideRequest.getDate(), rideRequest.getDriver());
         return ride;
     }
 
