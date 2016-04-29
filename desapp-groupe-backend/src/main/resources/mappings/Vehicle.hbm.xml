@@ -9,6 +9,8 @@
         </id>
         <property name="capacity" />
         <property name="oilWastePerKm" />
+        <property name="goodRateCount" />
+        <property name="badRateCount" />
         <one-to-one name="owner" class="domain.User" />
 
     </class>

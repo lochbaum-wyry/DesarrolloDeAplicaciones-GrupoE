@@ -129,7 +129,9 @@ public class VehicleTest
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
         BeanFactory factory = context;
+
         UserRepository userRepository = (UserRepository) factory.getBean("persistence.userrepository");
+        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
         RideRepository rideRepository = (RideRepository) factory.getBean("persistence.riderepository");
 
         Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(2f).build();
@@ -141,16 +143,20 @@ public class VehicleTest
 
         fede.setGoodRateCount(20);
         jorge.setGoodRateCount(10);
+
         Ride ride = RideBuilder.aRide().withDriver(fede).withDate(new DateTime(2016,2,10,23,4)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
+        Ride ride2 = RideBuilder.aRide().withDriver(jorge).withDate(new DateTime(2016,2,10,23,4)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
+
+        vehicleRepository.save(vehicle);
 
         rideRepository.save(ride);
-
+        rideRepository.save(ride2);
 
         userRepository.save(fede);
         userRepository.save(jorge);
         userRepository.save(nadie);
 
-        System.out.print(userRepository.getMostEfficientDriversInMonthYear(2,2016));
+        //userRepository.getWorstDriversInMonthYear(2,2016,20).stream().forEach(user -> System.out.print(user.getName()+" "));
     }
 
 }

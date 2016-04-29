@@ -1,5 +1,6 @@
 package domain.repositories;
 
+import domain.Ride;
 import domain.TakenSeat;
 import domain.User;
 import org.hibernate.Query;
@@ -18,10 +19,10 @@ public class UserRepository extends HibernateGenericDao<User> implements
 
     public List<User> getBestDriversInMonthYear(Integer month, Integer year,Integer cant)
     {
-        String hql = "SELECT u FROM " + persistentClass.getName() +  " as u " +
-                " INNER JOIN u.rides r " +
-                " WHERE month(r.date) = :month and year(r.date) = :year" +
-                " ORDER BY (u.goodRateCount - u.badRateCount) DESC";
+        String hql = " SELECT r.driver FROM " +  Ride.class.getName() +
+                " AS r INNER JOIN r.driver u " +
+                " WHERE   month(r.date) = :month AND year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount-u.badRateCount) DESC ";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
@@ -34,10 +35,10 @@ public class UserRepository extends HibernateGenericDao<User> implements
 
     public List<User> getWorstDriversInMonthYear(Integer month, Integer year,Integer cant)
     {
-        String hql = "SELECT u FROM " + persistentClass.getName() +  " as u " +
-                " INNER JOIN u.rides r " +
-                " WHERE month(r.date) = :month and year(r.date) = :year" +
-                " ORDER BY (u.goodRateCount - u.badRateCount) ASC";
+        String hql = " SELECT r.driver FROM " +  Ride.class.getName() +
+                " AS r INNER JOIN r.driver u " +
+                " WHERE   month(r.date) = :month AND year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount-u.badRateCount) ASC ";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
@@ -68,7 +69,19 @@ public class UserRepository extends HibernateGenericDao<User> implements
 
     public List<User> getWorstPassengersInMonthYear(Integer month, Integer year,Integer cant)
     {
-        return null;
+        String hql = "SELECT distinct u FROM " + TakenSeat.class.getName() + " ts " +
+                " INNER JOIN ts.passenger u " +
+                " INNER JOIN ts.ride r  " +
+                " WHERE month(r.date) = :month and year(r.date) = :year" +
+                " ORDER BY (u.goodRateCount - u.badRateCount) ASC";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("month",month);
+        query.setParameter("year",year);
+        query.setFirstResult(0);
+        query.setMaxResults(cant);
+
+        return query.list();
     }
 
     public List<User> getMostEfficientDriversInMonthYear(Integer month, Integer year)

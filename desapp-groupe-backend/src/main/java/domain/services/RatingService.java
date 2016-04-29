@@ -24,7 +24,7 @@ public class RatingService
     {
         User ratedUser = ride.getDriver();
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Driving, qualification, comment);
-        addRate(rate);
+        addRate(rater,rate);
     }
 
     public void rateVehicleOfRide(User rater, Ride ride, RateValue qualification, String comment)
@@ -33,19 +33,21 @@ public class RatingService
         Rate rate = new Rate(rater, ratedUser, ride, RateType.CarState, qualification, comment);
         rate.setVehicle(ride.getVehicle());
 
-        addRate(rate);
+        rateRepository.save(rate);
+        ride.getVehicle().updateRateCounters(rate);
     }
 
     public void ratePassengerOfRide(User rater, User ratedUser, Ride ride, RateValue qualification, String comment)
     {
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Accompany, qualification, comment);
-        addRate(rate);
+
+        addRate(rater,rate);
     }
 
-    public void addRate(Rate rate)
+    public void addRate(User rater, Rate rate)
     {
         rateRepository.save(rate);
-        rate.getRatedUser().updateRateCounters(rate) ;
+        rater.updateRateCounters(rate) ;
     }
 
 //    public void getRatesForUserBetweenDates(User user, DateTime from, DateTime to)

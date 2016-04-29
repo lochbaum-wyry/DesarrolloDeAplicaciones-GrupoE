@@ -1,5 +1,6 @@
 package domain.repositories;
 
+import domain.Ride;
 import domain.Vehicle;
 import org.hibernate.Query;
 
@@ -17,10 +18,10 @@ private static final long serialVersionUID = -8543996946304099004L;
 
     public List<Vehicle> getBestVehiclesInMonthYear(Integer month, Integer year,Integer cant)
     {
-        String hql = "SELECT v FROM " + persistentClass.getName() +  " as v " +
-                " INNER JOIN v.rides r " +
-                " WHERE month(r.date) = :month and year(r.date) = :year" +
-                " ORDER BY (v.goodRateCount - v.badRateCount) DESC";
+        String hql = " SELECT r.vehicle FROM " +  Ride.class.getName() +
+                " AS r INNER JOIN r.vehicle v " +
+                " WHERE   month(r.date) = :month AND year(r.date) = :year" +
+                " ORDER BY (v.goodRateCount-v.badRateCount) DESC ";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
@@ -33,10 +34,10 @@ private static final long serialVersionUID = -8543996946304099004L;
 
     public List<Vehicle> getWorstVehiclesInMonthYear(Integer month, Integer year,Integer cant)
     {
-        String hql = "SELECT v FROM " + persistentClass.getName() +  " as v " +
-                " INNER JOIN v.rides r " +
-                " WHERE month(r.date) = :month and year(r.date) = :year" +
-                " ORDER BY (v.goodRateCount - v.badRateCount) ASC";
+        String hql = " SELECT r.vehicle FROM " +  Ride.class.getName() +
+                " AS r INNER JOIN r.vehicle v " +
+                " WHERE   month(r.date) = :month AND year(r.date) = :year" +
+                " ORDER BY (v.goodRateCount-v.badRateCount) ASC ";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
