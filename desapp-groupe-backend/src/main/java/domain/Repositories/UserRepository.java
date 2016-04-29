@@ -1,5 +1,6 @@
 package domain.Repositories;
 
+import domain.TakenSeat;
 import domain.User;
 import domain.gaming_service.ranking.MonthlyRanking;
 import org.hibernate.Query;
@@ -50,7 +51,7 @@ public class UserRepository extends HibernateGenericDao<User> implements
 
     public List<User> getBestPassengersInMonthYear(Integer month, Integer year,Integer cant)
     {
-        String hql = "SELECT distinct u FROM TakenSeat ts " +
+        String hql = "SELECT distinct u FROM " + TakenSeat.class.getName() + " ts " +
                 " INNER JOIN ts.passenger u " +
                 " INNER JOIN ts.ride r  " +
                 " WHERE month(r.date) = :month and year(r.date) = :year" +

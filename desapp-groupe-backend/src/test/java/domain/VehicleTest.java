@@ -141,7 +141,7 @@ public class VehicleTest
 
         fede.setGoodRateCount(20);
         jorge.setGoodRateCount(10);
-        Ride ride = RideBuilder.aRide().withDriver(fede).withDate(new DateTime(2/2)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
+        Ride ride = RideBuilder.aRide().withDriver(fede).withDate(new DateTime(2016,2,10,23,4)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
 
         rideRepository.save(ride);
 
@@ -150,8 +150,7 @@ public class VehicleTest
         userRepository.save(jorge);
         userRepository.save(nadie);
 
-
-        System.out.print(userRepository.getBestPassengersInMonthYear(2,2,20));
+        System.out.print(userRepository.getMostEfficientDriversInMonthYear(2,2016));
     }
 
 }

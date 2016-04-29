@@ -1,5 +1,6 @@
-package domain;
+package domain.service_tests;
 
+import domain.User;
 import domain.builders.*;
 import domain.exceptions.NotEnoughPointsException;
 import domain.gaming_service.product_service.Product;

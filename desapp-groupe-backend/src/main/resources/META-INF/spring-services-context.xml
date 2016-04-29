@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
+
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -17,6 +18,30 @@
 	</bean>
 
 	<!--
+	<jaxrs:server id="post"  >
+		<jaxrs:serviceBeans>
+			<ref bean="postsRest" />
+		</jaxrs:serviceBeans>
+		<jaxrs:extensionMappings>
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
+		</jaxrs:extensionMappings>
+		<jaxrs:providers>
+			<ref bean="jaxbProvider" />
+			<ref bean="jacksonProvider" />
+		</jaxrs:providers>
+		<jaxrs:features>
+			<cxf:logging />
+		</jaxrs:features>
+	</jaxrs:server>
+
+    <bean id="dao.post" class="org.assembly.nornas.repository.PostDAO" />
+
+	<bean id="postsRest" class="org.assembly.nornas.web.rest.post.PostsRest">
+		<property name="postRepository" ref="dao.post" />
+	</bean>
+
+
 	<bean id="services.general" class="ar.edu.unq.services.GeneralService">
 		<property name="carService" ref="services.car" />
 		<property name="personService" ref="services.person" />

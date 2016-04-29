@@ -1,5 +1,6 @@
-package domain;
+package domain.service_tests;
 
+import domain.System;
 import domain.gaming_service.GamingService;
 import domain.gaming_service.product_service.ProductsService;
 import domain.gaming_service.ranking.MonthlyRanking;

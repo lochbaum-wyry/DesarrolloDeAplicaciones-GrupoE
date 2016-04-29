@@ -64,15 +64,6 @@ public class User  extends Entity
         this.points = points;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-
     private Chat getOrAddChatWith(User user)
     {
         Chat chat ;
