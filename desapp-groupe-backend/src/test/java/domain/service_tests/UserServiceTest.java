@@ -58,7 +58,7 @@ public class UserServiceTest {
 
         userService.addVehicleForUser(user,vehicle);
 
-        Vehicle vehicleReceived = userRepository.findById(user.getId()).getVehicle();
+        //Vehicle vehicleReceived = userRepository.findById(user.getId()).getVehicle();
 
         //Assert.assertEquals(vehicleReceived,vehicle);
 
