@@ -1,10 +1,56 @@
 package domain.service_tests;
 
 
-import static org.mockito.Mockito.mock;
+import domain.Location;
+import domain.Route;
+import domain.User;
+import domain.repositories.*;
+import domain.services.RideService;
+import org.joda.time.DateTime;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-public class RideServiceTest
+public class RideServiceTest extends AbstractServiceTest
 {
+    @Autowired
+    public RideService rideService ;
+
+    @Autowired
+    public RideRepository rideRepo ;
+
+    @Autowired
+    public RouteRepository routeRepo ;
+
+    @Autowired
+    public UserRepository userRepo ;
+
+    @Autowired
+    public VehicleRepository vehicleRepo ;
+
+    @Autowired
+    public RideRequestRepository rideRequestRepo ;
+
+    @Test
+    public void test_requestRide_aNewRideRequestIsCreated()
+    {
+        Route route = aCommonRouteWithLocations(2,50,0);
+        User requester = aPassenger();
+        User driver = aDriver();
+        DateTime date = new DateTime(2016,6,1,0,0,0);
+        Location board = route.getLocations().get(0);
+        Location getOff = route.getLocations().get(1);
+
+        userRepo.save(requester);
+        userRepo.save(driver);
+        routeRepo.save(route);
+
+        rideService.requestRide(requester, driver, date, route, board , getOff);
+        java.lang.System.out.println(rideRequestRepo.findAll());
+
+
+    }
+
+
 
 //    @Test
 //    public void test_fromRideRequest_createdRideSuitsRideRequestDetails()

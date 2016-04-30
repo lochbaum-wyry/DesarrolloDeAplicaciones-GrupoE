@@ -9,12 +9,23 @@
 
 	<!-- beans de spring -->
 
-	<bean id="services.general" class="domain.servicesRest.GeneralService">
-		<property name="userService" ref="services.user" />
+	<!--<bean id="services.general" class="domain.servicesRest.GeneralService">-->
+		<!--<property name="userService" ref="services.user" />-->
+	<!--</bean>-->
+
+	<bean id="services.ride" class="domain.services.RideService">
+		<constructor-arg>
+			<ref bean="persistence.riderepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.riderequestrepository" />
+		</constructor-arg>
 	</bean>
 
 	<bean id="services.user" class="domain.services.UserService">
-		<property name="repository" ref="persistence.userrepository" />
+		<constructor-arg>
+			<ref bean="persistence.userrepository" />
+		</constructor-arg>
 	</bean>
 
 	<!--
@@ -34,26 +45,5 @@
 			<cxf:logging />
 		</jaxrs:features>
 	</jaxrs:server>
-
-    <bean id="dao.post" class="org.assembly.nornas.repository.PostDAO" />
-
-	<bean id="postsRest" class="org.assembly.nornas.web.rest.post.PostsRest">
-		<property name="postRepository" ref="dao.post" />
-	</bean>
-
-
-	<bean id="services.general" class="ar.edu.unq.services.GeneralService">
-		<property name="carService" ref="services.car" />
-		<property name="personService" ref="services.person" />
-	</bean>
-
-	<bean id="services.person" class="ar.edu.unq.services.PersonService">
-		<property name="repository" ref="persistence.personrepository" />
-	</bean>
-
-	<bean id="services.car" class="ar.edu.unq.services.CarService">
-		<property name="repository" ref="persistence.carrepository" />
-	</bean>
 	-->
-
 </beans>

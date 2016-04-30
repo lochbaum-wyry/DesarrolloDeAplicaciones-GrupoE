@@ -6,11 +6,12 @@ import domain.repositories.RideRepository;
 import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
+import sun.net.www.content.text.Generic;
 
 import java.util.List;
 import java.util.Optional;
 
-public class RideService
+public class RideService extends GenericService<Ride>
 {
     private SystemSettings systemSettings;
     private RideRepository rideRepository ;
@@ -21,15 +22,6 @@ public class RideService
     {
         this.rideRepository = rideRepository ;
         this.rideRequestRepository = rideRequestRepository;
-    }
-
-    public List<Ride> getRidesOfUserAsDriver(User user)
-    {
-        return null;
-    }
-    public List<Ride> getRidesOfUserAsPassenger(User user)
-    {
-        return null;
     }
 
     public void requestRide(User requester, User driver, DateTime date, Route route, Location boardingAt, Location getOffAt)
@@ -53,6 +45,16 @@ public class RideService
 
         rideRepository.save(ride);
     }
+
+//    public List<Ride> getRidesOfUserAsDriver(User user)
+//    {
+//        return null;
+//    }
+//
+//    public List<Ride> getRidesOfUserAsPassenger(User user)
+//    {
+//        return null;
+//    }
 
     private Ride getOrCreateRideForRequest(RideRequest rideRequest)
     {
