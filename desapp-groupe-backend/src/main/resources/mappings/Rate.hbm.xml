@@ -12,7 +12,7 @@
         <one-to-one name="ride" class="domain.Ride" />
         <property name="rateValue" />
         <property name="comment" />
-        <property name="date" />
+        <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
 
     </class>
 </hibernate-mapping>

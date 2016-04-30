@@ -9,8 +9,8 @@
         </id>
 
         <property name="day" />
-        <property name="departureTime" />
-        <property name="arrivalTime" />
+        <property name="departureTime" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
+        <property name="arrivalTime" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
 
     </class>
 </hibernate-mapping>

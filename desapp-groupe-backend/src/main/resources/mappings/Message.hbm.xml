@@ -9,7 +9,7 @@
         </id>
 
         <one-to-one name="sender" class="domain.User" />
-        <property name="timestamp" />
+        <property name="timestamp" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="content" />
 
         <list name="seenBy" lazy="false">

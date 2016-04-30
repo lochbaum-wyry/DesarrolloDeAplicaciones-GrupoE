@@ -9,7 +9,7 @@
         </id>
 
         <one-to-one name="publisher" class="domain.User" />
-        <property name="date" />
+        <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="content" />
     </class>
 </hibernate-mapping>

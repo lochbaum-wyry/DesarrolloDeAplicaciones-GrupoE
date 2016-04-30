@@ -8,6 +8,8 @@
             <generator class="native" />
         </id>
 
+        <property name="month"  type = "java.lang.Integer"/>
+        <property name="year"  type = "java.lang.Integer"/>
         <list name="bestDrivers" lazy="false">
             <key column="userId" />
             <list-index column="id" />

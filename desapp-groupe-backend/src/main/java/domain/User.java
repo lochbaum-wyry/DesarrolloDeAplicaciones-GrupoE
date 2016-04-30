@@ -197,4 +197,25 @@ public class User  extends Entity
         chats.add(chat);
     }
 
+    public Chat getOrAddChatWith(User user)
+    {
+        Chat chat ;
+        Optional<Chat> maybeChat = getChatWith(user);
+        if(maybeChat.isPresent())
+        {
+            chat = maybeChat.get();
+        } else
+        {
+            chat = new Chat(this.name.toString(),this,user);
+            addChat(chat);
+            user.addChat(chat);
+        }
+        return chat;
+    }
+
+    private Optional<Chat> getChatWith(User user)
+    {
+        return this.getChats().stream().filter(p -> p.getUsers().contains(user)).findFirst();
+    }
+
 }

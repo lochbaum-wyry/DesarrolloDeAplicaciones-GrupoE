@@ -12,35 +12,24 @@ public class ChatService {
     ChatRepository chatRepository;
     UserRepository userRepository;
 
+    public ChatService(ChatRepository chatRepository,UserRepository userRepository) {
+        this.chatRepository = chatRepository;
+        this.userRepository = userRepository;
+    }
+
 
     public void sendMessage(User send,User receive, String content)
     {
-        //TODO :creo que es al reves: P send es receive
-        Chat chat = getOrAddChatWith(send,receive);
+        Chat chat = send.getOrAddChatWith(receive);
         chat.addMessage(send,content);
+
         chatRepository.update(chat);
-    }
-
-    public Chat getOrAddChatWith(User send,User receive) {
-        Chat chat = chatRepository.findChatByUsers(receive.getId(),send.getId());
-
-        if(chat.equals(null)){
-            chat = new Chat(send.getName().toString(),receive,send);
-
-            send.addChat(chat);
-            userRepository.update(send);
-
-            receive.addChat(chat);
-            userRepository.update(receive);
-
-            chatRepository.save(chat);
-        }
-
-        return chat;
+        userRepository.update(send);
+        userRepository.update(receive);
     }
 
     public List<Chat> chatsUser(User user){
-        return chatRepository.findByUserId(user.getId());
+        return user.getChats();
     }
 
 
