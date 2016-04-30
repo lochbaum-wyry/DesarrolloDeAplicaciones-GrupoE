@@ -10,11 +10,10 @@
 
         <property name="name" />
 
-        <list name="users" lazy="false">
+        <bag name="users" lazy="false" table="chat_users">
             <key column="userId" />
-            <list-index column="id" />
-            <one-to-many class="domain.User" />
-        </list>
+            <many-to-many class="domain.User" column="id"/>
+        </bag>
         <list name="messages" lazy="false">
             <key column="messageId" />
             <list-index column="id" />
