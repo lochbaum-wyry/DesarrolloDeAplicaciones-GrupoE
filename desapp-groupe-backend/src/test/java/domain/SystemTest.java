@@ -15,16 +15,6 @@ import java.util.List;
 
 public class SystemTest {
 
-//    @Test
-//    public void testSignUp(){
-//
-//        System system = SystemBuilder.aSystem().build();
-//        User user = UserBuilder.aUser().build();
-//
-//        system.signUp(user);
-//
-//        Assert.assertTrue(system.getUsers().contains(user));
-//    }
 
     @Test
     public void testFindUserByRoute_whenNoRoutesFoundResultIsEmpty(){

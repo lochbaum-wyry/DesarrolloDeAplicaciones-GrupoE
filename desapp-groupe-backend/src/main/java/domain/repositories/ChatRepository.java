@@ -1,7 +1,10 @@
 package domain.repositories;
 
 import domain.Chat;
+import domain.User;
 import org.hibernate.Query;
+
+import java.util.List;
 
 public class ChatRepository extends HibernateGenericDao<Chat> implements
         GenericRepository<Chat> {
@@ -13,14 +16,19 @@ public class ChatRepository extends HibernateGenericDao<Chat> implements
         return Chat.class;
     }
 
-    public Chat findByUserId(Integer userId){
+    public List<Chat> findByUserId(Integer userId){
 
-        String hql = "from " + this.persistentClass.getName() +
-                " as c WHERE  c.userId = :user";
+        String hql = "SELECT u.chats from " + User.class.getName() +
+                " as u WHERE  u.id = :id";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-        query.setParameter("user", userId);
+        query.setParameter("id", userId);
 
-        return ((Chat) query.uniqueResult()); //TODO : feo feo el cast
+        return query.list();
+    }
+
+    public Chat findChatByUsers(Integer userId1,Integer userId2)
+    {
+        return  null;
     }
 }

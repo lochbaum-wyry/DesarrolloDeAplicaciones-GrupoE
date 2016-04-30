@@ -17,6 +17,7 @@ public class User  extends Entity
     private Vehicle vehicle ;
     private List<Route> routes ;
     private Integer points;
+    private List<Chat> chats;
 
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
@@ -30,6 +31,7 @@ public class User  extends Entity
         this.userName = userName;
         this.email = email;
         this.routes = new ArrayList<Route>();
+        this.chats = new ArrayList<Chat>();
         this.points = 0;
     }
 
@@ -181,4 +183,18 @@ public class User  extends Entity
     {
         return ((float)getBadRateCount() * 100) / getTotalRateCount();
     }
+
+
+    public List<Chat> getChats() {
+        return chats;
+    }
+
+    public void setChats(List<Chat> chats) {
+        this.chats = chats;
+    }
+
+    public void addChat(Chat chat){
+        chats.add(chat);
+    }
+
 }
