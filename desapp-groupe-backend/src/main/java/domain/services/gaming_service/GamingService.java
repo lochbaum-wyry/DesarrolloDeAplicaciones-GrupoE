@@ -9,29 +9,13 @@ import domain.services.gaming_service.scoring_service.ScoringService;
 
 public class GamingService
 {
-    private ScoringService scoringService;
     private UserRepository userRepository ;
     private VehicleRepository vehicleRepository;
-    private ProductsService productsService;
-    private System system;
 
-    public GamingService()
+    public GamingService(UserRepository userRepository, VehicleRepository vehicleRepository)
     {
-        scoringService = new ScoringService();
-        productsService = new ProductsService();
-    }
-
-    public GamingService(System system){
-        this();
-        this.system = system;
-    }
-
-    public ProductsService getProductsService() {
-        return productsService;
-    }
-
-    public ScoringService getScoringService() {
-        return scoringService;
+        this.userRepository = userRepository ;
+        this.vehicleRepository = vehicleRepository ;
     }
 
     public MonthlyRanking createRanking(Integer month, Integer year)
@@ -45,10 +29,6 @@ public class GamingService
         ranking.setWorstVehicles(vehicleRepository.getWorstVehiclesInMonthYear(month,year,20));
         ranking.setMostEfficientDrivers(userRepository.getMostEfficientDriversInMonthYear(month, year));
         return ranking ;
-    }
-
-    public void setSystem(System system) {
-        this.system = system;
     }
 }
 
