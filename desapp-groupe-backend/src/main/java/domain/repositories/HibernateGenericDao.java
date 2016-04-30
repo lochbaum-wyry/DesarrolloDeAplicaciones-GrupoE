@@ -3,6 +3,7 @@ package domain.repositories;
 import java.io.Serializable;
 import java.util.List;
 
+import domain.User;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 /**
@@ -83,5 +84,6 @@ public abstract class HibernateGenericDao<T> extends HibernateDaoSupport impleme
         this.getHibernateTemplate().saveOrUpdate(entity);
         this.getHibernateTemplate().flush();
     }
+
 
 }

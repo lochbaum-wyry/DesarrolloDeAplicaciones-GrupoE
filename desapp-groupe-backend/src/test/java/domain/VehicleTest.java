@@ -156,7 +156,7 @@ public class VehicleTest
         userRepository.save(jorge);
         userRepository.save(nadie);
 
-        //userRepository.getWorstDriversInMonthYear(2,2016,20).stream().forEach(user -> System.out.print(user.getName()+" "));
+        userRepository.getBestPassengersInMonthYear(2,2016,20).stream().forEach(user -> System.out.print(user.getName()+" "));
     }
 
 }
