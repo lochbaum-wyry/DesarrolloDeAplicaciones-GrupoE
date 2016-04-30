@@ -11,8 +11,8 @@
         <property name="name" />
 
         <bag name="users" lazy="false" table="chat_users">
-            <key column="userId" />
-            <many-to-many class="domain.User" column="id"/>
+            <key column="chatId" />
+            <many-to-many class="domain.User" column="userId"/>
         </bag>
         <list name="messages" lazy="false">
             <key column="messageId" />
