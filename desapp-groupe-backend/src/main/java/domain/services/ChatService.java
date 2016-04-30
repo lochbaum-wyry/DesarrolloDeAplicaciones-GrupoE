@@ -2,22 +2,30 @@ package domain.services;
 
 import domain.Chat;
 import domain.User;
+import domain.repositories.ChatRepository;
 
-import java.util.Optional;
-
-/**
- * Created by prospero on 4/29/16.
- */
 public class ChatService {
 
-//    public void sendMessage(User user, String content)
-//    {
-//        Chat chat = this.getOrAddChatWith(user);
-//        chat.addMessage(this,content);
-//    }
-//
-//    private Chat getOrAddChatWith(User user)
-//    {
+    ChatRepository chatRepository;
+
+
+    public void sendMessage(User send,User receive, String content)
+    {
+        //TODO :creo que es al reves: P send es receive
+        Chat chat = getOrAddChatWith(send,receive);
+        chat.addMessage(send,content);
+        chatRepository.update(chat);
+    }
+
+    private Chat getOrAddChatWith(User send,User receive) {
+        Chat chat = chatRepository.findByUserId(receive.getId());
+
+        if(chat.equals(null)){
+            chat = new Chat(send.getName().toString(),receive,send);
+            chatRepository.save(chat);
+        }
+
+        return chat;
 //        Chat chat ;
 //        Optional<Chat> maybeChat = getChatWith(user);
 //        if(maybeChat.isPresent())
@@ -31,4 +39,5 @@ public class ChatService {
 //        }
 //        return chat;
 //    }
+    }
 }
