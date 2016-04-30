@@ -10,6 +10,8 @@ import java.util.List;
 
 public class SystemBuilder {
 
+}
+    /*
     private List<User> users = new ArrayList<User>();
     private GamingService gamingService = new GamingService();
     private SystemSettings settings = new SystemSettings();
@@ -33,3 +35,4 @@ public class SystemBuilder {
     }
 
 }
+*/

@@ -15,20 +15,4 @@ public class ChatRepository extends HibernateGenericDao<Chat> implements
     protected Class<Chat> getDomainClass() {
         return Chat.class;
     }
-
-    public List<Chat> findByUserId(Integer userId){
-
-        String hql = "SELECT u.chats from " + User.class.getName() +
-                " as u WHERE  u.id = :id";
-
-        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-        query.setParameter("id", userId);
-
-        return query.list();
-    }
-
-    public Chat findChatByUsers(Integer userId1,Integer userId2)
-    {
-        return  null;
-    }
 }

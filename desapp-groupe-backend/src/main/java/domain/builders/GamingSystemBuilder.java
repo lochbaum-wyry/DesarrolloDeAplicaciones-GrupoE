@@ -4,6 +4,8 @@ import domain.services.gaming_service.GamingService;
 import domain.services.System;
 
 public class GamingSystemBuilder {
+
+    /*
     private System system;
 
     public GamingSystemBuilder(){
@@ -20,4 +22,5 @@ public class GamingSystemBuilder {
     public GamingService build() {
         return new GamingService(this.system);
     }
+    */
 }

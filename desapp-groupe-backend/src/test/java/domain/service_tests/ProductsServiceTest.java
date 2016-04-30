@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class ProductsServiceTest {
-
+/*
     @Test
     public void test_exchangedProductsBy_exchangedProductsByUserAreRegistered()
     {
@@ -65,4 +65,5 @@ public class ProductsServiceTest {
 
         productsService.userExchangesAProduct(fede, product);
     }
+    */
 }

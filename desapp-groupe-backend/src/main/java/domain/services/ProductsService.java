@@ -4,33 +4,41 @@ import domain.User;
 import domain.exceptions.NotEnoughPointsException;
 import domain.Product;
 import domain.ProductExchange;
+import domain.repositories.ProductExchangeRepository;
+import domain.repositories.ProductRepository;
+import domain.repositories.UserRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductsService {
-    private List<Product> availableProducts;
-    private List<ProductExchange> productExchanges;
 
-    public ProductsService(){
-        this.availableProducts = new ArrayList<Product>();
-        this.productExchanges = new ArrayList<ProductExchange>();
+    ProductRepository productRepository;
+    ProductExchangeRepository productExchangeRepository;
+    UserRepository userRepository;
+
+    public ProductsService(ProductRepository productRepository, ProductExchangeRepository productExchangeRepository,UserRepository userRepository){
+        this.productExchangeRepository = productExchangeRepository;
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
     }
 
-    public List<Product> getAvailableProducts() {
-        return availableProducts;
+    public ProductExchangeRepository getProductExchangeRepository() {
+        return productExchangeRepository;
     }
 
-    public List<ProductExchange> getProductExchanges() {
-        return productExchanges;
+    public ProductRepository getProductRepository() {
+        return productRepository;
     }
 
     public List<ProductExchange> exchangedProductsBy(User user)
     {
-        return this.getProductExchanges().stream()
-                .filter(productExchange -> productExchange.getUser().equals(user))
-                .collect(Collectors.toList());
+        return productExchangeRepository.exchangedProductsBy(user.getId());
+    }
+
+    public List<Product> products(){
+        return productRepository.findAll();
     }
 
     public void userExchangesAProduct(User user, Product product) throws NotEnoughPointsException
@@ -39,8 +47,13 @@ public class ProductsService {
         {
             ProductExchange productExchange = new ProductExchange(user, product);
             product.setStock(product.getStock()-1);
-            this.getProductExchanges().add(productExchange);
+            productRepository.update(product);
+
+            productExchangeRepository.save(productExchange);
+
             user.addPoints(-product.getCost());
+            userRepository.update(user);
+
         }else
             throw new NotEnoughPointsException(user,product);
     }

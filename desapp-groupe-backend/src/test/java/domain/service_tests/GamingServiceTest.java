@@ -21,7 +21,7 @@ public class GamingServiceTest
 //
 //        Assert.assertTrue(ranking instanceof MonthlyRanking);
 //    }
-
+/*
     @Test
     public void test_getProductsService(){
         System system = Mockito.mock(System.class);
@@ -39,4 +39,6 @@ public class GamingServiceTest
 
         Assert.assertTrue(gamingService.getScoringService() instanceof ScoringService);
     }
+
+    */
 }

@@ -10,12 +10,14 @@ import domain.services.gaming_service.scoring_service.ScoringService;
 public class GamingService
 {
     private UserRepository userRepository ;
+    private System system;
     private VehicleRepository vehicleRepository;
 
-    public GamingService(UserRepository userRepository, VehicleRepository vehicleRepository)
+    public GamingService(UserRepository userRepository, VehicleRepository vehicleRepository,System system)
     {
         this.userRepository = userRepository ;
         this.vehicleRepository = vehicleRepository ;
+        this.system = system;
     }
 
     public MonthlyRanking createRanking(Integer month, Integer year)
@@ -30,5 +32,15 @@ public class GamingService
         ranking.setMostEfficientDrivers(userRepository.getMostEfficientDriversInMonthYear(month, year));
         return ranking ;
     }
+
+
+    public System getSystem() {
+        return system;
+    }
+
+    public void setSystem(System system) {
+        this.system = system;
+    }
+
 }
 

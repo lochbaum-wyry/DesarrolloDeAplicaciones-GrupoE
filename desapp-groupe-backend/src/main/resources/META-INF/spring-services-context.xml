@@ -22,11 +22,22 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="services.chat" class="domain.services.ChatService">
+		<constructor-arg>
+			<ref bean="persistence.userrepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.chatrepository" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.user" class="domain.services.UserService">
 		<constructor-arg>
 			<ref bean="persistence.userrepository" />
 		</constructor-arg>
 	</bean>
+
+
 
 	<!--
 	<jaxrs:server id="post"  >

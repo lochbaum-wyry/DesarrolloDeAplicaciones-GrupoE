@@ -8,9 +8,7 @@ import domain.services.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,15 +17,20 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/spring-persistence-context.xml")
 @Transactional
-public class UserServiceTest {
+public class UserServiceTest extends AbstractServiceTest{
+
+    @Autowired
+    public UserService userService;
+
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public VehicleRepository vehicleRepository;
+
 
     @Test
     public void test_singUp() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-
-        UserRepository userRepository = (UserRepository) factory.getBean("persistence.userrepository");
-
         UserService userService= new UserService(userRepository);
 
         try {
@@ -41,12 +44,6 @@ public class UserServiceTest {
 
     @Test
     public void test_addVehicleForUser(){
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-
-        UserRepository userRepository = (UserRepository) factory.getBean("persistence.userrepository");
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-
         UserService userService= new UserService(userRepository);
 
         User user = new User("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
