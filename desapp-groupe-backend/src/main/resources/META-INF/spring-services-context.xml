@@ -40,6 +40,18 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="services.product" class="domain.services.ProductsService">
+		<constructor-arg>
+			<ref bean="persistence.productrepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.productexchangerepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.userrepository" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.user" class="domain.services.UserService">
 		<constructor-arg>
 			<ref bean="persistence.userrepository" />

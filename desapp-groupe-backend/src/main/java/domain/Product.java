@@ -4,12 +4,11 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Product {
+public class Product extends Entity{
     private String name;
     private List<Image> pictures;
     private Integer cost;
     private Integer stock;
-    private int id;
 
     public Product(String name,Integer cost,Integer stock){
         this.pictures = new ArrayList<Image>();
@@ -54,11 +53,4 @@ public class Product {
         return stock;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

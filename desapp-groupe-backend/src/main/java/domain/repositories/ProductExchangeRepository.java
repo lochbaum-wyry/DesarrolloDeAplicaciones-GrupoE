@@ -18,7 +18,7 @@ public class ProductExchangeRepository extends HibernateGenericDao<ProductExchan
 
     public List<ProductExchange> exchangedProductsBy(Integer userId){
         String hql = "from " + persistentClass.getName() +
-                " as p WHERE  p.userId = :id";
+                " as p WHERE  p.user.id = :id";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("id", userId);

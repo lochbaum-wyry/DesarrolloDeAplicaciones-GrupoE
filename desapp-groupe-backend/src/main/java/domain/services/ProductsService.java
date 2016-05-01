@@ -7,10 +7,7 @@ import domain.ProductExchange;
 import domain.repositories.ProductExchangeRepository;
 import domain.repositories.ProductRepository;
 import domain.repositories.UserRepository;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductsService {
 
@@ -22,6 +19,10 @@ public class ProductsService {
         this.productExchangeRepository = productExchangeRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
     }
 
     public ProductExchangeRepository getProductExchangeRepository() {
@@ -46,10 +47,10 @@ public class ProductsService {
         if(user.getPoints() >= product.getCost() && product.getStock()>0)
         {
             ProductExchange productExchange = new ProductExchange(user, product);
+            productExchangeRepository.save(productExchange);
+
             product.setStock(product.getStock()-1);
             productRepository.update(product);
-
-            productExchangeRepository.save(productExchange);
 
             user.addPoints(-product.getCost());
             userRepository.update(user);
