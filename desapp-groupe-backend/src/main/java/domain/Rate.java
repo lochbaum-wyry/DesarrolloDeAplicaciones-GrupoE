@@ -90,4 +90,7 @@ public class Rate {
     }
 
 
+    public void setDate(DateTime date) {
+        this.date = date;
+    }
 }

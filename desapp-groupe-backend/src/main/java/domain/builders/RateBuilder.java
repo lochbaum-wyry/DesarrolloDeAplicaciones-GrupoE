@@ -21,6 +21,11 @@ public class RateBuilder {
     }
 
 
+    public RateBuilder withDate(DateTime date)
+    {
+        this.date = date;
+        return this;
+    }
     public RateBuilder withUser(User user) {
         this.user = user;
         return this;
@@ -49,6 +54,8 @@ public class RateBuilder {
 
     public Rate build() {
         if (rateType == null) rateType = RateType.Driving;
-        return new Rate(user, ratedUser, ride, rateType,rateValue,comment);
+        Rate rate = new Rate(user, ratedUser, ride, rateType, rateValue, comment);
+        rate.setDate(date);
+        return rate;
     }
 }
