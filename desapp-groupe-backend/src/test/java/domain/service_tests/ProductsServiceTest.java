@@ -9,6 +9,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProductsServiceTest extends AbstractServiceTest{
 
     @Autowired
@@ -34,7 +37,7 @@ public class ProductsServiceTest extends AbstractServiceTest{
             productsService.userExchangesAProduct(fede,product1);
             productsService.userExchangesAProduct(fede,product2);
 
-            //Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),3);
+            Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),3);
 
         } catch (NotEnoughPointsException e) {
             Assert.fail("No tiene puntos para realizar el canje");
@@ -54,7 +57,7 @@ public class ProductsServiceTest extends AbstractServiceTest{
         try {
             productsService.userExchangesAProduct(fede,product);
 
-            //Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),1);
+            Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),1);
 
         } catch (NotEnoughPointsException e) {
             e.printStackTrace();

@@ -8,8 +8,8 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="user" class="domain.User" />
-        <one-to-one name="product" class="domain.Product" />
+        <many-to-one name="user" class="domain.User" column="userId"/>
+        <many-to-one name="product" class="domain.Product" column="productId"/>
 
     </class>
 </hibernate-mapping>
