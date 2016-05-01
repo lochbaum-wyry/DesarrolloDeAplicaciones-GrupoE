@@ -13,6 +13,15 @@
 		<!--<property name="userService" ref="services.user" />-->
 	<!--</bean>-->
 
+	<bean id="services.gaming" class="domain.services.gaming_service.GamingService">
+		<constructor-arg>
+			<ref bean="persistence.userrepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.vehiclerepository" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.ride" class="domain.services.RideService">
 		<constructor-arg>
 			<ref bean="persistence.riderepository" />

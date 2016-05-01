@@ -2,6 +2,7 @@ package domain.service_tests;
 
 
 import domain.Location;
+import domain.RideRequest;
 import domain.Route;
 import domain.User;
 import domain.repositories.*;
@@ -9,6 +10,10 @@ import domain.services.RideService;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RideServiceTest extends AbstractServiceTest
 {
@@ -44,10 +49,10 @@ public class RideServiceTest extends AbstractServiceTest
         userRepo.save(driver);
         routeRepo.save(route);
 
-        rideService.requestRide(requester, driver, date, route, board , getOff);
-        java.lang.System.out.println(rideRequestRepo.findAll());
+        RideRequest rideRequest = rideService.requestRide(requester, driver, date, route, board , getOff);
 
-
+        int foundRequests = rideRequestRepo.findByExample(rideRequest).size();
+        assertEquals(1, foundRequests);
     }
 
 

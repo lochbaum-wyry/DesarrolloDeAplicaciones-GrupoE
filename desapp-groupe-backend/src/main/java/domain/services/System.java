@@ -25,7 +25,6 @@ public class System
     {
         this.settings = systemSettings;
         this.gamingService = gamingService;
-        gamingService.setSystem(this);
     }
 
     public void setSettings(SystemSettings settings)
