@@ -4,7 +4,6 @@
 # project specific
 desapp-groupe-backend.iml
 desapp-groupe-backend.ipr
-.idea/*
 .idea/artifacts/desapp_grupoe_backend_war.xml
 .idea/artifacts/desapp_grupoe_backend_war_exploded.xml
 
