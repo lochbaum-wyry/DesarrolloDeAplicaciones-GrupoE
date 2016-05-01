@@ -12,9 +12,9 @@
         <property name="date"  type="org.joda.time.contrib.hibernate.PersistentDateTime" />
         <property name="cancelled" />
 
-        <one-to-one name="vehicle" class="domain.Vehicle" />
-        <one-to-one name="route" class="domain.Route" />
-        <one-to-one name="driver" class="domain.User" />
+        <many-to-one name="vehicle" class="domain.Vehicle" column="vehicleId"/>
+        <many-to-one name="route" class="domain.Route" column="routeId"/>
+        <many-to-one name="driver" class="domain.User" column="driverId"/>
 
         <list name="takenSeats" lazy="false" cascade="save-update" >
             <key column="takenSeatId" />

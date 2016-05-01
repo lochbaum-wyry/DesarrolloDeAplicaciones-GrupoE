@@ -90,6 +90,28 @@ public class RideServiceTest extends AbstractServiceTest
         }
     }
 
+    @Test
+    public void test_acceptRideRequest_ifDriverHasntARideSuitingTheRequestTheRideIsCreated()
+    {
+        boolean rideExists ;
+
+        RideRequest rideRequest = aPersistedRideRequest();
+
+        rideExists = rideService.getRideOfDriverSuitableForRideRequest(rideRequest).isPresent();
+        assertFalse(rideExists);
+
+        try {
+            rideService.acceptRideRequest(rideRequest);
+            rideExists = rideService.getRideOfDriverSuitableForRideRequest(rideRequest).isPresent();
+            assertTrue(rideExists);
+
+        } catch (NoSeatsAvailableException e){
+            fail("Expected request to be accepted but NoSeatsAvailableException is thrown");
+        }
+    }
+
+
+
 
 
     protected RideRequest aPersistedRideRequest()

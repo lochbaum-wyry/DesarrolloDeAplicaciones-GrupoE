@@ -79,7 +79,7 @@ public class RideService extends GenericService<Ride>
         return ride;
     }
 
-    private Optional<Ride> getRideOfDriverSuitableForRideRequest(RideRequest rideRequest)
+    public Optional<Ride> getRideOfDriverSuitableForRideRequest(RideRequest rideRequest)
     {
         return Optional.ofNullable( rideRepository.getRideOfDriverSuitableForRideRequest(rideRequest) );
     }
