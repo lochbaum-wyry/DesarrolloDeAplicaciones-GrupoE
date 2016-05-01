@@ -4,6 +4,10 @@ import domain.Ride;
 import domain.RideRequest;
 import org.hibernate.Query;
 
+import java.util.List;
+
+import static jdk.nashorn.internal.objects.Global.println;
+
 public class RideRepository extends HibernateGenericDao<Ride> implements
         GenericRepository<Ride> {
 
@@ -16,14 +20,20 @@ public class RideRepository extends HibernateGenericDao<Ride> implements
 
     public Ride getRideOfDriverSuitableForRideRequest(RideRequest rideRequest)
     {
-        String hql = "SELECT r FROM Ride r WHERE r.route = :route AND r.date = :date AND driver = :driver";
+        String hql = "SELECT r " +
+                " FROM " + Ride.class.getName() + " r " +
+                " WHERE r.route = :route  AND r.date = :date AND driver = :driver" ;
 
-        Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-        q.setParameter("route", rideRequest.getRoute());
-        q.setParameter("date", rideRequest.getDate());
-        q.setParameter("driver", rideRequest.getDriver());
+        Query query =  getHibernateTemplate()
+                .getSessionFactory()
+                .getCurrentSession()
+                .createQuery(hql);
 
-        Ride ride = (Ride)q.uniqueResult();
+        query.setEntity("route", rideRequest.getRoute());
+        query.setParameter("date", rideRequest.getDate());
+        query.setEntity("driver", rideRequest.getDriver());
+
+        Ride ride = (Ride)query.uniqueResult();
         return ride;
     }
 }

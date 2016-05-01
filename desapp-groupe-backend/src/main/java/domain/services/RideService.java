@@ -18,6 +18,7 @@ public class RideService extends GenericService<Ride>
 
     public RideService(RideRepository rideRepository, RideRequestRepository rideRequestRepository)
     {
+        this.systemSettings = new SystemSettings();
         this.rideRepository = rideRepository ;
         this.rideRequestRepository = rideRequestRepository;
     }

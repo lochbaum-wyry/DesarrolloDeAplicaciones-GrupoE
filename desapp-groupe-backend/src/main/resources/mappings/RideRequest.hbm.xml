@@ -10,7 +10,7 @@
         </id>
 
         <one-to-one name="requester" class="domain.User" />
-        <one-to-one name="route" class="domain.Route" /> <!--esta relacion esta mal, deberia ser one-to-many...creo-->
+        <one-to-one name="route" class="domain.Route" />
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="dateRequested" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <one-to-one name="boardingAt" class="domain.Location" />

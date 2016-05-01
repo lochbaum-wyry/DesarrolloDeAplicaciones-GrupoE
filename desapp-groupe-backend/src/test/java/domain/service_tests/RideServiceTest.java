@@ -1,19 +1,15 @@
 package domain.service_tests;
 
 
-import domain.Location;
-import domain.RideRequest;
-import domain.Route;
-import domain.User;
+import domain.*;
+import domain.exceptions.NoSeatsAvailableException;
 import domain.repositories.*;
 import domain.services.RideService;
 import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class RideServiceTest extends AbstractServiceTest
 {
@@ -55,6 +51,46 @@ public class RideServiceTest extends AbstractServiceTest
         assertEquals(1, foundRequests);
     }
 
+
+    @Test
+    public void test_rejectRideRequest_whenRejectedThenRequestIsInRejectedStatus()
+    {
+        RideRequest rideRequest = aPersistedRideRequest();
+        rideService.rejectRideRequest(rideRequest);
+        RideRequest foundRequest = rideRequestRepo.findByExample(rideRequest).get(0);
+        assertEquals(RequestStatus.Rejected, foundRequest.getStatus());
+    }
+
+    @Test
+    public void test_acceptRideRequest_whenAcceptedThenRequestIsInAcceptedStatus()
+    {
+        RideRequest rideRequest = aPersistedRideRequest();
+        try {
+            rideService.acceptRideRequest(rideRequest);
+            RideRequest foundRequest = rideRequestRepo.findByExample(rideRequest).get(0);
+            assertEquals(RequestStatus.Accepted, foundRequest.getStatus());
+        } catch (NoSeatsAvailableException e){
+            fail("Expected request to be accepted but NoSeatsAvailableException is thrown");
+        }
+    }
+
+
+
+    protected RideRequest aPersistedRideRequest()
+    {
+        Route route = aCommonRouteWithLocations(2,50,0);
+        User requester = aPassenger();
+        User driver = aDriver();
+        DateTime date = new DateTime(2016,6,1,0,0,0);
+        Location board = route.getLocations().get(0);
+        Location getOff = route.getLocations().get(1);
+
+        userRepo.save(requester);
+        userRepo.save(driver);
+        routeRepo.save(route);
+
+        return rideService.requestRide(requester, driver, date, route, board , getOff);
+    }
 
 
 //    @Test
