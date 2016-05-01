@@ -74,6 +74,22 @@ public class RideServiceTest extends AbstractServiceTest
         }
     }
 
+    @Test
+    public void test_acceptRideRequest_whenAcceptedThenPassengerHasTakenASeatInTheResultingRide()
+    {
+        Ride ride ;
+        RideRequest rideRequest = aPersistedRideRequest();
+        User requester = rideRequest.getRequester();
+
+        try {
+            ride = rideService.acceptRideRequest(rideRequest);
+
+            assertTrue(ride.isPassenger(requester));
+        } catch (NoSeatsAvailableException e){
+            fail("Expected request to be accepted but NoSeatsAvailableException is thrown");
+        }
+    }
+
 
 
     protected RideRequest aPersistedRideRequest()

@@ -234,4 +234,8 @@ public class Ride extends Entity
     public void setTakenSeats(List<TakenSeat> takenSeats) {
         this.takenSeats = takenSeats;
     }
+
+    public boolean isPassenger(User requester) {
+        return seatTakenBy(requester).isPresent();
+    }
 }
