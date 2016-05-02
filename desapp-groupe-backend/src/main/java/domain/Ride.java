@@ -102,8 +102,6 @@ public class Ride extends Entity
 
     public void takeSeat(User passenger, RoutePoint boardingAt, RoutePoint getOffAt) throws NoSeatsAvailableException
     {
-        this.validateSeatAvailableInSection(boardingAt, getOffAt);
-
         TakenSeat seat = new TakenSeat(passenger, boardingAt, getOffAt);
         this.addTakenSeat(seat);
     }
@@ -124,7 +122,7 @@ public class Ride extends Entity
     {
         Integer placesLeft = this.vehicle.getCapacity() - 1; // one space taken by driver by default
 
-        placesLeft -= (int) this.takenSeatsCountInSection(from, to).size();
+        placesLeft -= (int) this.takenSeatsInSection(from, to).size();
 
         return placesLeft ;
     }
@@ -135,7 +133,7 @@ public class Ride extends Entity
      * @param to
      * @return
      */
-    public List<TakenSeat> takenSeatsCountInSection(RoutePoint from, RoutePoint to) {
+    public List<TakenSeat> takenSeatsInSection(RoutePoint from, RoutePoint to) {
         return this.takenSeats.stream()
                 .filter( seat -> this.seatIsTakenInSection(seat, from, to) )
                 .collect(Collectors.toList());
@@ -158,9 +156,9 @@ public class Ride extends Entity
                                         idxSeatBoardingAt, idxSeatGetOffAt);
     }
 
-    private boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt) {
-        return Math.max(idxTo,idxSeatGetOffAt) - Math.min(idxFrom,idxSeatBoardingAt)
-                < (idxTo - idxFrom) + (idxSeatGetOffAt - idxSeatBoardingAt);
+    private boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt)
+    {
+        return (idxFrom <= idxSeatGetOffAt && idxTo <= idxSeatBoardingAt);
     }
 
     public Optional<TakenSeat> getSeatTakenBy(User passenger)

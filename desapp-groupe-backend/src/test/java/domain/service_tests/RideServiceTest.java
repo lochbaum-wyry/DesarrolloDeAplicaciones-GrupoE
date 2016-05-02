@@ -9,6 +9,8 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class RideServiceTest extends AbstractServiceTest
@@ -116,10 +118,8 @@ public class RideServiceTest extends AbstractServiceTest
         Ride ride = null ;
         RideRequest rideRequest1 = aPersistedRideRequest();
 
-        RideRequest rideRequest2 = aPersistedRideRequest();
-        rideRequest2.setDriver(rideRequest1.getDriver());
-        rideRequest2.setRoute(rideRequest1.getRoute());
-        rideRequestRepo.update(rideRequest2);
+        RideRequest rideRequest2 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+
 
         try {
             ride = rideService.acceptRideRequest(rideRequest1);
@@ -139,53 +139,61 @@ public class RideServiceTest extends AbstractServiceTest
         }
     }
 
+    @Test (expected = NoSeatsAvailableException.class)
+    public void test_acceptRideRequest_whenAllSeatsAreTakenInSectionThenThrowsNoSeatsAvailableException() throws NoSeatsAvailableException {
+        Ride ride = null ;
+
+        RideRequest rideRequest1 = aPersistedRideRequest();
+        RideRequest rideRequest2 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+        RideRequest rideRequest3 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+        RideRequest rideRequest4 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+
+        rideService.acceptRideRequest(rideRequest1);
+        rideService.acceptRideRequest(rideRequest2);
+        rideService.acceptRideRequest(rideRequest3);
+        rideService.acceptRideRequest(rideRequest4);
+
+        List<Ride> rideList = rideRepo.findAll();
+    }
 
 
 
+
+    protected RideRequest aPersistedRideRequestMatchingOtherRequest(RideRequest exampleRideRequest) {
+        User requester = aPersistedPassenger();
+
+        RideRequest rideRequest = new RideRequest(requester, exampleRideRequest.getDriver(), exampleRideRequest.getDate(), exampleRideRequest.getRoute(), exampleRideRequest.getBoardingAt(), exampleRideRequest.getBoardingAt());
+        rideRequestRepo.save(rideRequest);
+
+        return rideRequest;
+    }
 
     protected RideRequest aPersistedRideRequest()
     {
-        Route route = aCommonRouteWithLocations(2,50,0);
-        User requester = aPassenger();
-        User driver = aDriver();
+        Route route = aCommonRouteWithLocations(5,50,0);
+        User requester = aPersistedPassenger();
+        User driver = aPersistedDriver();
         DateTime date = new DateTime(2016,6,1,0,0,0);
         RoutePoint board = route.getRoutePoints().get(0);
         RoutePoint getOff = route.getRoutePoints().get(1);
 
-        userRepo.save(requester);
-        userRepo.save(driver);
         routeRepo.save(route);
 
         return rideService.requestRide(requester, driver, date, route, board , getOff);
     }
 
 
+    protected User aPersistedPassenger() {
+        User rideReq2Requester = aPassenger();
+        userRepo.save(rideReq2Requester);
+        return rideReq2Requester;
+    }
 
-//    @Test
-//    public void test_getRidesAsDriver_returnsAListContainingAllTheRidesWhereUserIsDriver()
-//    {
-//
-//        User user = UserBuilder.aUser().build();
-//
-//        Ride ride1 = mock(Ride.class);
-//        when(ride1.isDriver(user)).thenReturn(true);
-//
-//        Ride ride2 = mock(Ride.class);
-//        when(ride2.isDriver(user)).thenReturn(true);
-//
-//        Ride ride3 = mock(Ride.class);
-//        when(ride3.isDriver(user)).thenReturn(false);
-//
-//        user.addRide(ride1);
-//        user.addRide(ride2);
-//        user.addRide(ride3);
-//
-//        user.getRidesAsDriver().stream().forEach(
-//                ride -> Assert.assertTrue(ride.isDriver(user))
-//        );
-//
-//        Assert.assertFalse(user.getRidesAsDriver().contains(ride3));
-//
-//    }
+    protected User aPersistedDriver() {
+        User driver = aDriver();
+        userRepo.save(driver);
+        return driver;
+    }
+
 
 }

@@ -155,7 +155,7 @@ public class RideTest extends AbstractDomainTest
                 .withTakenSeatAt(notAnOccupiersSeat)
                 .build();
 
-        List<TakenSeat> takenSeatsInSection = ride.takenSeatsCountInSection(route1, route2);
+        List<TakenSeat> takenSeatsInSection = ride.takenSeatsInSection(route1, route2);
 
         Assert.assertTrue(takenSeatsInSection.contains(occupiersSeat));
         Assert.assertFalse(takenSeatsInSection.contains(notAnOccupiersSeat));
