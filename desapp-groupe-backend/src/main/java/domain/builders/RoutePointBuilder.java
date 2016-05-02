@@ -2,21 +2,21 @@ package domain.builders;
 
 import domain.RoutePoint;
 
-public class LocationBuilder {
+public class RoutePointBuilder {
     private Double longitude;
     private Double latitude;
 
-    public static LocationBuilder aLocation() {
-        return new LocationBuilder();
+    public static RoutePointBuilder aRoutePoint() {
+        return new RoutePointBuilder();
     }
 
 
-    public LocationBuilder withLongitude(Double longitude) {
+    public RoutePointBuilder withLongitude(Double longitude) {
         this.longitude = longitude;
         return this;
     }
 
-    public LocationBuilder withLatitude(Double latitude) {
+    public RoutePointBuilder withLatitude(Double latitude) {
         this.latitude = latitude;
         return this;
     }

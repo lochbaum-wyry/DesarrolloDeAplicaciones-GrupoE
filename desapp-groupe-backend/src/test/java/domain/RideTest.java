@@ -2,6 +2,7 @@ package domain;
 
 import domain.builders.*;
 import domain.exceptions.NoSeatsAvailableException;
+import helpers.RangeHelpers;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,6 +11,8 @@ import java.lang.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -24,8 +27,8 @@ public class RideTest extends AbstractDomainTest
 
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
 
-        RoutePoint boardingAt1 = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(60.4).build();
-        RoutePoint getOffAt1 = LocationBuilder.aLocation().withLatitude(38.6).withLongitude(40.4).build();
+        RoutePoint boardingAt1 = RoutePointBuilder.aRoutePoint().withLatitude(50.5).withLongitude(60.4).build();
+        RoutePoint getOffAt1 = RoutePointBuilder.aRoutePoint().withLatitude(38.6).withLongitude(40.4).build();
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
                 .withPassenger(passengerFede)
@@ -53,22 +56,17 @@ public class RideTest extends AbstractDomainTest
 
 
     @Test
-    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffLocationsOverlapFromToThenItReturnsTrue()
+    public void test_seatIsTakenInSection_whenSeatBoardAndGetOffRoutePointsOverlapFromToThenItReturnsTrue()
     {
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
-        User driverMario = driverWithVehicle(2);
+        User driverMario = driverWithVehicle(3);
 
-        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        Route route = aCommonRouteWithLocations(4,50,50);
 
-        Route route = RouteBuilder.aRoute()
-                .withRoutePoint(route1)
-                .withRoutePoint(route2)
-                .withRoutePoint(route3)
-                .withRoutePoint(route4)
-                .build();
+        RoutePoint route1 = route.getRoutePoints().get(0);
+        RoutePoint route2 = route.getRoutePoints().get(1);
+        RoutePoint route3 = route.getRoutePoints().get(2);
+        RoutePoint route4 = route.getRoutePoints().get(3);
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
                                     .withPassenger( passengerFede )
@@ -90,17 +88,12 @@ public class RideTest extends AbstractDomainTest
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
         User driverMario = driverWithVehicle(2);
 
-        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        Route route = aCommonRouteWithLocations(4,50,50);
 
-        Route route = RouteBuilder.aRoute()
-                .withRoutePoint(route1)
-                .withRoutePoint(route2)
-                .withRoutePoint(route3)
-                .withRoutePoint(route4)
-                .build();
+        RoutePoint route1 = route.getRoutePoints().get(0);
+        RoutePoint route2 = route.getRoutePoints().get(1);
+        RoutePoint route3 = route.getRoutePoints().get(2);
+        RoutePoint route4 = route.getRoutePoints().get(3);
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
                 .withPassenger(passengerFede)
@@ -119,23 +112,17 @@ public class RideTest extends AbstractDomainTest
     @Test
     public void test_takenSeatsCountInSection_resultContainsPassengersThatOccupySeatsInTheGivenSectionOfTheRoute()
     {
-        User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
-        User notAnOccupier = UserBuilder.aUser().withName("Miguel Del Sel").build();
+        User occupier = aPassenger();
+        User notAnOccupier = aPassenger();
         User driverMario = driverWithVehicle(2);
 
-        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-        RoutePoint route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
+        Route route = aCommonRouteWithLocations(5,50,50);
 
-        Route route = RouteBuilder.aRoute()
-                .withRoutePoint(route1)
-                .withRoutePoint(route2)
-                .withRoutePoint(route3)
-                .withRoutePoint(route4)
-                .withRoutePoint(route5)
-                .build();
+        RoutePoint route1 = route.getRoutePoints().get(0);
+        RoutePoint route2 = route.getRoutePoints().get(1);
+        RoutePoint route3 = route.getRoutePoints().get(2);
+        RoutePoint route4 = route.getRoutePoints().get(3);
+        RoutePoint route5 = route.getRoutePoints().get(4);
 
         TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
                 .withPassenger(occupier)
@@ -170,11 +157,11 @@ public class RideTest extends AbstractDomainTest
 
         Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5f).withCapacity(2).build();
 
-        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-        RoutePoint route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
+        RoutePoint route1 = RoutePointBuilder.aRoutePoint().withLatitude(50.0).withLongitude(50.0).build();
+        RoutePoint route2 = RoutePointBuilder.aRoutePoint().withLatitude(100.0).withLongitude(100.0).build();
+        RoutePoint route3 = RoutePointBuilder.aRoutePoint().withLatitude(150.0).withLongitude(150.0).build();
+        RoutePoint route4 = RoutePointBuilder.aRoutePoint().withLatitude(200.0).withLongitude(200.0).build();
+        RoutePoint route5 = RoutePointBuilder.aRoutePoint().withLatitude(250.0).withLongitude(250.0).build();
 
         Route route = RouteBuilder.aRoute()
                 .withRoutePoint(route1)
@@ -423,32 +410,6 @@ public class RideTest extends AbstractDomainTest
         Assert.assertTrue(ride.isCancelled());
     }
 
-    @Test(expected = NoSeatsAvailableException.class)
-    public void test_takeSeat_NoSeatsAvailableExceptionIsThrownIfThereIsNoSeatsAvailbleForTheRequestedSectionOfTheRide()
-            throws NoSeatsAvailableException {
-
-        User driver = mock(User.class);
-
-        Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getCapacity()).thenReturn(2);
-
-        User occupierPassenger = mock(User.class);
-        User failerPassenger = mock(User.class);
-
-        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
-        RoutePoint boardAt = route.getRoutePoints().get(0);
-        RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
-
-        Ride ride = RideBuilder.aRide()
-                .withDriver(driver)
-                .withVehicle(vehicle)
-                .withRoute(route)
-                .build();
-
-        ride.takeSeat(occupierPassenger ,boardAt, getOffAt);
-        ride.takeSeat(failerPassenger,boardAt, getOffAt);
-
-    }
 
     @Test
     public void test_takeSeat_addsATakenSeatToRideTakenSeatsIfThereIsSpaceAvailableForTheRequestedSectionOfTheRide()

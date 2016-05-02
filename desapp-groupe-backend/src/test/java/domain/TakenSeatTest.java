@@ -1,6 +1,6 @@
 package domain;
 
-import domain.builders.LocationBuilder;
+import domain.builders.RoutePointBuilder;
 import domain.builders.RideBuilder;
 import domain.builders.TakenSeatBuilder;
 import domain.builders.UserBuilder;
@@ -34,7 +34,7 @@ public class TakenSeatTest {
     public void test_setAndGetBoardingAt(){
         TakenSeat takenSeat = TakenSeatBuilder.aTakenSeat().build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().build();
         takenSeat.setBoardingAt(routePoint);
 
         Assert.assertEquals(takenSeat.getBoardingAt(),routePoint);
@@ -44,7 +44,7 @@ public class TakenSeatTest {
     public void test_setAndGetGetoffAt(){
         TakenSeat takenSeat = TakenSeatBuilder.aTakenSeat().build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().build();
         takenSeat.setGetOffAt(routePoint);
 
         Assert.assertEquals(takenSeat.getGetOffAt(),routePoint);

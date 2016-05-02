@@ -1,18 +1,5 @@
 package domain;
 
-import domain.builders.LocationBuilder;
-import domain.builders.RouteBuilder;
-import domain.builders.SystemBuilder;
-import domain.builders.UserBuilder;
-import domain.services.System;
-import org.joda.time.DateTime;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class SystemTest {
 
 /*
@@ -30,8 +17,8 @@ public class SystemTest {
 
         System system = SystemBuilder.aSystem().withUsers(users).build();
 
-        RoutePoint initiallocation = LocationBuilder.aRoutePoint().withLongitude(230.0).withLatitude(400.0).build();
-        RoutePoint endinglocation = LocationBuilder.aRoutePoint().withLongitude(300.0).withLatitude(450.0).build();
+        RoutePoint initiallocation = RoutePointBuilder.aRoutePoint().withLongitude(230.0).withLatitude(400.0).build();
+        RoutePoint endinglocation = RoutePointBuilder.aRoutePoint().withLongitude(300.0).withLatitude(450.0).build();
 
         List<Route> received = system.findRoutesSatisfying(new DateTime(), 1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();
@@ -59,8 +46,8 @@ public class SystemTest {
 
         System system = SystemBuilder.aSystem().withUsers(users).build();
 
-        RoutePoint initiallocation = LocationBuilder.aRoutePoint().withLongitude(200.0).withLatitude(200.0).build();
-        RoutePoint endinglocation = LocationBuilder.aRoutePoint().withLongitude(230.0).withLatitude(230.0).build();
+        RoutePoint initiallocation = RoutePointBuilder.aRoutePoint().withLongitude(200.0).withLatitude(200.0).build();
+        RoutePoint endinglocation = RoutePointBuilder.aRoutePoint().withLongitude(230.0).withLatitude(230.0).build();
 
         List<Route> received = system.findRoutesSatisfying(new DateTime(),1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();

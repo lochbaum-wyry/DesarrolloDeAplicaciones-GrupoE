@@ -1,9 +1,9 @@
 package domain;
 
 import domain.exceptions.NoSeatsAvailableException;
+import helpers.RangeHelpers;
 import org.joda.time.DateTime;
 
-import java.lang.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -152,13 +152,17 @@ public class Ride extends Entity
         Integer idxSeatGetOffAt = seat.getGetOffAt().getIndexInRoute();
 
         // chequeo si se solapan los puntos de ruta
-        return sectionIndexesOverlap(sectionFrom.getIndexInRoute(), sectionTo.getIndexInRoute(),
-                                        idxSeatBoardingAt, idxSeatGetOffAt);
+        return RangeHelpers.rangesOverlap(  sectionFrom.getIndexInRoute(), sectionTo.getIndexInRoute(),
+                                            idxSeatBoardingAt, idxSeatGetOffAt );
     }
 
-    private boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt)
+    public boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt)
     {
-        return (idxFrom <= idxSeatGetOffAt && idxTo <= idxSeatBoardingAt);
+        return Math.max(idxTo,idxSeatGetOffAt) - Math.min(idxFrom,idxSeatBoardingAt) < (idxTo - idxFrom) + (idxSeatGetOffAt - idxSeatBoardingAt);
+//        return 	( Math.min(idxFrom,idxTo) < Math.max(idxSeatBoardingAt,idxSeatGetOffAt) && Math.min(idxSeatBoardingAt,idxSeatGetOffAt) < Math.max(idxFrom,idxTo) );
+//        return (idxFrom < idxSeatGetOffAt && idxSeatBoardingAt < idxTo) ||
+//                (idxFrom == idxTo && (idxFrom == idxTo || idxSeatBoardingAt == idxSeatGetOffAt));
+//        return (idxFrom <= idxSeatGetOffAt && idxTo <= idxSeatBoardingAt);
     }
 
     public Optional<TakenSeat> getSeatTakenBy(User passenger)

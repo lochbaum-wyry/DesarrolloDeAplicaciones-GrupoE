@@ -1,13 +1,12 @@
 package domain;
 
-import domain.builders.LocationBuilder;
+import domain.builders.RoutePointBuilder;
 import domain.builders.RouteBuilder;
 import domain.builders.ScheduleBuilder;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class RouteTest
                 .withRoutePointAt(59.3,100.2)
                 .withRoutePointAt(56.4,87.6).build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(60.4).build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().withLatitude(50.5).withLongitude(60.4).build();
 
         Boolean received = route.locationIsNearRoute(routePoint,200f);
         Boolean expected = Boolean.TRUE;
@@ -38,7 +37,7 @@ public class RouteTest
                 .withRoutePointAt(56.4,87.6)
                 .build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().withLatitude(200.4).withLongitude(583.3).build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().withLatitude(200.4).withLongitude(583.3).build();
 
         Boolean received = route.locationIsNearRoute(routePoint, 200f);
         Boolean expected = Boolean.FALSE;
@@ -50,8 +49,8 @@ public class RouteTest
     public void test_matchesRequestedRouteWhenisTrue(){
         Route route = RouteBuilder.aRoute().withRoutePointAt(34.5,21.4).withRoutePointAt(59.3,100.2).withRoutePointAt(56.4,87.6).build();
 
-        RoutePoint routePoint1 = LocationBuilder.aLocation().withLatitude(30.1).withLongitude(56.3).build();
-        RoutePoint routePoint2 = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(60.4).build();
+        RoutePoint routePoint1 = RoutePointBuilder.aRoutePoint().withLatitude(30.1).withLongitude(56.3).build();
+        RoutePoint routePoint2 = RoutePointBuilder.aRoutePoint().withLatitude(50.5).withLongitude(60.4).build();
 
         Boolean received = route.matchesRequestedRoute(routePoint1, routePoint2, 200f);
         Boolean expected = Boolean.TRUE;
@@ -69,8 +68,8 @@ public class RouteTest
                 .withRoutePointAt(56.4,87.6)
                 .build();
 
-        RoutePoint routePoint1 = LocationBuilder.aLocation().withLatitude(200.3).withLongitude(56.2).build();
-        RoutePoint routePoint2 = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(500.4).build();
+        RoutePoint routePoint1 = RoutePointBuilder.aRoutePoint().withLatitude(200.3).withLongitude(56.2).build();
+        RoutePoint routePoint2 = RoutePointBuilder.aRoutePoint().withLatitude(50.5).withLongitude(500.4).build();
 
         Boolean received = route.matchesRequestedRoute(routePoint1, routePoint2, 200f);
         Boolean expected = Boolean.FALSE;
@@ -162,7 +161,7 @@ public class RouteTest
 
         List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
         route.setRoutePoints(routePoints);
-        route.addRoutePoint(LocationBuilder.aLocation().build());
+        route.addRoutePoint(RoutePointBuilder.aRoutePoint().build());
 
         Assert.assertEquals(route.getRoutePoints(),routePoints);
     }

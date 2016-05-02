@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RideServiceTest extends AbstractServiceTest
+public class RideServiceTest extends AbstractServiceTest implements TestHelpersTrait
 {
     @Autowired
     public RideService rideService ;
@@ -156,13 +156,40 @@ public class RideServiceTest extends AbstractServiceTest
         List<Ride> rideList = rideRepo.findAll();
     }
 
+    @Test
+    public void test_acceptRideRequest_whenSeatsTakenDontOverlapWithRequestThenPassengerIsIncludedInRide() throws NoSeatsAvailableException
+    {
+        Ride ride = null ;
 
+        RideRequest rideRequest1 = aPersistedRideRequest();
+        RideRequest rideRequest2 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+        RideRequest rideRequest3 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+        RideRequest rideRequest4 = aPersistedRideRequestMatchingOtherRequest(rideRequest1);
+
+        Route route = rideRequest4.getRoute();
+        rideRequest4.setBoardingAt(route.getRoutePoints().get(1));
+        rideRequest4.setGetOffAt(route.getRoutePoints().get(2));
+        rideRequestRepo.update(rideRequest4);
+
+        rideService.acceptRideRequest(rideRequest1);
+        rideService.acceptRideRequest(rideRequest2);
+        rideService.acceptRideRequest(rideRequest3);
+
+        try {
+            ride = rideService.acceptRideRequest(rideRequest4);
+            assertTrue(ride.isPassenger(rideRequest4.getRequester()));
+
+        } catch (NoSeatsAvailableException e)
+        {
+            fail();
+        }
+    }
 
 
     protected RideRequest aPersistedRideRequestMatchingOtherRequest(RideRequest exampleRideRequest) {
         User requester = aPersistedPassenger();
 
-        RideRequest rideRequest = new RideRequest(requester, exampleRideRequest.getDriver(), exampleRideRequest.getDate(), exampleRideRequest.getRoute(), exampleRideRequest.getBoardingAt(), exampleRideRequest.getBoardingAt());
+        RideRequest rideRequest = new RideRequest(requester, exampleRideRequest.getDriver(), exampleRideRequest.getDate(), exampleRideRequest.getRoute(), exampleRideRequest.getBoardingAt(), exampleRideRequest.getGetOffAt());
         rideRequestRepo.save(rideRequest);
 
         return rideRequest;

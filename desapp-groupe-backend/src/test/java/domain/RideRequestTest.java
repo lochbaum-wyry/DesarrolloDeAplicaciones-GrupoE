@@ -1,6 +1,6 @@
 package domain;
 
-import domain.builders.LocationBuilder;
+import domain.builders.RoutePointBuilder;
 import domain.builders.RideRequestBuilder;
 import domain.builders.RouteBuilder;
 import domain.builders.UserBuilder;
@@ -90,7 +90,7 @@ public class RideRequestTest {
     public void test_setAndGetBoardingAt(){
         RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().build();
         rideRequest.setBoardingAt(routePoint);
 
         Assert.assertEquals(rideRequest.getBoardingAt(),routePoint);
@@ -100,7 +100,7 @@ public class RideRequestTest {
     public void test_setAndGetGetOffAt(){
         RideRequest rideRequest = RideRequestBuilder.aRideRequest().build();
 
-        RoutePoint routePoint = LocationBuilder.aLocation().build();
+        RoutePoint routePoint = RoutePointBuilder.aRoutePoint().build();
         rideRequest.setGetOffAt(routePoint);
 
         Assert.assertEquals(rideRequest.getGetOffAt(),routePoint);
