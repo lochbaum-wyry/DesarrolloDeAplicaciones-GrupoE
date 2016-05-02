@@ -1,13 +1,13 @@
 package domain.builders;
 
-import domain.Location;
+import domain.RoutePoint;
 import domain.TakenSeat;
 import domain.User;
 
 public class TakenSeatBuilder {
     private User passenger;
-    private Location boardingAt;
-    private Location getOffAt;
+    private RoutePoint boardingAt;
+    private RoutePoint getOffAt;
 
     public TakenSeatBuilder(){
         this.passenger = null;
@@ -25,12 +25,12 @@ public class TakenSeatBuilder {
         return this;
     }
 
-    public TakenSeatBuilder withboardingAtLocation(Location boardingAt) {
+    public TakenSeatBuilder withboardingAtLocation(RoutePoint boardingAt) {
         this.boardingAt = boardingAt;
         return this;
     }
 
-    public TakenSeatBuilder withgetOffAtLocation(Location getOffAt) {
+    public TakenSeatBuilder withgetOffAtLocation(RoutePoint getOffAt) {
         this.getOffAt = getOffAt;
         return this;
     }

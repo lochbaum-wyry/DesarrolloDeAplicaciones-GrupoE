@@ -165,7 +165,7 @@
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 
-	<bean id="persistence.locationrepository" class="domain.repositories.LocationRepository" >
+	<bean id="persistence.routepointrepository" class="domain.repositories.RoutePointRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 

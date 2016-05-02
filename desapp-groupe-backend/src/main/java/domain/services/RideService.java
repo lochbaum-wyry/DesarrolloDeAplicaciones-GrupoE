@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 
 import java.util.Optional;
 
+
 public class RideService extends GenericService<Ride>
 {
     private SystemSettings systemSettings;
@@ -23,7 +24,7 @@ public class RideService extends GenericService<Ride>
         this.rideRequestRepository = rideRequestRepository;
     }
 
-    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, Location boardingAt, Location getOffAt)
+    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
     {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
         rideRequestRepository.save(rideRequest);
@@ -44,7 +45,8 @@ public class RideService extends GenericService<Ride>
         ride.takeSeat(rideRequest.getRequester(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
         rideRequest.accept();
 
-        rideRepository.save(ride);
+
+        rideRepository.saveOrUpdate(ride);
 
         return ride;
     }

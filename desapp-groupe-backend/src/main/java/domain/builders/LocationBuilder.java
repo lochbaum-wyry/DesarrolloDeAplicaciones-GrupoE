@@ -1,6 +1,6 @@
 package domain.builders;
 
-import domain.Location;
+import domain.RoutePoint;
 
 public class LocationBuilder {
     private Double longitude;
@@ -21,7 +21,7 @@ public class LocationBuilder {
         return this;
     }
 
-    public Location build() {
-        return new Location(this.longitude, this.latitude);
+    public RoutePoint build() {
+        return new RoutePoint(this.longitude, this.latitude);
     }
 }

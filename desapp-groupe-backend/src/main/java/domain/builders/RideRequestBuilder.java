@@ -1,6 +1,6 @@
 package domain.builders;
 
-import domain.Location;
+import domain.RoutePoint;
 import domain.RideRequest;
 import domain.Route;
 import domain.User;
@@ -8,8 +8,8 @@ import org.joda.time.DateTime;
 
 public class RideRequestBuilder {
     private Route route;
-    private Location boardingAt;
-    private Location getOffAt;
+    private RoutePoint boardingAt;
+    private RoutePoint getOffAt;
     private User passenger;
     private DateTime date;
     private User driver;
@@ -31,12 +31,12 @@ public class RideRequestBuilder {
         return this;
     }
 
-    public RideRequestBuilder withBoardingAt(Location boardingAt) {
+    public RideRequestBuilder withBoardingAt(RoutePoint boardingAt) {
         this.boardingAt = boardingAt;
         return this;
     }
 
-    public RideRequestBuilder withGetoffAt(Location getOffAt) {
+    public RideRequestBuilder withGetoffAt(RoutePoint getOffAt) {
         this.getOffAt = getOffAt;
         return this;
     }

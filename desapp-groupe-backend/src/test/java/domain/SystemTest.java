@@ -30,8 +30,8 @@ public class SystemTest {
 
         System system = SystemBuilder.aSystem().withUsers(users).build();
 
-        Location initiallocation = LocationBuilder.aLocation().withLongitude(230.0).withLatitude(400.0).build();
-        Location endinglocation = LocationBuilder.aLocation().withLongitude(300.0).withLatitude(450.0).build();
+        RoutePoint initiallocation = LocationBuilder.aRoutePoint().withLongitude(230.0).withLatitude(400.0).build();
+        RoutePoint endinglocation = LocationBuilder.aRoutePoint().withLongitude(300.0).withLatitude(450.0).build();
 
         List<Route> received = system.findRoutesSatisfying(new DateTime(), 1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();
@@ -59,8 +59,8 @@ public class SystemTest {
 
         System system = SystemBuilder.aSystem().withUsers(users).build();
 
-        Location initiallocation = LocationBuilder.aLocation().withLongitude(200.0).withLatitude(200.0).build();
-        Location endinglocation = LocationBuilder.aLocation().withLongitude(230.0).withLatitude(230.0).build();
+        RoutePoint initiallocation = LocationBuilder.aRoutePoint().withLongitude(200.0).withLatitude(200.0).build();
+        RoutePoint endinglocation = LocationBuilder.aRoutePoint().withLongitude(230.0).withLatitude(230.0).build();
 
         List<Route> received = system.findRoutesSatisfying(new DateTime(),1000,initiallocation,endinglocation, 200f);
         List<Route> expected = new ArrayList<Route>();

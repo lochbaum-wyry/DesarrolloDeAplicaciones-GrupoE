@@ -3,13 +3,15 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field"
                    default-cascade="save-update">
-    <class name="domain.Location">
+    <class name="domain.RoutePoint">
         <id column="ID" name="id">
             <generator class="native" />
         </id>
 
-        <property name="longitude" />
-        <property name="latitude" />
+        <one-to-one name="route" class="domain.Route"/>
+        <property name="indexInRoute"/>
+        <property name="latitude"/>
+        <property name="longitude"/>
 
     </class>
 </hibernate-mapping>

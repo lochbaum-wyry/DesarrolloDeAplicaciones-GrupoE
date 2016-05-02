@@ -1,13 +1,13 @@
 package domain.exceptions;
 
-import domain.Location;
+import domain.RoutePoint;
 
 public class NoSeatsAvailableException extends SubiQueTeLlevoException
 {
-    private Location boardingAt;
-    private Location getOffAt;
+    private RoutePoint boardingAt;
+    private RoutePoint getOffAt;
 
-    public NoSeatsAvailableException(Location boardingAt, Location getOffAt)
+    public NoSeatsAvailableException(RoutePoint boardingAt, RoutePoint getOffAt)
     {
         this.boardingAt = boardingAt ;
         this.getOffAt = getOffAt ;

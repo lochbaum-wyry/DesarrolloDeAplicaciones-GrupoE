@@ -4,10 +4,10 @@ public class TakenSeat extends Entity
 {
     private Ride ride;
     private User passenger;
-    private Location boardingAt;
-    private Location getOffAt;
+    private RoutePoint boardingAt;
+    private RoutePoint getOffAt;
 
-    public TakenSeat(User passenger, Location boardingAt, Location getOffAt)
+    public TakenSeat(User passenger, RoutePoint boardingAt, RoutePoint getOffAt)
     {
         this.passenger = passenger;
         this.boardingAt = boardingAt;
@@ -19,21 +19,21 @@ public class TakenSeat extends Entity
         return passenger;
     }
 
-    public Location getGetOffAt()
+    public RoutePoint getGetOffAt()
     {
         return getOffAt;
     }
 
-    public Location getBoardingAt()
+    public RoutePoint getBoardingAt()
     {
         return boardingAt;
     }
 
-    public void setBoardingAt(Location boardingAt) {
+    public void setBoardingAt(RoutePoint boardingAt) {
         this.boardingAt = boardingAt;
     }
 
-    public void setGetOffAt(Location getOffAt) {
+    public void setGetOffAt(RoutePoint getOffAt) {
         this.getOffAt = getOffAt;
     }
 

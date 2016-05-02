@@ -24,8 +24,8 @@ public class RideTest extends AbstractDomainTest
 
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
 
-        Location boardingAt1 = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(60.4).build();
-        Location getOffAt1 = LocationBuilder.aLocation().withLatitude(38.6).withLongitude(40.4).build();
+        RoutePoint boardingAt1 = LocationBuilder.aLocation().withLatitude(50.5).withLongitude(60.4).build();
+        RoutePoint getOffAt1 = LocationBuilder.aLocation().withLatitude(38.6).withLongitude(40.4).build();
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
                 .withPassenger(passengerFede)
@@ -35,7 +35,7 @@ public class RideTest extends AbstractDomainTest
 
         Ride ride = RideBuilder.aRide().withDriver(driverMario).withTakenSeatAt(takenSeatFede).build();
 
-        Assert.assertTrue(ride.seatTakenBy(passengerFede).isPresent());
+        Assert.assertTrue(ride.getSeatTakenBy(passengerFede).isPresent());
     }
 
     @Test
@@ -47,7 +47,7 @@ public class RideTest extends AbstractDomainTest
 
         Ride ride = RideBuilder.aRide().withDriver(driverMario).build();
 
-        Assert.assertFalse(ride.seatTakenBy(passengerFede).isPresent());
+        Assert.assertFalse(ride.getSeatTakenBy(passengerFede).isPresent());
     }
 
 
@@ -58,16 +58,16 @@ public class RideTest extends AbstractDomainTest
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
         User driverMario = driverWithVehicle(2);
 
-        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
 
         Route route = RouteBuilder.aRoute()
-                .withLocation(route1)
-                .withLocation(route2)
-                .withLocation(route3)
-                .withLocation(route4)
+                .withRoutePoint(route1)
+                .withRoutePoint(route2)
+                .withRoutePoint(route3)
+                .withRoutePoint(route4)
                 .build();
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
@@ -90,16 +90,16 @@ public class RideTest extends AbstractDomainTest
         User passengerFede = UserBuilder.aUser().withName("Fede").build();
         User driverMario = driverWithVehicle(2);
 
-        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
 
         Route route = RouteBuilder.aRoute()
-                .withLocation(route1)
-                .withLocation(route2)
-                .withLocation(route3)
-                .withLocation(route4)
+                .withRoutePoint(route1)
+                .withRoutePoint(route2)
+                .withRoutePoint(route3)
+                .withRoutePoint(route4)
                 .build();
 
         TakenSeat takenSeatFede = TakenSeatBuilder.aTakenSeat()
@@ -123,18 +123,18 @@ public class RideTest extends AbstractDomainTest
         User notAnOccupier = UserBuilder.aUser().withName("Miguel Del Sel").build();
         User driverMario = driverWithVehicle(2);
 
-        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-        Location route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
+        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        RoutePoint route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
 
         Route route = RouteBuilder.aRoute()
-                .withLocation(route1)
-                .withLocation(route2)
-                .withLocation(route3)
-                .withLocation(route4)
-                .withLocation(route5)
+                .withRoutePoint(route1)
+                .withRoutePoint(route2)
+                .withRoutePoint(route3)
+                .withRoutePoint(route4)
+                .withRoutePoint(route5)
                 .build();
 
         TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
@@ -170,18 +170,18 @@ public class RideTest extends AbstractDomainTest
 
         Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5f).withCapacity(2).build();
 
-        Location route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
-        Location route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
-        Location route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
-        Location route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
-        Location route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
+        RoutePoint route1 = LocationBuilder.aLocation().withLatitude(50.0).withLongitude(50.0).build();
+        RoutePoint route2 = LocationBuilder.aLocation().withLatitude(100.0).withLongitude(100.0).build();
+        RoutePoint route3 = LocationBuilder.aLocation().withLatitude(150.0).withLongitude(150.0).build();
+        RoutePoint route4 = LocationBuilder.aLocation().withLatitude(200.0).withLongitude(200.0).build();
+        RoutePoint route5 = LocationBuilder.aLocation().withLatitude(250.0).withLongitude(250.0).build();
 
         Route route = RouteBuilder.aRoute()
-                .withLocation(route1)
-                .withLocation(route2)
-                .withLocation(route3)
-                .withLocation(route4)
-                .withLocation(route5)
+                .withRoutePoint(route1)
+                .withRoutePoint(route2)
+                .withRoutePoint(route3)
+                .withRoutePoint(route4)
+                .withRoutePoint(route5)
                 .build();
 
         TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
@@ -209,7 +209,7 @@ public class RideTest extends AbstractDomainTest
         float routeDistanceInKms = 20f;
 
         Route route = mock(Route.class);
-        when(route.getLocations()).thenReturn(alistOfLocations());
+        when(route.getRoutePoints()).thenReturn(alistOfLocations());
         when(route.getFixedCosts()).thenReturn(100f);
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
@@ -236,14 +236,14 @@ public class RideTest extends AbstractDomainTest
 
     }
 
-    private List<Location> alistOfLocations() {
+    private List<RoutePoint> alistOfLocations() {
 
-        List<Location> list = new ArrayList<Location>();
+        List<RoutePoint> list = new ArrayList<RoutePoint>();
 
         Double latLongValue = 50d;
         for (int i = 0 ; i < 5 ; i++ , latLongValue += 50);
         {
-            Location loc = new Location(latLongValue, latLongValue);
+            RoutePoint loc = new RoutePoint(latLongValue, latLongValue);
             list.add(loc);
         }
         return list;
@@ -257,7 +257,7 @@ public class RideTest extends AbstractDomainTest
         float routeDistanceInKms = 20f;
 
         Route route = mock(Route.class);
-        when(route.getLocations()).thenReturn(alistOfLocations());
+        when(route.getRoutePoints()).thenReturn(alistOfLocations());
         when(route.getFixedCosts()).thenReturn(90f);
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
@@ -435,9 +435,9 @@ public class RideTest extends AbstractDomainTest
         User occupierPassenger = mock(User.class);
         User failerPassenger = mock(User.class);
 
-        Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
-        Location boardAt = route.getLocations().get(0);
-        Location getOffAt = route.getLocations().get( route.getLocations().size()-1 );
+        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
+        RoutePoint boardAt = route.getRoutePoints().get(0);
+        RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
 
         Ride ride = RideBuilder.aRide()
                 .withDriver(driver)
@@ -461,9 +461,9 @@ public class RideTest extends AbstractDomainTest
 
         User occupierPassenger = mock(User.class);
 
-        Route route = RouteBuilder.aRoute().withLocationAt(100.0,100.0).withLocationAt(200.0,200.0).build();
-        Location boardAt = route.getLocations().get(0);
-        Location getOffAt = route.getLocations().get( route.getLocations().size()-1 );
+        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
+        RoutePoint boardAt = route.getRoutePoints().get(0);
+        RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
 
         Ride ride = RideBuilder.aRide()
                 .withDriver(driver)

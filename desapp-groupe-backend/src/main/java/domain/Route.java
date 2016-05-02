@@ -8,28 +8,30 @@ import java.util.List;
 public class Route extends Entity{
 
     private List<Schedule> schedules = new ArrayList<Schedule>();
-    private List<Location> locations = new ArrayList<Location>();
+    private List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
     private Float distanceInKms = 0f;
     private Float fixedCosts = 0f;
 
-    public Boolean matchesRequestedRoute(Location departureLocation, Location getOffLocation, Float radioCloseness)
+    public Boolean matchesRequestedRoute(RoutePoint departureRoutePoint, RoutePoint getOffRoutePoint, Float radioCloseness)
     {
-        return this.locationIsNearRoute(departureLocation, radioCloseness) && this.locationIsNearRoute(getOffLocation, radioCloseness);
+        return this.locationIsNearRoute(departureRoutePoint, radioCloseness) && this.locationIsNearRoute(getOffRoutePoint, radioCloseness);
     }
 
-    public Boolean locationIsNearRoute(Location location, Float radioCloseness)
+    public Boolean locationIsNearRoute(RoutePoint routePoint, Float radioCloseness)
     {
-        return this.locations.stream().anyMatch(point -> point.isNear(location, radioCloseness));
+        return this.routePoints.stream().anyMatch(point -> point.isNear(routePoint, radioCloseness));
     }
 
-    public void addLocation(Location location) {
-        this.locations.add(location);
+    public void addRoutePoint(RoutePoint routePoint)
+    {
+        this.routePoints.add(routePoint);
+        updateIndexes();
     }
 
     public void addSchedule(Schedule schedule){ this.schedules.add(schedule); }
 
-    public List<Location> getLocations() {
-        return locations;
+    public List<RoutePoint> getRoutePoints() {
+        return routePoints;
     }
 
     public List<Schedule> getSchedules() {
@@ -60,8 +62,19 @@ public class Route extends Entity{
     }
 
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+    public void setRoutePoints(List<RoutePoint> routePoints)
+    {
+        this.routePoints = routePoints;
+        updateIndexes();
+    }
+
+    private void updateIndexes()
+    {
+        for (int i = 0; i < this.getRoutePoints().size() ; i++)
+        {
+            RoutePoint routePoint = this.getRoutePoints().get(i);
+            routePoint.setIndexInRoute(i);
+        }
     }
 
     public void setSchedules(List<Schedule> schedules) {

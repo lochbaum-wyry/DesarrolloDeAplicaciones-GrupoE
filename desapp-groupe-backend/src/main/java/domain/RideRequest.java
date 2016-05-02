@@ -9,12 +9,12 @@ public class RideRequest extends Entity
     private Route route;
     private DateTime date;
     private DateTime dateRequested;
-    private Location boardingAt;
-    private Location getOffAt;
+    private RoutePoint boardingAt;
+    private RoutePoint getOffAt;
     private RequestStatus status;
 
 
-    public RideRequest(User requester, User driver, DateTime date, Route route, Location boardingAt, Location getOffAt)
+    public RideRequest(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
     {
         this.driver = driver;
         this.dateRequested = DateTime.now();
@@ -47,11 +47,11 @@ public class RideRequest extends Entity
         return date;
     }
 
-    public Location getBoardingAt() {
+    public RoutePoint getBoardingAt() {
         return boardingAt;
     }
 
-    public Location getGetOffAt() {
+    public RoutePoint getGetOffAt() {
         return getOffAt;
     }
 
@@ -59,7 +59,7 @@ public class RideRequest extends Entity
         return status;
     }
 
-    public void setBoardingAt(Location boardingAt) {
+    public void setBoardingAt(RoutePoint boardingAt) {
         this.boardingAt = boardingAt;
     }
 
@@ -75,7 +75,7 @@ public class RideRequest extends Entity
         this.dateRequested = dateRequested;
     }
 
-    public void setGetOffAt(Location getOffAt) {
+    public void setGetOffAt(RoutePoint getOffAt) {
         this.getOffAt = getOffAt;
     }
 

@@ -16,10 +16,10 @@
             <list-index column="id" />
             <one-to-many class="domain.Schedule" />
         </list>
-        <list name="locations" lazy="false">
-            <key column="locationId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Location" />
+        <list name="routePoints" lazy="false" cascade="save-update">
+            <key column="routePointId" />
+            <list-index column="indexInRoute" />
+            <one-to-many class="domain.RoutePoint" />
         </list>
 
     </class>

@@ -1,6 +1,6 @@
 package domain.builders;
 
-import domain.Location;
+import domain.RoutePoint;
 import domain.Route;
 
 import java.lang.*;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteBuilder {
-    private List<Location> locations = new ArrayList<Location>();
+    private List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
     private Float fixedCosts ;
     private Float distanceInKms ;
 
@@ -16,36 +16,39 @@ public class RouteBuilder {
         return new RouteBuilder();
     }
 
-    public Route build() {
+    public Route build()
+    {
         Route route = new Route();
-        locations.stream().forEach(location -> {route.addLocation(location);});
+        routePoints.stream().forEach(routePoint -> {
+                routePoint.setRoute(route);
+                route.addRoutePoint(routePoint);
+            }
+        );
 
         if (fixedCosts != null)
             route.setFixedCosts(fixedCosts);
 
         if (distanceInKms != null)
             route.setFixedCosts(distanceInKms);
-
-
         return route;
 
     }
 
-    public RouteBuilder withLocationAt(Double longitude, Double latitude)
+    public RouteBuilder withRoutePointAt(Double longitude, Double latitude)
     {
-        this.locations.add( new Location(longitude, latitude) );
+        this.routePoints.add( new RoutePoint(latitude,longitude) );
         return this;
     }
 
-    public RouteBuilder withLocation(Location location)
+    public RouteBuilder withRoutePoint(RoutePoint routePoint)
     {
-        this.locations.add( location );
+        this.routePoints.add(routePoint);
         return this;
     }
 
 
-    public RouteBuilder withLocations(List<Location> locations) {
-        this.locations = locations;
+    public RouteBuilder withRoutePoints(List<RoutePoint> routePoints) {
+        this.routePoints = routePoints;
         return this;
     }
 

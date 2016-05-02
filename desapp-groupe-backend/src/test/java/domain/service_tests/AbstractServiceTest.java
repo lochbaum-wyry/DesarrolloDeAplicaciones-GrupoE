@@ -1,19 +1,16 @@
 package domain.service_tests;
 
-import domain.Location;
+import domain.RoutePoint;
 import domain.Route;
 import domain.User;
 import domain.builders.RouteBuilder;
 import domain.builders.UserBuilder;
-import domain.repositories.HibernateGenericDao;
-import domain.services.GenericService;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,8 +41,8 @@ abstract public class AbstractServiceTest
 
     // Funciones de ayuda para buildear objetos comunes
 
-    protected Location aLocation(Double currLongitude, Double currLatitude) {
-        return new Location(currLongitude, currLatitude);
+    protected RoutePoint aRoutePoint(Double currLongitude, Double currLatitude) {
+        return new RoutePoint(currLatitude, currLongitude);
     }
 
     protected User aDriver()
@@ -72,7 +69,7 @@ abstract public class AbstractServiceTest
 
     protected Route aCommonRouteWithLocations(int numberOfLocations, int longitudeShift, int latitudeShift)
     {
-        List<Location> locations = new ArrayList<>();
+        List<RoutePoint> routePoints = new ArrayList<>();
         Double currLongitude = 0d ;
         Double currLatitude = 0d;
 
@@ -80,13 +77,13 @@ abstract public class AbstractServiceTest
         {
             currLatitude = currLongitude + longitudeShift ;
             currLatitude = currLatitude + latitudeShift;
-            locations.add(aLocation(currLongitude, currLatitude));
+            routePoints.add(aRoutePoint(currLongitude, currLatitude));
         }
 
         return RouteBuilder.aRoute()
                 .withDistanceInKms(20f)
                 .withFixedCosts(100)
-                .withLocations(locations)
+                .withRoutePoints(routePoints)
                 .build();
     }
 

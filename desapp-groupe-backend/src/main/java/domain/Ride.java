@@ -100,15 +100,15 @@ public class Ride extends Entity
         this.takenSeats.add(takenSeat);
     }
 
-    public void takeSeat(User passenger, Location boardingAt, Location getOffAt) throws NoSeatsAvailableException
+    public void takeSeat(User passenger, RoutePoint boardingAt, RoutePoint getOffAt) throws NoSeatsAvailableException
     {
-        this.validateSeatAvailable(boardingAt, getOffAt);
+        this.validateSeatAvailableInSection(boardingAt, getOffAt);
 
         TakenSeat seat = new TakenSeat(passenger, boardingAt, getOffAt);
         this.addTakenSeat(seat);
     }
 
-    public void validateSeatAvailable(Location boardingAt, Location getOffAt) throws NoSeatsAvailableException
+    public void validateSeatAvailableInSection(RoutePoint boardingAt, RoutePoint getOffAt) throws NoSeatsAvailableException
     {
         if ( this.availableSeatsCountInSection(boardingAt, getOffAt) == 0 )
             throw new NoSeatsAvailableException(boardingAt, getOffAt);
@@ -120,7 +120,7 @@ public class Ride extends Entity
      * @param to
      * @return
      */
-    public Integer availableSeatsCountInSection(Location from, Location to)
+    public Integer availableSeatsCountInSection(RoutePoint from, RoutePoint to)
     {
         Integer placesLeft = this.vehicle.getCapacity() - 1; // one space taken by driver by default
 
@@ -135,7 +135,7 @@ public class Ride extends Entity
      * @param to
      * @return
      */
-    public List<TakenSeat> takenSeatsCountInSection(Location from, Location to) {
+    public List<TakenSeat> takenSeatsCountInSection(RoutePoint from, RoutePoint to) {
         return this.takenSeats.stream()
                 .filter( seat -> this.seatIsTakenInSection(seat, from, to) )
                 .collect(Collectors.toList());
@@ -148,17 +148,14 @@ public class Ride extends Entity
      * @param sectionTo
      * @return
      */
-    public Boolean seatIsTakenInSection(TakenSeat seat, Location sectionFrom, Location sectionTo)
+    public Boolean seatIsTakenInSection(TakenSeat seat, RoutePoint sectionFrom, RoutePoint sectionTo)
     {
-        Integer idxSectionFrom = this.route.getLocations().indexOf(sectionFrom);
-        Integer idxSectionTo = this.route.getLocations().indexOf(sectionTo);
-
-        Integer idxSeatBoardingAt = this.route.getLocations().indexOf(seat.getBoardingAt());
-        Integer idxSeatGetOffAt = this.route.getLocations().indexOf(seat.getGetOffAt());
+        Integer idxSeatBoardingAt = seat.getBoardingAt().getIndexInRoute();
+        Integer idxSeatGetOffAt = seat.getGetOffAt().getIndexInRoute();
 
         // chequeo si se solapan los puntos de ruta
-        return sectionIndexesOverlap(idxSectionFrom, idxSectionTo, idxSeatBoardingAt, idxSeatGetOffAt);
-
+        return sectionIndexesOverlap(sectionFrom.getIndexInRoute(), sectionTo.getIndexInRoute(),
+                                        idxSeatBoardingAt, idxSeatGetOffAt);
     }
 
     private boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt) {
@@ -166,7 +163,7 @@ public class Ride extends Entity
                 < (idxTo - idxFrom) + (idxSeatGetOffAt - idxSeatBoardingAt);
     }
 
-    public Optional<TakenSeat> seatTakenBy(User passenger)
+    public Optional<TakenSeat> getSeatTakenBy(User passenger)
     {
         return takenSeats.stream().filter(seat -> seat.getPassenger() == passenger).findFirst();
     }
@@ -236,6 +233,6 @@ public class Ride extends Entity
     }
 
     public boolean isPassenger(User requester) {
-        return seatTakenBy(requester).isPresent();
+        return getSeatTakenBy(requester).isPresent();
     }
 }

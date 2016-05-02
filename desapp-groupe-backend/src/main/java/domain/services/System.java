@@ -1,6 +1,6 @@
 package domain.services;
 
-import domain.Location;
+import domain.RoutePoint;
 import domain.Route;
 import domain.User;
 import domain.services.gaming_service.GamingService;
@@ -32,12 +32,12 @@ public class System
         this.settings = settings;
     }
 
-    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, Location departureLocation, Location getOffLocation, Float radioCloseness)
+    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, RoutePoint departureRoutePoint, RoutePoint getOffRoutePoint, Float radioCloseness)
     {
         List<Route> result = users.stream().map(user -> user.getRoutes()).flatMap(routes -> routes.stream()).collect(Collectors.toList());
 
         result = result.stream()
-                .filter(route -> route.matchesRequestedRoute(departureLocation,getOffLocation,radioCloseness) && route.isInDayAndHour(date,secondsDateCloseness) )
+                .filter(route -> route.matchesRequestedRoute(departureRoutePoint, getOffRoutePoint,radioCloseness) && route.isInDayAndHour(date,secondsDateCloseness) )
                 .collect(Collectors.toList());
 
         return result;
