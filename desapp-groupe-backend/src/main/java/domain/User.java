@@ -8,7 +8,6 @@ import java.util.*;
 
 public class User  extends Entity
 {
-    private int id;
     protected System system ;
     private String name;
     private String lastName;

@@ -1,12 +1,9 @@
 package domain;
 
+import domain.builders.*;
 import domain.repositories.RideRepository;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
-import domain.builders.RideBuilder;
-import domain.builders.RouteBuilder;
-import domain.builders.UserBuilder;
-import domain.builders.VehicleBuilder;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.joda.time.DateTime;
@@ -24,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.*;
 import java.lang.System;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -53,7 +52,7 @@ public class VehicleTest
     public void test_saveAndFindById()
     {
 
-       ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
         BeanFactory factory = context;
         VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
 
@@ -123,40 +122,84 @@ public class VehicleTest
         Assert.assertEquals(vehicleRepository.findAll().size(),3);
     }
 
-
     @Test
-    public void test_prueba_userRepository()
-    {
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
+    public void test_setAndGetTotalRateCount(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
 
-        UserRepository userRepository = (UserRepository) factory.getBean("persistence.userrepository");
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-        RideRepository rideRepository = (RideRepository) factory.getBean("persistence.riderepository");
+        vehicle.setTotalRateCount(200);
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(2).withOilWasterPerHour(2f).build();
-        User fede = UserBuilder.aUser().withName("fede").withVehicle(vehicle).build();
-        User jorge = UserBuilder.aUser().withName("jorge").withVehicle(vehicle).build();
-        User nadie = UserBuilder.aUser().withName("nadie").build();
-
-        Route route = RouteBuilder.aRoute().build();
-
-        fede.setGoodRateCount(20);
-        jorge.setGoodRateCount(10);
-
-        Ride ride = RideBuilder.aRide().withDriver(fede).withDate(new DateTime(2016,2,10,23,4)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
-        Ride ride2 = RideBuilder.aRide().withDriver(jorge).withDate(new DateTime(2016,2,10,23,4)).withOilPrice(2f).withVehicle(vehicle).withRoute(route).build();
-
-        vehicleRepository.save(vehicle);
-
-        rideRepository.save(ride);
-        rideRepository.save(ride2);
-
-        userRepository.save(fede);
-        userRepository.save(jorge);
-        userRepository.save(nadie);
-
-        userRepository.getBestPassengersInMonthYear(2,2016,20).stream().forEach(user -> System.out.print(user.getName()+" "));
+        Assert.assertEquals(vehicle.getTotalRateCount().intValue(),200);
     }
 
+    @Test
+    public void test_setAndGetTotalBadRateCount(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        vehicle.setBadRateCount(200);
+
+        Assert.assertEquals(vehicle.getBadRateCount().intValue(),200);
+    }
+
+    @Test
+    public void test_setAndGetTotalGoodRateCount(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        vehicle.setGoodRateCount(200);
+
+        Assert.assertEquals(vehicle.getGoodRateCount().intValue(),200);
+    }
+
+    @Test
+    public void test_updateRateCounters(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        vehicle.updateRateCounters(RateBuilder.aRate().withRateValue(RateValue.GOOD).build());
+
+        Assert.assertEquals(vehicle.getGoodRateCount().intValue(),1);
+        Assert.assertEquals(vehicle.getBadRateCount().intValue(),0);
+
+        vehicle.updateRateCounters(RateBuilder.aRate().withRateValue(RateValue.BAD).build());
+
+        Assert.assertEquals(vehicle.getBadRateCount().intValue(),1);
+
+    }
+
+    @Test
+    public void test_setAndGetRates(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        List<Rate> rates = new ArrayList<Rate>();
+        rates.add(RateBuilder.aRate().build());
+        vehicle.setRates(rates);
+
+        Assert.assertEquals(vehicle.getRates(),rates);
+    }
+
+    @Test
+    public void test_setAndGetOwner(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        User user = UserBuilder.aUser().build();
+        vehicle.setOwner(user);
+
+        Assert.assertEquals(vehicle.getOwner(),user);
+    }
+
+    @Test
+    public void test_setAndGetCapacity(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        vehicle.setCapacity(20);
+
+        Assert.assertEquals(vehicle.getCapacity().intValue(),20);
+    }
+
+    @Test
+    public void test_setAndGetOilWastePerKm(){
+        Vehicle vehicle = VehicleBuilder.aVehicle().build();
+
+        vehicle.setOilWastePerKm(24f);
+
+        Assert.assertEquals(vehicle.getOilWastePerKm().intValue(),24);
+    }
 }
