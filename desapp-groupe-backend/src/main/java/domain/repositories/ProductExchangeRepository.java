@@ -16,12 +16,12 @@ public class ProductExchangeRepository extends HibernateGenericDao<ProductExchan
         return ProductExchange.class;
     }
 
-    public List<ProductExchange> exchangedProductsBy(Integer userId){
+    public List<ProductExchange> exchangedProductsBy(User user){
         String hql = "from " + persistentClass.getName() +
-                " as p WHERE  p.user.id = :id";
+                " as p WHERE  p.user = :user";
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
-        query.setParameter("id", userId);
+        query.setEntity("user",user);
 
         return query.list();
     }

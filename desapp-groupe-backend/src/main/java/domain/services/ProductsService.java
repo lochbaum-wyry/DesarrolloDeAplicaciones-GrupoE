@@ -35,7 +35,7 @@ public class ProductsService {
 
     public List<ProductExchange> exchangedProductsBy(User user)
     {
-        return productExchangeRepository.exchangedProductsBy(user.getId());
+        return productExchangeRepository.exchangedProductsBy(user);
     }
 
     public List<Product> products(){
