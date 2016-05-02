@@ -2,17 +2,15 @@ package domain;
 
 import org.joda.time.DateTime;
 
-public class Rate {
+public class Rate extends Entity{
     private User rater;
     private User ratedUser;
     private Ride ride;
-
     private RateType rateType;
     private RateValue rateValue;
     private String comment;
     private DateTime date;
     private Vehicle vehicle;
-    private int id;
 
     public Rate(User rater, User ratedUser, Ride ride, RateType rateType, RateValue rateValue, String comment)
     {
@@ -31,15 +29,6 @@ public class Rate {
 
     public String getComment() {
         return comment;
-    }
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
 
@@ -87,6 +76,22 @@ public class Rate {
 
     public void setRateValue(RateValue rateValue) {
         this.rateValue = rateValue;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public DateTime getDate() {
+        return date;
+    }
+
+    public void setRater(User rater) {
+        this.rater = rater;
+    }
+
+    public void setRide(Ride ride) {
+        this.ride = ride;
     }
 
 

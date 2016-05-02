@@ -56,5 +56,25 @@ public class ScheduleTest
         Assert.assertEquals(departureTime,schedule.getDepartureTime());
     }
 
+    @Test
+    public void test_setAndGetArrivalTime(){
+        Schedule schedule = ScheduleBuilder.aSchedule().build();
+
+        DateTime date = new DateTime(2,3,4,5,6);
+        schedule.setArrivalTime(date);
+
+        Assert.assertEquals(schedule.getArrivalTime(),date);
+    }
+
+
+    @Test
+    public void test_setAndGetDepartureTime(){
+        Schedule schedule = ScheduleBuilder.aSchedule().build();
+
+        DateTime date = new DateTime(2,3,4,5,6);
+        schedule.setDepartureTime(date);
+
+        Assert.assertEquals(schedule.getDepartureTime(),date);
+    }
 
 }

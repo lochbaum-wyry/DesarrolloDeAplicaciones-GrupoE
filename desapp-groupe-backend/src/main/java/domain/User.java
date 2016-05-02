@@ -8,7 +8,6 @@ import java.util.*;
 
 public class User  extends Entity
 {
-    private int id;
     protected System system ;
     private String name;
     private String lastName;
@@ -18,7 +17,6 @@ public class User  extends Entity
     private List<Route> routes ;
     private Integer points;
     private List<Chat> chats;
-
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
     private Integer badRateCount = 0 ;
