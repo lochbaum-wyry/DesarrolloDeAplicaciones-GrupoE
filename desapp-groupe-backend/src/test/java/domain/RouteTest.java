@@ -2,8 +2,15 @@ package domain;
 
 import domain.builders.LocationBuilder;
 import domain.builders.RouteBuilder;
+import domain.builders.ScheduleBuilder;
+import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.lang.reflect.Array;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RouteTest
 {
@@ -138,6 +145,34 @@ public class RouteTest
         Assert.assertEquals(expected,route.getDistanceInKms());
     }
 
+    @Test
+    public void test_setAndGetSchedules(){
+        Route route = RouteBuilder.aRoute().build();
 
+        List<Schedule> schedules = new ArrayList<Schedule>();
+        route.setSchedules(schedules);
+        route.addSchedule(ScheduleBuilder.aSchedule().build());
+
+        Assert.assertEquals(route.getSchedules(),schedules);
+    }
+
+    @Test
+    public void test_setAndGetRoutePoints(){
+        Route route = RouteBuilder.aRoute().build();
+
+        List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
+        route.setRoutePoints(routePoints);
+        route.addRoutePoint(LocationBuilder.aLocation().build());
+
+        Assert.assertEquals(route.getRoutePoints(),routePoints);
+    }
+
+    @Test
+    public void test_isInDayAndHour(){
+        Route route = RouteBuilder.aRoute().build();
+        route.addSchedule(ScheduleBuilder.aSchedule().withDay(DayOfWeek.WEDNESDAY).withDepartureTime(new DateTime(23,4,5,6,7)).withArrivalTime(new DateTime(2,5,7,9,2,3)).build());
+
+        Assert.assertFalse(route.isInDayAndHour(new DateTime(23,4,5,6,7),1));
+    }
 
 }

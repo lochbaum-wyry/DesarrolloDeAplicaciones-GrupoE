@@ -479,6 +479,54 @@ public class RideTest extends AbstractDomainTest
 
     }
 
+    @Test
+    public void test_setAndGetCancelled(){
+        User driver = mock(User.class);
 
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getCapacity()).thenReturn(2);
+
+        User occupierPassenger = mock(User.class);
+
+        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
+        RoutePoint boardAt = route.getRoutePoints().get(0);
+        RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withRoute(route)
+                .build();
+
+        ride.setCancelled(true);
+
+        Assert.assertTrue(ride.getCancelled());
+    }
+
+    @Test
+    public void test_setAndGetTakenSeats(){
+        User driver = mock(User.class);
+
+        Vehicle vehicle = mock(Vehicle.class);
+        when(vehicle.getCapacity()).thenReturn(2);
+
+        User occupierPassenger = mock(User.class);
+
+        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
+        RoutePoint boardAt = route.getRoutePoints().get(0);
+        RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
+
+        Ride ride = RideBuilder.aRide()
+                .withDriver(driver)
+                .withVehicle(vehicle)
+                .withRoute(route)
+                .build();
+
+        List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
+        takenSeats.add(TakenSeatBuilder.aTakenSeat().build());
+        ride.setTakenSeats(takenSeats);
+
+        Assert.assertEquals(ride.getTakenSeats(),takenSeats);
+    }
 
 }

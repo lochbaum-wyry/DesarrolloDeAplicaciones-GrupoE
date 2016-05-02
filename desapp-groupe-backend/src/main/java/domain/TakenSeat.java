@@ -41,6 +41,12 @@ public class TakenSeat extends Entity
         this.passenger = passenger;
     }
 
+    public Ride getRide() {
+        return ride;
+    }
 
+    public void setRide(Ride ride) {
+        this.ride = ride;
+    }
 
 }

@@ -55,7 +55,7 @@ public class RoutePoint extends Entity
 
     public boolean isSameLatLng(Double latitude, Double longitude)
     {
-        return this.getLatitude() == latitude && this.getLatitude() == longitude;
+        return getLatitude().equals(latitude) && getLongitude().equals(longitude);
     }
 
     public void setRoute(Route route) {

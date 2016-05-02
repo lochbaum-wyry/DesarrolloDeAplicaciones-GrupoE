@@ -77,4 +77,15 @@ public class ScheduleTest
         Assert.assertEquals(schedule.getDepartureTime(),date);
     }
 
+    @Test
+    public void test_setAndGetDay(){
+        Schedule schedule = ScheduleBuilder.aSchedule().build();
+
+        DayOfWeek date = DayOfWeek.FRIDAY;
+        schedule.setDay(date);
+
+        Assert.assertEquals(schedule.getDay(),date);
+    }
+
+
 }
