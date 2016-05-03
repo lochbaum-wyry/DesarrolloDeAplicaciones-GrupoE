@@ -43,6 +43,15 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="services.rating" class="domain.services.RatingService">
+		<constructor-arg>
+			<ref bean="persistence.userrepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.raterepository" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.chat" class="domain.services.ChatService">
 		<constructor-arg>
 			<ref bean="persistence.userrepository" />
