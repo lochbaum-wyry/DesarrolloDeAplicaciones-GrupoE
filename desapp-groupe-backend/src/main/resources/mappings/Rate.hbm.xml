@@ -11,6 +11,8 @@
         <one-to-one name="rater" class="domain.User" />
         <one-to-one name="ride" class="domain.Ride" />
         <property name="rateValue" />
+        <one-to-one name="ratedUser" class="domain.User"/>
+        <one-to-one name="vehicle" class="domain.Vehicle"/>
         <property name="comment" />
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
 

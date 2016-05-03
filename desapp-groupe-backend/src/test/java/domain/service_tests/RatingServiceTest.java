@@ -4,7 +4,10 @@ import domain.builders.RateBuilder;
 import domain.builders.RideBuilder;
 import domain.builders.UserBuilder;
 import domain.builders.VehicleBuilder;
+import domain.exceptions.RatingException;
 import domain.repositories.RateRepository;
+import domain.repositories.RideRepository;
+import domain.repositories.UserRepository;
 import domain.services.RatingService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,12 +26,24 @@ public class RatingServiceTest extends AbstractServiceTest{
     @Autowired
     public RateRepository rateRepository;
 
+    @Autowired
+    public UserRepository userRepository;
+
+    @Autowired
+    public RideRepository rideRepository;
+
+
+
     @Test
-    public void test_rateDriverOfRide(){
+    public void test_rateDriverOfRide() throws RatingException {
         User rater = UserBuilder.aUser().build();
         User driver = UserBuilder.aUser().build();
+        userRepository.save(rater);
+        userRepository.save(driver);
+
 
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
+        rideRepository.save(ride);
 
         ratingService.rateDriverOfRide(rater,ride, RateValue.GOOD,"un capo este pibe");
 
@@ -38,13 +53,16 @@ public class RatingServiceTest extends AbstractServiceTest{
     }
 
     @Test
-    public void test_rateVehicleOfRide(){
+    public void test_rateVehicleOfRide() throws RatingException {
         User rater = UserBuilder.aUser().build();
         User driver = UserBuilder.aUser().build();
+        userRepository.save(rater);
+        userRepository.save(driver);
 
         Vehicle vehicle = VehicleBuilder.aVehicle().build();
 
         Ride ride = RideBuilder.aRide().withDriver(driver).withVehicle(vehicle).build();
+        rideRepository.save(ride);
 
         ratingService.rateVehicleOfRide(rater,ride, RateValue.GOOD,"un capo este pibe");
 
@@ -54,13 +72,17 @@ public class RatingServiceTest extends AbstractServiceTest{
     }
 
     @Test
-    public void test_ratePassengerOfRide(){
+    public void test_ratePassengerOfRide() throws RatingException {
         User rater = UserBuilder.aUser().build();
         User rateado = UserBuilder.aUser().build();
+        userRepository.save(rater);
+        userRepository.save(rateado);
+
 
         User driver = UserBuilder.aUser().build();
 
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
+        rideRepository.save(ride);
 
         ratingService.ratePassengerOfRide(rater,rateado,ride,RateValue.BAD,"apesta");
 
