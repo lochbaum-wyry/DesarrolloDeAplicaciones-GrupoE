@@ -20,6 +20,9 @@
 		<constructor-arg>
 			<ref bean="persistence.vehiclerepository" />
 		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.rankingrepository" />
+		</constructor-arg>
 	</bean>
 
 	<bean id="services.route" class="domain.services.RouteService">
