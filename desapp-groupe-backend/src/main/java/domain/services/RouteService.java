@@ -20,7 +20,7 @@ public class RouteService
         this.routePointRepository = routePointRepository ;
     }
 
-    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Float radioCloseness)
+    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
     {
         return routeRepository.findRoutesSatisfiying(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
     }

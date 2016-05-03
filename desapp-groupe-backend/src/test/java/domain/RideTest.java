@@ -2,7 +2,6 @@ package domain;
 
 import domain.builders.*;
 import domain.exceptions.NoSeatsAvailableException;
-import helpers.RangeHelpers;
 import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;

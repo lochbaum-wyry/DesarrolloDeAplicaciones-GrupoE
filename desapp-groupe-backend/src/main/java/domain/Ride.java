@@ -1,7 +1,7 @@
 package domain;
 
 import domain.exceptions.NoSeatsAvailableException;
-import helpers.RangeHelpers;
+import helpers.CalculationHelpers;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -152,7 +152,7 @@ public class Ride extends Entity
         Integer idxSeatGetOffAt = seat.getGetOffAt().getIndexInRoute();
 
         // chequeo si se solapan los puntos de ruta
-        return RangeHelpers.rangesOverlap(  sectionFrom.getIndexInRoute(), sectionTo.getIndexInRoute(),
+        return CalculationHelpers.rangesOverlap(  sectionFrom.getIndexInRoute(), sectionTo.getIndexInRoute(),
                                             idxSeatBoardingAt, idxSeatGetOffAt );
     }
 

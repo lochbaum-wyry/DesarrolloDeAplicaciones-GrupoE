@@ -2,7 +2,7 @@ package helpers;
 
 
 
-public class RangeHelpers
+public class CalculationHelpers
 {
     public static boolean rangesOverlap(Integer start1, Integer end1, Integer start2, Integer end2)
     {
