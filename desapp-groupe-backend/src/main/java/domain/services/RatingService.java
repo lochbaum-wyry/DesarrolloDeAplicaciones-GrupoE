@@ -22,6 +22,7 @@ public class RatingService
 
     public void rateDriverOfRide(User rater, Ride ride, RateValue qualification, String comment)
     {
+
         User ratedUser = ride.getDriver();
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Driving, qualification, comment);
         addRate(rater,rate);

@@ -64,7 +64,28 @@ public class UserRepository extends HibernateGenericDao<User> implements
         query.setMaxResults(cant);
 
         return query.list();
+    }
 
+    public User getUserByEmail(String email){
+        String hql = "SELECT u FROM " + User.class.getName() + " u " +
+                "WHERE u.email = :email";
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("email",email);
+
+        User user = (User) query.uniqueResult();
+
+        return user;
+    }
+
+    public User getUserByUserName(String userName){
+        String hql = "SELECT u FROM " + User.class.getName() + " u " +
+                "WHERE u.userName = :userName";
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setParameter("userName",userName);
+
+        User user = (User) query.uniqueResult();
+
+        return user;
     }
 
     public List<User> getWorstPassengersInMonthYear(Integer month, Integer year,Integer cant)

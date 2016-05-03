@@ -12,6 +12,17 @@ public class Route extends Entity{
     private Float distanceInKms = 0f;
     private Float fixedCosts = 0f;
 
+    public Route(Float distanceInKms, Float fixedCosts, List<RoutePoint> points, List<Schedule> schedules) {
+        this.schedules = schedules;
+        this.routePoints = points;
+        this.fixedCosts = fixedCosts;
+        this.distanceInKms = distanceInKms;
+    }
+
+    public Route() {
+
+    }
+
     public Boolean matchesRequestedRoute(RoutePoint departureRoutePoint, RoutePoint getOffRoutePoint, Float radioCloseness)
     {
         return this.locationIsNearRoute(departureRoutePoint, radioCloseness) && this.locationIsNearRoute(getOffRoutePoint, radioCloseness);

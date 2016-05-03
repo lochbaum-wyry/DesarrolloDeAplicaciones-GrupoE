@@ -1,53 +1,59 @@
 package domain.services;
 
-import domain.Vehicle;
+import domain.*;
+import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
+import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
-import domain.User;
 
 import java.lang.*;
 import java.lang.System;
+import java.util.List;
 
 
-public class UserService {//extends GenericService<User> { //TODO :deberia quedr la herencia ?
+public class UserService {
 
-    //private static final long serialVersionUID = 2131359482422367092L;
 
     private UserRepository userRepository;
+    private RouteRepository routeRepository;
 
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository,RouteRepository routeRepository){
         this.userRepository = userRepository;
+        this.routeRepository = routeRepository;
     }
 
 
-    public void singUp(String name, String lastName, String userName, String email) throws SubiQueTeLlevoException
+    public void singUp(String name, String lastName, String userName, String email) throws SingUpException
     {
+        validateUser(userName,email);
+        User user = new User(name,lastName,userName,email);
 
-        if(validateUser(userName,email)){
-
-            User user = new User(name,lastName,userName,email);
-
-            userRepository.save(user);
-            System.out.print(userRepository.findById(user.getId()));
-        }
+        userRepository.save(user);
+        System.out.print(userRepository.findById(user.getId()));
     }
 
     public UserRepository getUserRepository() {
         return userRepository;
     }
 
-    private boolean validateUser(String userName, String email) {
-        return isValidUserName(userName) && isValidEmail(email);
+    private void validateUser(String userName, String email) throws SingUpException {
+        validateNotExistingUserName(userName);
+        validateNotExistingEmail(email);
+
     }
 
-    private boolean isValidUserName(String userName) {
-        //TODO : consulta bd, fijandose si ya existe o no
-        return true;
+    private void validateNotExistingEmail(String email) throws SingUpException {
+        User user = userRepository.getUserByEmail(email);
+        if (user != null){
+            throw new SingUpException();
+        }
     }
 
-    private boolean isValidEmail(String email) {
-        //TODO : consulta bd, fijandose si ya existe o no
-        return true;
+    private void validateNotExistingUserName(String userName) throws SingUpException {
+        User user = userRepository.getUserByUserName(userName);
+        if(user != null){
+            throw new SingUpException();
+        }
     }
 
     public void addVehicleForUser(User user,Vehicle vehicle){
@@ -55,13 +61,11 @@ public class UserService {//extends GenericService<User> { //TODO :deberia quedr
         userRepository.update(user);
     }
 
-    public void addRoute(User user){
-        //TODO :  addRoute ( user , datos de la ruta , schedules de la ruta )
-
+    public void addRouteForUser(User user, List<RoutePoint> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules){
+        Route route = new Route(distanceInKms,fixedCosts,points,schedules);
+        routeRepository.save(route);
+        user.addRoute(route);
+        userRepository.update(user);
     }
-
-    //TODO : falta pasar todo lo de rideRequest
-
-
 
 }

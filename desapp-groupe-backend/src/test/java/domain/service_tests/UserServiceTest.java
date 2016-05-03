@@ -1,6 +1,7 @@
 package domain.service_tests;
 import domain.User;
 import domain.Vehicle;
+import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
@@ -31,12 +32,11 @@ public class UserServiceTest extends AbstractServiceTest{
 
     @Test
     public void test_singUp() {
-        UserService userService= new UserService(userRepository);
 
         try {
             userService.singUp("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
 
-        } catch (SubiQueTeLlevoException e) {
+        } catch (SingUpException e) {
             Assert.fail("Usuario o Email Existente");
         }
 
@@ -44,7 +44,6 @@ public class UserServiceTest extends AbstractServiceTest{
 
     @Test
     public void test_addVehicleForUser(){
-        UserService userService= new UserService(userRepository);
 
         User user = new User("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
 
@@ -55,9 +54,9 @@ public class UserServiceTest extends AbstractServiceTest{
 
         userService.addVehicleForUser(user,vehicle);
 
-        //Vehicle vehicleReceived = userRepository.findById(user.getId()).getVehicle();
+        Vehicle vehicleReceived = userRepository.findById(user.getId()).getVehicle();
 
-        //Assert.assertEquals(vehicleReceived,vehicle);
+        Assert.assertEquals(vehicleReceived,vehicle);
 
     }
 
