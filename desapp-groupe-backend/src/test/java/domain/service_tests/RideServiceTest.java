@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class RideServiceTest extends AbstractServiceTest implements TestHelpersTrait
+public class RideServiceTest extends AbstractServiceTest
 {
     @Autowired
     public RideService rideService ;

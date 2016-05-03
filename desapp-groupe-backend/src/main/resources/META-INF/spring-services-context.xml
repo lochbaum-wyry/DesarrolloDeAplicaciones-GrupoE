@@ -22,6 +22,15 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="services.route" class="domain.services.RouteService">
+		<constructor-arg>
+			<ref bean="persistence.routerepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.routepointrepository" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.ride" class="domain.services.RideService">
 		<constructor-arg>
 			<ref bean="persistence.riderepository" />

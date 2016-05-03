@@ -2,6 +2,7 @@ package domain.service_tests;
 
 import domain.RoutePoint;
 import domain.Route;
+import domain.TestHelpersTrait;
 import domain.User;
 import domain.builders.RouteBuilder;
 import domain.builders.UserBuilder;
@@ -21,7 +22,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/spring-all-contexts.xml")
 @Transactional
-abstract public class AbstractServiceTest
+abstract public class AbstractServiceTest implements TestHelpersTrait
 {
 
     ApplicationContext servicecontext ;
