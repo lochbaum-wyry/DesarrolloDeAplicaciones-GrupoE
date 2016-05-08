@@ -8,7 +8,7 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="route" class="domain.Route"/>
+        <many-to-one name="route" class="domain.Route" column="routeId"/>
         <property name="indexInRoute"/>
         <property name="latitude"/>
         <property name="longitude"/>

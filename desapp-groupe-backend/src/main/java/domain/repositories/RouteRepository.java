@@ -5,8 +5,12 @@ import domain.Route;
 import domain.RoutePoint;
 import org.hibernate.Query;
 import org.hibernate.type.DoubleType;
+import org.hibernate.type.EnumType;
+import org.hibernate.type.IntegerType;
 import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 
+import java.time.DayOfWeek;
 import java.util.List;
 
 public class RouteRepository extends HibernateGenericDao<Route> implements
@@ -19,44 +23,42 @@ public class RouteRepository extends HibernateGenericDao<Route> implements
         return Route.class;
     }
 
+
     public List<Route> findRoutesSatisfiying(DateTime date, Integer secondsDateCloseness, LatLng departurePoint, LatLng arrivalPoint, Double closenessInMts)
     {
+
         // El cálculo de cercanía se hace por el cálculo de distancia entre dos puntos geográficos (LatLng) .
         // Los algoritmos usados fueron adaptados de las funciones de la api de googlemaps
-        // Math.PI;
 
-//
-//        String hql =    " SELECT r " +
-//                        " FROM Route r " +
-//                        " INNER JOIN r.routePoints rpd " +
-//                        " INNER JOIN r.routePoints rpa " +
-//                        " WHERE rpd.indexInRoute < rpa.indexInRoute " +
-//                        "   AND POWER( rpd.longitude - :rpdlng , 2 ) + POWER( rpd.latitude - :rpdlat, 2) < POWER(:radioCloseness, 2) " +
-//                        "   AND POWER( rpa.longitude - :rpalng , 2 ) + POWER( rpa.latitude - :rpalat, 2) < POWER(:radioCloseness, 2) " ;
-
-        String hql =    " SELECT r " +
+        String hql =    " SELECT DISTINCT r  " +
                 " FROM Route r " +
                 " INNER JOIN r.routePoints rpd " +
-//                " INNER JOIN r.routePoints rpa " +
-                " WHERE" +
-//                " rpd.indexInRoute < rpa.indexInRoute AND" +
-//                "   :earth_radius*(2*asin(sqrt(power(sin(((rpd.latitude*:PI/180)-(:rpdlat*:PI/180))/2),2)+cos(rpd.latitude*:PI/180)*cos(:rpdlat*:PI/180)*power(sin(((rpd.longitude*:PI/180)-(:rpdlng*:PI/180))/2),2)))) < :closenessInMts " ; //+
-                  "   6378137d * (2* asin( sqrt( power( sin(((rpd.latitude*:PI/180) - ((:dplat*:PI)/180)) / 2), 2) + cos(rpd.latitude*:PI/180) * cos(((:dplat*:PI)/180)) * power(sin((rpd.longitude - :dplng) / 2), 2)))) < :closenessInMts " ; //+
-//                "   AND :earth_radius*(2*asin(sqrt(power(sin(((rpa.latitude*:PI/180)-(:rpalat*:PI/180))/2),2)+cos(rpa.latitude*:PI/180)*cos(:rpalat*:PI/180)*power(sin(((rpa.longitude*:PI/180)-(:rpalng*:PI/180))/2),2)))) < :closenessInMts " ;
-//                "   AND (2*asin(sqrt(power(sin(((lat_a*:PI/180)-(lat_b*:PI/180))/2),2)+cos(lat_a*:PI/180)*cos(lat_b*:PI/180)*power(sin(((lng_a*:PI/180)-(lng_b*:PI/180))/2),2)))) <= :closenessInMts " ;
+                " INNER JOIN r.routePoints rpa " +
+                " INNER JOIN r.schedules s " +
+                " WHERE " +
+                " rpd.indexInRoute < rpa.indexInRoute " +
+                " AND cast(:earth_radius as double) * (  2 * asin(sqrt(power(sin( ((rpd.latitude*cast(:PI as double)/180) - (cast(:dp_lat as double)*cast(:PI as double)/180)) / 2), 2) + cos(rpd.latitude*cast(:PI as double)/180) * cos(cast(:dp_lat as double)*cast(:PI as double)/180) * power(sin(((rpd.longitude*cast(:PI as double)/180) - (cast(:dp_lng as double)*cast(:PI as double)/180)) / 2), 2))) ) <= :closenessInMts  " +
+                " AND cast(:earth_radius as double) * (  2 * asin(sqrt(power(sin( ((rpa.latitude*cast(:PI as double)/180) - (cast(:ap_lat as double)*cast(:PI as double)/180)) / 2), 2) + cos(rpa.latitude*cast(:PI as double)/180) * cos(cast(:ap_lat as double)*cast(:PI as double)/180) * power(sin(((rpa.longitude*cast(:PI as double)/180) - (cast(:ap_lng as double)*cast(:PI as double)/180)) / 2), 2))) ) <= :closenessInMts " +
+                " AND (s.departureTime - :secondsTimeCloseness) <= :time " +
+                " AND (s.departureTime + :secondsTimeCloseness) >= :time " +
+                " AND s.day = :dayOfWeek "
+
+                ;
 
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
 
-        query.setParameter("dplat", departurePoint.getLatitude(), DoubleType.INSTANCE);
-        query.setParameter("dplng", departurePoint.getLongitude(), DoubleType.INSTANCE);
+        query.setParameter("dp_lat", departurePoint.getLatitude(), DoubleType.INSTANCE);
+        query.setParameter("dp_lng", departurePoint.getLongitude(), DoubleType.INSTANCE);
 
-//        query.setParameter("rpalng", arrivalRoutePoint.getLongitude(), DoubleType.INSTANCE);
-//        query.setParameter("rpalat", arrivalRoutePoint.getLatitude(), DoubleType.INSTANCE);
+        query.setParameter("ap_lat", arrivalPoint.getLatitude(), DoubleType.INSTANCE);
+        query.setParameter("ap_lng", arrivalPoint.getLongitude(), DoubleType.INSTANCE);
 
         query.setParameter("PI", 3.141592653589793, DoubleType.INSTANCE);
         query.setParameter("closenessInMts", closenessInMts, DoubleType.INSTANCE);
-//        query.setParameter("earth_radius", 6378137d, DoubleType.INSTANCE);
-
+        query.setParameter("earth_radius", 6378137d, DoubleType.INSTANCE);
+        query.setParameter("time", LocalTime.fromDateFields(date.toDate()));
+        query.setParameter("secondsTimeCloseness", secondsDateCloseness, IntegerType.INSTANCE);
+        query.setParameter("dayOfWeek", DayOfWeek.of(date.getDayOfWeek()));
 
         return query.list();
     }

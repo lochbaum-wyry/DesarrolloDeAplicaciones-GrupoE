@@ -1,18 +1,17 @@
 package domain;
-import org.joda.time.DateTime;
 import org.joda.time.LocalTime;
 
-import java.sql.Time;
 import java.time.DayOfWeek;
 
 public class Schedule extends Entity{
     private DayOfWeek day;
-    private DateTime departureTime;
-    private DateTime arrivalTime;
+    private LocalTime departureTime;
+    private LocalTime arrivalTime;
 
-    public Schedule(DayOfWeek day, DateTime departureTime, DateTime arrivalTime){
-        this.arrivalTime = arrivalTime;
+    public Schedule(DayOfWeek day, LocalTime departureTime, LocalTime arrivalTime)
+    {
         this.day = day;
+        this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
     }
 
@@ -20,28 +19,16 @@ public class Schedule extends Entity{
         return day;
     }
 
-    public DateTime getArrivalTime() {
+    public LocalTime getArrivalTime() {
         return arrivalTime;
     }
 
-    public DateTime getDepartureTime() {
+    public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public boolean dayAndHourIsNear(DateTime date, Integer secondsDateCloseness)
-    {
-        return getDay().getValue() == date.getDayOfWeek() && timeIsNear(date, secondsDateCloseness);
-    }
 
-    private boolean timeIsNear(DateTime date, Integer secondsDateCloseness) {
-        int toleranceBegin = departureTime.secondOfDay().get() - secondsDateCloseness;
-        int toleranceEnd = departureTime.secondOfDay().get() + secondsDateCloseness;
-
-        return   (toleranceBegin <= date.secondOfDay().get()) && (date.secondOfDay().get() >= toleranceEnd);
-    }
-
-
-    public void setArrivalTime(DateTime arrivalTime) {
+    public void setArrivalTime(LocalTime arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -49,7 +36,7 @@ public class Schedule extends Entity{
         this.day = day;
     }
 
-    public void setDepartureTime(DateTime departureTime) {
+    public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
 }

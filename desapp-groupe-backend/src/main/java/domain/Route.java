@@ -23,16 +23,6 @@ public class Route extends Entity{
 
     }
 
-    public Boolean matchesRequestedRoute(RoutePoint departureRoutePoint, RoutePoint getOffRoutePoint, Float radioCloseness)
-    {
-        return this.locationIsNearRoute(departureRoutePoint, radioCloseness) && this.locationIsNearRoute(getOffRoutePoint, radioCloseness);
-    }
-
-    public Boolean locationIsNearRoute(RoutePoint routePoint, Float radioCloseness)
-    {
-        return this.routePoints.stream().anyMatch(point -> point.isNear(routePoint, radioCloseness));
-    }
-
     public void addRoutePoint(RoutePoint routePoint)
     {
         this.routePoints.add(routePoint);
@@ -64,9 +54,6 @@ public class Route extends Entity{
         return this.distanceInKms;
     }
 
-    public boolean isInDayAndHour(DateTime date,Integer secondsDateCloseness) {
-        return schedules.stream().anyMatch(schedule -> schedule.dayAndHourIsNear(date,secondsDateCloseness));
-    }
 
     public void setDistanceInKms(Float distanceInKms) {
         this.distanceInKms = distanceInKms;

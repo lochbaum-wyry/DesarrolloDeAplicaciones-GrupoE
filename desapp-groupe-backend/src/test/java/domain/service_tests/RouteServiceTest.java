@@ -1,9 +1,10 @@
 package domain.service_tests;
 
-import domain.*;
+import domain.LatLng;
+import domain.Route;
+import domain.Schedule;
 import domain.builders.RouteBuilder;
-import domain.builders.RoutePointBuilder;
-import domain.builders.UserBuilder;
+import domain.builders.ScheduleBuilder;
 import domain.repositories.RouteRepository;
 import domain.services.RouteService;
 import domain.services.UserService;
@@ -15,7 +16,8 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class RouteServiceTest extends AbstractServiceTest
 {
@@ -28,57 +30,199 @@ public class RouteServiceTest extends AbstractServiceTest
     @Autowired
     private UserService userService ;
 
-    // TODO: hacer comparación por fecha
     @Test
-    public void test_findRoutesSatisfying_whenARoutesIsFoundTheResultContainsThatRoute()
+    public void test_findRoutesSatisfying_whenARoutesExistsWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsNotEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
-
-        // -34.703556,-58.2932116/-34.7022161,-58.2919911  // cramer 930, don bosco, buenos aires, argentina
-        // -34.6942951,-58.3146194/-34.6961566,-58.3105088 //
 
         Route route = RouteBuilder.aRoute()
                 .withDistanceInKms(20f)
                 .withFixedCosts(100)
-                .withRoutePointAt(-34.7035576,-58.2907153)
-                .withRoutePointAt(-34.7035576,-58.2907153)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
                 .build();
 
-//        DateTime departureTime = new DateTime(2016,5,1,9,30,0);
-//        DateTime arrivalTime = new DateTime(2016,5,1,9,30,0);
-//        Schedule schedule = new Schedule(DayOfWeek.FRIDAY, departureTime, arrivalTime);
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.FRIDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
 
         routeRepo.save(route);
 
-        DateTime date = new DateTime();
-        int secondsDateCloseness = 1000;
-        Double closenessInMts = 300d;
+        DateTime date = new DateTime(2016,5,6,8,45);
+        int secondsDateCloseness = 3600;
+        Double closenessInMts = 295d;
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
-        LatLng arrivalPoint = new LatLng(-34.6961566,-58.3105088);
-
-//        java.lang.System.out.println(routeRepo.findAll());
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
         List<Route> received = routeService.findRoutesSatisfying(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
-        java.lang.System.out.println(received);
-
-//        -34.7035576,-58.2907153/-34.702742,-58.2937437   -- 290m
-
-//        Double c = -34.7035576 * 3.141592653589793 /180;
-//        Double d = -58.2907153* 3.141592653589793 /180;
-//        Double e = -34.702742* 3.141592653589793 /180;
-//        Double f = -58.2937437* 3.141592653589793 /180;
-//
-//        double x = 6378137d * (2*Math.asin(Math.sqrt(Math.pow(Math.sin((c - e) / 2), 2) + Math.cos(c) * Math.cos(e) * Math.pow(Math.sin((d - f) / 2), 2))));
-//        java.lang.System.out.println(x);
-
-
-
-
-//        java.lang.System.out.println(received);
-
-
+        assertFalse(received.isEmpty());
     }
 
 
+    @Test
+    public void test_findRoutesSatisfying_whenARoutesDoesNotExistWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsEmpty()
+    {
+        List<Route> routes = new ArrayList<Route>();
+
+        Route route = RouteBuilder.aRoute()
+                .withDistanceInKms(20f)
+                .withFixedCosts(100)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
+                .build();
+
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.FRIDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
+
+        routeRepo.save(route);
+
+        DateTime date = new DateTime(2016,5,6,8,45);
+        int secondsDateCloseness = 3600;
+        Double closenessInMts = 290d;
+        LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
+
+        List<Route> received = routeService.findRoutesSatisfying(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
+        assertTrue(received.isEmpty());
+    }
+
+
+    @Test
+    public void test_findRoutesSatisfying_whenARoutesDoesNotExistWithinSecondsClosenessTheResultIsEmpty()
+    {
+        List<Route> routes = new ArrayList<Route>();
+
+        Route route = RouteBuilder.aRoute()
+                .withDistanceInKms(20f)
+                .withFixedCosts(100)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
+                .build();
+
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.FRIDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
+
+        routeRepo.save(route);
+
+        DateTime date = new DateTime(2016,5,6,8,25);
+        int secondsCloseness = 3600;
+        Double closenessInMts = 1000d;
+        LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
+
+        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        assertTrue(received.isEmpty());
+    }
+
+    @Test
+    public void test_findRoutesSatisfying_whenARoutesExistsWithinSecondsClosenessTheResultIsNotEmpty()
+    {
+        List<Route> routes = new ArrayList<Route>();
+
+        Route route = RouteBuilder.aRoute()
+                .withDistanceInKms(20f)
+                .withFixedCosts(100)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
+                .build();
+
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.FRIDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
+
+        routeRepo.save(route);
+
+        DateTime date = new DateTime(2016,5,6,8,35);
+        int secondsCloseness = 3600;
+        Double closenessInMts = 1000d;
+        LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
+
+        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        assertFalse(received.isEmpty());
+    }
+
+    @Test
+    public void test_findRoutesSatisfying_whenARoutesInTheSameDayOfWeekExistsTHenResultIsNotEmpty()
+    {
+        List<Route> routes = new ArrayList<Route>();
+
+        Route route = RouteBuilder.aRoute()
+                .withDistanceInKms(20f)
+                .withFixedCosts(100)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
+                .build();
+
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.FRIDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
+
+        routeRepo.save(route);
+
+        DateTime date = new DateTime(2016,5,6,8,35);
+        int secondsCloseness = 3600;
+        Double closenessInMts = 1000d;
+        LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
+
+        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        assertFalse(received.isEmpty());
+    }
+
+
+    @Test
+    public void test_findRoutesSatisfying_whenARoutesInTheSameDayOfWeekDoesNotExistTHenResultIsEmpty()
+    {
+        List<Route> routes = new ArrayList<Route>();
+
+        Route route = RouteBuilder.aRoute()
+                .withDistanceInKms(20f)
+                .withFixedCosts(100)
+                .withRoutePointAt(-58.2907153,-34.7035576)
+                .withRoutePointAt(-58.3435821,-34.6760004)
+                .build();
+
+        Schedule schedule = ScheduleBuilder.aSchedule()
+                .withDay(DayOfWeek.THURSDAY)
+                .withDepartureTimeAt(9,30)
+                .withArrivalTimeAt(10,30)
+                .build();
+
+        route.addSchedule(schedule);
+
+        routeRepo.save(route);
+
+        DateTime date = new DateTime(2016,5,6,8,35);
+        int secondsCloseness = 3600;
+        Double closenessInMts = 1000d;
+        LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+        LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
+
+        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        assertTrue(received.isEmpty());
+    }
 
 }
