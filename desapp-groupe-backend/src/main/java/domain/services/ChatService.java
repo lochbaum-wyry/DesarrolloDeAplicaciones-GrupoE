@@ -12,6 +12,8 @@ public class ChatService {
     ChatRepository chatRepository;
     UserRepository userRepository;
 
+    public ChatService(){}
+
     public ChatService(ChatRepository chatRepository,UserRepository userRepository) {
         this.chatRepository = chatRepository;
         this.userRepository = userRepository;

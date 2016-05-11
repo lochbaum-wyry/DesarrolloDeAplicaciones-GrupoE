@@ -16,6 +16,7 @@ public class System
     private GamingService gamingService;
     private List<User> users = new ArrayList<User>();
 
+    public System(){}
 
     public List<User> getUsers() {
         return users;

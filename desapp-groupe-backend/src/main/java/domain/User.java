@@ -22,6 +22,8 @@ public class User  extends Entity
     private Integer goodRateCount = 0 ;
     private Integer badRateCount = 0 ;
 
+    public User(){
+    }
 
     public User(String name, String lastName, String userName, String email)
     {
@@ -98,8 +100,6 @@ public class User  extends Entity
         this.vehicle = vehicle;
     }
 
-
-
     public Vehicle getVehicle()
     {
         return vehicle;
@@ -114,7 +114,6 @@ public class User  extends Entity
     {
         routes.add(route);
     }
-
 
     public void addPoints(Integer points) {
         this.points= this.points + points;

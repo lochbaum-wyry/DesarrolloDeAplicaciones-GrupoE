@@ -43,6 +43,7 @@
       <version>1.1.1</version>
     </dependency>
 
+
     <dependency>
       <groupId>commons-lang</groupId>
       <artifactId>commons-lang</artifactId>
@@ -346,20 +347,19 @@
     </plugins>
   </reporting>
 
-  <build>
-    <finalName>desapp-groupe-backend</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-
+    <build>
+      <finalName>desapp-groupe-backend</finalName>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
 
 
 
@@ -368,7 +368,7 @@
 
       <properties>
         <deploy.hostname>localhost</deploy.hostname>
-        <deploy.port>8081</deploy.port>
+        <deploy.port>8080</deploy.port>
         <deploy.artifactId>${artifactId}</deploy.artifactId>
         <deploy.groupId>${groupId}</deploy.groupId>
       </properties>
@@ -448,10 +448,5 @@
       </build>
     </profile>
   </profiles>
-
-
-
-
-
 
 </project>

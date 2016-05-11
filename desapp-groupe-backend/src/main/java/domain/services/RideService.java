@@ -16,6 +16,8 @@ public class RideService extends GenericService<Ride>
     private RideRepository rideRepository ;
     private RideRequestRepository rideRequestRepository;
 
+    public RideService(){
+    }
 
     public RideService(RideRepository rideRepository, RideRequestRepository rideRequestRepository)
     {

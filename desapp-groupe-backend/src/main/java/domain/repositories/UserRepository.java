@@ -4,9 +4,11 @@ import domain.Ride;
 import domain.TakenSeat;
 import domain.User;
 import org.hibernate.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserRepository extends HibernateGenericDao<User> implements
         GenericRepository<User> {
 

@@ -2,21 +2,28 @@
  "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
-<web-app>
-  <display-name>Web Client Application</display-name>
-  <description>Web Client Application</description>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+  <display-name>Spring Hibernate</display-name>
 
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/applicationContext*.xml</param-value>
+    <param-value>
+      classpath*:/META-INF/spring-persistence-context.xml,
+      classpath*:/META-INF/spring-services-context.xml,
+      /WEB-INF/applicationContext*.xml
+    </param-value>
   </context-param>
 
   <listener>
-    <listener-class>
-      org.springframework.web.context.ContextLoaderListener
-    </listener-class>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+  <session-config>
+    <session-timeout>7200</session-timeout>
+  </session-config>
 
   <servlet>
     <servlet-name>CXFServlet</servlet-name>
@@ -24,11 +31,9 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
 
-
-
   <servlet-mapping>
     <servlet-name>CXFServlet</servlet-name>
-    <url-pattern>/servicesRest/*</url-pattern>
+    <url-pattern>/domain/servicesRest/*</url-pattern>
   </servlet-mapping>
 
 </web-app>

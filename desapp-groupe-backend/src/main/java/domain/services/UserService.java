@@ -2,14 +2,13 @@ package domain.services;
 
 import domain.*;
 import domain.exceptions.SingUpException;
-import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import java.lang.*;
-import java.lang.System;
 import java.util.List;
-
 
 public class UserService {
 
@@ -17,19 +16,20 @@ public class UserService {
     private UserRepository userRepository;
     private RouteRepository routeRepository;
 
+    public UserService(){}
+
     public UserService(UserRepository userRepository,RouteRepository routeRepository){
         this.userRepository = userRepository;
         this.routeRepository = routeRepository;
     }
 
-
+    @Transactional
     public void singUp(String name, String lastName, String userName, String email) throws SingUpException
     {
         validateUser(userName,email);
         User user = new User(name,lastName,userName,email);
 
         userRepository.save(user);
-        System.out.print(userRepository.findById(user.getId()));
     }
 
     public UserRepository getUserRepository() {
@@ -56,11 +56,13 @@ public class UserService {
         }
     }
 
+    @Transactional
     public void addVehicleForUser(User user,Vehicle vehicle){
         user.setVehicle(vehicle);
         userRepository.update(user);
     }
 
+    @Transactional
     public void addRouteForUser(User user, List<RoutePoint> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules){
         Route route = new Route(distanceInKms,fixedCosts,points,schedules);
         routeRepository.save(route);

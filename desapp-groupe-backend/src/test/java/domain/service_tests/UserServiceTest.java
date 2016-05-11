@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/META-INF/spring-persistence-context.xml")
-@Transactional
 public class UserServiceTest extends AbstractServiceTest{
 
     @Autowired
