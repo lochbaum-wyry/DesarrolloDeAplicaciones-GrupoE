@@ -1,11 +1,13 @@
 package domain.servicesRest;
 
+import domain.RoutePoint;
+import domain.Schedule;
 import domain.User;
+import domain.builders.UserBuilder;
 import domain.exceptions.SingUpException;
 import domain.services.UserService;
 import org.springframework.stereotype.Service;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
@@ -26,7 +28,13 @@ public class UserServiceRest {
     @Path("/user")
     @Produces("application/json")
     public User user(){
-        return new User("asd4","asd3","asd2","asd");
+        User user = UserBuilder.aUser()
+                .withName("fede")
+                .withUserName("trimegisto")
+                .withLastName("lochbaum")
+                .withEmail("EmailBuilder.aEmail.build()")
+                .build();
+        return user;
     }
 
     @GET
@@ -51,7 +59,20 @@ public class UserServiceRest {
         return response;
     }
 
+    @POST
+    @Path("/addRouteForUser")
+    @Consumes("application/json")
+    public Response addRouteForUser(User user, List<RoutePoint> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules){
+        Response response;
+        //try {
+            userService.addRouteForUser(user,points,distanceInKms,fixedCosts,schedules);
+            response = Response.ok().tag("La ruta fue agregar Correctamente").build();
+        //} catch (SingUpException e) {
+        //    response = Response.serverError().tag("No se pudo agregar la ruta Correctamente").build();
+        //}
 
+        return response;
+    }
 
 
 
