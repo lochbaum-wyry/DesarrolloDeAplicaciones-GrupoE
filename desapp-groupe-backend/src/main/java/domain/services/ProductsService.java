@@ -15,6 +15,8 @@ public class ProductsService {
     ProductExchangeRepository productExchangeRepository;
     UserRepository userRepository;
 
+    public ProductsService(){}
+
     public ProductsService(ProductRepository productRepository, ProductExchangeRepository productExchangeRepository,UserRepository userRepository){
         this.productExchangeRepository = productExchangeRepository;
         this.productRepository = productRepository;

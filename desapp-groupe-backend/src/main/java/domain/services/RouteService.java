@@ -11,8 +11,10 @@ import java.util.List;
 
 public class RouteService
 {
-    private final RoutePointRepository routePointRepository;
-    private final RouteRepository routeRepository;
+    private  RoutePointRepository routePointRepository;
+    private  RouteRepository routeRepository;
+
+    public RouteService(){}
 
     public RouteService(RouteRepository routeRepository , RoutePointRepository routePointRepository)
     {

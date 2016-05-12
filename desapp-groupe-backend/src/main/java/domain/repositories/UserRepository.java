@@ -3,14 +3,12 @@ package domain.repositories;
 import domain.Ride;
 import domain.TakenSeat;
 import domain.User;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.classic.Session;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserRepository extends HibernateGenericDao<User> implements
         GenericRepository<User> {
 

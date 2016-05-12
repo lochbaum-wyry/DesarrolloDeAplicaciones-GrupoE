@@ -1,14 +1,13 @@
 package domain.services;
 
-/**
- * Created by prospero on 4/7/16.
- */
 public class SystemSettings {
 
     private Float oilPrice = 10f;
     private Float defaultRadioCloseness = 200f;
     private Integer defaultTimeClosenessInSecs = 1800 ;
     
+
+    public SystemSettings(){}
 
     public Float getOilPrice() {
         return oilPrice;

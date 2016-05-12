@@ -25,6 +25,7 @@ public class MonthlyRanking extends Entity
         this.year = year ;
     }
 
+    public MonthlyRanking(){}
 
     public List<User> getBestDrivers() {
         return bestDrivers;

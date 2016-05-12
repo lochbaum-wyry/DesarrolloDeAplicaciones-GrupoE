@@ -15,6 +15,8 @@ public class RatingService
     RateRepository rateRepository ;
     UserRepository userRepository ;
 
+    public RatingService(){}
+
     public RatingService(final UserRepository userRepository, final RateRepository rateRepository)
     {
         this.userRepository = userRepository;
