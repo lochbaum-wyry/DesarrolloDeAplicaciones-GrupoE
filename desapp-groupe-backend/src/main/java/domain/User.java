@@ -1,14 +1,12 @@
 package domain;
 
-import domain.services.System;
-
-import java.lang.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 public class User  extends Entity
 {
-    protected System system ;
     private String name;
     private String lastName;
     private String userName;
@@ -34,10 +32,6 @@ public class User  extends Entity
         this.points = 0;
     }
 
-    public void setSystem(System system)
-    {
-        this.system = system ;
-    }
 
     public User(String name,String lastName,String userName,String email,Vehicle vehicle)
     {
@@ -82,9 +76,6 @@ public class User  extends Entity
         this.routes = routes;
     }
 
-    public System getSystem() {
-        return system;
-    }
 
     public String getUserName() {
         return userName;

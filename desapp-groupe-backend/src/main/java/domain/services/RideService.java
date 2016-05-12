@@ -7,6 +7,7 @@ import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -28,8 +29,7 @@ public class RideService extends GenericService<Ride>
     {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
         rideRequestRepository.save(rideRequest);
-
-        return rideRequest;
+        return rideRequestRepository.findById(rideRequest.getId());
     }
 
     public void rejectRideRequest(RideRequest rideRequest)
@@ -88,4 +88,8 @@ public class RideService extends GenericService<Ride>
         return Optional.ofNullable( rideRepository.getRideOfDriverSuitableForRideRequest(rideRequest) );
     }
 
+    public List<RideRequest> getPendingRequestsFor(User driver)
+    {
+        return rideRequestRepository.getPendingRequestsFor(driver);
+    }
 }

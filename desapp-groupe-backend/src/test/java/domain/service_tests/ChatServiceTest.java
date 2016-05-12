@@ -12,9 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/META-INF/spring-persistence-context.xml")
-@Transactional
 public class ChatServiceTest extends AbstractServiceTest{
 
     @Autowired

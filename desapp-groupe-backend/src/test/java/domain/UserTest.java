@@ -1,7 +1,6 @@
 package domain;
 
 import domain.builders.*;
-import domain.services.System;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -48,15 +47,6 @@ public class UserTest extends AbstractDomainTest
         Assert.assertTrue(user.isPassenger());
     }
 
-    @Test
-    public void test_setAndGetSystem(){
-        User user = UserBuilder.aUser().build();
-
-        System system = Mockito.mock(System.class);
-        user.setSystem(system);
-
-        Assert.assertEquals(user.getSystem(),system);
-    }
 
     @Test
     public void test_setAndGetName(){

@@ -88,41 +88,6 @@ public class VehicleTest
     }
 
     @Test
-    public void test_deleteById()
-    {
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-
-        Float oilWastePerKm = 0.05f;
-        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
-        vehicleRepository.save(vehicle);
-
-        vehicleRepository.deleteById(vehicle.getId());
-
-
-        Assert.assertEquals(vehicleRepository.count(),0);
-    }
-
-    @Test
-    public void test_findAll()
-    {
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-
-        Float oilWastePerKm = 0.05f;
-        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
-        vehicleRepository.save(vehicle);
-        Vehicle vehicle1 = new Vehicle(2, oilWastePerKm);
-        vehicleRepository.save(vehicle1);
-        Vehicle vehicle2 = new Vehicle(3, oilWastePerKm);
-        vehicleRepository.save(vehicle2);
-
-        Assert.assertEquals(vehicleRepository.findAll().size(),3);
-    }
-
-    @Test
     public void test_setAndGetTotalRateCount(){
         Vehicle vehicle = VehicleBuilder.aVehicle().build();
 

@@ -16,7 +16,7 @@
             <list-index column="id" />
             <one-to-many class="domain.Schedule" />
         </list>
-        <list name="routePoints" lazy="false" cascade="save-update">
+        <list name="routePoints" lazy="false">
             <key column="routePointId" />
             <list-index column="indexInRoute" />
             <one-to-many class="domain.RoutePoint" />

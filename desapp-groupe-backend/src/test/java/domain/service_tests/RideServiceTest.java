@@ -15,24 +15,6 @@ import static org.junit.Assert.*;
 
 public class RideServiceTest extends AbstractServiceTest
 {
-    @Autowired
-    public RideService rideService ;
-
-    @Autowired
-    public RideRepository rideRepo ;
-
-    @Autowired
-    public RouteRepository routeRepo ;
-
-    @Autowired
-    public UserRepository userRepo ;
-
-    @Autowired
-    public VehicleRepository vehicleRepo ;
-
-    @Autowired
-    public RideRequestRepository rideRequestRepo ;
-
     @Test
     public void test_requestRide_aNewRideRequestIsCreated()
     {
@@ -185,42 +167,6 @@ public class RideServiceTest extends AbstractServiceTest
         }
     }
 
-
-    protected RideRequest aPersistedRideRequestMatchingOtherRequest(RideRequest exampleRideRequest) {
-        User requester = aPersistedPassenger();
-
-        RideRequest rideRequest = new RideRequest(requester, exampleRideRequest.getDriver(), exampleRideRequest.getDate(), exampleRideRequest.getRoute(), exampleRideRequest.getBoardingAt(), exampleRideRequest.getGetOffAt());
-        rideRequestRepo.save(rideRequest);
-
-        return rideRequest;
-    }
-
-    protected RideRequest aPersistedRideRequest()
-    {
-        Route route = aCommonRouteWithLocations(5,50,0);
-        User requester = aPersistedPassenger();
-        User driver = aPersistedDriver();
-        DateTime date = new DateTime(2016,6,1,0,0,0);
-        RoutePoint board = route.getRoutePoints().get(0);
-        RoutePoint getOff = route.getRoutePoints().get(1);
-
-        routeRepo.save(route);
-
-        return rideService.requestRide(requester, driver, date, route, board , getOff);
-    }
-
-
-    protected User aPersistedPassenger() {
-        User rideReq2Requester = aPassenger();
-        userRepo.save(rideReq2Requester);
-        return rideReq2Requester;
-    }
-
-    protected User aPersistedDriver() {
-        User driver = aDriver();
-        userRepo.save(driver);
-        return driver;
-    }
 
 
 }

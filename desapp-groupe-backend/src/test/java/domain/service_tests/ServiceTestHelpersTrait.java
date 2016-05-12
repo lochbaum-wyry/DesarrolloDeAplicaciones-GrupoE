@@ -1,7 +1,7 @@
 package domain.service_tests;
 
-/**
- * Created by prospero on 5/8/16.
- */
-public class ServiceTestHelpersTrait {
+import domain.TestHelpersTrait;
+
+public interface ServiceTestHelpersTrait extends TestHelpersTrait
+{
 }

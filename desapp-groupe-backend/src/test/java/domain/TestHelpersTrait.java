@@ -2,6 +2,7 @@ package domain;
 
 import domain.builders.RouteBuilder;
 import domain.builders.UserBuilder;
+import domain.builders.VehicleBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +20,18 @@ public interface TestHelpersTrait
 
     default public User aDriver()
     {
+        Vehicle vehicle = aVehicle();
         return UserBuilder.aUser()
                 .withName("Sarasa")
                 .withLastName("Gil")
                 .withEmail("sarasa@gmail.com")
                 .withUserName("sarasa1982")
-                .withVehicleCapacity(4)
+                .withVehicle(vehicle)
                 .build();
+    }
+
+    default Vehicle aVehicle() {
+       return VehicleBuilder.aVehicle().withOilWasterPerHour(0.05f).withCapacity(4).build();
     }
 
     default public User aPassenger()

@@ -3,7 +3,11 @@ package domain.repositories;
 import domain.Ride;
 import domain.TakenSeat;
 import domain.User;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.classic.Session;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 
 import java.util.List;
 
@@ -27,8 +31,8 @@ public class UserRepository extends HibernateGenericDao<User> implements
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
         query.setParameter("year",year);
-        query.setFirstResult(0);
-        query.setMaxResults(cant);
+//        query.setFirstResult(0);
+//        query.setMaxResults(cant);
 
         return query.list();
     }
@@ -43,8 +47,8 @@ public class UserRepository extends HibernateGenericDao<User> implements
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
         query.setParameter("year",year);
-        query.setFirstResult(0);
-        query.setMaxResults(cant);
+//        query.setFirstResult(0);
+//        query.setMaxResults(cant);
 
         return query.list();
     }
@@ -60,8 +64,8 @@ public class UserRepository extends HibernateGenericDao<User> implements
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
         query.setParameter("year",year);
-        query.setFirstResult(0);
-        query.setMaxResults(cant);
+//        query.setFirstResult(0);
+//        query.setMaxResults(cant);
 
         return query.list();
     }
@@ -99,36 +103,29 @@ public class UserRepository extends HibernateGenericDao<User> implements
         Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
         query.setParameter("month",month);
         query.setParameter("year",year);
-        query.setFirstResult(0);
-        query.setMaxResults(cant);
+//        query.setFirstResult(0);
+//        query.setMaxResults(cant);
 
         return query.list();
     }
 
-    public List<User> getMostEfficientDriversInMonthYear(Integer month, Integer year)
+    public List<User> getMostEfficientDriversInMonthYear(Integer month, Integer year, Integer cant)
     {
-        return null;
+        String hql =    "SELECT r.driver.id " +
+                ", AVG(r.efficiencyPercentage) as percentage " +
+                        "FROM Ride r "+
+                        "WHERE month(r.date) = :month and year(r.date) = :year " +
+                        "GROUP BY r.driver.id " +
+                        "ORDER BY percentage DESC";
+
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+
+        query.setParameter("month",month);
+        query.setParameter("year",year);
+
+        return query.list();
+
+
     }
-
-
-    /* ALGORITMOS DE COMPARACIÓN :
-
-    RANKING EFFICIENCY(User user, User t1)
-    {
-        Integer valor = (getEfficiencyAvgForUser(user) > getEfficiencyAvgForUser(t1)) ? 1 : -1;
-        return valor * this.getOrder().getValue();
-    }
-
-    public Float getEfficiencyAvgForUser(User user)
-    {
-        if (user.getRidesCount() == 0 )
-            return 0f ;
-        Float effSumUser = user.getRidesAsDriver().stream()
-                .map(ride -> ride.getEfficiencyPercentage())
-                .reduce(0f, Float::sum);
-
-        return effSumUser / user.getRidesCount();
-    }
-    */
 
 }

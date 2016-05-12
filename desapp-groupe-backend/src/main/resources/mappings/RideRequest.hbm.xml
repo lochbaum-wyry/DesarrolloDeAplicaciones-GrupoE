@@ -9,7 +9,8 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="requester" class="domain.User" />
+        <many-to-one name="driver" class="domain.User" />
+        <many-to-one name="requester" class="domain.User" />
         <one-to-one name="route" class="domain.Route" />
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="dateRequested" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>

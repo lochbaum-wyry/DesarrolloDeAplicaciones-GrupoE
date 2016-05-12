@@ -18,11 +18,10 @@
         <property name="points" />
 
         <one-to-one name="vehicle" class="domain.Vehicle" />
-        <list name="routes" lazy="false"> <!--no estoy seguro de que deban estar routes y rides-->
+        <bag name="routes" lazy="false">
             <key column="routeId" />
-            <list-index column="id" />
             <one-to-many class="domain.Route" />
-        </list>
+        </bag>
 
         <list name="chats" lazy="false">
             <key column="chatId" />

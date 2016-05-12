@@ -8,6 +8,7 @@
             <generator class="native" />
         </id>
 
+        <property name="efficiencyPercentage" />
         <property name="oilPrice" />
         <property name="date"  type="org.joda.time.contrib.hibernate.PersistentDateTime" />
         <property name="cancelled" />

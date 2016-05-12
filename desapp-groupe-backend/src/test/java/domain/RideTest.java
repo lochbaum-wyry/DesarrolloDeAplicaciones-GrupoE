@@ -383,7 +383,7 @@ public class RideTest extends AbstractDomainTest
                 .withOilPrice(oilPrice)
                 .build();
 
-
+        ride.updateEfficiency();
         Float savedAmount = rideCostCalculator.calculateCostForPassenger(passenger1) +
                             rideCostCalculator.calculateCostForPassenger(passenger2);
 
@@ -418,10 +418,11 @@ public class RideTest extends AbstractDomainTest
 
         Vehicle vehicle = mock(Vehicle.class);
         when(vehicle.getCapacity()).thenReturn(2);
+        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
 
         User occupierPassenger = mock(User.class);
 
-        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).build();
+        Route route = RouteBuilder.aRoute().withRoutePointAt(100.0,100.0).withRoutePointAt(200.0,200.0).withDistanceInKms(10f).build();
         RoutePoint boardAt = route.getRoutePoints().get(0);
         RoutePoint getOffAt = route.getRoutePoints().get( route.getRoutePoints().size()-1 );
 
@@ -429,7 +430,10 @@ public class RideTest extends AbstractDomainTest
                 .withDriver(driver)
                 .withVehicle(vehicle)
                 .withRoute(route)
+                .withOilPrice(10f)
                 .build();
+
+        ride.setRideCostCalculator(new RideCostPassengerDivision(ride));
 
         Assert.assertTrue(ride.getTakenSeats().size() == 0);
 

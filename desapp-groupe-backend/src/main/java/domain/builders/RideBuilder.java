@@ -14,7 +14,7 @@ public class RideBuilder {
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled = Boolean.FALSE;
     private Float oilPrice;
-    private RideCostCalculator rideCostCalculator;
+    private RideCostCalculator rideCostCalculator ;
 
     public static RideBuilder aRide() {
         return new RideBuilder();
@@ -35,8 +35,10 @@ public class RideBuilder {
         ride.setVehicle(this.vehicle);
         ride.setOilPrice(oilPrice);
 
-        if (this.rideCostCalculator instanceof RideCostCalculator)
-            this.rideCostCalculator.setRide(ride);
+        if (this.rideCostCalculator == null)
+            rideCostCalculator = new RideCostPassengerDivision();
+
+        this.rideCostCalculator.setRide(ride);
 
         ride.setRideCostCalculator(rideCostCalculator);
 

@@ -18,11 +18,14 @@ public class Ride extends Entity
     private User driver;
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled;
+    private Float efficiencyPercentage;
+
     private RideCostCalculator rideCostCalculator ;
 
     public static Ride newFromRideRequest(RideRequest rideRequest)
     {
         Ride ride = new Ride(rideRequest.getRoute(), rideRequest.getDate(), rideRequest.getDriver());
+        ride.setRideCostCalculator(new RideCostPassengerDivision(ride));
         return ride;
     }
 
@@ -104,6 +107,16 @@ public class Ride extends Entity
     {
         TakenSeat seat = new TakenSeat(passenger, boardingAt, getOffAt);
         this.addTakenSeat(seat);
+        this.updateEfficiency();
+    }
+
+    public void updateEfficiency()
+    {
+        this.efficiencyPercentage = computeEfficiencyPercentage();
+    }
+
+    private float computeEfficiencyPercentage() {
+        return (getSavedAmount()*100)/getTotalCost();
     }
 
     public void validateSeatAvailableInSection(RoutePoint boardingAt, RoutePoint getOffAt) throws NoSeatsAvailableException
@@ -156,15 +169,6 @@ public class Ride extends Entity
                                             idxSeatBoardingAt, idxSeatGetOffAt );
     }
 
-    public boolean sectionIndexesOverlap(Integer idxFrom, Integer idxTo, Integer idxSeatBoardingAt, Integer idxSeatGetOffAt)
-    {
-        return Math.max(idxTo,idxSeatGetOffAt) - Math.min(idxFrom,idxSeatBoardingAt) < (idxTo - idxFrom) + (idxSeatGetOffAt - idxSeatBoardingAt);
-//        return 	( Math.min(idxFrom,idxTo) < Math.max(idxSeatBoardingAt,idxSeatGetOffAt) && Math.min(idxSeatBoardingAt,idxSeatGetOffAt) < Math.max(idxFrom,idxTo) );
-//        return (idxFrom < idxSeatGetOffAt && idxSeatBoardingAt < idxTo) ||
-//                (idxFrom == idxTo && (idxFrom == idxTo || idxSeatBoardingAt == idxSeatGetOffAt));
-//        return (idxFrom <= idxSeatGetOffAt && idxTo <= idxSeatBoardingAt);
-    }
-
     public Optional<TakenSeat> getSeatTakenBy(User passenger)
     {
         return takenSeats.stream().filter(seat -> seat.getPassenger() == passenger).findFirst();
@@ -203,7 +207,8 @@ public class Ride extends Entity
         return getPassengers().stream().map(passenger -> getCostForPassenger(passenger)).reduce(0f, Float::sum);
     }
 
-    public List<User> getPassengers() {
+    public List<User> getPassengers()
+    {
         return this.takenSeats.stream().map(takenSeat -> takenSeat.getPassenger()).collect(Collectors.toList());
     }
 
@@ -214,7 +219,12 @@ public class Ride extends Entity
 
     public Float getEfficiencyPercentage()
     {
-        return (getSavedAmount()*100)/getTotalCost();
+        return this.efficiencyPercentage;
+    }
+
+    public void setEfficiencyPercentage(Float efficiencyPercentage)
+    {
+        this.efficiencyPercentage = efficiencyPercentage;
     }
 
     public Boolean isCancelled() {
