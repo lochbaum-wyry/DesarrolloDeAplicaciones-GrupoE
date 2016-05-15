@@ -1,11 +1,12 @@
 package domain.services;
 
+
 import domain.LatLng;
 import domain.Route;
-import domain.RoutePoint;
 import domain.repositories.RoutePointRepository;
 import domain.repositories.RouteRepository;
 import org.joda.time.DateTime;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,10 +22,10 @@ public class RouteService
         this.routeRepository = routeRepository;
         this.routePointRepository = routePointRepository ;
     }
-
-    public List<Route> findRoutesSatisfying(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
+    @Transactional
+    public List<Route> findRoutesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
     {
-        return routeRepository.findRoutesSatisfiying(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
+        return routeRepository.findRoutesCloseTo(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
     }
 
 }

@@ -42,10 +42,31 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         </jaxrs:features>
     </jaxrs:server>
 
+    <jaxrs:server id="route"  >
+        <jaxrs:serviceBeans>
+            <ref bean="routeRest" />
+        </jaxrs:serviceBeans>
+        <jaxrs:extensionMappings>
+            <entry key="json" value="application/json" />
+        </jaxrs:extensionMappings>
+        <jaxrs:providers>
+            <ref bean="jacksonProvider" />
+        </jaxrs:providers>
+        <jaxrs:features>
+            <cxf:logging />
+        </jaxrs:features>
+    </jaxrs:server>
+
 
     <bean id="userRest" class="domain.servicesRest.UserServiceRest">
         <constructor-arg>
             <ref bean="services.user" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="routeRest" class="domain.servicesRest.RouteServiceRest">
+        <constructor-arg>
+            <ref bean="services.route" />
         </constructor-arg>
     </bean>
 

@@ -1,7 +1,9 @@
 package domain.repositories;
 
 import domain.RoutePoint;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class RoutePointRepository extends HibernateGenericDao<RoutePoint> implements
         GenericRepository<RoutePoint> {
 

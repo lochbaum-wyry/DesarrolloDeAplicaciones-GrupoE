@@ -31,7 +31,7 @@ public class RouteServiceTest extends AbstractServiceTest
     private UserService userService ;
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesExistsWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsNotEmpty()
+    public void test_findRoutesCloseTo_whenARoutesExistsWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsNotEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -58,13 +58,13 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesDoesNotExistWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsEmpty()
+    public void test_findRoutesCloseTo_whenARoutesDoesNotExistWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -91,13 +91,13 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesDoesNotExistWithinSecondsClosenessTheResultIsEmpty()
+    public void test_findRoutesCloseTo_whenARoutesDoesNotExistWithinSecondsClosenessTheResultIsEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -124,12 +124,12 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesExistsWithinSecondsClosenessTheResultIsNotEmpty()
+    public void test_findRoutesCloseTo_whenARoutesExistsWithinSecondsClosenessTheResultIsNotEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -156,12 +156,12 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesInTheSameDayOfWeekExistsTHenResultIsNotEmpty()
+    public void test_findRoutesCloseTo_whenARoutesInTheSameDayOfWeekExistsTHenResultIsNotEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -188,13 +188,13 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
 
     @Test
-    public void test_findRoutesSatisfying_whenARoutesInTheSameDayOfWeekDoesNotExistTHenResultIsEmpty()
+    public void test_findRoutesCloseTo_whenARoutesInTheSameDayOfWeekDoesNotExistTHenResultIsEmpty()
     {
         List<Route> routes = new ArrayList<Route>();
 
@@ -221,7 +221,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<Route> received = routeService.findRoutesSatisfying(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<Route> received = routeService.findRoutesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 
