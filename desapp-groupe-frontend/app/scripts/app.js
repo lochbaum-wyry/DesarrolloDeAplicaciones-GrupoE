@@ -17,7 +17,8 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
-  .config(function ($routeProvider) {
+  .config('$httpProvider',function ($routeProvider,$httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
     $routeProvider
       .when('/', {
         templateUrl: 'views/singUp.html',
