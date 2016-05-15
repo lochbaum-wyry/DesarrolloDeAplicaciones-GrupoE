@@ -25,18 +25,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("/META-INF/spring-persistence-context.xml")
-@Transactional
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration("/META-INF/spring-persistence-context.xml")
+//@Transactional
 public class VehicleTest
 {
-    @Autowired
-    private SessionFactory sessionFactory;
-    private Session currentSession;
-    @Before
-    public void openSession() {
-        currentSession = sessionFactory.getCurrentSession();
-    }
+//    @Autowired
+//    private SessionFactory sessionFactory;
+//    private Session currentSession;
+//    @Before
+//    public void openSession() {
+//        currentSession = sessionFactory.getCurrentSession();
+//    }
 
     @Test
     public void test_getOilUsePerKmInLts_returnsOilUsePerKmsInLtsSet()
@@ -46,45 +46,6 @@ public class VehicleTest
 
         Assert.assertEquals(oilWastePerKm,vehicle.getOilUsePerKmInLts());
 
-    }
-
-    @Test
-    public void test_saveAndFindById()
-    {
-
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-
-        Float oilWastePerKm = 0.05f;
-        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
-        vehicleRepository.save(vehicle);
-
-        Integer id =  vehicle.getId();
-
-        Vehicle vehicle1 = vehicleRepository.findById(id);
-
-        Assert.assertEquals(vehicle,vehicle1);
-    }
-
-    @Test
-    public void test_update()
-    {
-        ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring-persistence-context.xml");
-        BeanFactory factory = context;
-        VehicleRepository vehicleRepository = (VehicleRepository) factory.getBean("persistence.vehiclerepository");
-
-        Float oilWastePerKm = 0.05f;
-        Vehicle vehicle = new Vehicle(1, oilWastePerKm);
-        vehicleRepository.save(vehicle);
-
-        Integer id =  vehicle.getId();
-        vehicle.setId(3);
-        vehicleRepository.update(vehicle);
-
-        Vehicle vehicle1 = vehicleRepository.findById(id);
-
-        Assert.assertEquals(vehicle1.getId(),3);
     }
 
     @Test

@@ -2,6 +2,7 @@ package domain.services;
 
 import domain.*;
 import domain.exceptions.SingUpException;
+import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class UserService {
     }
 
     @Transactional
-    public void singUp(String name, String lastName, String userName, String email) throws SingUpException
+    public void signUp(String name, String lastName, String userName, String email) throws SingUpException
     {
         validateUser(userName,email);
         User user = new User(name,lastName,userName,email);
@@ -63,11 +64,15 @@ public class UserService {
     }
 
     @Transactional
-    public void addRouteForUser(User user, List<RoutePoint> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules){
-        Route route = new Route(distanceInKms,fixedCosts,points,schedules);
-        routeRepository.save(route);
-        user.addRoute(route);
-        userRepository.update(user);
+    public void addRoute(User user, List<LatLng> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules) throws SubiQueTeLlevoException {
+        try {
+            Route route = new Route(distanceInKms, fixedCosts, points, schedules);
+            routeRepository.save(route);
+            user.addRoute(route);
+            userRepository.update(user);
+        } catch (Exception e) {
+            throw new SubiQueTeLlevoException(e);
+        }
     }
 
 }

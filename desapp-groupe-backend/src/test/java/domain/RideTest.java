@@ -156,19 +156,13 @@ public class RideTest extends AbstractDomainTest
 
         Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5f).withCapacity(2).build();
 
-        RoutePoint route1 = RoutePointBuilder.aRoutePoint().withLatitude(50.0).withLongitude(50.0).build();
-        RoutePoint route2 = RoutePointBuilder.aRoutePoint().withLatitude(100.0).withLongitude(100.0).build();
-        RoutePoint route3 = RoutePointBuilder.aRoutePoint().withLatitude(150.0).withLongitude(150.0).build();
-        RoutePoint route4 = RoutePointBuilder.aRoutePoint().withLatitude(200.0).withLongitude(200.0).build();
-        RoutePoint route5 = RoutePointBuilder.aRoutePoint().withLatitude(250.0).withLongitude(250.0).build();
+        Route route = aCommonRouteWithLocations(5,50,50);
 
-        Route route = RouteBuilder.aRoute()
-                .withRoutePoint(route1)
-                .withRoutePoint(route2)
-                .withRoutePoint(route3)
-                .withRoutePoint(route4)
-                .withRoutePoint(route5)
-                .build();
+        RoutePoint route1 = route.getRoutePoints().get(0);
+        RoutePoint route2 = route.getRoutePoints().get(1);
+        RoutePoint route3 = route.getRoutePoints().get(2);
+        RoutePoint route4 = route.getRoutePoints().get(3);
+        RoutePoint route5 = route.getRoutePoints().get(4);
 
         TakenSeat occupiersSeat = TakenSeatBuilder.aTakenSeat()
                 .withPassenger(occupier)

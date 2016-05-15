@@ -14,8 +14,8 @@ public interface TestHelpersTrait
 {
     // Funciones de ayuda para buildear objetos comunes
 
-    default public RoutePoint aRoutePoint(Double currLongitude, Double currLatitude) {
-        return new RoutePoint(currLatitude, currLongitude);
+    default public LatLng aLatLng(Double currLongitude, Double currLatitude) {
+        return new LatLng(currLatitude, currLongitude);
     }
 
     default public User aDriver()
@@ -46,7 +46,7 @@ public interface TestHelpersTrait
 
     default public Route aCommonRouteWithLocations(int numberOfLocations, int longitudeShift, int latitudeShift)
     {
-        List<RoutePoint> routePoints = new ArrayList<>();
+        List<LatLng> routePoints = new ArrayList<>();
         Double currLongitude = 0d ;
         Double currLatitude = 0d;
 
@@ -54,7 +54,7 @@ public interface TestHelpersTrait
         {
             currLatitude = currLongitude + longitudeShift ;
             currLatitude = currLatitude + latitudeShift;
-            routePoints.add(aRoutePoint(currLongitude, currLatitude));
+            routePoints.add(aLatLng(currLongitude, currLatitude));
         }
 
         return RouteBuilder.aRoute()

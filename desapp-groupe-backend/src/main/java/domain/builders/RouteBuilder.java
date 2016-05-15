@@ -1,5 +1,6 @@
 package domain.builders;
 
+import domain.LatLng;
 import domain.RoutePoint;
 import domain.Route;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteBuilder {
-    private List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
+    private List<LatLng> routePoints = new ArrayList<LatLng>();
     private Float fixedCosts ;
     private Float distanceInKms ;
 
@@ -19,11 +20,7 @@ public class RouteBuilder {
     public Route build()
     {
         Route route = new Route();
-        routePoints.stream().forEach(routePoint -> {
-                routePoint.setRoute(route);
-                route.addRoutePoint(routePoint);
-            }
-        );
+        route.setRoutePointsFromLatLng(routePoints);
 
         if (fixedCosts != null)
             route.setFixedCosts(fixedCosts);
@@ -36,18 +33,13 @@ public class RouteBuilder {
 
     public RouteBuilder withRoutePointAt(Double longitude, Double latitude)
     {
-        this.routePoints.add( new RoutePoint(latitude,longitude) );
-        return this;
-    }
-
-    public RouteBuilder withRoutePoint(RoutePoint routePoint)
-    {
-        this.routePoints.add(routePoint);
+        this.routePoints.add( new LatLng(latitude,longitude) );
         return this;
     }
 
 
-    public RouteBuilder withRoutePoints(List<RoutePoint> routePoints) {
+
+    public RouteBuilder withRoutePoints(List<LatLng> routePoints) {
         this.routePoints = routePoints;
         return this;
     }

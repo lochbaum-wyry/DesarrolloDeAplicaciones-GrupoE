@@ -9,6 +9,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.mock;
+
 public class RouteTest
 {
 
@@ -94,8 +96,9 @@ public class RouteTest
         Route route = RouteBuilder.aRoute().build();
 
         List<RoutePoint> routePoints = new ArrayList<RoutePoint>();
+        routePoints.add(mock(RoutePoint.class));
+
         route.setRoutePoints(routePoints);
-        route.addRoutePoint(RoutePointBuilder.aRoutePoint().build());
 
         Assert.assertEquals(route.getRoutePoints(),routePoints);
     }

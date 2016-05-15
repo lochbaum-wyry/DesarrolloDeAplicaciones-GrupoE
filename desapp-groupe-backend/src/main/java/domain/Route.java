@@ -12,19 +12,26 @@ public class Route extends Entity{
     private Float distanceInKms = 0f;
     private Float fixedCosts = 0f;
 
-    public Route(Float distanceInKms, Float fixedCosts, List<RoutePoint> points, List<Schedule> schedules) {
+    public Route(Float distanceInKms, Float fixedCosts, List<LatLng> points, List<Schedule> schedules) {
         this.schedules = schedules;
-        this.routePoints = points;
         this.fixedCosts = fixedCosts;
         this.distanceInKms = distanceInKms;
+
+        setRoutePointsFromLatLng(points);
+    }
+
+    public void setRoutePointsFromLatLng(List<LatLng> points)
+    {
+        points.stream().forEach(latLng -> this.addRoutePoint(latLng));
     }
 
     public Route() {
 
     }
 
-    public void addRoutePoint(RoutePoint routePoint)
+    public void addRoutePoint(LatLng latLng)
     {
+        RoutePoint routePoint = new RoutePoint(this,latLng.getLatitude(), latLng.getLongitude());
         this.routePoints.add(routePoint);
         updateIndexes();
     }
@@ -63,7 +70,6 @@ public class Route extends Entity{
     public void setRoutePoints(List<RoutePoint> routePoints)
     {
         this.routePoints = routePoints;
-        updateIndexes();
     }
 
     private void updateIndexes()

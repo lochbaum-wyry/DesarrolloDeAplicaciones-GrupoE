@@ -1,5 +1,6 @@
 package domain.exceptions;
 
-public class SingUpException extends Exception{
+public class SingUpException extends SubiQueTeLlevoException
+{
 
 }
