@@ -24,7 +24,7 @@ public class RouteRepository extends HibernateGenericDao<Route> implements
     }
 
 
-    public List<Route> findRoutesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departurePoint, LatLng arrivalPoint, Double closenessInMts)
+    public List findRouteSchedulesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departurePoint, LatLng arrivalPoint, Double closenessInMts)
     {
         // El cálculo de cercanía se hace por el cálculo de distancia entre dos puntos geográficos (LatLng) .
         // Los algoritmos usados fueron adaptados de las funciones de la api de googlemaps
@@ -46,7 +46,7 @@ public class RouteRepository extends HibernateGenericDao<Route> implements
     }
 
     private Query queryRoutesCloseTo() {
-        String hql =    " SELECT DISTINCT r  " +
+        String hql =    " SELECT DISTINCT r,s  " +
                 " FROM Route r " +
                 " INNER JOIN r.routePoints rpd " +
                 " INNER JOIN r.routePoints rpa " +

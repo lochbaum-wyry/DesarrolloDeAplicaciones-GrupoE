@@ -2,13 +2,17 @@ package domain.services;
 
 
 import domain.LatLng;
+import domain.Ride;
 import domain.Route;
+import domain.Schedule;
 import domain.repositories.RoutePointRepository;
 import domain.repositories.RouteRepository;
 import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RouteService
 {
@@ -22,10 +26,22 @@ public class RouteService
         this.routeRepository = routeRepository;
         this.routePointRepository = routePointRepository ;
     }
+
     @Transactional
-    public List<Route> findRoutesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
+    public List<RideProposal> getRideProposalsForRouteSchedulesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
     {
-        return routeRepository.findRoutesCloseTo(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
+        List rows = routeRepository.findRouteSchedulesCloseTo(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
+        List<RideProposal> result = new ArrayList<>();
+
+        for (int i = 0 ; i < rows.size() ; i++)
+        {
+            Object [] row = (Object [] )rows.get(i);
+            Route route = (Route)row[0];
+            Schedule schedule = (Schedule)row[1];
+            RideProposal proposal = new RideProposal(route, schedule, date);
+            result.add(proposal);
+        }
+        return result ;
     }
 
 }
