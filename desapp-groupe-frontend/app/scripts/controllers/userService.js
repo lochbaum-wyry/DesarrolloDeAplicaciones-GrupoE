@@ -14,7 +14,7 @@ angular.module('desappGrupoeFrontendApp')
 				$log.error('Ocurrio un error: ' + error.data);
 				return 'Ocurrio un error';
 			}
-			return $http.put(url + '/singUp',data).then(onSuccessSingUp).catch(onFailureSingUp);
+			return $http.post(url + '/singUp',data).then(onSuccessSingUp).catch(onFailureSingUp);
 		};
 
 		UserService.getUser =  function(id){
