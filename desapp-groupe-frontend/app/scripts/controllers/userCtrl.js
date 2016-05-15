@@ -27,8 +27,10 @@ angular.module('desappGrupoeFrontendApp')
     	userPromise.catch(onFailure);
     };
 
-    $scope.singUpData = function (data) {
+    $scope.signUpData = function (data) {
+        
         data = {'name':'asd4','lastName':'asd3','userName':'asd2','email':'asd'};
+
     	onSuccess = function (result){
     		$scope.ERROR_MSG = result;
     	};
