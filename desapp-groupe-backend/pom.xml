@@ -294,6 +294,18 @@
 
     </dependency>
 
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-util</artifactId>
+      <version>9.3.9.M1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.eclipse.jetty</groupId>
+      <artifactId>jetty-servlets</artifactId>
+      <version>8.1.10.v20130312</version>
+    </dependency>
+
     <!-- /CXF -->
 
     <!-- Jackson -->
@@ -330,7 +342,6 @@
     <jackson.version>1.8.2</jackson.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
 
 
 
