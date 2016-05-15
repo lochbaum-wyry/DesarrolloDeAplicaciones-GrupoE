@@ -1,7 +1,7 @@
 'use strict';
 angular.module('desappGrupoeFrontendApp')
 	.factory('UserService',function ($http,$log){
-		var url = 'http://localhost:8080/domain/services/user';
+		var url = 'http://localhost:8080/domain/servicesRest/user';
 
 		var UserService = {};
 
@@ -32,3 +32,4 @@ angular.module('desappGrupoeFrontendApp')
 
 		return UserService;
 	});
+
