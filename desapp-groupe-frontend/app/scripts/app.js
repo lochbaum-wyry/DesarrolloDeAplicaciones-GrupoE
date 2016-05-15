@@ -18,7 +18,6 @@ angular
     'ngTouch'
   ])
   .config(function ($routeProvider,$httpProvider) {
-    $httpProvider.defaults.useXDomain = true;
     $routeProvider
       .when('/', {
         templateUrl: 'views/singUp.html',
@@ -33,4 +32,6 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+      $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
   });
