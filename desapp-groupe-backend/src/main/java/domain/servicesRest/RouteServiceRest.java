@@ -1,6 +1,5 @@
 package domain.servicesRest;
 
-import domain.Route;
 import domain.services.RouteService;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +20,11 @@ public class RouteServiceRest {
     }
 
     @GET
-    @Path("/findRoutesCloseTo/{date}/{departurePoint}/{arrivalPoint}")
+    @Path("/getRideProposalsForRouteSchedulesCloseTo/{date}/{departurePoint}/{arrivalPoint}")
     @Produces("application/json")
-    public List<Route> findRoutesCloseTo(@PathParam("date") final DateTimeTransformer date, @PathParam("departurePoint") final LatLngTransformer departurePoint, @PathParam("arrivalPoint") final LatLngTransformer arrivalPoint)
+    public List findRoutesCloseTo(@PathParam("date") final DateTimeTransformer date, @PathParam("departurePoint") final LatLngTransformer departurePoint, @PathParam("arrivalPoint") final LatLngTransformer arrivalPoint)
     {
-        return routeService.findRoutesCloseTo(date.getValue(), 1800, departurePoint.getValue(), arrivalPoint.getValue(), 1000d);
+        return routeService.getRideProposalsForRouteSchedulesCloseTo(date.getValue(), 1800, departurePoint.getValue(), arrivalPoint.getValue(), 1000d);
     }
 
 

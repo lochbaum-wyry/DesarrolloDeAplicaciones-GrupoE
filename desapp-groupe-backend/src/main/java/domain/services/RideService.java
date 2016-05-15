@@ -2,6 +2,7 @@ package domain.services;
 
 
 import domain.*;
+import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RideRepository;
 import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
@@ -27,10 +28,14 @@ public class RideService extends GenericService<Ride>
         this.rideRequestRepository = rideRequestRepository;
     }
 
-    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
-    {
+    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt) {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
-        rideRequestRepository.save(rideRequest);
+//        try {
+            rideRequestRepository.save(rideRequest);
+//        } catch (Exception e)
+//        {
+//            throw new SubiQueTeLlevoException(e);
+//        }
         return rideRequestRepository.findById(rideRequest.getId());
     }
 
