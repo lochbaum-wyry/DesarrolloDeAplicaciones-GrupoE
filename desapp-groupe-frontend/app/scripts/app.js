@@ -17,13 +17,13 @@ angular
     'ngSanitize',
     'ngTouch'
   ])
-  .config('$httpProvider',function ($routeProvider,$httpProvider) {
+  .config(function ($routeProvider,$httpProvider) {
     $httpProvider.defaults.useXDomain = true;
     $routeProvider
       .when('/', {
         templateUrl: 'views/singUp.html',
         controller: 'UserCtrl',
-        controllerAs: 'singUp'
+        controllerAs: 'SingUp'
       })
       .when('/about', {
         templateUrl: 'views/about.html',

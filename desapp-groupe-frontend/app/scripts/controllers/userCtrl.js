@@ -28,8 +28,18 @@ angular.module('desappGrupoeFrontendApp')
     };
 
     $scope.singUpData = function (data) {
-    	userPromise = UserService.singUp(data);	
-    	$scope.ERROR_MSG = userPromise.error;
+    	onSuccess = function (result){
+    		$scope.ERROR_MSG = result;
+    	};
+
+    	onFailure = function (error){
+    		$scope.ERROR_MSG = error;
+    	};
+
+    	userPromise = UserService.singUp(data);
+    	userPromise.then(onSuccess);
+    	userPromise.catch(onFailure);
+
     };
 
   });
