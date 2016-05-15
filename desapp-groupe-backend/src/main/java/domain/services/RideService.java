@@ -7,6 +7,7 @@ import domain.repositories.RideRepository;
 import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,7 @@ public class RideService extends GenericService<Ride>
         this.rideRequestRepository = rideRequestRepository;
     }
 
+    @Transactional
     public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt) {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
 //        try {
@@ -39,12 +41,14 @@ public class RideService extends GenericService<Ride>
         return rideRequestRepository.findById(rideRequest.getId());
     }
 
+    @Transactional
     public void rejectRideRequest(RideRequest rideRequest)
     {
         rideRequest.reject();
         rideRequestRepository.save(rideRequest);
     }
 
+    @Transactional
     public Ride acceptRideRequest(RideRequest rideRequest) throws NoSeatsAvailableException
     {
         Ride ride = getOrCreateRideForRequest(rideRequest);

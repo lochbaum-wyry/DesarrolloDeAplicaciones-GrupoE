@@ -20,11 +20,11 @@ public class RouteServiceRest {
     }
 
     @GET
-    @Path("/getRideProposalsForRouteSchedulesCloseTo/{date}/{departurePoint}/{arrivalPoint}")
+    @Path("/getRideProposals/{date}/{departurePoint}/{arrivalPoint}")
     @Produces("application/json")
-    public List findRoutesCloseTo(@PathParam("date") final DateTimeTransformer date, @PathParam("departurePoint") final LatLngTransformer departurePoint, @PathParam("arrivalPoint") final LatLngTransformer arrivalPoint)
+    public List getRideProposals(@PathParam("date") final DateTimeTransformer date, @PathParam("departurePoint") final LatLngTransformer departurePoint, @PathParam("arrivalPoint") final LatLngTransformer arrivalPoint)
     {
-        return routeService.getRideProposalsForRouteSchedulesCloseTo(date.getValue(), 1800, departurePoint.getValue(), arrivalPoint.getValue(), 1000d);
+        return routeService.getRideProposalsCloseTo(date.getValue(), 1800, departurePoint.getValue(), arrivalPoint.getValue(), 1000d);
     }
 
 

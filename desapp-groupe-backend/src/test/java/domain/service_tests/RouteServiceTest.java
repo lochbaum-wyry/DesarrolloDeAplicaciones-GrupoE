@@ -59,7 +59,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List received = routeService.getRideProposalsCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
@@ -92,7 +92,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List received = routeService.getRideProposalsCloseTo(date, secondsDateCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 
@@ -125,7 +125,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List received = routeService.getRideProposalsCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 
@@ -157,7 +157,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List<RideProposal> received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List<RideProposal> received = routeService.getRideProposalsCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
@@ -189,7 +189,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List received = routeService.getRideProposalsCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertFalse(received.isEmpty());
     }
 
@@ -222,7 +222,7 @@ public class RouteServiceTest extends AbstractServiceTest
         LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
         LatLng arrivalPoint = new LatLng(-34.6753329,-58.342759);
 
-        List received = routeService.getRideProposalsForRouteSchedulesCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
+        List received = routeService.getRideProposalsCloseTo(date, secondsCloseness, departurePoint, arrivalPoint, closenessInMts);
         assertTrue(received.isEmpty());
     }
 

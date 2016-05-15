@@ -28,9 +28,13 @@ public class RouteService
     }
 
     @Transactional
-    public List<RideProposal> getRideProposalsForRouteSchedulesCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
+    public List<RideProposal> getRideProposalsCloseTo(DateTime date, Integer secondsDateCloseness, LatLng departureRoutePoint, LatLng arrivalRoutePoint, Double radioCloseness)
     {
         List rows = routeRepository.findRouteSchedulesCloseTo(date, secondsDateCloseness, departureRoutePoint, arrivalRoutePoint, radioCloseness);
+        return routeScheduleToRideProposal(date, rows);
+    }
+
+    private List<RideProposal> routeScheduleToRideProposal(DateTime date, List rows) {
         List<RideProposal> result = new ArrayList<>();
 
         for (int i = 0 ; i < rows.size() ; i++)
