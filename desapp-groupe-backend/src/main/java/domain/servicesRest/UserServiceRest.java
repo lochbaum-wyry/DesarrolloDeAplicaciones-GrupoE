@@ -60,6 +60,18 @@ public class UserServiceRest {
         return response;
     }
 
+    @GET
+    @Path("login/{email}/{passwd}")
+    @Produces("application/json")
+    public User login(@PathParam("date") final String email, @PathParam("passwd") final String token) {
+        try {
+            userService.signUp("ejemplo", "ejemplo", "ejemplo", email);
+        } catch (SingUpException e) {
+            e.printStackTrace();
+        }
+        return userService.login(email,token);
+    }
+
     @POST
     @Path("addRoute")
     @Consumes("application/json")

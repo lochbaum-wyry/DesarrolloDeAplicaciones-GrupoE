@@ -24,6 +24,10 @@ public class UserService {
         this.routeRepository = routeRepository;
     }
 
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
     @Transactional
     public void signUp(String name, String lastName, String userName, String email) throws SingUpException
     {
@@ -31,10 +35,6 @@ public class UserService {
         User user = new User(name,lastName,userName,email);
 
         userRepository.save(user);
-    }
-
-    public UserRepository getUserRepository() {
-        return userRepository;
     }
 
     private void validateUser(String userName, String email) throws SingUpException {
@@ -75,4 +75,7 @@ public class UserService {
         }
     }
 
+    public User login(String email, String token) {
+        return userRepository.getUserByEmail(email);
+    }
 }
