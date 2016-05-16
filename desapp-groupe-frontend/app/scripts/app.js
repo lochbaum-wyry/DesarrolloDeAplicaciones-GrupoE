@@ -19,7 +19,7 @@ angular
   ])
   .config(function ($routeProvider,$httpProvider) {
     $routeProvider
-      .when('/', {
+      .when('/signUp', {
         templateUrl: 'views/signUp.html',
         controller: 'UserCtrl',
         controllerAs: 'SignUp'
@@ -28,6 +28,11 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
+      })
+      .when('/home', {
+        templateUrl: 'views/home.html',
+        controller: 'UserCtrl',
+        controllerAs: 'Home'
       })
       .otherwise({
         redirectTo: '/'

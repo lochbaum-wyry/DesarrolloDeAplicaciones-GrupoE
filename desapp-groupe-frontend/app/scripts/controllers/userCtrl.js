@@ -12,6 +12,7 @@ angular.module('desappGrupoeFrontendApp')
     $scope.ERROR_MSG = null;
     $scope.userData = {};
     $scope.user = {};
+
     var onSuccess,onFailure,userPromise;
 
     $scope.getUserData = function (id){
@@ -59,7 +60,7 @@ angular.module('desappGrupoeFrontendApp')
         userPromise = UserService.login(email,passw);
         userPromise.then(onSuccess);
         userPromise.catch(onFailure);
-        $window.location.href = 'views/home.html';
+        $window.location.href = '/#/home';
     };
 
 
