@@ -3,6 +3,7 @@ package domain.service_tests;
 import domain.LatLng;
 import domain.Route;
 import domain.Schedule;
+import domain.User;
 import domain.builders.RouteBuilder;
 import domain.builders.ScheduleBuilder;
 import domain.repositories.RouteRepository;
@@ -34,6 +35,7 @@ public class RouteServiceTest extends AbstractServiceTest
     @Test
     public void test_getRideProposalsForRouteSchedulesCloseTo_whenARoutesExistsWithinClosenessInMtsAndGivenDepartureAndArrivalPointsTheResultIsNotEmpty()
     {
+        User driver = aDriver();
         List<Route> routes = new ArrayList<Route>();
 
         Route route = RouteBuilder.aRoute()
@@ -50,8 +52,8 @@ public class RouteServiceTest extends AbstractServiceTest
                 .build();
 
         route.addSchedule(schedule);
-
-        routeRepo.save(route);
+        driver.addRoute(route);
+        userRepo.save(driver);
 
         DateTime date = new DateTime(2016,5,6,8,45);
         int secondsDateCloseness = 3600;
@@ -149,7 +151,9 @@ public class RouteServiceTest extends AbstractServiceTest
 
         route.addSchedule(schedule);
 
-        routeRepo.save(route);
+        User driver = aDriver();
+        driver.addRoute(route);
+        userRepo.save(driver);
 
         DateTime date = new DateTime(2016,5,6,8,35);
         int secondsCloseness = 3600;
@@ -181,7 +185,9 @@ public class RouteServiceTest extends AbstractServiceTest
 
         route.addSchedule(schedule);
 
-        routeRepo.save(route);
+        User driver = aDriver();
+        driver.addRoute(route);
+        userRepo.save(driver);
 
         DateTime date = new DateTime(2016,5,6,8,35);
         int secondsCloseness = 3600;

@@ -1,10 +1,7 @@
 package domain.services;
 
 
-import domain.LatLng;
-import domain.Ride;
-import domain.Route;
-import domain.Schedule;
+import domain.*;
 import domain.repositories.RoutePointRepository;
 import domain.repositories.RouteRepository;
 import org.joda.time.DateTime;
@@ -42,7 +39,10 @@ public class RouteService
             Object [] row = (Object [] )rows.get(i);
             Route route = (Route)row[0];
             Schedule schedule = (Schedule)row[1];
-            RideProposal proposal = new RideProposal(route, schedule, date);
+            RoutePoint departure = (RoutePoint) row[2];
+            RoutePoint arrival = (RoutePoint) row[3];
+            User driver = (User) row[4];
+            RideProposal proposal = new RideProposal(driver, route, schedule, date, departure, arrival);
             result.add(proposal);
         }
         return result ;

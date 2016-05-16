@@ -1,3 +1,4 @@
+(function () { 
 'use strict';
 angular.module('desappGrupoeFrontendApp')
 	.factory('UserService',function ($http,$log){
@@ -43,7 +44,29 @@ angular.module('desappGrupoeFrontendApp')
 			return $http.get(url + '/login/' + email + '/' + passw).then(onSuccessGetUser).catch(onFailureGetUser);
 		};
 
+		UserService.addRoute =  function(user,points,distanceInKms,fixedCosts,schedules) {
+
+			var data = {
+				user: user,
+				points: points,
+				distanceInKms: distanceInKms, 
+				fixedCosts: fixedCosts, 
+				schedules: schedules
+			};
+
+			function onSuccessAddRoute(response){
+				return response.data;
+			}
+
+			function onFailureddRoute(error){
+				$log.error('Ocurrio un error: ' + error.data);
+				return 'Ocurrio un error';	
+			}
+			return $http.post(url + '/addRoute', data).then(onSuccessGetUser).catch(onFailureGetUser);
+		};
+
 
 		return UserService;
 	});
 
+})();

@@ -46,8 +46,9 @@ public class RouteRepository extends HibernateGenericDao<Route> implements
     }
 
     private Query queryRoutesCloseTo() {
-        String hql =    " SELECT DISTINCT r,s  " +
-                " FROM Route r " +
+        String hql =    " SELECT DISTINCT r,s, rpd, rpa, u " +
+                " FROM User u " +
+                " INNER JOIN u.routes r " +
                 " INNER JOIN r.routePoints rpd " +
                 " INNER JOIN r.routePoints rpa " +
                 " INNER JOIN r.schedules s " +
@@ -57,7 +58,7 @@ public class RouteRepository extends HibernateGenericDao<Route> implements
                 " AND cast(:earth_radius as double) * (  2 * asin(sqrt(power(sin( ((rpa.latitude*cast(:PI as double)/180) - (cast(:ap_lat as double)*cast(:PI as double)/180)) / 2), 2) + cos(rpa.latitude*cast(:PI as double)/180) * cos(cast(:ap_lat as double)*cast(:PI as double)/180) * power(sin(((rpa.longitude*cast(:PI as double)/180) - (cast(:ap_lng as double)*cast(:PI as double)/180)) / 2), 2))) ) <= :closenessInMts " +
                 " AND (s.departureTime - :secondsTimeCloseness) <= :time " +
                 " AND (s.departureTime + :secondsTimeCloseness) >= :time " +
-                " AND s.day = :dayOfWeek "
+                " AND s.day = :dayOfWeek"
 
                 ;
 
