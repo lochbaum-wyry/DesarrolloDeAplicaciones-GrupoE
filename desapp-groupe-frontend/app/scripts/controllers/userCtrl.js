@@ -11,7 +11,9 @@ angular.module('desappGrupoeFrontendApp')
   .controller('UserCtrl', function ($scope,UserService,$window) {
     $scope.ERROR_MSG = null;
     $scope.userData = {};
-    $scope.user = {};
+    $scope.user = {'name':'Federico','lastName':'Trimegisto','userName':'Trime87',
+                    'email':'federico.lochbaum@gmail.com','image':'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/074/165/2458a49.jpg',
+                    'badRateCount':'23','goodRateCount':'50','totalRateCount': '73'};
 
     var onSuccess,onFailure,userPromise;
 
@@ -60,7 +62,7 @@ angular.module('desappGrupoeFrontendApp')
         userPromise = UserService.login(email,passw);
         userPromise.then(onSuccess);
         userPromise.catch(onFailure);
-        $window.location.href = '/#/home';
+        $window.location.href = '/#/home2';
     };
 
 

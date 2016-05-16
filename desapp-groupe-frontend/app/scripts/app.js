@@ -14,6 +14,7 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
+    
     'ngSanitize',
     'ngTouch'
   ])
@@ -29,13 +30,15 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/home', {
-        templateUrl: 'views/home.html',
+      .when('/home2', {
+        templateUrl: '/views/home2.html',
         controller: 'UserCtrl',
-        controllerAs: 'Home'
+        controllerAs: 'home'
       })
       .otherwise({
-        redirectTo: '/'
+        templateUrl: 'views/signUp.html',
+        controller: 'UserCtrl',
+        controllerAs: 'SignUp'
       });
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
