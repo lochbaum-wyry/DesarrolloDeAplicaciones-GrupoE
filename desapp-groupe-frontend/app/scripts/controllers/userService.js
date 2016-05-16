@@ -30,6 +30,20 @@ angular.module('desappGrupoeFrontendApp')
 			return $http.get(url + '/user/' + id).then(onSuccessGetUser).catch(onFailureGetUser);
 		};
 
+		UserService.login =  function(email,passw){
+
+			function onSuccessGetUser(response){
+				return response.data;
+			}
+
+			function onFailureGetUser(error){
+				$log.error('Ocurrio un error: ' + error.data);
+				return 'Ocurrio un error';	
+			}
+			return $http.get(url + '/login/' + email + '/' + passw).then(onSuccessGetUser).catch(onFailureGetUser);
+		};
+
+
 		return UserService;
 	});
 
