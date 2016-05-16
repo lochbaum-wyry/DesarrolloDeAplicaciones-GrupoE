@@ -20,9 +20,9 @@ angular
   .config(function ($routeProvider,$httpProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/singUp.html',
+        templateUrl: 'views/signUp.html',
         controller: 'UserCtrl',
-        controllerAs: 'SingUp'
+        controllerAs: 'SignUp'
       })
       .when('/about', {
         templateUrl: 'views/about.html',
