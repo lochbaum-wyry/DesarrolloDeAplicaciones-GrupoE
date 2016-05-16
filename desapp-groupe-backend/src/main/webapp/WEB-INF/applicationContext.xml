@@ -30,20 +30,6 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
     <jaxrs:server id="user"  >
         <jaxrs:serviceBeans>
             <ref bean="userRest" />
-        </jaxrs:serviceBeans>
-        <jaxrs:extensionMappings>
-            <entry key="json" value="application/json" />
-        </jaxrs:extensionMappings>
-        <jaxrs:providers>
-            <ref bean="jacksonProvider" />
-        </jaxrs:providers>
-        <jaxrs:features>
-            <cxf:logging />
-        </jaxrs:features>
-    </jaxrs:server>
-
-    <jaxrs:server id="route"  >
-        <jaxrs:serviceBeans>
             <ref bean="routeRest" />
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
@@ -57,20 +43,35 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         </jaxrs:features>
     </jaxrs:server>
 
-    <jaxrs:server id="ride"  >
-        <jaxrs:serviceBeans>
-            <ref bean="rideRest" />
-        </jaxrs:serviceBeans>
-        <jaxrs:extensionMappings>
-            <entry key="json" value="application/json" />
-        </jaxrs:extensionMappings>
-        <jaxrs:providers>
-            <ref bean="jacksonProvider" />
-        </jaxrs:providers>
-        <jaxrs:features>
-            <cxf:logging />
-        </jaxrs:features>
-    </jaxrs:server>
+    <!--<jaxrs:server id="route"  >-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<ref bean="routeRest" />-->
+        <!--</jaxrs:serviceBeans>-->
+        <!--<jaxrs:extensionMappings>-->
+            <!--<entry key="json" value="application/json" />-->
+        <!--</jaxrs:extensionMappings>-->
+        <!--<jaxrs:providers>-->
+            <!--<ref bean="jacksonProvider" />-->
+        <!--</jaxrs:providers>-->
+        <!--<jaxrs:features>-->
+            <!--<cxf:logging />-->
+        <!--</jaxrs:features>-->
+    <!--</jaxrs:server>-->
+
+    <!--<jaxrs:server id="ride"  >-->
+        <!--<jaxrs:serviceBeans>-->
+            <!--<ref bean="rideRest" />-->
+        <!--</jaxrs:serviceBeans>-->
+        <!--<jaxrs:extensionMappings>-->
+            <!--<entry key="json" value="application/json" />-->
+        <!--</jaxrs:extensionMappings>-->
+        <!--<jaxrs:providers>-->
+            <!--<ref bean="jacksonProvider" />-->
+        <!--</jaxrs:providers>-->
+        <!--<jaxrs:features>-->
+            <!--<cxf:logging />-->
+        <!--</jaxrs:features>-->
+    <!--</jaxrs:server>-->
 
 
     <bean id="userRest" class="domain.servicesRest.UserServiceRest">
@@ -85,11 +86,11 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         </constructor-arg>
     </bean>
 
-    <bean id="rideRest" class="domain.servicesRest.RideServiceRest">
-        <constructor-arg>
-            <ref bean="services.ride" />
-        </constructor-arg>
-    </bean>
+    <!--<bean id="rideRest" class="domain.servicesRest.RideServiceRest">-->
+        <!--<constructor-arg>-->
+            <!--<ref bean="services.ride" />-->
+        <!--</constructor-arg>-->
+    <!--</bean>-->
 
 
 </beans>
