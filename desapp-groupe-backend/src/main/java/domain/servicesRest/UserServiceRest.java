@@ -14,7 +14,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/user")
+@Path("user")
 @Service
 public class UserServiceRest {
 
@@ -26,7 +26,7 @@ public class UserServiceRest {
     }
 
     @GET
-    @Path("/user")
+    @Path("user")
     @Produces("application/json")
     public User user(){
         User user = UserBuilder.aUser()
@@ -39,14 +39,14 @@ public class UserServiceRest {
     }
 
     @GET
-    @Path("/list")
+    @Path("list")
     @Produces("application/json")
     public List<User> listUser(){
         return userService.getUserRepository().findAll();
     }
 
     @POST
-    @Path("/signUp")
+    @Path("signUp")
     @Consumes("application/json")
     public Response signUp(User user){
         Response response;
@@ -61,7 +61,7 @@ public class UserServiceRest {
     }
 
     @POST
-    @Path("/addRoute")
+    @Path("addRoute")
     @Consumes("application/json")
     public Response addRoute(User user, List<LatLng> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules)
     {
@@ -75,8 +75,5 @@ public class UserServiceRest {
 
         return response;
     }
-
-
-
 
 }
