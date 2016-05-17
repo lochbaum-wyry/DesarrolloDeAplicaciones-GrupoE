@@ -8,15 +8,16 @@
  * Controller of the desappGrupoeFrontendApp
  */
 angular.module('desappGrupoeFrontendApp')
-  .controller('UserCtrl', function ($scope,UserService,$window) {
+  .controller('UserCtrl', function ($scope,UserService,$window,$localStorage) {
     $scope.ERROR_MSG = null;
-    $scope.user = {};
+    $scope.user = $localStorage.user;
 
     var onSuccess,onFailure,userPromise;
 
     $scope.signUpData = function (data) {
     	onSuccess = function (result){
     		$scope = result;
+            $localStorage.user = result;
             $window.location.href = '/#/home2';
     	};
 
@@ -29,4 +30,11 @@ angular.module('desappGrupoeFrontendApp')
     	userPromise.catch(onFailure);
 
     };
+
+    $scope.percentageGoodRate = function(){
+        return ((($scope.user.goodRateCount * 100) - 
+            ((($scope.user.goodRateCount * 100) % $scope.user.totalRateCount))) 
+        / $scope.user.totalRateCount);
+    }
+
   });

@@ -12,6 +12,7 @@ angular
   .module('desappGrupoeFrontendApp', [
     'ngAnimate',
     'ngCookies',
+    'ngStorage',
     'ngResource',
     'ngRoute',
     'ngSanitize',
