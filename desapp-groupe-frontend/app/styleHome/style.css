@@ -820,7 +820,7 @@ ul.nav.navbar-nav {
 }
 
 .bridge-city {
-  background: url(../images/card.jpg)no-repeat;
+  /*background: url(../images/card.jpg)no-repeat;*/
   min-height: 100px;
   background-size: cover;
   text-align:center;
