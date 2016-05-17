@@ -46,18 +46,25 @@ public class UserServiceRest {
     }
 
     @POST
-    @Path("signUp")
+    @Path("signUpAndLogin")
     @Consumes("application/json")
-    public Response signUp(User user){
-        Response response;
-        try {
-            userService.signUp(user.getName(),user.getLastName(),user.getUserName(),user.getEmail());
-            response = Response.ok().tag("El usuario fue creado").build();
-        } catch (SingUpException e) {
-            response = Response.serverError().tag("No se pudo crear el usuario").build();
-        }
+    @Produces("application/json")
+    public User signUp(User user){
 
-        return response;
+        User realUser = null;
+
+        if(userService.existUser(user.getEmail())){
+            realUser = userService.login(user.getEmail(),"un token ");
+        }
+        else {
+            try {
+                realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail());
+
+            } catch (SingUpException e) {
+                realUser = null;
+            }
+        }
+        return realUser;
     }
 
     @GET

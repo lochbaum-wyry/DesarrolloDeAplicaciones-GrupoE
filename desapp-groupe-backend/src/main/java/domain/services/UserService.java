@@ -29,12 +29,19 @@ public class UserService {
     }
 
     @Transactional
-    public void signUp(String name, String lastName, String userName, String email) throws SingUpException
+    public Boolean existUser(String email){
+        return userRepository.getUserByEmail(email) != null;
+    }
+
+    @Transactional
+    public User signUp(String name, String lastName, String userName, String email) throws SingUpException
     {
         validateUser(userName,email);
         User user = new User(name,lastName,userName,email);
 
         userRepository.save(user);
+
+        return user;
     }
 
     private void validateUser(String userName, String email) throws SingUpException {
