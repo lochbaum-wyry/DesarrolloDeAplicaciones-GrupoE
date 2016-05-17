@@ -8,7 +8,7 @@
  * Controller of the desappGrupoeFrontendApp
  */
 angular.module('desappGrupoeFrontendApp')
-  .controller('UserCtrl', function ($scope,UserService,$window,$localStorage) {
+  .controller('UserCtrl', function ($scope,UserService,$location,$localStorage) {
     $scope.ERROR_MSG = null;
     $scope.user = $localStorage.user;
 
@@ -18,7 +18,7 @@ angular.module('desappGrupoeFrontendApp')
     	onSuccess = function (result){
     		$scope = result;
             $localStorage.user = result;
-            $window.location.href = '/#/home2';
+            $location.path('/home');
     	};
 
     	onFailure = function (error){

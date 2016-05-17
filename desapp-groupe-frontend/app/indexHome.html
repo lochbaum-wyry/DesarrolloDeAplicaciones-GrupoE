@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Subí que te llevo</title>
+<!-- <link rel="stylesheet" href="styles/main.css"> -->
+<link href="/styleHome/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/jsHome/jquery-1.11.0.min.js"></script>
+<script src="/jsHome/bootstrap.js"></script>
+<!-- Custom Theme files -->
+<link href="/styleHome/style.css" rel="stylesheet" type="text/css" media="all"/>
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!--Google Fonts-->
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" src="/jsHome/move-top.js"></script>
+<script type="text/javascript" src="/jsHome/easing.js"></script>
+<script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $(".scroll").click(function(event){   
+          event.preventDefault();
+          $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+        });
+      });
+  </script>
+<!-- //end-smoth-scrolling -->
+<!--Calender -->
+<link rel="stylesheet" href="styleHome/clndr.css" type="text/css"/>
+<script src="jsHome/underscore-min.js"></script>
+<script src="jsHome/moment-2.2.1.js"></script>
+<script src="jsHome/clndr.js"></script>
+<script src="jsHome/site.js"></script>
+<!--chart -->
+<link href="styleHome/theme.css" rel='stylesheet' type='text/css'/>
+<script src="jsHome/Chart.js"></script>
+<!--close script-->
+<script>$(document).ready(function(c) {
+  $('.glyphicon-remove').on('click', function(c){
+    $('.flat').fadeOut('slow', function(c){
+        $('.flat').remove();
+    });
+  });   
+});
+</script>
+<!--responsive-->
+<script src="jsHome/responsiveslides.min.js"></script>
+<script>
+    $(function () {
+      $("#slider").responsiveSlides({
+        auto: true,
+        nav: true,
+        speed: 500,
+        namespace: "callbacks",
+        pager: true,
+      });
+    });
+  </script>
+</head>
+<body ng-app="desappGrupoeFrontendApp">
+<!--header start here-->
+<div class="headerHome">
+  <div class="logo">
+    <h3>Subi<span>QueTeLlevo</span></h3>
+  </div>
+  <!---->
+  <div class="headerHome-main1">
+    <div class=" headerHome-right1">
+      <div class="top-nav">
+        <nav class="navbar ">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller='NavBarCtrl as nav'>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+            <li class="dropdown">
+            <a href="#rides" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Viajes<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#accepted">Confirmados</a></li>
+              <li><a href="#rideRequests">Solicitudes</a></li>
+              <li><a href="#requestedRides">Solicitados</a></li>
+              <li><a href="#rateRide">Calificar viaje</a></li>
+            </ul>
+            </li>
+            <li class="dropdown">
+            <a href="#routes" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            Recorridos<span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#user_routes">Mis Recorridos</a></li>
+              <li><a href="#add_route">Agregar Recorrido</a></li>
+            </ul>
+            </li>
+            <li><a href="#chats">Chats</a></li>
+            <li><a href="#webshop">WebShop</a></li>
+            <li><a href="#routeFind">Buscar recorrido</a></li>
+          </ul>
+          <ul>
+            <li class="dropdown pull-right">
+            <a href="account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {{nav.user.name}}<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#user_data">Datos Personales</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+        </nav>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+  <div ng-view="">
+  </div>
+</div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
+<!-- <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script> -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<!-- Services -->
+<script src="scripts/controllers/userService.js"></script>
+<script src="scripts/services/routeService.js"></script>
+<script src="scripts/services/rideService.js"></script>
+<!-- Controllers -->
+<script src="scripts/controllers/userCtrl.js"></script>
+<script src="scripts/controllers/navBarCtrl.js"></script>
+<script src="scripts/controllers/routeFindCtrl.js"></script>
+<script src="scripts/controllers/about.js"></script>
+<!-- endbuild -->
+</body>
+</html>

@@ -20,25 +20,25 @@ angular
   ])
   .config(function ($routeProvider,$httpProvider) {
     $routeProvider
-      .when('/signUp', {
-        templateUrl: 'views/signUp.html',
-        controller: 'UserCtrl',
-        controllerAs: 'SignUp'
-      })
       .when('/about', {
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-      .when('/home2', {
-        templateUrl: '/views/home2.html',
+      .when('/home', {
+        templateUrl: '/views/home.html',
         controller: 'UserCtrl',
         controllerAs: 'home'
       })
+      .when('/routeFind', {
+        templateUrl: '/views/routeFind.html',
+        controller: 'routeFindCtrl',
+        controllerAs: 'rf'
+      })
       .otherwise({
-        templateUrl: 'views/signUp.html',
+        templateUrl: 'views/home.html',
         controller: 'UserCtrl',
-        controllerAs: 'SignUp'
+        controllerAs: 'home'
       });
       $httpProvider.defaults.useXDomain = true;
       delete $httpProvider.defaults.headers.common['X-Requested-With'];
