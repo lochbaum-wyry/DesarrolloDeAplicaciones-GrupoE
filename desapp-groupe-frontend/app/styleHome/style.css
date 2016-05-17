@@ -16,6 +16,9 @@ html, body{
    opacity: 0.9;
 }
 
+#map {
+        height: 100%;
+      }
 
 a {
   text-decoration: none;
