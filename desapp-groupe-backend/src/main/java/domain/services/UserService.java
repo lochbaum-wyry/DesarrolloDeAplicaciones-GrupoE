@@ -82,6 +82,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public User login(String email, String token) {
         return userRepository.getUserByEmail(email);
     }
