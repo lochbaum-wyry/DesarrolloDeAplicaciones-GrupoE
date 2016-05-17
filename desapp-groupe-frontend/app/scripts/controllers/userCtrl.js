@@ -17,6 +17,7 @@ angular.module('desappGrupoeFrontendApp')
 
     var onSuccess,onFailure,userPromise;
 
+
     $scope.getUserData = function (id){
     	onSuccess = function (result){
     		$scope.userData = result;
