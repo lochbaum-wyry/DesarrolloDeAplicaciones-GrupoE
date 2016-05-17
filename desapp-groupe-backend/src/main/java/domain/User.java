@@ -15,6 +15,7 @@ public class User  extends Entity
     private List<Route> routes ;
     private Integer points;
     private List<Chat> chats;
+    private String image;
 
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
@@ -78,6 +79,13 @@ public class User  extends Entity
         this.routes = routes;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     public String getUserName() {
         return userName;

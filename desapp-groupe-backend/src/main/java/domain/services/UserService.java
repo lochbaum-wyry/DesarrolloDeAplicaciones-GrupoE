@@ -34,10 +34,11 @@ public class UserService {
     }
 
     @Transactional
-    public User signUp(String name, String lastName, String userName, String email) throws SingUpException
+    public User signUp(String name, String lastName, String userName, String email,String image) throws SingUpException
     {
         validateUser(userName,email);
         User user = new User(name,lastName,userName,email);
+        user.setImage(image);
 
         userRepository.save(user);
 

@@ -58,7 +58,7 @@ public class UserServiceRest {
         }
         else {
             try {
-                realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail());
+                realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail(),user.getImage());
 
             } catch (SingUpException e) {
                 realUser = null;
@@ -72,7 +72,7 @@ public class UserServiceRest {
     @Produces("application/json")
     public User login(@PathParam("date") final String email, @PathParam("passwd") final String token) {
         try {
-            userService.signUp("ejemplo", "ejemplo", "ejemplo", email);
+            userService.signUp("ejemplo", "ejemplo", "ejemplo", email,"ejemplo");
         } catch (SingUpException e) {
             e.printStackTrace();
         }

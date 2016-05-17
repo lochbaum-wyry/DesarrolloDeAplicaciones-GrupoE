@@ -26,7 +26,7 @@ public class UserServiceTest extends AbstractServiceTest{
     public void test_singUp() {
 
         try {
-            userService.signUp("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
+            userService.signUp("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com","unaImagen");
 
         } catch (SingUpException e) {
             Assert.fail("Usuario o Email Existente");
