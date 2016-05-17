@@ -32,9 +32,16 @@ angular.module('desappGrupoeFrontendApp')
     };
 
     $scope.percentageGoodRate = function(){
-        return ((($scope.user.goodRateCount * 100) - 
+        var res;
+        if($scope.user.totalRateCount <= 0){
+            res = 0;
+        }
+        else
+        res = ((($scope.user.goodRateCount * 100) - 
             ((($scope.user.goodRateCount * 100) % $scope.user.totalRateCount))) 
         / $scope.user.totalRateCount);
+        
+        return res
     }
 
   });
