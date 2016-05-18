@@ -3,8 +3,6 @@
 
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
-//RouteFindCtrl.$inject['RouteService', 'RideService'];
-
 /* @ngInject */
 function RouteFindCtrl(RouteService,RideService) {
   /* RouteFindCtrl */ var vm = this;

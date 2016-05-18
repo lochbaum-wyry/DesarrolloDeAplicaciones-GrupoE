@@ -17,37 +17,37 @@
 <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="/jsHome/move-top.js"></script>
+<!-- <script type="text/javascript" src="/jsHome/move-top.js"></script>
 <script type="text/javascript" src="/jsHome/easing.js"></script>
-<script type="text/javascript">
+ --><!-- <script type="text/javascript">
       jQuery(document).ready(function($) {
         $(".scroll").click(function(event){   
           event.preventDefault();
           $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
         });
       });
-  </script>
+  </script> -->
 <!-- //end-smoth-scrolling -->
 <!--Calender -->
-<link rel="stylesheet" href="styleHome/clndr.css" type="text/css"/>
-<script src="jsHome/underscore-min.js"></script>
-<script src="jsHome/moment-2.2.1.js"></script>
-<script src="jsHome/clndr.js"></script>
-<script src="jsHome/site.js"></script>
+  <!-- <link rel="stylesheet" href="styleHome/clndr.css" type="text/css"/> -->
+  <!-- <script src="jsHome/underscore-min.js"></script> -->
+  <script src="jsHome/moment-2.2.1.js"></script>
+  <!-- <script src="jsHome/clndr.js"></script> -->
+  <!-- <script src="jsHome/site.js"></script> -->
 <!--chart -->
-<link href="styleHome/theme.css" rel='stylesheet' type='text/css'/>
-<script src="jsHome/Chart.js"></script>
+<!-- <link href="styleHome/theme.css" rel='stylesheet' type='text/css'/> -->
+<!-- <script src="jsHome/Chart.js"></script> -->
 <!--close script-->
-<script>$(document).ready(function(c) {
+<!-- <script>$(document).ready(function(c) {
   $('.glyphicon-remove').on('click', function(c){
     $('.flat').fadeOut('slow', function(c){
         $('.flat').remove();
     });
   });   
 });
-</script>
+</script> -->
 <!--responsive-->
-<script src="jsHome/responsiveslides.min.js"></script>
+<!-- <script src="jsHome/responsiveslides.min.js"></script>
 <script>
     $(function () {
       $("#slider").responsiveSlides({
@@ -58,7 +58,7 @@
         pager: true,
       });
     });
-  </script>
+  </script> -->
 </head>
 <body ng-app="desappGrupoeFrontendApp">
 <!--header start here-->
@@ -122,8 +122,12 @@
     <div class="clearfix">
     </div>
   </div>
-  <div ng-view="">
-  </div>
+
+  <!-- NG-VIEW: Aca es donde mete el contenido el ngRoute, no tocar -->
+  <div ng-view=""></div>
+  <!-- FIN NG-VIEW -->
+
+
 </div>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
@@ -142,14 +146,13 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <!-- Services -->
-<script src="scripts/controllers/userService.js"></script>
+<script src="scripts/services/userService.js"></script>
 <script src="scripts/services/routeService.js"></script>
 <script src="scripts/services/rideService.js"></script>
 <!-- Controllers -->
 <script src="scripts/controllers/userCtrl.js"></script>
 <script src="scripts/controllers/navBarCtrl.js"></script>
 <script src="scripts/controllers/routeFindCtrl.js"></script>
-<script src="scripts/controllers/about.js"></script>
 <!-- endbuild -->
 </body>
 </html>
