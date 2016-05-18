@@ -282,5 +282,16 @@ body{
 ::-moz-input-placeholder{
    color: rgba(255,255,255,0.6);
 }
+//------------------
 
+.comments-container {
+    width: 480px;
+  }
+.comments-list .comment-box {
+    width: 390px;
+  }
+
+.reply-list .comment-box {
+    width: 320px;
+  }
 }
