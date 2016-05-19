@@ -1,27 +1,31 @@
+  (function () {
 'use strict';
 
-angular.module('desappGrupoeFrontendApp')
-  .controller('AddRouteCtrl', function ($scope,UserService,$localStorage,$UserCtrl) {
+angular.module('desappGrupoeFrontendApp').controller('AddRouteCtrl', AddRouteCtrl);
 
-  $scope.routeList = [];
-  $scope.latLng = {'latitude':'0','longitude':'0'};
-  $scope.latitude = 0;
+function AddRouteCtrl(UserService,$localStorage) {
 
+  var vm = this;
+  
+  vm.routeList = [];
+  vm.latLng = {'latitude':'0','longitude':'0'};
+  vm.latitude = 0;
+  vm.ERROR_MSG;
 
-  $scope.addPoint = function () {
-    $scope.routeList.push($scope.latLng);
-    $scope.latLng = {'latitude':'0','longitude':'0'};
+   function addPoint() {
+    vm.routeList.push(vm.latLng);
+    vm.latLng = {'latitude':'0','longitude':'0'};
   };
 
-  $scope.addRoute = function () {
+  function addRoute() {
 
-      onSuccess = function (result){
-            $scope.latLng = {'latitude':'0','longitude':'0'};
-            $scope.routeList = [];
+      function onSuccess(result){
+            vm.latLng = {'latitude':'0','longitude':'0'};
+            vm.routeList = [];
       };
 
-      onFailure = function (error){
-        $scope.ERROR_MSG = error;
+      function onFailure(error){
+        vm.ERROR_MSG = error;
       };
 
       var user = $localStorage.user;
@@ -32,4 +36,6 @@ angular.module('desappGrupoeFrontendApp')
       userPromise.catch(onFailure);
   };
 
-});
+} // RouteFindCtrl
+
+})()

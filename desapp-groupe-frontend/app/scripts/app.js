@@ -26,6 +26,11 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+      .when('/addRoute', {
+        templateUrl: '/views/addRoute.html',
+        controller: 'AddRouteCtrl',
+        controllerAs: 'addrf'
+      })
       .when('/home', {
         templateUrl: '/views/home.html',
         controller: 'UserCtrl',
@@ -35,11 +40,6 @@ angular
         templateUrl: '/views/routeFind.html',
         controller: 'RouteFindCtrl',
         controllerAs: 'rf'
-      })
-      .when('/add_route', {
-        templateUrl: '/views/add_route.html',
-        controller: 'addRouteCtrl',
-        controllerAs: 'addrf'
       })
       .otherwise({
         templateUrl: 'views/home.html',
