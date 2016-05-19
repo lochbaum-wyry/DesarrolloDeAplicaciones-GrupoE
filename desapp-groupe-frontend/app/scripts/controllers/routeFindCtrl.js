@@ -11,10 +11,9 @@ function RouteFindCtrl(RouteService,RideService) {
   //------------
   // Scope data
   //------------
-  /* User */ vm.myself = {};
 
   //-- for getRideProposals
-  /* DateTime */ vm.selectedDate    = null; // fecha seleccionada por el usuario para la búsqueda de rutas
+  /* DateTime */ vm.selDate    = moment(); // fecha seleccionada por el usuario para la búsqueda de rutas
   /* LatLng */ vm.selDeparturePoint = null; // puntos seleccionados por el usuario para la búsqueda de rutas
   /* LatLng */ vm.selArrivalPoint   = null;
 
@@ -28,24 +27,31 @@ function RouteFindCtrl(RouteService,RideService) {
   //------------------------------
   vm.getRideProposals = getRideProposals;
   vm.requestRide = requestRide; 
-
-
+  vm.onTimeSet = onTimeSet; 
 
   //--------------------------------
   // Scope functions implementation
   //--------------------------------
+  function onTimeSet(newDate, oldDate) {
+    console.log('hey!');
+    // vm.selDate = newDate;
+  }
+
   function getRideProposals() {
 
-    var routePromise = RouteService.getRideProposals(vm.selectedDate, vm.selDeparturePoint, vm.selArrivalPoint)
+    var routePromise = RouteService.getRideProposals(vm.selDate.valueOf(), vm.selDeparturePoint, vm.selArrivalPoint)
               .then(onSuccess)
               .catch(onFailure);
   
     function onSuccess(response) { 
       vm.rideProposals = response ;
       if (vm.rideProposals.length > 0) renderRideProposal(0) ;
+      alert('success papá!');
     }
 
-    function onFailure(error) { }
+    function onFailure(error) {
+      console.log(error);
+     }
   }
 
   function requestRide() {
