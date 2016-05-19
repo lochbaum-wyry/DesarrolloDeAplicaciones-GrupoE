@@ -36,6 +36,11 @@ angular
         controller: 'RouteFindCtrl',
         controllerAs: 'rf'
       })
+      .when('/add_route', {
+        templateUrl: '/views/add_route.html',
+        controller: 'addRouteCtrl',
+        controllerAs: 'addrf'
+      })
       .otherwise({
         templateUrl: 'views/home.html',
         controller: 'UserCtrl',
