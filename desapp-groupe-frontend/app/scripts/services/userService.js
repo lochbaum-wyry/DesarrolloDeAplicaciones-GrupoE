@@ -1,12 +1,28 @@
 (function () { 
 'use strict';
 angular.module('desappGrupoeFrontendApp')
-	.factory('UserService',function ($http,$log){
+	.factory('UserService',function ($http,$log,$localStorage){
 		var url = 'http://localhost:8080/domain/servicesRest/user';
 
 		var userService = {
-			addRoute: addRoute
+			addRoute: addRoute,
+			reloadUser: reloadUser
 		};
+
+		function reloadUser(){
+      		return $http.get(url + '/getUser',$localStorage.id)
+        		.then(onSuccessReload)
+        		.catch(onFailureReload);
+    
+    		function onSuccessReload(user){
+      			$localStorage.user = user;
+    		}
+
+    		function onFailureReload(error){
+      			$log.error('Ocurrio un error: ' + error.data);
+      			return 'Ocurrio un error';
+    		}
+  		};
 
 		function addRoute(user,points,distanceInKms,fixedCosts,schedules) {
 			var data = {
@@ -16,7 +32,7 @@ angular.module('desappGrupoeFrontendApp')
 				fixedCosts: fixedCosts, 
 				schedules: schedules
 			};
-			return $http.post(url + '/addRoute', data).then(onSuccessGetUser).catch(onFailureGetUser);
+			return $http.post(url + '/addRoute', data).then(onSuccessAddRoute).catch(onFailureddRoute);
 
 
 			function onSuccessAddRoute(response){

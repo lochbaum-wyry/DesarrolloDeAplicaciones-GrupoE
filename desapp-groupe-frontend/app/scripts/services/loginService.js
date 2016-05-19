@@ -2,7 +2,7 @@
 'use strict';
 angular.module('desappGrupoeFrontendApp').factory('LoginService', LoginService);
 
-function LoginService($http,$log) {
+function LoginService($http,$log,$localStorage) {
     
   var url = 'http://localhost:8080/domain/servicesRest/user';
 
