@@ -1,0 +1,46 @@
+<div class = "col-md-12 header-right">
+    <div class="head-colum3">
+    <!--ACA EMPIEZA EL ADD ROUTE-->
+    <div class = "col-md-3 calgaman">
+            <div class = "content-cal1">
+              <form>
+                <div class="form-group">
+                  <label for="subeEn">Latitud:</label>
+                  <input type="text" value= {{latLng.latitude}} class="form-control" id="subeEn" placeholder="Latitud">
+                </div>
+                <div class="form-group">
+                  <label for="bajaEn">Longitud:</label>
+                  <input type="text" value= {{latLng.longitude}} class="form-control" id="bajaEn" placeholder="Longitud">
+                </div>
+                
+
+                <div class="form-group ">
+                  <input class="btn" type="submit" value="Agregar Punto" ng-click="addPoint()">
+                </div>
+
+              </form>
+              <div class="form-group ">
+                  <input class="btn" type="submit" value="Agregar Ruta" ng-click="addRoute()">
+                </div>
+            </div>
+          </div>
+      	<!--ACA TERMINA EL ADD ROUTE-->
+      	<!--ACA EMPIEZA MAP DEL ADD ROUTE-->
+      	<div class = "col-md-6 calgaman">
+            <div class = "content-cal1">
+            </div>
+        </div>
+      	<!--ACA TERMINA MAP DEL ADD ROUTE-->
+      	<!--ACA EMPIEZA LISTA DE  ROUTE-->
+      	<div class = "col-md-3 calgaman">
+            <div class = "content-cal1">
+            	<div class="list-group">
+  					<a href="#" class="list-group-item">First item</a>
+  					<a href="#" class="list-group-item">Second item</a>
+  					<a href="#" class="list-group-item">Third item</a>
+				</div>
+            </div>
+        </div>
+      	<!--ACA TERMINA LISTA DE  ROUTE-->
+    </div>
+</div>
