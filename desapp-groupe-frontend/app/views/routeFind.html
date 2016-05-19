@@ -45,7 +45,7 @@
 
             <div class="row"> <!--div class="row" ng-repeat="rf.rideProposals as rideProposal" -->
               <div class="col-md-12">
-                <a href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="selectRideProposal($index)">
+                <a href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)">
                 <div class="well well-sm">
                   <div class="row">
                     <!-- <div class="col-xs-3 col-md-3 text-center">
@@ -73,44 +73,8 @@
             </div>
 
 
-            <button class='btn' onclick="rf.requestRide()"'">Solicitar unirse</button>
+            <button class='btn' ng-click="rf.requestRide()"'">Solicitar unirse</button>
           </div>
-<!-- 
-
-          <div class="col-md-3 skills-rows">
-            <div class = "content-cal1">
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <span class="badge">14</span>
-                    Jorgito
-                  </li>
-                </ul>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <span class="badge">14</span>
-                    Fede
-                  </li>
-                </ul>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <span class="badge">14</span>
-                    Dan
-                  </li>
-                </ul>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <span class="badge">14</span>
-                    Sarasa
-                  </li>
-                </ul>
-                <ul class="list-group">
-                  <li class="list-group-item">
-                    <span class="badge">14</span>
-                    Leo
-                  </li>
-                </ul>
-            </div>
-          </div> -->
           <!--ACA TERMINA LA LISTA DE RESULTADOS-->
      </div>
   </div>

@@ -28,7 +28,7 @@ function RouteFindCtrl(RouteService,RideService) {
   vm.getRideProposals = getRideProposals;
   vm.requestRide = requestRide; 
   vm.onTimeSet = onTimeSet; 
-
+  vm.selectRideProposal = selectRideProposal;
   //--------------------------------
   // Scope functions implementation
   //--------------------------------
@@ -52,6 +52,11 @@ function RouteFindCtrl(RouteService,RideService) {
     function onFailure(error) {
       console.log(error);
      }
+  }
+
+  function selectRideProposal(index)
+  {
+    vm.selRideProposalIdx = index;
   }
 
   function requestRide() {
