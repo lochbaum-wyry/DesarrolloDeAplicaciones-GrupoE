@@ -16,7 +16,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ui.bootstrap.datetimepicker'
   ])
   .config(function ($routeProvider,$httpProvider) {
     $routeProvider
@@ -32,7 +33,7 @@ angular
       })
       .when('/routeFind', {
         templateUrl: '/views/routeFind.html',
-        controller: 'routeFindCtrl',
+        controller: 'RouteFindCtrl',
         controllerAs: 'rf'
       })
       .otherwise({
