@@ -70,13 +70,20 @@ public class UserServiceRest {
     @GET
     @Path("login/{email}/{passwd}")
     @Produces("application/json")
-    public User login(@PathParam("date") final String email, @PathParam("passwd") final String token) {
-        try {
+    public User login(@PathParam("email") final String email, @PathParam("passwd") final String token) {
+        /*try {
             userService.signUp("ejemplo", "ejemplo", "ejemplo", email,"ejemplo");
         } catch (SingUpException e) {
             e.printStackTrace();
-        }
+        }*/
         return userService.login(email,token);
+    }
+
+    @GET
+    @Path("getUser/{id}")
+    @Produces("application/json")
+    public User getUser(@PathParam("id") final Integer id) {
+        return userService.getUser(id);
     }
 
     @POST

@@ -10,12 +10,12 @@ angular.module('desappGrupoeFrontendApp')
 		};
 
 		function reloadUser(){
-      		return $http.get(url + '/getUser',$localStorage.id)
+      		return $http.get(url + '/getUser/' + $localStorage.user.id)
         		.then(onSuccessReload)
         		.catch(onFailureReload);
     
     		function onSuccessReload(user){
-      			$localStorage.user = user;
+    			return user;
     		}
 
     		function onFailureReload(error){

@@ -24,7 +24,7 @@ function AddRouteCtrl(UserService,$localStorage) {
       function onSuccess(result){
             vm.latLng = {'latitude':'0','longitude':'0'};
             vm.routeList = [];
-            //UserService.reloadUser();
+            $localStorage.user = UserService.reloadUser();
       };
 
       function onFailure(error){
