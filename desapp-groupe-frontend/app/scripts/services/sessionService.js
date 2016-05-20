@@ -36,7 +36,7 @@ function sessionService($http,$log,$localStorage,UserService) {
       .catch(onFailureReload);
 
     function onSuccessReload(user){
-      return user;
+      initialize(user);
     }
 
     function onFailureReload(error){
