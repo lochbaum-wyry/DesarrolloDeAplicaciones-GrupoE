@@ -1,21 +1,43 @@
 package domain;
 
-import java.lang.*;
-
-import static java.lang.StrictMath.abs;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 public class RoutePoint extends Entity
 {
+    @JsonIgnore
     private Route route;
     private Integer indexInRoute;
     private Double latitude;
-    private Double longitude;
 
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    @JsonIgnore
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    private Double longitude;
+    public RoutePoint()
+    {}
     public RoutePoint(Route route, Double latitude, Double longitude)
     {
         this(latitude, longitude);
         this.route = route;
     }
+
+    public RoutePoint(Double latitude, Double longitude, Integer indexInRoute)
+    {
+        this.indexInRoute = indexInRoute;
+        this.latitude = latitude;
+        this.longitude = longitude ;
+    }
+
 
     public RoutePoint(Double latitude, Double longitude)
     {
@@ -58,6 +80,7 @@ public class RoutePoint extends Entity
         return getLatitude().equals(latitude) && getLongitude().equals(longitude);
     }
 
+    @JsonIgnore
     public void setRoute(Route route) {
         this.route = route;
     }

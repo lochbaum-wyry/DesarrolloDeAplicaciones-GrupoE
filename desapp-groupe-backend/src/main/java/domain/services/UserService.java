@@ -72,10 +72,8 @@ public class UserService {
     }
 
     @Transactional
-    public void addRoute(User user, List<LatLng> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules) throws SubiQueTeLlevoException {
+    public void addRoute(User user, Route route) throws SubiQueTeLlevoException {
         try {
-            Route route = new Route(distanceInKms, fixedCosts, points, schedules);
-            routeRepository.save(route);
             user.addRoute(route);
             userRepository.update(user);
         } catch (Exception e) {
@@ -83,6 +81,18 @@ public class UserService {
         }
     }
 
+//    @Transactional
+//    public void addRoute(User user, List<LatLng> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules) throws SubiQueTeLlevoException {
+//        try {
+//            Route route = new Route(distanceInKms, fixedCosts, points, schedules);
+//            routeRepository.save(route);
+//            user.addRoute(route);
+//            userRepository.update(user);
+//        } catch (Exception e) {
+//            throw new SubiQueTeLlevoException(e);
+//        }
+//    }
+//
     @Transactional
     public User login(String email, String token) {
         return userRepository.getUserByEmail(email);

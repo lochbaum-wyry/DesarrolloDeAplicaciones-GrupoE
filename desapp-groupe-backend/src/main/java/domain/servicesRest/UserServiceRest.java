@@ -1,6 +1,7 @@
 package domain.servicesRest;
 
 import domain.LatLng;
+import domain.Route;
 import domain.Schedule;
 import domain.User;
 import domain.builders.UserBuilder;
@@ -87,13 +88,15 @@ public class UserServiceRest {
     }
 
     @POST
-    @Path("addRoute")
+    @Path("{id}/addRoute/")
     @Consumes("application/json")
-    public Response addRoute(User user, List<LatLng> points, Float distanceInKms, Float fixedCosts, List<Schedule> schedules)
+    @Produces("application/json")
+    public Response addRoute(@PathParam("id") final Integer id, Route route)
     {
         Response response;
         try {
-            userService.addRoute(user,points,distanceInKms,fixedCosts,schedules);
+            User user = userService.getUser(id);
+            userService.addRoute(user,route);
             response = Response.ok().tag("La ruta fue agregada correctamente").build();
         } catch (SubiQueTeLlevoException e) {
             response = Response.serverError().tag("No se pudo agregar la ruta").build();

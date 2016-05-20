@@ -1,7 +1,6 @@
 package domain.builders;
 
 import domain.LatLng;
-import domain.RoutePoint;
 import domain.Route;
 
 import java.lang.*;
@@ -20,7 +19,7 @@ public class RouteBuilder {
     public Route build()
     {
         Route route = new Route();
-        route.setRoutePointsFromLatLng(routePoints);
+        route.setLatLngs(routePoints);
 
         if (fixedCosts != null)
             route.setFixedCosts(fixedCosts);

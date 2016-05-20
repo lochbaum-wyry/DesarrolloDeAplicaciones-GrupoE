@@ -2,7 +2,7 @@
 'use strict';
 angular.module('desappGrupoeFrontendApp').factory('LoginService', LoginService);
 
-function LoginService($http,$log,$localStorage) {
+function LoginService($http,$log,SessionService) {
     
   var url = 'http://localhost:8080/domain/servicesRest/user';
 
@@ -17,11 +17,12 @@ function LoginService($http,$log,$localStorage) {
         .catch(onFailureSignUp);
     
     function onSuccessSignUp(response){
-      return response.data;
+      var user = response.data;
+      SessionService.initialize(user);
+      return user; 
     }
 
     function onFailureSignUp(error){
-      $log.error('Ocurrio un error: ' + error.data);
       return 'Ocurrio un error';
     }
 

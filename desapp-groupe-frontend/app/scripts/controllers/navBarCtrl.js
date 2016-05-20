@@ -4,9 +4,16 @@
 angular.module('desappGrupoeFrontendApp').controller('NavBarCtrl', navBarCtrl);
 
 /* @ngInject */
-function navBarCtrl($localStorage) {
+function navBarCtrl(SessionService,$window) {
   /* navBarCtrl */ var vm = this;
-  vm.user = $localStorage.user;
+  vm.user = SessionService.user();
+
+  vm.logout = logout; 
+
+  function logout() {
+    SessionService.finalize();
+    $window.location.href = "/index.html";
+  }
 } // navBarCtrl
 
 

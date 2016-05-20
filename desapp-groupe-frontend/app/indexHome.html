@@ -77,6 +77,7 @@
             {{nav.user.name}}<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="#user_data">Datos Personales</a></li>
+              <li><a href='#' ng-click='nav.logout()'>Salir</a></li>
             </ul>
             </li>
           </ul>
@@ -114,6 +115,7 @@
 <script src="scripts/app.js"></script>
 <!-- Services -->
 <script src="scripts/services/userService.js"></script>
+<script src="scripts/services/sessionService.js"></script>
 <script src="scripts/services/routeService.js"></script>
 <script src="scripts/services/rideService.js"></script>
 <!-- Controllers -->

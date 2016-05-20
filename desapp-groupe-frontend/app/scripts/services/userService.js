@@ -1,51 +1,53 @@
 (function () { 
 'use strict';
 angular.module('desappGrupoeFrontendApp')
-	.factory('UserService',function ($http,$log,$localStorage){
-		var url = 'http://localhost:8080/domain/servicesRest/user';
+  .factory('UserService',function ($http,$log,$localStorage){
+    var url = 'http://localhost:8080/domain/servicesRest/user';
 
-		var userService = {
-			addRoute: addRoute,
-			reloadUser: reloadUser
-		};
+    var userService = {
+      addRoute: addRoute,
+      getUser: getUser
+    };
 
-		function reloadUser(){
-      		return $http.get(url + '/getUser/' + $localStorage.user.id)
-        		.then(onSuccessReload)
-        		.catch(onFailureReload);
+
+    function getUser(user_id) {
+        return $http.get(url + '/getUser/' + user_id)
+          .then(onSuccessGetUser)
+          .catch(onFailureGetUser);
     
-    		function onSuccessReload(user){
-    			return user;
-    		}
+        function onSuccessGetUser(response){
+          return response.data;
+        }
 
-    		function onFailureReload(error){
-      			$log.error('Ocurrio un error: ' + error.data);
-      			return 'Ocurrio un error';
-    		}
-  		};
+        function onFailureGetUser(error){
+            $log.error('Ocurrio un error: ' + error.data);
+            return 'Ocurrio un error';
+        }
+      };
 
-		function addRoute(user,points,distanceInKms,fixedCosts,schedules) {
-			var data = {
-				user: user,
-				points: points,
-				distanceInKms: distanceInKms, 
-				fixedCosts: fixedCosts, 
-				schedules: schedules
-			};
-			return $http.post(url + '/addRoute', data).then(onSuccessAddRoute).catch(onFailureddRoute);
+    function addRoute(user_id,points,distanceInKms,fixedCosts,schedules) {
+      var route = {
+        latLngs: points,
+        distanceInKms: distanceInKms, 
+        fixedCosts: fixedCosts, 
+        schedules: schedules
+      };
 
+      return $http.post(url + '/' + user_id + '/addRoute' , route)
+            .then(onSuccessAddRoute)
+            .catch(onFailureddRoute);
 
-			function onSuccessAddRoute(response){
-				return response.data;
-			}
+      function onSuccessAddRoute(response){
+        return response.data;
+      }
 
-			function onFailureddRoute(error){
-				$log.error('Ocurrio un error: ' + error.data);
-				return 'Ocurrio un error';	
-			}
-		};
+      function onFailureddRoute(error){
+        $log.error('Ocurrio un error: ' + error.data);
+        return 'Ocurrio un error';  
+      }
+    };
 
-		return userService;
-	});
+    return userService;
+  });
 
 })();
