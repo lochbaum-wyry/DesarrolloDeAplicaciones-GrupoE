@@ -19,6 +19,7 @@ function sessionService($http,$log,$localStorage,UserService) {
   }
 
   function initialize(user) {
+    $localStorage.user = null; 
     $localStorage.user = user ; 
   }
 
@@ -36,7 +37,7 @@ function sessionService($http,$log,$localStorage,UserService) {
       .catch(onFailureReload);
 
     function onSuccessReload(user){
-      initialize(user);
+      $localStorage.user = user;
     }
 
     function onFailureReload(error){
