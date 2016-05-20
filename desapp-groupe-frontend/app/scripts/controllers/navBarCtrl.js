@@ -14,6 +14,7 @@ function navBarCtrl(SessionService,$window) {
     SessionService.finalize();
     $window.location.href = "/index.html";
   }
+
 } // navBarCtrl
 
 

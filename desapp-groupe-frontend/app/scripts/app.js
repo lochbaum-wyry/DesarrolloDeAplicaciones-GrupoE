@@ -41,6 +41,11 @@ angular
         controller: 'RouteFindCtrl',
         controllerAs: 'rf'
       })
+      .when('/rankings', {
+        templateUrl: '/views/rankings.html',
+        controller: 'RankingCtrl',
+        controllerAs: 'rnk'
+      })
       .otherwise({
         templateUrl: 'views/home.html',
         controller: 'UserCtrl',

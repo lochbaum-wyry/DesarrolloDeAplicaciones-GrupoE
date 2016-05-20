@@ -70,40 +70,17 @@
         <td><strong>Origen</strong></td>
         <td><strong>Destino</strong></td>
         <td><strong>Intencion</strong></td>
+        <td><strong>Costo</strong></td>
       </tr>
       </thead>
-
-      <tbody>
-      <tr>
+      <tbody ng-repeat="route in user.routes">
+      <tr ng-model="route.selected">
         <td>Lunes</td>
         <td>9:30</td>
         <td>Ranelagh</td>
         <td>Capital</td>
         <td>Trabajo</td>
-      </tr>
- 
-      <tr>
-        <td>Martes</td>
-        <td>9:30</td>
-        <td>Ranelagh</td>
-        <td>Capital</td>
-        <td>Trabajo</td>
-      </tr>
-
-      <tr>
-        <td>Martes</td>
-        <td>9:30</td>
-        <td>Ranelagh</td>
-        <td>Capital</td>
-        <td>Trabajo</td>
-      </tr>
-
-      <tr>
-        <td>Martes</td>
-        <td>9:30</td>
-        <td>Ranelagh</td>
-        <td>Capital</td>
-        <td>Trabajo</td>
+        <td>${{route.fixedCosts}}</td>
       </tr>
       </tbody>
       </table>

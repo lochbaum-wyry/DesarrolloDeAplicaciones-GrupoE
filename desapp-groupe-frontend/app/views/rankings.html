@@ -1,0 +1,32 @@
+<div class = "col-md-12 header-right">
+	<div class = "col-md-2 ">
+      <div class = "content-cal1">
+      	<button ng-click="rnk.ranking()"></button>
+      </div>
+    </div>
+	<div class = "col-md-10 ">
+      <div class = "content-cal1">
+      	<table class="table table-hover ">
+      <div class="avari-info">
+            <h2>Ranking</h2>
+      </div>
+      <thead>
+      <tr>
+        <td><strong>Usuario</strong></td>
+        <td><strong>Puntos</strong></td>
+        <td><strong>Votos buenos</strong></td>
+        <td><strong>Votos malos</strong></td>
+      </tr>
+      </thead>
+      <tbody ng-repeat="user in rnk.users">
+      <tr ng-model="user.selected">
+        <td>{{user.name}}</td>
+        <td>{{user.points}}</td>
+        <td>{{user.goodRateCount}}</td>
+        <td>{{user.badRateCount}}</td>
+      </tr>
+      </tbody>
+      </table>
+      </div>
+    </div>
+</div>
