@@ -43,8 +43,8 @@ angular
       })
       .when('/chats', {
         templateUrl: '/views/chats.html',
-        controller: 'chatCtrl',
-        controllerAs: 'chat'
+        controller: 'ChatCtrl',
+        controllerAs: 'ct'
       })
       .when('/routeFind', {
         templateUrl: '/views/routeFind.html',

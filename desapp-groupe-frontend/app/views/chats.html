@@ -4,8 +4,8 @@
           <div class="avari-info">
             <h2>Chats</h2>
           </div>
-          <div class="list-group" ng-repeat="chat in chats.chats">
-           <a href="#" class="list-group-item" ng-model="chat.selected">
+          <div class="list-group" ng-repeat="chat in ct.chats">
+           <a href="" value ='chat' class="list-group-item" ng-model="ct.chatSelected">
              {{chat.name}} 
            </a>
         </div>
@@ -15,7 +15,7 @@
       <div class = "content-cal1">
 
       <div class="avari-info">
-            <h2>{{chats.chatSelected.name}}</h2>
+            <h2>{{ct.chatSelected.name}}</h2>
       </div>
       <div class="panel-collapse collapse" id="collapseOne">
                 <div class="panel-body">
