@@ -12,8 +12,8 @@ function RankingService($http,$log){
   };
 
   function ranking() {
-    return $http.get(url + '/ranking/')
-              .then(succRanking)
+    return $http.get(url + '/ranking')
+              .then(succRanking)																																																																																																																																																	
               .catch(failRanking);
 
     function succRanking(response){

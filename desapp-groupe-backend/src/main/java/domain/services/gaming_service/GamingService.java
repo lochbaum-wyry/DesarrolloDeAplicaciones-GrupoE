@@ -4,6 +4,7 @@ import domain.repositories.RankingRepository;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
 import domain.services.MonthlyRanking;
+import org.springframework.transaction.annotation.Transactional;
 
 public class GamingService
 {
@@ -20,6 +21,8 @@ public class GamingService
         this.rankingRepository = rankingRepository;
     }
 
+
+    //@Transactional
     public MonthlyRanking createRanking(Integer month, Integer year)
     {
         MonthlyRanking ranking = rankingRepository.getRankingIn(month,year);

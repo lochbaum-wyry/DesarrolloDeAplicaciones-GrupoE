@@ -1,0 +1,41 @@
+<div class = "col-md-12 header-right">
+	<div class = "col-md-3 ">
+      <div class = "content-cal1">
+      	<form>
+          <div class="avari-info">
+            <h2>Filtro</h2>
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text"  class="form-control" placeholder="nombre">
+          </div>
+        </form>
+      </div>
+    </div>
+	<div class = "col-md-9 ">
+      <div class = "content-cal1">
+      	<table class="table table-hover ">
+      <div class="avari-info">
+            <h2>Productos</h2>
+      </div>
+      <div>
+        <h4>Mis puntos: {{ws.user.points}}</h4>
+      </div>
+      <thead>
+      <tr>
+        <td><strong>Producto</strong></td>
+        <td><strong>Costo</strong></td>
+        <td><strong>Stock</strong></td>
+      </tr>
+      </thead>
+      <tbody ng-repeat="product in ws.products">
+      <tr ng-model="product.selected">
+        <td>{{product.name}}</td>
+        <td>{{product.cost}}</td>
+        <td>{{product.stock}}</td>
+      </tr>
+      </tbody>
+      </table>
+      </div>
+    </div>
+</div>

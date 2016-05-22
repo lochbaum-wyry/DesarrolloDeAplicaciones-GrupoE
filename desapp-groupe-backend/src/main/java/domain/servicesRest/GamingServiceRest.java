@@ -1,17 +1,15 @@
 package domain.servicesRest;
 
 
-import domain.User;
-import domain.builders.UserBuilder;
-import domain.services.UserService;
-import domain.services.gaming_service.GamingService;
-import org.springframework.stereotype.Service;
 
+import domain.services.MonthlyRanking;
+import domain.services.gaming_service.GamingService;
+import org.joda.time.DateTime;
+import org.springframework.stereotype.Service;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @Path("gaming")
 @Service
@@ -27,8 +25,7 @@ public class GamingServiceRest {
     @GET
     @Path("ranking")
     @Produces("application/json")
-    public List<User> ranking(){
-
-        return new ArrayList<User>();
+    public MonthlyRanking ranking(){
+        return gamingService.createRanking(new DateTime().getMonthOfYear(),new DateTime().getYearOfEra());
     }
 }

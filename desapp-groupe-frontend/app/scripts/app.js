@@ -36,6 +36,16 @@ angular
         controller: 'UserCtrl',
         controllerAs: 'home'
       })
+      .when('/webshop', {
+        templateUrl: '/views/webshop.html',
+        controller: 'WebShopCtrl',
+        controllerAs: 'ws'
+      })
+      .when('/chats', {
+        templateUrl: '/views/chats.html',
+        controller: 'chatCtrl',
+        controllerAs: 'chat'
+      })
       .when('/routeFind', {
         templateUrl: '/views/routeFind.html',
         controller: 'RouteFindCtrl',
