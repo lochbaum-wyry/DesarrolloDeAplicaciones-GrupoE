@@ -10,7 +10,7 @@ function chatCtrl($localStorage) {
   /* String */ vm.ERROR_MSG = null;
 
   //vm.chats = $localStorage.user.chats;
-  vm.chats = [{'name':'Dan'},{'name':'bernardo'},{'name':'carlos'},{'name':'sarasa'}]
+  vm.chats = [{'name':'Dan'},{'name':'Bernardo'},{'name':'Carlos'},{'name':'Sarasa'}]
 
   vm.chatSelected = {'name':'Dan'};
   }

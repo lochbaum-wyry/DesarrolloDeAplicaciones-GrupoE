@@ -3,20 +3,20 @@
       <div class = "content-cal1">
       	<form>
           <div class="form-group">
-            <label for="mes">Mes:</label>
-            <input type="text"  class="form-control" id="mes" placeholder="mes">
+            <label for="mes">{{'mes' | translate}}:</label>
+            <input type="text"  class="form-control" id="mes" placeholder="{{'mes' | translate}}">
           </div>
           <div class="form-group">
-            <label for="anio">Año:</label>
-            <input type="text" class="form-control" id="anio" placeholder="año">
+            <label for="anio">{{'año' | translate}}:</label>
+            <input type="text" class="form-control" id="anio" placeholder="{{'año' | translate}}">
           </div>
           <div class="btn-group form-group btn-group-sm" role="group" aria-label="">
-  			<button type="button" class="btn ">Conductores</button>
-  			<button type="button" class="btn ">Pasajeros</button>
-  			<button type="button" class="btn ">Vehiculos</button>
+  			<button type="button" class="btn ">{{'conductores' | translate}}</button>
+  			<button type="button" class="btn ">{{'pasajeros' | translate}}</button>
+  			<button type="button" class="btn ">{{'vehiculos' | translate}}</button>
 		  </div>
           <div class="form-group ">
-            <input class="btn" type="button" value="Buscar" id="" ng-click="rnk.getRanking()">
+            <input class="btn" type="button" value="{{'buscar' | translate}}" id="" ng-click="rnk.getRanking()">
           </div>
         </form>
       </div>
@@ -25,14 +25,14 @@
       <div class = "content-cal1">
       	<table class="table table-hover ">
       <div class="avari-info">
-            <h2>Ranking</h2>
+            <h2>{{'ranking' | translate}}</h2>
       </div>
       <thead>
       <tr>
-        <td><strong>Usuario</strong></td>
-        <td><strong>Puntos</strong></td>
-        <td><strong>Votos buenos</strong></td>
-        <td><strong>Votos malos</strong></td>
+        <td><strong>{{'usuario' | translate}}</strong></td>
+        <td><strong>{{'puntos' | translate}}</strong></td>
+        <td><strong>{{'votos buenos' | translate}}</strong></td>
+        <td><strong>{{'votos malos' | translate}}</strong></td>
       </tr>
       </thead>
       <tbody ng-repeat="user in rnk.ranking.bestDrivers">

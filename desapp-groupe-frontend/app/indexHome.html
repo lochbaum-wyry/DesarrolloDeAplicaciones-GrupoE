@@ -47,37 +47,37 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller='NavBarCtrl as nav'>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home<span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="#">{{'home' | translate}}<span class="sr-only">(current)</span></a></li>
             <li class="dropdown">
-            <a href="#rides" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Viajes<span class="caret"></span></a>
+            <a href="#rides" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'viajes' | translate}}<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#accepted">Confirmados</a></li>
-              <li><a href="#rideRequests">Solicitudes</a></li>
-              <li><a href="#requestedRides">Solicitados</a></li>
-              <li><a href="#rateRide">Calificar viaje</a></li>
+              <li><a href="#accepted">{{'confirmados' | translate}}</a></li>
+              <li><a href="#rideRequests">{{'solicitudes' | translate}}</a></li>
+              <li><a href="#requestedRides">{{'solicitados' | translate}}</a></li>
+              <li><a href="#rateRide">{{'calificar viaje' | translate}}</a></li>
             </ul>
             </li>
             <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            Recorridos<span class="caret"></span>
+            {{'recorridos' | translate}}<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#user_routes">Mis Recorridos</a></li>
-              <li><a href="#addRoute">Agregar Recorrido</a></li>
+              <li><a href="#user_routes">{{'mis recorridos' | translate}}</a></li>
+              <li><a href="#addRoute">{{'agregar recorrido' | translate}}</a></li>
             </ul>
             </li>
-            <li><a href="#chats">Chats</a></li>
-            <li><a href="#webshop">WebShop</a></li>
-            <li><a href="#routeFind">Buscar recorrido</a></li>
-            <li ><a href="#rankings" ng-click="nav.ranking()">Rankings</a></li>
+            <li><a href="#chats">{{'chats' | translate}}</a></li>
+            <li><a href="#webshop">{{'webShop' | translate}}</a></li>
+            <li><a href="#routeFind">{{'buscar recorrido' | translate}}</a></li>
+            <li ><a href="#rankings" ng-click="nav.ranking()">{{'rankings' | translate}}</a></li>
           </ul>
           <ul>
             <li class="dropdown pull-right">
             <a href="account" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             {{nav.user.name}}<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#user_data">Datos Personales</a></li>
-              <li><a href='#' ng-click='nav.logout()'>Salir</a></li>
+              <li><a href="#user_data">{{'datos personales' | translate}}</a></li>
+              <li><a href='#' ng-click='nav.logout()'>{{'salir' | translate}}</a></li>
             </ul>
             </li>
           </ul>
@@ -107,8 +107,10 @@
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
 <script src="bower_components/angular-touch/angular-touch.js"></script>
 <script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
 <script type="text/javascript" src="/jsLibs/angular-bootstrap-datetimepicker/js/datetimepicker.js"></script>
 <script type="text/javascript" src="/jsLibs/angular-bootstrap-datetimepicker/js/datetimepicker.templates.js"></script>
+
 <!-- endbower -->
 <!-- endbuild -->
 <!-- build:js({.tmp,app}) scripts/scripts.js -->

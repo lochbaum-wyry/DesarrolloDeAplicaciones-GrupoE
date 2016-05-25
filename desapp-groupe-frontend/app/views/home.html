@@ -17,7 +17,7 @@
             <div class="col-md-4 views">
               <div class="joker-text">
                 <p>
-                  GoodRateCount
+                  {{'votos buenos' | translate}}
                 </p>
                 <h4>{{user.goodRateCount}}</h4>
               </div>
@@ -29,7 +29,7 @@
             <div class="col-md-4 views viewlines">
               <div class="joker-text">
                 <p>
-                  BadRateCount
+                  {{'votos malos' | translate}}
                 </p>
                 <h4>{{user.badRateCount}}</h4>
               </div>
@@ -41,7 +41,7 @@
             <div class="col-md-4 views">
               <div class="joker-text">
                 <p>
-                  TotalRateCount
+                  {{'total de votos' | translate}}
                 </p>
                 <h4>{{user.totalRateCount}}</h4>
               </div>
@@ -61,16 +61,16 @@
       <div class = "content-cal1">
       <table class="table table-hover ">
       <div class="avari-info">
-            <h2>Proximos Viajes</h2>
+            <h2>{{'proximos viajes' | translate}}</h2>
       </div>
       <thead>
       <tr>
-        <td><strong>Dia</strong></td>
-        <td><strong>Hora</strong></td>
-        <td><strong>Origen</strong></td>
-        <td><strong>Destino</strong></td>
-        <td><strong>Intencion</strong></td>
-        <td><strong>Costo</strong></td>
+        <td><strong>{{'dia' | translate}}</strong></td>
+        <td><strong>{{'hora' | translate}}</strong></td>
+        <td><strong>{{'origen' | translate}}</strong></td>
+        <td><strong>{{'destino' | translate}}</strong></td>
+        <td><strong>{{'intencion' | translate}}</strong></td>
+        <td><strong>{{'costo' | translate}}</strong></td>
       </tr>
       </thead>
       <tbody ng-repeat="route in user.routes">
@@ -91,7 +91,7 @@
       <div class="col-md-3 skills-rows">
       <div class = "content-cal1">
       <div class="avari-info nav">
-            <h2>Comentarios</h2>
+            <h2>{{'comentarios' | translate}}</h2>
       </div>
           <ul id="comments-list" class="comments-list">
       <li>

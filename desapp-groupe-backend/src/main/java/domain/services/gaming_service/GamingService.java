@@ -14,6 +14,8 @@ public class GamingService
     private VehicleRepository vehicleRepository;
     private RankingRepository rankingRepository;
 
+    public GamingService(){}
+
     public GamingService(UserRepository userRepository, VehicleRepository vehicleRepository,RankingRepository rankingRepository)
     {
         this.userRepository = userRepository ;
@@ -22,7 +24,7 @@ public class GamingService
     }
 
 
-    //@Transactional
+    @Transactional
     public MonthlyRanking createRanking(Integer month, Integer year)
     {
         MonthlyRanking ranking = rankingRepository.getRankingIn(month,year);
@@ -37,6 +39,8 @@ public class GamingService
             ranking.setWorstVehicles(vehicleRepository.getWorstVehiclesInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             ranking.setMostEfficientDrivers(userRepository.getMostEfficientDriversInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             rankingRepository.save(ranking);
+            ranking = rankingRepository.getRankingIn(month,year);
+
         }
         return ranking ;
     }
