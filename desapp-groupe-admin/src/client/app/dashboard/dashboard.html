@@ -26,27 +26,26 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="widget wviolet">
-                        <div ht-widget-header title="People"
+                        <div ht-widget-header title="Agregar Producto"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <table class="table table-condensed table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Age</th>
-                                        <th>Location</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="p in vm.people">
-                                        <td>{{p.firstName}}</td>
-                                        <td>{{p.lastName}}</td>
-                                        <td>{{p.age}}</td>
-                                        <td>{{p.location}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <form>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre :</label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="nombre de producto" ng-model='vm.product.name'>
+                                </div>
+                                <div class="form-group">
+                                    <label for="stock">Stock :</label>
+                                    <input type="text" class="form-control" id="stock" placeholder="stock" ng-model='vm.product.stock'>
+                                </div>
+                                <div class="form-group">
+                                    <label for="costo">Costo :</label>
+                                    <input type="text" class="form-control" id="costo" placeholder="costo" ng-model='vm.product.cost'>
+                                </div>
+                                <div class="form-group">
+                                    <input class="btn" type="button" ng-click="vm.createProduct()" value="Agregar">
+                                </div>      
+                            </form>
                         </div>
                         <div class="widget-foot">
                             <div class="clearfix"></div>
@@ -55,10 +54,25 @@
                 </div>
                 <div class="col-md-6">
                     <div class="widget wgreen">
-                        <div ht-widget-header title="{{vm.news.title}}"
+                        <div ht-widget-header title="Productos"
                              allow-collapse="true"></div>
                         <div class="widget-content text-center text-info">
-                            <small>{{vm.news.description}}</small>
+                            <table class="table table-hover ">
+                                <thead>
+                                <tr>
+                                    <td><strong>producto</strong></td>
+                                    <td><strong>costo</strong></td>
+                                    <td><strong>stock</strong></td>
+                                </tr>
+                                </thead>
+                                <tbody ng-repeat="product in vm.listproducts">
+                                <tr ng-model="product.selected">
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.cost | currency}}</td>
+                                    <td>{{product.stock}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="widget-foot">
                             <div class="clearfix"></div>
