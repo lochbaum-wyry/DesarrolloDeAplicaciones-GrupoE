@@ -5,7 +5,7 @@ angular.module('desappGrupoeFrontendApp').controller('RankingCtrl', RankingCtrl)
 
 function RankingCtrl(RankingService,$localStorage) {
 
-  var vm = this;
+  var vm = this; 
   vm.ranking = $localStorage.ranking ;
 
   /* String */ vm.ERROR_MSG;
@@ -27,8 +27,7 @@ function RankingCtrl(RankingService,$localStorage) {
               .catch(onFailure);
   };
 
-
-
+  vm.getRanking();
 
 }
 

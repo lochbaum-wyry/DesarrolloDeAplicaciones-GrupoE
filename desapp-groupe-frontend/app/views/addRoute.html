@@ -38,7 +38,7 @@
       	<div class="list-group" ng-repeat="route in addrf.userRoutes">
 			     <a href="#" class="list-group-item" ng-model="route.selected">
              {{'distancia' | translate}} : {{route.distanceInKms}} 
-             {{'costo' | translate}} : {{route.fixedCosts}}
+             {{'costo' | translate}} : {{route.fixedCosts | currency}}
            </a>
 	      </div>
       </div>

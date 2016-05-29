@@ -175,5 +175,6 @@ angular
         'salir':'Log out'
       });
 
-      $translateProvider.preferredLanguage('es');
+      var language = (navigator.language || navigator.browserLanguage).split('-')[0];
+      $translateProvider.preferredLanguage(language);
   });
