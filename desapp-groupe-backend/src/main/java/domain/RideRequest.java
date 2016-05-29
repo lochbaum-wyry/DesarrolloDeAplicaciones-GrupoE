@@ -13,6 +13,8 @@ public class RideRequest extends Entity
     private RoutePoint getOffAt;
     private RequestStatus status;
 
+    public RideRequest()
+    {}
 
     public RideRequest(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
     {

@@ -154,7 +154,7 @@ public class RideTest extends AbstractDomainTest
         User occupier = UserBuilder.aUser().withName("Dady Brieva").build();
         User driverMario = driverWithVehicle(2);
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerHour(23.5f).withCapacity(2).build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withOilWasterPerKm(23.5f).withCapacity(2).build();
 
         Route route = aCommonRouteWithLocations(5,50,50);
 

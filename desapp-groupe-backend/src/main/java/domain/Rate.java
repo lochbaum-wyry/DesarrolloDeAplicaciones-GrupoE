@@ -12,6 +12,7 @@ public class Rate extends Entity{
     private DateTime date;
     private Vehicle vehicle;
 
+    public Rate() {}
     public Rate(User rater, User ratedUser, Ride ride, RateType rateType, RateValue rateValue, String comment)
     {
         this.rateType = rateType;

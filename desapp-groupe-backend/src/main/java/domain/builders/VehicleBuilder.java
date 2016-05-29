@@ -16,7 +16,7 @@ public class VehicleBuilder {
         return this;
     }
 
-    public VehicleBuilder withOilWasterPerHour(Float oilWasterPerHour){
+    public VehicleBuilder withOilWasterPerKm(Float oilWasterPerHour){
         this.oilWasterPerHour = oilWasterPerHour;
         return this;
     }

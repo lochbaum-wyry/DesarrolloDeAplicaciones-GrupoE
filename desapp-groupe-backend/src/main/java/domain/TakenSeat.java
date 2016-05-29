@@ -7,6 +7,7 @@ public class TakenSeat extends Entity
     private RoutePoint boardingAt;
     private RoutePoint getOffAt;
 
+    public TakenSeat() {}
     public TakenSeat(User passenger, RoutePoint boardingAt, RoutePoint getOffAt)
     {
         this.passenger = passenger;

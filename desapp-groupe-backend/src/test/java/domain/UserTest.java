@@ -11,7 +11,6 @@ import java.util.List;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 public class UserTest extends AbstractDomainTest
@@ -21,7 +20,7 @@ public class UserTest extends AbstractDomainTest
     @Test
     public void test_isDriver_ReturnTrueIfaUserHaveAvehicle(){
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(23).withOilWasterPerHour(23.0f).build();
+        Vehicle vehicle = VehicleBuilder.aVehicle().withCapacity(23).withOilWasterPerKm(23.0f).build();
 
         User user = UserBuilder.aUser()
                 .withName("fede")

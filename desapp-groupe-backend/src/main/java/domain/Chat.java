@@ -10,6 +10,7 @@ public class Chat  extends Entity{
     private String name;
     private List<Message> messages;
 
+    public Chat() {}
     public Chat(String name,User user1,User user2){
         this.name = name;
         this.messages = new ArrayList<Message>();

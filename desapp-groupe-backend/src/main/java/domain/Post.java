@@ -7,6 +7,7 @@ public class Post extends Entity{
     private DateTime date;
     private String content;
 
+    public Post() {}
 
     public Post(User user,DateTime date,String content){
         this.publisher = user;

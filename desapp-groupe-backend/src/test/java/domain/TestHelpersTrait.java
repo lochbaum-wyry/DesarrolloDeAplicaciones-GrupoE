@@ -31,7 +31,7 @@ public interface TestHelpersTrait
     }
 
     default Vehicle aVehicle() {
-       return VehicleBuilder.aVehicle().withOilWasterPerHour(0.05f).withCapacity(4).build();
+       return VehicleBuilder.aVehicle().withOilWasterPerKm(0.05f).withCapacity(4).build();
     }
 
     default public User aPassenger()

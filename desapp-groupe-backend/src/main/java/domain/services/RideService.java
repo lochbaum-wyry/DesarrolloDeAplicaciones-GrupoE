@@ -30,14 +30,41 @@ public class RideService extends GenericService<Ride>
     }
 
     @Transactional
-    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt) {
+    public RideRequest requestRide(RideRequest rideRequest)
+    {
+
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("a punto de: " );
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+
+        rideRequestRepository.save(rideRequest);
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("request ID: " + rideRequest.getId());
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        java.lang.System.out.println("");
+        return rideRequestRepository.findById(rideRequest.getId());
+    }
+
+
+
+    @Transactional
+    public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
+    {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
-//        try {
-            rideRequestRepository.save(rideRequest);
-//        } catch (Exception e)
-//        {
-//            throw new SubiQueTeLlevoException(e);
-//        }
+        rideRequestRepository.save(rideRequest);
         return rideRequestRepository.findById(rideRequest.getId());
     }
 

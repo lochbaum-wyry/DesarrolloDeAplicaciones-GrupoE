@@ -54,10 +54,10 @@ public class UserServiceRest {
 
         User realUser = null;
 
-        if(userService.existUser(user.getEmail())){
+        if(userService.existUser(user.getEmail()))
+        {
             realUser = userService.login(user.getEmail(),"un token ");
-        }
-        else {
+        } else {
             try {
                 realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail(),user.getImage());
 

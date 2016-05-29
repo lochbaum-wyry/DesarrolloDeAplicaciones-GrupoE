@@ -69,6 +69,15 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         </constructor-arg>
     </bean>
 
+    <bean id="setup.exampleData" class="domain.servicesRest.SetupExampleData" init-method="init">
+        <constructor-arg>
+            <ref bean="services.user" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.ride" />
+        </constructor-arg>
+    </bean>
+
     <!--<bean id="rideRest" class="domain.servicesRest.RideServiceRest">-->
         <!--<constructor-arg>-->
             <!--<ref bean="services.ride" />-->

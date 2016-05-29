@@ -11,6 +11,7 @@ public class Message extends Entity{
     private DateTime timestamp;
     private String content;
 
+    public Message() {}
     public Message(User user, String content, DateTime timestamp){
         this.sender = user;
         this.content = content;

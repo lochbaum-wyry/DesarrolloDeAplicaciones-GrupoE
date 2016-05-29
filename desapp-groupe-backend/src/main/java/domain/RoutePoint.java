@@ -23,8 +23,8 @@ public class RoutePoint extends Entity
     }
 
     private Double longitude;
-    public RoutePoint()
-    {}
+
+    public RoutePoint()  {}
     public RoutePoint(Route route, Double latitude, Double longitude)
     {
         this(latitude, longitude);

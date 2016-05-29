@@ -22,6 +22,8 @@ public class Ride extends Entity
 
     private RideCostCalculator rideCostCalculator ;
 
+    public Ride () {}
+
     public static Ride newFromRideRequest(RideRequest rideRequest)
     {
         Ride ride = new Ride(rideRequest.getRoute(), rideRequest.getDate(), rideRequest.getDriver());

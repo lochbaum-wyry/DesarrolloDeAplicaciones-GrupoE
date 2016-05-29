@@ -8,9 +8,7 @@ public class Schedule extends Entity{
     private LocalTime departureTime;
     private LocalTime arrivalTime;
 
-    public Schedule()
-    {
-    }
+    public Schedule() { }
     public Schedule(DayOfWeek day, LocalTime departureTime, LocalTime arrivalTime)
     {
         this.day = day;

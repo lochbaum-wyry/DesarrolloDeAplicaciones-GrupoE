@@ -1,11 +1,14 @@
 package domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Vehicle  extends Entity
 {
+    @JsonIgnore
     private User owner;
     private Integer capacity;
     private Float oilWastePerKm;
@@ -13,6 +16,8 @@ public class Vehicle  extends Entity
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
     private Integer badRateCount = 0 ;
+
+    public Vehicle() {}
 
     public Vehicle(Integer capacity,Float oilWastePerKm)
     {
@@ -88,10 +93,12 @@ public class Vehicle  extends Entity
         return oilWastePerKm;
     }
 
+    @JsonIgnore
     public User getOwner() {
         return owner;
     }
 
+    @JsonIgnore
     public void setOwner(User owner) {
         this.owner = owner;
     }

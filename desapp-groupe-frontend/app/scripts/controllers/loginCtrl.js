@@ -7,6 +7,15 @@ angular.module('desappGrupoeFrontendApp').controller('LoginCtrl', loginCtrl );
 function loginCtrl(SessionService,LoginService,$window) {
   var vm = this; 
 
+  vm.userData = {
+    'name':'Dan',
+    'lastName':'Wyry',
+    'userName':'danwyry',
+    'email':'dandanielw@gmail.com',
+    'image': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/250px-Albert_Einstein_Head_cleaned.jpg'
+    // 'image':'https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/074/165/2458a49.jpg'
+  }; 
+
   /* String */ vm.ERROR_MSG = null;
 
   vm.signUpAndLogin = signUpAndLogin;
@@ -16,8 +25,8 @@ function loginCtrl(SessionService,LoginService,$window) {
     vm.ERROR_MSG = null; 
   }
 
-  function signUpAndLogin(data) {
-    LoginService.signUpAndLogin(data)
+  function signUpAndLogin() {
+    LoginService.signUpAndLogin(vm.userData)
       .then(onSuccess)
       .catch(onFailure);
 
