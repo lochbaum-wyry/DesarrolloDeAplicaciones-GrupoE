@@ -14,7 +14,8 @@
     "moment": "^2.13.0"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0"
+    "angular-mocks": "^1.4.0",
+    "angular-translate": "^2.11.0"
   },
   "appPath": "app",
   "moduleName": "desappGrupoeFrontendApp",
