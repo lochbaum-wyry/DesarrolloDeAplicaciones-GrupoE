@@ -32,6 +32,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
             <ref bean="userRest" />
             <ref bean="routeRest" />
             <ref bean="gamingRest"/>
+            <ref bean="productRest"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -47,6 +48,12 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
     <bean id="userRest" class="domain.servicesRest.UserServiceRest">
         <constructor-arg>
             <ref bean="services.user" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="productRest" class="domain.servicesRest.ProductServiceRest">
+        <constructor-arg>
+            <ref bean="services.product" />
         </constructor-arg>
     </bean>
 

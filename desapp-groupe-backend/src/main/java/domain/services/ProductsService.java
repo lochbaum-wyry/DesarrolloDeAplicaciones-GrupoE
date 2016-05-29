@@ -4,9 +4,12 @@ import domain.User;
 import domain.exceptions.NotEnoughPointsException;
 import domain.Product;
 import domain.ProductExchange;
+import domain.exceptions.ProductException;
 import domain.repositories.ProductExchangeRepository;
 import domain.repositories.ProductRepository;
 import domain.repositories.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 public class ProductsService {
@@ -35,15 +38,18 @@ public class ProductsService {
         return productRepository;
     }
 
+    @Transactional
     public List<ProductExchange> exchangedProductsBy(User user)
     {
         return productExchangeRepository.exchangedProductsBy(user);
     }
 
+    @Transactional
     public List<Product> products(){
         return productRepository.findAll();
     }
 
+    @Transactional
     public void userExchangesAProduct(User user, Product product) throws NotEnoughPointsException
     {
         if(user.getPoints() >= product.getCost() && product.getStock()>0)
@@ -61,5 +67,10 @@ public class ProductsService {
             throw new NotEnoughPointsException(user,product);
     }
 
+    @Transactional
+    public void createProduct(String name, Integer stock, Integer cost) throws ProductException{
+        Product product = new Product(name,cost,stock);
+        productRepository.save(product);
+    }
 }
 

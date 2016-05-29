@@ -10,6 +10,8 @@ public class Product extends Entity{
     private Integer cost;
     private Integer stock;
 
+    public Product(){}
+
     public Product(String name,Integer cost,Integer stock){
         this.pictures = new ArrayList<Image>();
         this.cost = cost;
