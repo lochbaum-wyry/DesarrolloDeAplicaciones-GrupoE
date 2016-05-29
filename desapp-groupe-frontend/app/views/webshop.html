@@ -28,7 +28,7 @@
         <td><strong>{{'stock' | translate}}</strong></td>
       </tr>
       </thead>
-      <tbody ng-repeat="product in ws.products | filter:ws.search ">
+      <tbody dir-paginate="product in ws.products | filter:ws.search | itemsPerPage: 6">
       <tr ng-model="product.selected">
         <td>{{product.name}}</td>
         <td>{{product.cost | currency}}</td>
@@ -37,6 +37,7 @@
       </tr>
       </tbody>
       </table>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
       </div>
     </div>
 </div>

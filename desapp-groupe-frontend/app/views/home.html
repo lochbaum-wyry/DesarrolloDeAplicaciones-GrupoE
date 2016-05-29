@@ -73,7 +73,7 @@
         <td><strong>{{'costo' | translate}}</strong></td>
       </tr>
       </thead>
-      <tbody ng-repeat="route in user.routes">
+      <tbody dir-paginate="route in user.routes | itemsPerPage: 8">
       <tr ng-model="route.selected">
         <td>Lunes</td>
         <td>9:30</td>
@@ -84,6 +84,7 @@
       </tr>
       </tbody>
       </table>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
       </div>
       </div>
       <!-- fin de proximos viajes-->

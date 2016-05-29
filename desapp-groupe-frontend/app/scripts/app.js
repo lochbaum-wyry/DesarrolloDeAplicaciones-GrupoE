@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'angularUtils.directives.dirPagination'
   ])
   .config(function ($routeProvider,$httpProvider,$translateProvider) {
     $routeProvider

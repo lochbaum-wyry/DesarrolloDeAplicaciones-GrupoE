@@ -35,7 +35,7 @@
         <td><strong>{{'votos malos' | translate}}</strong></td>
       </tr>
       </thead>
-      <tbody ng-repeat="user in rnk.ranking.bestDrivers">
+      <tbody dir-paginate="user in rnk.ranking.bestDrivers | itemsPerPage: 8">
       <tr ng-model="user.selected">
         <td>{{user.name}}</td>
         <td>{{user.points}}</td>
@@ -44,6 +44,7 @@
       </tr>
       </tbody>
       </table>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
       </div>
     </div>
 </div>
