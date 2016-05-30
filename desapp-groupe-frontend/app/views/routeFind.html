@@ -41,41 +41,55 @@
           </div>
           <!--ACA TERMINAR EL MAP-->
           <!--ACA EMPIEZA LA LISTA DE RESULTADOS-->
-          <div class = "col-md-3"> 
+          <div class = "col-md-3 list-group"> 
 
-            <div class="row"> <!--div class="row" ng-repeat="rf.rideProposals as rideProposal" -->
-              <div class="col-md-12">
-                <a href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)">
-                <div class="well well-sm">
-                  <div class="row">
-                    <!-- <div class="col-xs-3 col-md-3 text-center">
-                      <img src="" /> <! -- FOTITO DEL FLACO -- >
-                    </div> -->
-                    <div class="col-xs-12 col-md-12 section-box"  style='font-size: 12px'>
-                      <h4>Propuesta ejemplo</h4>
-                      <p>Algo sobre el recorrido. <br>Al hacer click tiene que mostrarlo en el mapa y quedar seleccionado para enviar la solicitud </p>
-                      <ul class="list list-unstyled">
-                        <li><span><i class="glyphicon glyphicon-calendar"></i>{{'10:35'}}</span></li>
-                          <!-- <li><span><i class="glyphicon glyphicon-comment"></i> 2 comments</span></li> -->
-                          <li>
-                             <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star"></span>
-                              <span class="glyphicon glyphicon-star-empty"></span>
-                          </li>
-                      </ul>                 
-                    </div>
+            <a ng-repeat="rp in rf.rideProposals" class='list-group-item' href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
+              <div class="row">
+                <div class="section-box">
+                  <div class="col-xs-3 col-md-3 text-center">                      
+                    <img style='max-width:70% ; max-height:70%' ng-src='{{rp.driver.image}}'/>
                   </div>
+                  <h4>
+                    {{ rp.driver.name }} {{ rp.driver.lastName}} ({{ rp.driver.userName }})
+                  </h4>
                 </div>
-                </a>
               </div>
-            </div>
-
-
-            <button class='btn' ng-click="rf.requestRide()"'">Solicitar unirse</button>
+              <p class="list-group-item-text" >
+                <ul class="list list-unstyled"   style='font-size: 12px'>
+                  <li>
+                    <strong>{{ 'sube en' | translate }}</strong>: 
+                    {{ rp.boardingPoint.latitude }},{{ rp.boardingPoint.longitude }} 
+                  </li>
+                  <li>
+                    <strong>{{ 'baja en' | translate }}</strong>: 
+                    {{ rp.getOffPoint.latitude }},{{ rp.getOffPoint.longitude }} 
+                  </li>
+                  <li>
+                    <strong>{{ 'hora_partida' | translate }}</strong>:
+                    {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
+                  </li>
+                </ul>
+                <!--                       
+                <ul class="list list-unstyled">
+                  <li><span><i class="glyphicon glyphicon-calendar"></i>{{'10:35'}}</span></li>
+                    <li><span><i class="glyphicon glyphicon-comment"></i> 2 comments</span></li>
+                    <li>
+                       <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                    </li>
+                </ul>                 
+                -->
+              </p>
+            </a>
           </div>
-          <!--ACA TERMINA LA LISTA DE RESULTADOS-->
+
+
+          <button class='btn' ng-click="rf.requestRide()">Solicitar subirse</button>
+        </div>
+      <!--ACA TERMINA LA LISTA DE RESULTADOS-->
      </div>
   </div>
 </div>

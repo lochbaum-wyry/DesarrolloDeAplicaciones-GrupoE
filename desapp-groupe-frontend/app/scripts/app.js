@@ -118,7 +118,8 @@ angular
         'ranking':'Ranking',
         'usuario':'Usuario',
         'puntos':'Puntos',
-        'salir':'Salir'
+        'salir':'Salir',
+        'hora_partida': 'Hora'
       });
 
       $translateProvider.translations('en',{
@@ -160,8 +161,8 @@ angular
         'mis puntos':'My Points',
         'producto':'Product',
         'stock':'Stock',
-        'sube en':'Up in',
-        'baja en':'Short in',
+        'sube en':'Board at',
+        'baja en':'Get off at',
         'un lugar':'A place',
         'fecha y hora':'Date and Hour',
         'buscar':'Search',
@@ -173,7 +174,8 @@ angular
         'ranking':'Ranking',
         'usuario':'User',
         'puntos':'Points',
-        'salir':'Log out'
+        'salir':'Log out',
+        'hora_partida': 'Time'
       });
 
       var language = (navigator.language || navigator.browserLanguage).split('-')[0];

@@ -47,15 +47,6 @@ public class SetupExampleData {
         this.userService = userService;
     }
 
-
-
-//    @Override
-//    public Object postProcessBeforeInitialization(Object o, String s) throws BeansException {
-//        return o;
-//    }
-
-//    @Override
-//    public Object postProcessAfterInitialization(Object o, String s) throws BeansException {
     @Transactional
     public void init() throws SubiQueTeLlevoException {
         try {

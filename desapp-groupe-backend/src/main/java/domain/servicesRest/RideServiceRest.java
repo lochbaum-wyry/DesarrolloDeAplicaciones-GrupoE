@@ -1,5 +1,6 @@
 package domain.servicesRest;
 
+import domain.RideRequest;
 import domain.Route;
 import domain.RoutePoint;
 import domain.User;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 @Path("/ride")
@@ -23,17 +25,13 @@ public class RideServiceRest
     }
 
     @POST
-    @Path("/requestRide")
+    @Path("requestRide")
     @Consumes("application/json")
-    public Response requestRide(final User requester, final User driver, final DateTime date, final Route route, final RoutePoint departure, RoutePoint arrival){
-        Response response = null;
-//        try {
-            rideService.requestRide(requester, driver, date, route, departure, arrival);
-            response = Response.ok().tag("Se solicitó el viaje al conductor").build();
-//        } catch (SubiQueTeLlevoException e) {
-//            response = Response.serverError().tag("No se pudo crear el usuario").build();
-//        }
-
+    public Response requestRide(final RideRequest rideRequest)
+    {
+        Response response;
+        rideService.requestRide(rideRequest);
+        response = Response.ok().tag("Se solicitó el viaje al conductor").build();
         return response;
     }
 }

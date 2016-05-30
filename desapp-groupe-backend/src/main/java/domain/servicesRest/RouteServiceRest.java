@@ -25,6 +25,8 @@ public class RouteServiceRest {
     @Produces("application/json")
     public List<RideProposal> getRideProposals(@PathParam("date") final DateTimeTransformer date, @PathParam("departurePoint") final LatLngTransformer departurePoint, @PathParam("arrivalPoint") final LatLngTransformer arrivalPoint)
     {
+        java.lang.System.out.println(departurePoint.getValueStr());
+        java.lang.System.out.println(arrivalPoint.getValueStr());
         return routeService.getRideProposalsCloseTo(date.getValue(), 1800, departurePoint.getValue(), arrivalPoint.getValue(), 1000d);
     }
 

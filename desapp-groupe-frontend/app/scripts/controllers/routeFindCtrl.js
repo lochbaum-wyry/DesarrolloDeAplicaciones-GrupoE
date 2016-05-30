@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
 /* @ngInject */
-function RouteFindCtrl(RouteService,RideService) {
+function RouteFindCtrl(RouteService,RideService,SessionService) {
   /* RouteFindCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -12,13 +12,15 @@ function RouteFindCtrl(RouteService,RideService) {
   // Scope data
   //------------
 
+  // LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
+  // LatLng arrivalPoint   = new LatLng(-34.6753329,-58.342759);
+
   //-- for getRideProposals
   /* DateTime */ vm.selDate    = moment(); // fecha seleccionada por el usuario para la búsqueda de rutas
-  /* LatLng */ vm.selDeparturePoint = null; // puntos seleccionados por el usuario para la búsqueda de rutas
-  /* LatLng */ vm.selArrivalPoint   = null;
+  /* LatLng */ vm.selDeparturePoint = '-34.702742,-58.2937437'; // puntos seleccionados por el usuario para la búsqueda de rutas
+  /* LatLng */ vm.selArrivalPoint   = '-34.6753329,-58.342759';
 
   /* RideProposal[] */ vm.rideProposals = [];
-
   //-- for submitRideRequest
   /* int */ vm.selRideProposalIdx = null; // Indice de propuesta seleccionada por el usuario para solicitar unirse
 
@@ -29,24 +31,33 @@ function RouteFindCtrl(RouteService,RideService) {
   vm.requestRide = requestRide; 
   vm.onTimeSet = onTimeSet; 
   vm.selectRideProposal = selectRideProposal;
+  vm.parseTimestamp = parseTimestamp;
+
   //--------------------------------
   // Scope functions implementation
   //--------------------------------
+  function parseTimestamp(timestamp)
+  {
+    var ts = moment(timestamp);
+    console.log(ts);
+    return ts;
+  }
+
   function onTimeSet(newDate, oldDate) {
     console.log('hey!');
     // vm.selDate = newDate;
   }
 
   function getRideProposals() {
-
-    var routePromise = RouteService.getRideProposals(vm.selDate.valueOf(), vm.selDeparturePoint, vm.selArrivalPoint)
+    /* String */ var departurePoint = latLngToString(vm.selDeparturePoint);
+    /* String */ var arrivalPoint = latLngToString(vm.selArrivalPoint);
+    var routePromise = RouteService.getRideProposals(vm.selDate.valueOf(), departurePoint, arrivalPoint)
               .then(onSuccess)
               .catch(onFailure);
   
     function onSuccess(response) { 
       vm.rideProposals = response ;
       if (vm.rideProposals.length > 0) renderRideProposal(0) ;
-      alert('success papá!');
     }
 
     function onFailure(error) {
@@ -60,21 +71,39 @@ function RouteFindCtrl(RouteService,RideService) {
   }
 
   function requestRide() {
-    rideProposal = vm.rideProposals[vm.selRideProposalIdx]
-//    RideService.requestRide(myself, rideProposal['driver'], )
+    var rideProposal = vm.rideProposals[vm.selRideProposalIdx];
+    var rideRequest = rideProposalToRideRequest(rideProposal, SessionService.user());
+    RideService.requestRide(rideRequest);
   }
 
   //-----------
   // Functions
   //-----------
   
+  function rideProposalToRideRequest(/* RideProposal */ rideProposal, /* User */ requester) {
+    return {
+      driver:rideProposal['driver'],
+      requester: requester,
+      route: rideProposal['route'],
+      date: rideProposal['departureDateTime'],
+      boardingAt: rideProposal['boardingPoint'],
+      getOffAt: rideProposal['getOffPoint']
+    };
+  }
+
+  //TODO: Implementar la conversión adecuadamente. 
+  function latLngToString( /* LatLng */ latLng) {
+
+    return latLng;
+  }
+
   function renderRideProposal(rideProposalIdx) { 
     /* RideProposal */ var rideProposal = vm.rideProposals[rideProposalIdx];
     renderRouteOnMap(
       rideProposal['route']['routePoints'], 
       rideProposal['boardingPoint'],  // punto cercano al que el usuario solicito subirse 
       rideProposal['getOffPoint'],  // punto cercano al que el usuairo solicita bajarse 
-      ""
+      "marker info"
     );
   } 
 

@@ -1,5 +1,7 @@
 package domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -118,10 +120,12 @@ public class User  extends Entity
         this.points= this.points + points;
     }
 
+    @JsonIgnore
     public boolean hasVehicle() {
         return getVehicle().getClass().equals(Vehicle.class);
     }
 
+    @JsonIgnore
     public boolean isPassenger() {
         return getVehicle() == null;
     }
@@ -181,7 +185,7 @@ public class User  extends Entity
         return ((float)getBadRateCount() * 100) / getTotalRateCount();
     }
 
-
+    @JsonIgnore
     public List<Chat> getChats() {
         return chats;
     }
@@ -194,6 +198,7 @@ public class User  extends Entity
         chats.add(chat);
     }
 
+    @JsonIgnore
     public Chat getOrAddChatWith(User user)
     {
         Chat chat ;
@@ -209,6 +214,7 @@ public class User  extends Entity
         }
         return chat;
     }
+
 
     private Optional<Chat> getChatWith(User user)
     {
