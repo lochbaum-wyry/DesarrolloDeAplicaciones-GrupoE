@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('WebShopCtrl', webShopCtrl );
 
 /* @ngInject */
-function webShopCtrl($localStorage) {
+function webShopCtrl($localStorage,webShopService) {
   var vm = this; 
 
   /* String */ vm.ERROR_MSG = null;
@@ -12,8 +12,27 @@ function webShopCtrl($localStorage) {
   vm.user = $localStorage.user
 
   vm.search = '';
+  vm.getProducts = getProducts;
+  vm.products = [];
 
-  vm.products = [{'name':'vale por 10 pesos','cost':'10','stock':'2'},{'name':'sarasa','cost':'10','stock':'2'},{'name':'sarasa','cost':'10','stock':'2'},{'name':'sarasa','cost':'10','stock':'2'}];
+  getProducts();
+
+
+
+  	function getProducts(){
+
+        function onSuccess(result){
+            vm.products = result;
+        };
+
+        function onFailure(error){
+            vm.ERROR_MSG = error;
+        };
+
+        webShopService.products() 
+              .then(onSuccess)
+              .catch(onFailure);
+    };
 
   }
 
