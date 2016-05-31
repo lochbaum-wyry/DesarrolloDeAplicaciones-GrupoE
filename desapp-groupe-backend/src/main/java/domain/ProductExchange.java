@@ -4,6 +4,9 @@ public class ProductExchange extends Entity{
     private User user;
     private Product product;
 
+    public ProductExchange(){
+    }
+
     public ProductExchange(User user,Product product){
         this.user = user;
         this.product = product;

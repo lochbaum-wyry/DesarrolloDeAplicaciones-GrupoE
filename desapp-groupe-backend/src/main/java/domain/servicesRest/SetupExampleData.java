@@ -74,6 +74,7 @@ public class SetupExampleData {
 
             route.addSchedule(schedule);
             dan.addRoute(route);
+            dan.setPoints(100);
 
             userService.addRoute(dan,route);
 

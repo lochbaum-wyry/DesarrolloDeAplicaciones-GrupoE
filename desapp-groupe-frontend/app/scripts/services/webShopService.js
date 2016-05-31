@@ -7,7 +7,8 @@ angular.module('desappGrupoeFrontendApp')
   var url = 'http://localhost:8080/domain/servicesRest/product';
 
   var webShopService = {
-    products: products
+    products: products,
+    changeProduct: changeProduct
   };
 
   function products() {
@@ -24,6 +25,22 @@ angular.module('desappGrupoeFrontendApp')
       return 'Ocurrio un error';
     }
   };
+
+  function changeProduct(data){
+    return $http.post(url + '/changeProduct',data)
+              .then(succchangeProduct)
+              .catch(failchangeProduct);
+
+    function succchangeProduct(response){
+      return response.data;
+    }
+
+    function failchangeProduct(error){
+      $log.error('Ocurrio un error: ' + error.data);
+      return 'Ocurrio un error';
+    }
+  };
+
 
   return webShopService;
 }

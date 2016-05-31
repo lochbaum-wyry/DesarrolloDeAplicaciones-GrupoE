@@ -1,14 +1,20 @@
 package domain.servicesRest;
 
 
+import domain.Message;
 import domain.Product;
+import domain.User;
+import domain.exceptions.NotEnoughPointsException;
 import domain.exceptions.ProductException;
 import domain.exceptions.SingUpException;
 import domain.services.ProductsService;
+import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 
 @Path("product")
@@ -42,5 +48,19 @@ public class ProductServiceRest {
     @Produces("application/json")
     public List<Product> products(){
         return productsService.products();
+    }
+
+    @POST
+    @Path("changeProduct")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response changeProduct(Product product, User user){
+        try {
+            productsService.userExchangesAProduct(user,product);
+        } catch (NotEnoughPointsException e){
+            return Response.serverError().build();
+        }
+
+        return Response.ok().tag("El producto fue cangeado correctamente").build();
     }
 }
