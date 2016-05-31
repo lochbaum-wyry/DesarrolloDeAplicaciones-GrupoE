@@ -51,12 +51,12 @@ public class ProductServiceRest {
     }
 
     @POST
-    @Path("changeProduct")
+    @Path("{id}/changeProduct")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response changeProduct(Product product, User user){
+    public Response changeProduct(@PathParam("id") final Integer id,Product product){
         try {
-            productsService.userExchangesAProduct(user,product);
+            productsService.userExchangesAProduct(id,product);
         } catch (NotEnoughPointsException e){
             return Response.serverError().build();
         }

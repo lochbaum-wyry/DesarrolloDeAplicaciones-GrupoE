@@ -31,8 +31,7 @@ function webShopCtrl($localStorage,webShopService,SessionService) {
         };
 
         if(vm.user.points >= product.cost){
-            var data = {'product': product,'user':{'id': vm.user.id,'points':vm.user.points}};
-            webShopService.changeProduct(data) 
+            webShopService.changeProduct(vm.user.id,product) 
                 .then(onSuccess)
                 .catch(onFailure);
         }

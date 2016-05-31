@@ -50,8 +50,9 @@ public class ProductsService {
     }
 
     @Transactional
-    public void userExchangesAProduct(User user, Product product) throws NotEnoughPointsException
+    public void userExchangesAProduct(Integer idUser, Product product) throws NotEnoughPointsException
     {
+        User user = userRepository.findById(idUser);
         if(user.getPoints() >= product.getCost() && product.getStock()>0)
         {
             ProductExchange productExchange = new ProductExchange(user, product);

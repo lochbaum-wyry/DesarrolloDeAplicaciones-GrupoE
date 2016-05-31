@@ -26,8 +26,8 @@ angular.module('desappGrupoeFrontendApp')
     }
   };
 
-  function changeProduct(data){
-    return $http.post(url + '/changeProduct',data)
+  function changeProduct(user_id,product){
+    return $http.post(url + '/' + user_id + '/changeProduct',product)
               .then(succchangeProduct)
               .catch(failchangeProduct);
 
