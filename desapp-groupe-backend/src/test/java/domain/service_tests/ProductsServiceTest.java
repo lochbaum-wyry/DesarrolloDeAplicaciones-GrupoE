@@ -30,9 +30,9 @@ public class ProductsServiceTest extends AbstractServiceTest{
         productsService.getProductRepository().save(product2);
 
         try {
-            productsService.userExchangesAProduct(fede,product);
-            productsService.userExchangesAProduct(fede,product1);
-            productsService.userExchangesAProduct(fede,product2);
+            productsService.userExchangesAProduct(fede.getId(),product);
+            productsService.userExchangesAProduct(fede.getId(),product1);
+            productsService.userExchangesAProduct(fede.getId(),product2);
 
             Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),3);
 
@@ -52,7 +52,7 @@ public class ProductsServiceTest extends AbstractServiceTest{
         productsService.getProductRepository().save(product);
 
         try {
-            productsService.userExchangesAProduct(fede,product);
+            productsService.userExchangesAProduct(fede.getId(),product);
 
             Assert.assertEquals(productsService.exchangedProductsBy(fede).size(),1);
 
@@ -71,7 +71,7 @@ public class ProductsServiceTest extends AbstractServiceTest{
         Product product = ProductBuilder.aProduct().withName("1000 pesos de nafta").withCost(2000).withStock(2).build();
         productsService.getProductRepository().save(product);
 
-        productsService.userExchangesAProduct(fede, product);
+        productsService.userExchangesAProduct(fede.getId(), product);
     }
 
     @Test
