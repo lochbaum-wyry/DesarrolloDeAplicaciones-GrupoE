@@ -1,11 +1,14 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Message extends Entity{
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class Message extends Entity
+{
     private User sender;
     private List<User> seenBy;
     private DateTime timestamp;

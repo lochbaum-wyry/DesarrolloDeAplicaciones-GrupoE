@@ -83,23 +83,4 @@
 	</bean>
 
 
-
-	<!--
-	<jaxrs:server id="post"  >
-		<jaxrs:serviceBeans>
-			<ref bean="postsRest" />
-		</jaxrs:serviceBeans>
-		<jaxrs:extensionMappings>
-			<entry key="json" value="application/json" />
-			<entry key="xml" value="application/xml" />
-		</jaxrs:extensionMappings>
-		<jaxrs:providers>
-			<ref bean="jaxbProvider" />
-			<ref bean="jacksonProvider" />
-		</jaxrs:providers>
-		<jaxrs:features>
-			<cxf:logging />
-		</jaxrs:features>
-	</jaxrs:server>
-	-->
 </beans>

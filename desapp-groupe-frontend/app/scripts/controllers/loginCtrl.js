@@ -7,6 +7,11 @@ angular.module('desappGrupoeFrontendApp').controller('LoginCtrl', loginCtrl );
 function loginCtrl(SessionService,LoginService,$window) {
   var vm = this; 
 
+/*
+"algun", 
+"otro", 
+"algunotro", "algunotrousuario@gmail.com", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/250px-Albert_Einstein_Head_cleaned.jpg"
+*/
   vm.userData = {
     'name':'Dan',
     'lastName':'Wyry',

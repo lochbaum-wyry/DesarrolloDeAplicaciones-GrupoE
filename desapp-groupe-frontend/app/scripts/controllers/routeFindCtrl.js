@@ -16,7 +16,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   // LatLng arrivalPoint   = new LatLng(-34.6753329,-58.342759);
 
   //-- for getRideProposals
-  /* DateTime */ vm.selDate    = moment(); // fecha seleccionada por el usuario para la búsqueda de rutas
+  /* DateTime */ vm.selDate         = moment("2016-07-08 9:20", "YYYY-MM-DD HH:mm"); // fecha seleccionada por el usuario para la búsqueda de rutas
   /* LatLng */ vm.selDeparturePoint = '-34.702742,-58.2937437'; // puntos seleccionados por el usuario para la búsqueda de rutas
   /* LatLng */ vm.selArrivalPoint   = '-34.6753329,-58.342759';
 
@@ -39,7 +39,6 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   function parseTimestamp(timestamp)
   {
     var ts = moment(timestamp);
-    console.log(ts);
     return ts;
   }
 
@@ -81,6 +80,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   //-----------
   
   function rideProposalToRideRequest(/* RideProposal */ rideProposal, /* User */ requester) {
+    console.log(rideProposal);
     return {
       driver:rideProposal['driver'],
       requester: requester,

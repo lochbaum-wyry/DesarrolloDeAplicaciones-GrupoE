@@ -51,8 +51,11 @@ public class SetupExampleData {
     public void init() throws SubiQueTeLlevoException {
         try {
             User fede = userService.signUp("Fede", "Loch", "trimegisto", "federico.lochbaum@gmail.com", "https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/074/165/2458a49.jpg");
+            User otro = userService.signUp("algun", "otro", "algunotro", "algunotrousuario@gmail.com", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/250px-Albert_Einstein_Head_cleaned.jpg");
+            otro.setPoints(15000);
+            userService.getUserRepository().update(otro);
+
             User dan  = userService.signUp("Dan", "Wyry", "danwyry", "dandanielw@gmail.com", "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Albert_Einstein_Head_cleaned.jpg/250px-Albert_Einstein_Head_cleaned.jpg");
-            User otro = userService.signUp("algun", "otro", "algunotro", "algunotrousuario@gmail.com", "unaImagen");
 
             Vehicle ninjamovil = VehicleBuilder.aVehicle().withCapacity(5).withOilWasterPerKm(0.05f).build();
             dan.setVehicle(ninjamovil);

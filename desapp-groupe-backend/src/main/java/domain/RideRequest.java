@@ -1,5 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import org.joda.time.DateTime;
 
 public class RideRequest extends Entity
@@ -7,7 +11,11 @@ public class RideRequest extends Entity
     private User requester;
     private User driver;
     private Route route;
+
+    @JsonSerialize(using=DateTimeSerializer.class)
+    @JsonDeserialize(using=DateTimeDeserializer.class)
     private DateTime date;
+
     private DateTime dateRequested;
     private RoutePoint boardingAt;
     private RoutePoint getOffAt;
@@ -65,6 +73,7 @@ public class RideRequest extends Entity
         this.boardingAt = boardingAt;
     }
 
+    @JsonDeserialize(using=DateTimeDeserializer.class)
     public void setDate(DateTime date) {
         this.date = date;
     }

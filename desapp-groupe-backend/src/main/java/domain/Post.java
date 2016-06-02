@@ -1,10 +1,14 @@
 package domain;
 
+
 import org.joda.time.DateTime;
 
-public class Post extends Entity{
+public class Post extends Entity
+{
     private User publisher;
+
     private DateTime date;
+
     private String content;
 
     public Post() {}

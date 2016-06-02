@@ -1,5 +1,7 @@
 package domain.services;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import domain.Route;
 import domain.RoutePoint;
 import domain.Schedule;
@@ -14,11 +16,15 @@ public class RideProposal
     private RoutePoint boardingPoint;
     private RoutePoint getOffPoint;
     private Schedule schedule;
+
+    @JsonSerialize(using=DateTimeSerializer.class)
     private DateTime departureDateTime;
 
+    @JsonSerialize(using=DateTimeSerializer.class)
     public DateTime getDepartureDateTime() {
         return departureDateTime;
     }
+
 
     public void setDepartureDateTime(DateTime departureDateTime) {
         this.departureDateTime = departureDateTime;
@@ -56,8 +62,6 @@ public class RideProposal
         this.getOffPoint = getOffPoint;
     }
 
-    public RideProposal() {}
-
     public User getDriver() {
         return driver;
     }
@@ -65,6 +69,8 @@ public class RideProposal
     public void setDriver(User driver) {
         this.driver = driver;
     }
+
+    public RideProposal() {}
 
     public RideProposal(User driver, Route route, Schedule schedule, DateTime departureDateTime, RoutePoint boardingPoint, RoutePoint getOffPoint)
     {

@@ -4,10 +4,6 @@ import domain.Ride;
 import domain.RideRequest;
 import org.hibernate.Query;
 
-import java.util.List;
-
-import static jdk.nashorn.internal.objects.Global.println;
-
 public class RideRepository extends HibernateGenericDao<Ride> implements
         GenericRepository<Ride> {
 

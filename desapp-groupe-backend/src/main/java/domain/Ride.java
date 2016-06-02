@@ -13,6 +13,7 @@ public class Ride extends Entity
 {
     private Float oilPrice ;
     private Vehicle vehicle;
+
     private DateTime date;
     private Route route;
     private User driver;

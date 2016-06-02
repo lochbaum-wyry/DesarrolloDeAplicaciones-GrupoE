@@ -32,29 +32,7 @@ public class RideService extends GenericService<Ride>
     @Transactional
     public RideRequest requestRide(RideRequest rideRequest)
     {
-
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("a punto de: " );
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-
         rideRequestRepository.save(rideRequest);
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("request ID: " + rideRequest.getId());
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
-        java.lang.System.out.println("");
         return rideRequestRepository.findById(rideRequest.getId());
     }
 

@@ -1,12 +1,14 @@
 package domain;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class User  extends Entity
 {
     private String name;

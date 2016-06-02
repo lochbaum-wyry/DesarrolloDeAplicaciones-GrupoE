@@ -9,6 +9,7 @@ public class Rate extends Entity{
     private RateType rateType;
     private RateValue rateValue;
     private String comment;
+
     private DateTime date;
     private Vehicle vehicle;
 
@@ -83,6 +84,7 @@ public class Rate extends Entity{
         this.comment = comment;
     }
 
+
     public DateTime getDate() {
         return date;
     }
@@ -94,7 +96,6 @@ public class Rate extends Entity{
     public void setRide(Ride ride) {
         this.ride = ride;
     }
-
 
     public void setDate(DateTime date) {
         this.date = date;
