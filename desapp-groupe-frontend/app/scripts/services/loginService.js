@@ -7,8 +7,17 @@ function LoginService($http,$log,SessionService) {
   var url = 'http://localhost:8080/domain/servicesRest/user';
 
   var loginService = {
-    signUpAndLogin: signUpAndLogin
+    signUpAndLogin: signUpAndLogin,
+    googleLogin: googleLogin
   };
+
+  //inicia login google token
+  function googleLogin(code){
+    return $http({ method: 'post',
+          url: url + '/signUpAndLogin2',
+          data: { authorizationCode: code }});
+  };
+  //termina login google token
 
   function signUpAndLogin(data) {
 
