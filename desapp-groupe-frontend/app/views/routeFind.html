@@ -87,7 +87,7 @@
           </div>
 
 
-          <button class='btn' ng-click="rf.requestRide()">Solicitar subirse</button>
+          <button class='btn' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
         </div>
       <!--ACA TERMINA LA LISTA DE RESULTADOS-->
      </div>

@@ -12,17 +12,14 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   // Scope data
   //------------
 
-  // LatLng departurePoint = new LatLng(-34.702742,-58.2937437);
-  // LatLng arrivalPoint   = new LatLng(-34.6753329,-58.342759);
-
   //-- for getRideProposals
-  /* DateTime */ vm.selDate         = moment("2016-07-08 9:20", "YYYY-MM-DD HH:mm"); // fecha seleccionada por el usuario para la búsqueda de rutas
-  /* LatLng */ vm.selDeparturePoint = '-34.702742,-58.2937437'; // puntos seleccionados por el usuario para la búsqueda de rutas
-  /* LatLng */ vm.selArrivalPoint   = '-34.6753329,-58.342759';
-
+  /* DateTime */ vm.selDate; // fecha seleccionada por el usuario para la búsqueda de rutas
+  /* LatLng */ vm.selDeparturePoint; // puntos seleccionados por el usuario para la búsqueda de rutas
+  /* LatLng */ vm.selArrivalPoint;
   /* RideProposal[] */ vm.rideProposals = [];
+
   //-- for submitRideRequest
-  /* int */ vm.selRideProposalIdx = null; // Indice de propuesta seleccionada por el usuario para solicitar unirse
+  /* int */ vm.selRideProposalIdx ; // Indice de propuesta seleccionada por el usuario para solicitar unirse
 
   //------------------------------
   // Scope functions declarations
@@ -32,6 +29,13 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   vm.onTimeSet = onTimeSet; 
   vm.selectRideProposal = selectRideProposal;
   vm.parseTimestamp = parseTimestamp;
+
+  //---------------------------
+  // Controller initialization
+
+  setDefaultValues() 
+
+
 
   //--------------------------------
   // Scope functions implementation
@@ -43,7 +47,6 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   }
 
   function onTimeSet(newDate, oldDate) {
-    console.log('hey!');
     // vm.selDate = newDate;
   }
 
@@ -53,13 +56,16 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
     var routePromise = RouteService.getRideProposals(vm.selDate.valueOf(), departurePoint, arrivalPoint)
               .then(onSuccess)
               .catch(onFailure);
-  
+
+    vm.selRideProposalIdx= null;
+
     function onSuccess(response) { 
       vm.rideProposals = response ;
       if (vm.rideProposals.length > 0) renderRideProposal(0) ;
     }
 
     function onFailure(error) {
+      infoModal("failed_getting_proposals", 'error');
       console.log(error);
      }
   }
@@ -72,15 +78,32 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   function requestRide() {
     var rideProposal = vm.rideProposals[vm.selRideProposalIdx];
     var rideRequest = rideProposalToRideRequest(rideProposal, SessionService.user());
-    RideService.requestRide(rideRequest);
+    RideService.requestRide(rideRequest).then(onReqSucc).catch(onReqFail);
+
+    function onReqSucc(data) {
+      infoModal("successfull_ride_request_msg");
+      setDefaultValues();
+      vm.rideProposals = [];
+    }
+
+    function onReqFail(error) {
+      infoModal("failed_requesting_ride", 'error');
+      console.log(error);
+    }
   }
 
   //-----------
   // Functions
   //-----------
-  
+
+  function setDefaultValues() {
+    vm.selDate = moment("2016-07-08 9:20", "YYYY-MM-DD HH:mm"); 
+    vm.selDeparturePoint = '-34.702742,-58.2937437'; 
+    vm.selArrivalPoint = '-34.6753329,-58.342759';
+    vm.selRideProposalIdx= null;
+  }
+
   function rideProposalToRideRequest(/* RideProposal */ rideProposal, /* User */ requester) {
-    console.log(rideProposal);
     return {
       driver:rideProposal['driver'],
       requester: requester,
@@ -95,6 +118,13 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   function latLngToString( /* LatLng */ latLng) {
 
     return latLng;
+  }
+
+  function infoModal(msg, type) {
+    if (type && type=='error') {
+      msg = "Error: " + msg; 
+    }
+    alert(msg);
   }
 
   function renderRideProposal(rideProposalIdx) { 
