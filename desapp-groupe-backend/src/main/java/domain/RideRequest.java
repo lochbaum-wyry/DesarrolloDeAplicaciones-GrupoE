@@ -2,8 +2,8 @@ package domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
+import domain.servicesRest.JodaDateTimeDeserializer;
 import org.joda.time.DateTime;
 
 public class RideRequest extends Entity
@@ -13,7 +13,7 @@ public class RideRequest extends Entity
     private Route route;
 
     @JsonSerialize(using=DateTimeSerializer.class)
-    @JsonDeserialize(using=DateTimeDeserializer.class)
+    @JsonDeserialize(using=JodaDateTimeDeserializer.class)
     private DateTime date;
 
     private DateTime dateRequested;
@@ -22,7 +22,10 @@ public class RideRequest extends Entity
     private RequestStatus status;
 
     public RideRequest()
-    {}
+    {
+        this.dateRequested = DateTime.now();
+
+    }
 
     public RideRequest(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
     {
@@ -73,7 +76,7 @@ public class RideRequest extends Entity
         this.boardingAt = boardingAt;
     }
 
-    @JsonDeserialize(using=DateTimeDeserializer.class)
+    @JsonDeserialize(using=JodaDateTimeDeserializer.class)
     public void setDate(DateTime date) {
         this.date = date;
     }
