@@ -73,12 +73,33 @@
 		</constructor-arg>
 	</bean>
 
+	<bean id="services.tokenService" class="domain.services.UserTokenService">
+		<constructor-arg>
+			<ref bean="persistence.usertoken" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="services.clientFactory" class="helpers.ClientFactory">
+	</bean>
+
+	<bean id="services.googleCredentials" class="domain.services.GoogleCredentialsService">
+		<constructor-arg>
+			<ref bean="persistence.googleoauthcredential" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="services.clientFactory" />
+		</constructor-arg>
+	</bean>
+
 	<bean id="services.user" class="domain.services.UserService">
 		<constructor-arg>
 			<ref bean="persistence.userrepository" />
 		</constructor-arg>
 		<constructor-arg>
 			<ref bean="persistence.routerepository" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="services.tokenService" />
 		</constructor-arg>
 	</bean>
 

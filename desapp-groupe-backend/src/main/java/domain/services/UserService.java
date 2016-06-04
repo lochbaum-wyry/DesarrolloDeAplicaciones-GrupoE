@@ -1,5 +1,6 @@
 package domain.services;
 
+import com.google.api.services.oauth2.model.Userinfoplus;
 import domain.*;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
@@ -9,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.lang.*;
-import java.util.List;
 
 public class UserService {
 
@@ -17,11 +17,14 @@ public class UserService {
     private UserRepository userRepository;
     private RouteRepository routeRepository;
 
+    private UserTokenService userTokenService;
+
     public UserService(){}
 
-    public UserService(UserRepository userRepository,RouteRepository routeRepository){
+    public UserService(UserRepository userRepository,RouteRepository routeRepository,UserTokenService userTokenService){
         this.userRepository = userRepository;
         this.routeRepository = routeRepository;
+        this.userTokenService = userTokenService;
     }
 
     public UserRepository getUserRepository() {
@@ -102,4 +105,22 @@ public class UserService {
     public User getUser(Integer id) {
         return userRepository.findById(id);
     }
+
+    @Transactional
+    public User signUpWithCredentials(Userinfoplus userinfoplus, GoogleOauthCredential googleOauthCredential) {
+        User newUser = this.signUp2(userinfoplus.getName(), userinfoplus.getEmail());
+        newUser.setToken(googleOauthCredential);
+        userRepository.update(newUser);
+        return newUser;
+    }
+
+    @Transactional
+    public User signUp2(String fullName, String email) {
+        User user = new User(fullName,fullName,fullName,email); //desp se cambia
+        userRepository.save(user);
+        userTokenService.create(user);
+        return user;
+    }
+
+
 }

@@ -20,6 +20,7 @@ public class User  extends Entity
     private Integer points;
     private List<Chat> chats;
     private String image;
+    private GoogleOauthCredential token;
 
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
@@ -223,4 +224,11 @@ public class User  extends Entity
         return this.getChats().stream().filter(p -> p.getUsers().contains(user)).findFirst();
     }
 
+    public GoogleOauthCredential getToken() {
+        return token;
+    }
+
+    public void setToken(GoogleOauthCredential token) {
+        this.token = token;
+    }
 }

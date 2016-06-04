@@ -1,13 +1,16 @@
 package domain.servicesRest;
 
-import domain.LatLng;
-import domain.Route;
-import domain.Schedule;
-import domain.User;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.services.oauth2.model.Userinfoplus;
+import domain.*;
 import domain.builders.UserBuilder;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
+import domain.services.GoogleCredentialsService;
 import domain.services.UserService;
+import domain.services.UserTokenService;
+import helpers.UserAuthorization;
+import helpers.UserTokenResponse;
 import org.springframework.stereotype.Service;
 
 
@@ -21,9 +24,13 @@ public class UserServiceRest {
 
 
     UserService userService;
+    GoogleCredentialsService googleCredentialsService;
+    UserTokenService userTokenService;
 
-    public UserServiceRest(UserService userService) {
+    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService) {
         this.userService = userService;
+        this.googleCredentialsService = googleCredentialsService;
+        this.userTokenService = userTokenService;
     }
 
     @GET
@@ -67,6 +74,21 @@ public class UserServiceRest {
         }
         return realUser;
     }
+
+    //Intento login de lalo
+    @POST
+    @Path("signUpAndLogin2")
+    @Consumes("application/json")
+    @Produces("application/json")
+    public UserTokenResponse signUp2(UserAuthorization userAuthorization){
+        Credential credential = googleCredentialsService.create(userAuthorization.getAuthorizationCode());
+        Userinfoplus userinfoplus = googleCredentialsService.getUserinfo(credential);
+        GoogleOauthCredential googleOauthCredential = googleCredentialsService.get(userinfoplus.getId());
+        User user = userService.signUpWithCredentials(userinfoplus, googleOauthCredential);
+        UserToken token = userTokenService.findByUserId(user.getId());
+        return new UserTokenResponse(token.getToken());
+    }
+    //Fin intento de login de lalo
 
     @GET
     @Path("login/{email}/{passwd}")

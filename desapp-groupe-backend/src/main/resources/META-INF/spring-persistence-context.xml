@@ -160,6 +160,14 @@
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 
+	<bean id="persistence.googleoauthcredential" class="domain.repositories.GoogleOauthCredentialRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
+	<bean id="persistence.usertoken" class="domain.repositories.UserTokenRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
 	<bean id="persistence.postrepository" class="domain.repositories.PostRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>

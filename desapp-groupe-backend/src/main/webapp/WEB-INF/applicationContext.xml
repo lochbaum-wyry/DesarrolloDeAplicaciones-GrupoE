@@ -51,6 +51,12 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.user" />
         </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.googleCredentials" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.tokenService" />
+        </constructor-arg>
     </bean>
 
     <bean id="productRest" class="domain.servicesRest.ProductServiceRest">
