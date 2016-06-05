@@ -23,9 +23,9 @@ import java.util.List;
 public class UserServiceRest {
 
 
-    UserService userService;
-    GoogleCredentialsService googleCredentialsService;
-    UserTokenService userTokenService;
+     UserService userService;
+     GoogleCredentialsService googleCredentialsService;
+     UserTokenService userTokenService;
 
     public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService) {
         this.userService = userService;

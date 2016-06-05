@@ -27,14 +27,14 @@ public class ClientFactory {
 
     public ClientFactory(){}
 
-    @Value("#{ systemProperties['google.clientId'] }")
-    private String envClientId;
+    //@Value("#{ systemProperties['google.clientId'] }")
+    private String envClientId = "845978166156-kfuknnh0pr4nboqmkjme9dtpjgv0v2h9.apps.googleusercontent.com";
 
-    @Value("#{ systemProperties['google.clientSecret'] }")
-    private String envClientSecret;
+    //@Value("#{ systemProperties['google.clientSecret'] }")
+    private String envClientSecret = "uXFDuMaDA8ViCJfcb4evMKji";
 
-    @Value("#{ systemProperties['google.redirectURI'] }")
-    private String envRedirectURI;
+    //@Value("#{ systemProperties['google.redirectURI'] }")
+    private String envRedirectURI = "http://localhost:8080/domain/servicesRest/user/signUpAndLogin2";
 
     public AuthClient getDefaultClient(GoogleOauthCredentialRepository googleOauthCredentialRepository) {
         try {
@@ -70,6 +70,8 @@ public class ClientFactory {
         private String client_secret;
         private String auth_uri;
         private String token_uri;
+
+        public WebCredentials(){}
 
         WebCredentials(String client_id, String client_secret) {
             this.auth_uri = "https://accounts.google.com/o/oauth2/auth";
@@ -113,6 +115,8 @@ public class ClientFactory {
 
     class Credentials {
         private WebCredentials web;
+
+        public Credentials(){}
 
         public Credentials(WebCredentials web) {
             this.setWeb(web);

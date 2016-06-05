@@ -108,15 +108,16 @@ public class UserService {
 
     @Transactional
     public User signUpWithCredentials(Userinfoplus userinfoplus, GoogleOauthCredential googleOauthCredential) {
-        User newUser = this.signUp2(userinfoplus.getName(), userinfoplus.getEmail());
+        User newUser = this.signUp2(userinfoplus.getName(),userinfoplus.getFamilyName(),userinfoplus.getEmail(),userinfoplus.getPicture());
         newUser.setToken(googleOauthCredential);
         userRepository.update(newUser);
         return newUser;
     }
 
     @Transactional
-    public User signUp2(String fullName, String email) {
-        User user = new User(fullName,fullName,fullName,email); //desp se cambia
+    public User signUp2(String fullName,String familyName, String email,String picture) {
+        User user = new User(fullName,familyName,fullName,email);
+        user.setImage(picture);
         userRepository.save(user);
         userTokenService.create(user);
         return user;

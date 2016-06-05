@@ -5,6 +5,8 @@ public class UserTokenResponse {
         this.setToken(token);
     }
 
+    public UserTokenResponse(){}
+
     private String token;
 
     public String getToken() {
