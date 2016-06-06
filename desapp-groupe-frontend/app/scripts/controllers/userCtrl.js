@@ -31,6 +31,22 @@ angular.module('desappGrupoeFrontendApp')
 
     };
 
+    $scope.userProfile = function(id){
+        onSuccess = function (result){
+
+            $localStorage.userProfile = result;
+            $location.path('/profile');
+        };
+
+        onFailure = function (error){
+            $scope.ERROR_MSG = error;
+        };
+
+        userPromise = UserService.getUser(id);
+        userPromise.then(onSuccess);
+        userPromise.catch(onFailure);
+    }
+
     $scope.percentageGoodRate = function(){
         var res;
         if($scope.user.totalRateCount <= 0){

@@ -35,6 +35,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
             <ref bean="rideRest" />
             <ref bean="gamingRest"/>
             <ref bean="productRest"/>
+            <ref bean="post"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -74,6 +75,12 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
     <bean id="rideRest" class="domain.servicesRest.RideServiceRest">
         <constructor-arg>
             <ref bean="services.ride" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="post" class="domain.servicesRest.PostServiceRest">
+        <constructor-arg>
+            <ref bean="services.post" />
         </constructor-arg>
     </bean>
 

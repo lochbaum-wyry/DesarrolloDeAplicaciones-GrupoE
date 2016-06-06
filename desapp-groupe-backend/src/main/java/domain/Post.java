@@ -9,6 +9,8 @@ public class Post extends Entity
 
     private DateTime date;
 
+    private User wallOwner ;
+
     private String content;
 
     public Post() {}
@@ -44,4 +46,11 @@ public class Post extends Entity
     }
 
 
+    public User getWallOwner() {
+        return wallOwner;
+    }
+
+    public void setWallOwner(User wallOwner) {
+        this.wallOwner = wallOwner;
+    }
 }

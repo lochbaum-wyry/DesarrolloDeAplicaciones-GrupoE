@@ -77,7 +77,9 @@ public class SetupExampleData {
 
             route.addSchedule(schedule);
             dan.addRoute(route);
-            dan.setPoints(100);
+            dan.setPoints(15000);
+            dan.getOrAddChatWith(fede);
+            dan.getOrAddChatWith(otro);
 
             userService.addRoute(dan,route);
 
