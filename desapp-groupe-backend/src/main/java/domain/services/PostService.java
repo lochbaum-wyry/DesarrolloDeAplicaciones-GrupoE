@@ -43,4 +43,10 @@ public class PostService {
         List<Post> list = postRepository.findByUser(user);
         return list.stream().sorted().collect(Collectors.toList());
     }
+
+    @Transactional
+    public void createPost(Post post) {
+        Post newPost = new Post(post.getPublisher(),post.getDate(),post.getContent(),post.getWallOwner());
+        postRepository.save(newPost);
+    }
 }

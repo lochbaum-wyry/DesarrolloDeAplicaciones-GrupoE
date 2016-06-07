@@ -25,8 +25,18 @@ public class PostServiceRest{
     @Path("post")
     @Produces("application/json")
     @Consumes("application/json")
-    public Response post(Post post){
-        return Response.ok().build();
+    public Response createPost(Post post){
+        Response response;
+        try{
+            postService.createPost(post);
+            response = Response.ok().build();
+        }
+        catch (Exception e ){
+            e.getMessage();
+            response = Response.serverError().build();
+
+        }
+        return response;
     }
 
     @GET
@@ -36,6 +46,7 @@ public class PostServiceRest{
     public List<Post> posts(@PathParam("id") final Integer id){
         return postService.posts(id);
     }
+
 
 
 }

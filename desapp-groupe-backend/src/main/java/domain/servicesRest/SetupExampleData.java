@@ -6,6 +6,7 @@ import domain.builders.ScheduleBuilder;
 import domain.builders.VehicleBuilder;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
+import domain.services.PostService;
 import domain.services.RideService;
 import domain.services.UserService;
 import org.joda.time.DateTime;
@@ -20,15 +21,16 @@ import java.util.List;
 
 public class SetupExampleData {
     UserService userService;
-
+    PostService postService;
     RideService rideService;
 
     public SetupExampleData() {}
 
-    public SetupExampleData(UserService userService, RideService rideService)
+    public SetupExampleData(UserService userService, RideService rideService,PostService postService)
     {
         this.userService = userService;
         this.rideService = rideService;
+        this.postService = postService;
     }
 
     public RideService getRideService() {

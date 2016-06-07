@@ -30,7 +30,7 @@ public class PostBuilder {
     }
 
     public Post build() {
-        return new Post(this.publisher,this.date,this.content);
+        return new Post(this.publisher,this.date,this.content,null);
     }
 
 }

@@ -7,7 +7,8 @@ function PostService($http,$log) {
   var url = 'http://localhost:8080/domain/servicesRest/posts';
 
   var postService = {
-    getPosts: getPosts
+    getPosts: getPosts,
+    sendPost: sendPost
   };
 
   function getPosts(user_id) {
@@ -21,6 +22,23 @@ function PostService($http,$log) {
         }
 
         function onFailuregetPosts(error){
+            $log.error('Ocurrio un error: ' + error.data);
+            return 'Ocurrio un error';
+        }
+
+  };
+
+    function sendPost(post) {
+
+    return $http.post(url + '/post',post)
+          .then(onSuccesssendPost)
+          .catch(onFailuresendPost);
+    
+        function onSuccesssendPost(response){
+            return response.data;
+        }
+
+        function onFailuresendPost(error){
             $log.error('Ocurrio un error: ' + error.data);
             return 'Ocurrio un error';
         }

@@ -1,5 +1,5 @@
 trans['allTogetherTmp'] = {
-  en: {
+  es: {
     'home': 'Home',
     'viajes':'Viajes',
     'confirmados':'Confirmados',
@@ -10,7 +10,7 @@ trans['allTogetherTmp'] = {
     'mis recorridos':'Mis Viajes',
     'agregar recorrido':'Agregar Recorrido',
     'chats':'Chats',
-    'posts':'Wall',
+    'posts':'Muro',
     'webShop':'WebShop',
     'buscar recorrido':'Buscar Recorrido',
     'rankings':'Rankings',
@@ -55,7 +55,7 @@ trans['allTogetherTmp'] = {
     'salir':'Salir',
     'hora_partida': 'Hora'
   }, 
-  es: { 
+  en: { 
     'home': 'Home',
     'viajes':'Rides',
     'confirmados':'Confirmed',
@@ -63,7 +63,7 @@ trans['allTogetherTmp'] = {
     'solicitados':'Requested',
     'calificar viaje':'Ride Rating',
     'recorridos':'Routes',
-    'posts':'Muro',
+    'posts':'Wall',
     'mis recorridos':'My Rides',
     'agregar recorrido':'Add Route',
     'chats':'Chats',

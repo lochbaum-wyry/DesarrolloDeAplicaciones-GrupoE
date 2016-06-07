@@ -15,10 +15,11 @@ public class Post extends Entity
 
     public Post() {}
 
-    public Post(User user,DateTime date,String content){
+    public Post(User user,DateTime date,String content,User wallOwner){
         this.publisher = user;
         this.date = date;
         this.content = content;
+        this.wallOwner = wallOwner;
     }
 
     public String getContent() {

@@ -90,6 +90,7 @@ public class Vehicle  extends Entity
         return capacity;
     }
 
+    @JsonIgnore
     public Float getOilUsePerKmInLts() {
         return oilWastePerKm;
     }
