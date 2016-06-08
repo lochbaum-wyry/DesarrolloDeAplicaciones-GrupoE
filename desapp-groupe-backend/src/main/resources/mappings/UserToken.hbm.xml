@@ -9,7 +9,7 @@
         </id>
 
         <property name="token" />
-        <one-to-one name="user" class="domain.User" />
+        <one-to-one name="userModel" class="domain.User" />
 
 
 

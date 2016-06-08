@@ -34,8 +34,13 @@ function loginCtrl(SessionService,LoginService,$window,AuthService) {
       auth) {
       LoginService.googleLogin(auth.detail.code)
         .then(function(response) {
+            if (SessionService.isInitialized())
+                $window.location.href = "/indexHome.html";
+            else {
+                vm.ERROR_MSG = "Oops... could not login. Try again."
+      }
             AuthService.login(response.data.token);
-            $window.location.assign('/');
+            //$window.location.assign('/');
           },
           function(error) {
             console.log(error);

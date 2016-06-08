@@ -34,7 +34,7 @@ public class ClientFactory {
     private String envClientSecret = "uXFDuMaDA8ViCJfcb4evMKji";
 
     //@Value("#{ systemProperties['google.redirectURI'] }")
-    private String envRedirectURI = "http://localhost:8080/domain/servicesRest/user/signUpAndLogin2";
+    private String envRedirectURI = "http://localhost:9000";
 
     public AuthClient getDefaultClient(GoogleOauthCredentialRepository googleOauthCredentialRepository) {
         try {

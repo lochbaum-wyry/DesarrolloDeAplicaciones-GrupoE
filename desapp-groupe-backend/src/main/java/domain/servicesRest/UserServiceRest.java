@@ -57,38 +57,40 @@ public class UserServiceRest {
     @Path("signUpAndLogin")
     @Consumes("application/json")
     @Produces("application/json")
-    public User signUp(User user){
+    public User signUp(UserAuthorization userAuthorization){
 
         User realUser = null;
+        Credential credential = googleCredentialsService.create(userAuthorization.getAuthorizationCode());
+        Userinfoplus userinfoplus = googleCredentialsService.getUserinfo(credential);
 
-        if(userService.existUser(user.getEmail()))
+        if(userService.existUser(userinfoplus))
         {
-            realUser = userService.login(user.getEmail(),"un token ");
+            realUser = userService.login(userinfoplus.getEmail());
         } else {
             try {
-                realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail(),user.getImage());
+                realUser = signUp2(userinfoplus);
 
-            } catch (SingUpException e) {
+            } catch (Exception e) {
                 realUser = null;
             }
         }
         return realUser;
     }
 
-    //Intento login de lalo
-    @POST
-    @Path("signUpAndLogin2")
-    @Consumes("application/json")
-    @Produces("application/json")
-    public UserTokenResponse signUp2(UserAuthorization userAuthorization){
-        Credential credential = googleCredentialsService.create(userAuthorization.getAuthorizationCode());
-        Userinfoplus userinfoplus = googleCredentialsService.getUserinfo(credential);
+
+    public User signUp2(Userinfoplus userinfoplus)
+    {
+
         GoogleOauthCredential googleOauthCredential = googleCredentialsService.get(userinfoplus.getId());
+
         User user = userService.signUpWithCredentials(userinfoplus, googleOauthCredential);
+
         UserToken token = userTokenService.findByUserId(user.getId());
-        return new UserTokenResponse(token.getToken());
+
+
+        return user;//return new UserTokenResponse(token.getToken());
     }
-    //Fin intento de login de lalo
+
 
     @GET
     @Path("login/{email}/{passwd}")
@@ -99,7 +101,7 @@ public class UserServiceRest {
         } catch (SingUpException e) {
             e.printStackTrace();
         }*/
-        return userService.login(email,token);
+        return userService.login(email);
     }
 
     @GET

@@ -15,11 +15,15 @@ public class UserTokenService {
     public UserTokenService(){}
 
     @Transactional
-    public UserToken create(User userModel){
+    public UserToken create(User userModel)
+    {
         UserToken token = new UserToken();
         token.setUserModel(userModel);
         token.generateToken();
         this.getUserTokenRepository().save(token);
+
+        token = this.getUserTokenRepository().findById(token.getId());
+
         return token;
     }
 
@@ -38,6 +42,6 @@ public class UserTokenService {
 
     @Transactional
     public UserToken findByUserId(int id) {
-        return userTokenRepository.findById(id);
+        return userTokenRepository.findByUserId(id);
     }
 }

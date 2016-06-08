@@ -9,18 +9,18 @@ public class UserToken extends Entity{
 
     private String token;
 
-    private User user;
+    private User userModel;
 
     public void generateToken() {
         this.setToken(this.tokenGenerator.generate());
     }
 
     public User getUserModel() {
-        return user;
+        return userModel;
     }
 
     public void setUserModel(User userModel) {
-        this.user = userModel;
+        this.userModel = userModel;
     }
 
     public String getToken() {
