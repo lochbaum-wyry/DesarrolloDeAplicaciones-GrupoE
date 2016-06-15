@@ -63,6 +63,11 @@ angular
         controller: 'RankingCtrl',
         controllerAs: 'rnk'
       })
+      .when('/requestedRides', {
+        templateUrl: '/views/requestedRides.html',
+        controller: 'RequestedRidesCtrl',
+        controllerAs: 'rrc'
+      })
       .otherwise({
         templateUrl: 'views/home.html',
         controller: 'UserCtrl',

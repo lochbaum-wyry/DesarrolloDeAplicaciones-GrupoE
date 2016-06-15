@@ -1,6 +1,7 @@
 package domain.repositories;
 
 import domain.RequestStatus;
+import domain.Ride;
 import domain.RideRequest;
 import domain.User;
 import org.hibernate.Query;
@@ -20,7 +21,11 @@ public class RideRequestRepository extends HibernateGenericDao<RideRequest> impl
 
     public List<RideRequest> getPendingRequestsFor(User driver)
     {
-        String hql = "select rr FROM RideRequest rr WHERE rr.driver = :driver and rr.status = :status";
+        String hql = "select rr " +
+                "FROM RideRequest rr " +
+                "WHERE rr.driver = :driver " +
+                "and rr.status = :status " ; //+
+//                "and rr.date <=  now()";
         Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
 
         q.setEntity("driver", driver);
@@ -29,4 +34,19 @@ public class RideRequestRepository extends HibernateGenericDao<RideRequest> impl
         return q.list();
     }
 
+    public List<RideRequest> getPendingRequestsBy(User requester)
+    {
+        String hql = "select rr " +
+                "FROM RideRequest rr " +
+                "WHERE rr.requester = :requester " +
+                "and rr.status = :status " +
+                "and rr.date >= now()";
+        Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+
+        q.setEntity("requester", requester);
+        q.setParameter("status", RequestStatus.Pending);
+
+        return q.list();
+
+    }
 }

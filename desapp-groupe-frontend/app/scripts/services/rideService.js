@@ -11,7 +11,8 @@ function RideService($http,$log) {
     // RouteService interface
     //////////////////////////
     var rideService = {
-        requestRide: requestRide
+        requestRide: requestRide,
+        pendingRequestsBy: pendingRequestsBy
     };
 
     //////////////////////////////////////////////////
@@ -23,19 +24,27 @@ function RideService($http,$log) {
      * { }
      */
     function requestRide(data) {
-        return $http.post(url + '/requestRide',data).then(successRequestRide).catch(failureRequestRide);
+        return $http.post(url + '/requestRide',data).then(onSuccess).catch(onFail);
+    }
 
-        function successRequestRide(response){
-            return response.data;
-        }
+    function pendingRequestsBy(userId) {
+        return $http.get(url + '/pendingRequestsBy/' + userId).then(onSuccess).catch(onFail)
+    }
 
-        function failureRequestRide(error){
-            $log.error('Ocurrio un error: ' + error.data);
-            return 'Ocurrio un error';
-        }
-    };
+    function pendingRequestsFor(userId) {
+        return $http.get(url + '/pendingRequestsFor/' + userId).then(onSuccess).catch(onFail)
+    }
 
     return rideService;
+}
+
+function onSuccess(response){
+    return response.data;
+}
+
+function onFail(error){
+    $log.error('Ocurrio un error: ' + error.data);
+    return 'Ocurrio un error';
 }
 
 })();

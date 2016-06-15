@@ -9,6 +9,7 @@ import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,15 @@ public class RideService extends GenericService<Ride>
 {
     private SystemSettings systemSettings;
     private RideRepository rideRepository ;
+
+    public RideRequestRepository getRideRequestRepository() {
+        return rideRequestRepository;
+    }
+
+    public RideRepository getRideRepository() {
+        return rideRepository;
+    }
+
     private RideRequestRepository rideRequestRepository;
 
     public RideService(){
@@ -104,8 +114,15 @@ public class RideService extends GenericService<Ride>
         return Optional.ofNullable( rideRepository.getRideOfDriverSuitableForRideRequest(rideRequest) );
     }
 
+    @Transactional
     public List<RideRequest> getPendingRequestsFor(User driver)
     {
         return rideRequestRepository.getPendingRequestsFor(driver);
+    }
+
+    @Transactional
+    public List<RideRequest> getPendingRequestsBy(User requester)
+    {
+        return rideRequestRepository.getPendingRequestsBy(requester);
     }
 }

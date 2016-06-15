@@ -77,6 +77,13 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.ride" />
         </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.user" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.route" />
+        </constructor-arg>
+
     </bean>
 
     <bean id="post" class="domain.servicesRest.PostServiceRest">

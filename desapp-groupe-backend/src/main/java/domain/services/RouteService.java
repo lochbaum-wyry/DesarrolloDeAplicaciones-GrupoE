@@ -48,4 +48,15 @@ public class RouteService
         return result ;
     }
 
+    public RouteRepository getRouteRepository() {
+        return routeRepository;
+    }
+
+    public void setRouteRepository(RouteRepository routeRepository) {
+        this.routeRepository = routeRepository;
+    }
+
+    public RoutePointRepository getRoutePointRepository() {
+        return routePointRepository;
+    }
 }

@@ -3,12 +3,15 @@ package domain;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
+import domain.services.ReducedUserSerializer;
 import domain.servicesRest.JodaDateTimeDeserializer;
 import org.joda.time.DateTime;
 
 public class RideRequest extends Entity
 {
+    @JsonSerialize(using= ReducedUserSerializer.class)
     private User requester;
+    @JsonSerialize(using= ReducedUserSerializer.class)
     private User driver;
     private Route route;
 
@@ -48,6 +51,7 @@ public class RideRequest extends Entity
         this.status = RequestStatus.Rejected;
     }
 
+    @JsonSerialize(using= ReducedUserSerializer.class)
     public User getRequester() {
         return requester;
     }
@@ -105,6 +109,7 @@ public class RideRequest extends Entity
         this.status = status;
     }
 
+    @JsonSerialize(using= ReducedUserSerializer.class)
     public User getDriver() {
         return driver;
     }

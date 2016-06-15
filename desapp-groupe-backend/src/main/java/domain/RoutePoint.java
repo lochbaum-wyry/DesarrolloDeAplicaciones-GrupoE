@@ -9,6 +9,8 @@ public class RoutePoint extends Entity
     private Route route;
     private Integer indexInRoute;
     private Double latitude;
+    private Double longitude;
+
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
@@ -22,8 +24,6 @@ public class RoutePoint extends Entity
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
-
-    private Double longitude;
 
     public RoutePoint()  {}
     public RoutePoint(Route route, Double latitude, Double longitude)
