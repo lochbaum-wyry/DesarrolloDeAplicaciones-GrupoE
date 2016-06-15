@@ -105,12 +105,12 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
 
   function rideProposalToRideRequest(/* RideProposal */ rideProposal, /* User */ requester) {
     return {
-      driver:rideProposal['driver'],
-      requester: requester,
-      route: rideProposal['route'],
+      driverId: rideProposal['driver']['id'],
+      requesterId: requester['id'],
+      routeId: rideProposal['route']['id'],
       date: rideProposal['departureDateTime'],
-      boardingAt: rideProposal['boardingPoint'],
-      getOffAt: rideProposal['getOffPoint']
+      boardingAtId: rideProposal['boardingPoint']['id'],
+      getOffAtId: rideProposal['getOffPoint']['id']
     };
   }
 

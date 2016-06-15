@@ -11,31 +11,22 @@ import org.joda.time.DateTime;
 
 public class RideProposal
 {
+    @JsonSerialize(using=ReducedUserSerializer.class)
     private User driver;
     private Route route;
     private RoutePoint boardingPoint;
     private RoutePoint getOffPoint;
-    private Schedule schedule;
-
     @JsonSerialize(using=DateTimeSerializer.class)
     private DateTime departureDateTime;
 
     @JsonSerialize(using=DateTimeSerializer.class)
-    public DateTime getDepartureDateTime() {
+    public DateTime getDepartureDateTime()
+    {
         return departureDateTime;
     }
 
-
     public void setDepartureDateTime(DateTime departureDateTime) {
         this.departureDateTime = departureDateTime;
-    }
-
-    public Schedule getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(Schedule schedule) {
-        this.schedule = schedule;
     }
 
     public Route getRoute() {
@@ -62,6 +53,7 @@ public class RideProposal
         this.getOffPoint = getOffPoint;
     }
 
+    @JsonSerialize(using=ReducedUserSerializer.class)
     public User getDriver() {
         return driver;
     }
@@ -79,14 +71,12 @@ public class RideProposal
         int year = departureDateTime.getYear();
         int month = departureDateTime.getMonthOfYear();
         int day = departureDateTime.getDayOfMonth();
-        DateTime scheduleDate = new DateTime(year, month, day, hour, minute);
+        DateTime scheduledDepartureDateTime = new DateTime(year, month, day, hour, minute);
 
         this.driver = driver;
         this.boardingPoint = boardingPoint;
         this.getOffPoint = getOffPoint;
         this.route = route ;
-        this.schedule = schedule ;
-        this.departureDateTime = scheduleDate ;
+        this.departureDateTime = scheduledDepartureDateTime ;
     }
-
 }

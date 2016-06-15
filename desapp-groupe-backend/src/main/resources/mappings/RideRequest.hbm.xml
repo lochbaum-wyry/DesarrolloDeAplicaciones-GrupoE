@@ -8,13 +8,13 @@
             <generator class="native" />
         </id>
 
-        <many-to-one name="driver" class="domain.User" />
-        <many-to-one name="requester" class="domain.User" />
-        <one-to-one name="route" class="domain.Route" />
+        <many-to-one name="driver" class="domain.User" lazy="false" />
+        <many-to-one name="requester" class="domain.User"  lazy="false"/>
+        <many-to-one name="route" class="domain.Route" lazy="false" />
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="dateRequested" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
-        <one-to-one name="boardingAt" class="domain.RoutePoint" />
-        <one-to-one name="getOffAt" class="domain.RoutePoint" />
+        <one-to-one name="boardingAt" class="domain.RoutePoint" lazy="false"/>
+        <one-to-one name="getOffAt" class="domain.RoutePoint" lazy="false" />
         <property name="status" />
 
     </class>
