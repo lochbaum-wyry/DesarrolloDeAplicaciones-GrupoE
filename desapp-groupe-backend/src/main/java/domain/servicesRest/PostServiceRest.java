@@ -43,7 +43,7 @@ public class PostServiceRest{
     @Path("posts/{id}")
     @Produces("application/json")
     @Consumes("application/json")
-    public List<Post> posts(@PathParam("id") final Integer id){
+    public List posts(@PathParam("id") final Integer id){
         return postService.posts(id);
     }
 

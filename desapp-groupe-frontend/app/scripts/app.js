@@ -53,7 +53,7 @@ angular
         controller: 'RouteFindCtrl',
         controllerAs: 'rf'
       })
-      .when('/profile', {
+      .when('/profile/:id', {
         templateUrl: '/views/profile.html',
         controller: 'ProfileCtrl',
         controllerAs: 'p'

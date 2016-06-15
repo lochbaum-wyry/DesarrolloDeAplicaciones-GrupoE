@@ -210,7 +210,7 @@ public class User  extends Entity
             chat = maybeChat.get();
         } else
         {
-            chat = new Chat(this.name.toString(),this,user);
+            chat = new Chat(this.name.toString()+'-'+user.name.toString(),this,user);
             addChat(chat);
             user.addChat(chat);
         }
@@ -220,7 +220,9 @@ public class User  extends Entity
 
     private Optional<Chat> getChatWith(User user)
     {
-        return this.getChats().stream().filter(p -> p.getUsers().contains(user)).findFirst();
+        return this.getChats().stream().
+                filter(p -> p.getUsers().size() == 2 && p.getUsers().contains(user))
+                .findFirst();
     }
 
 }

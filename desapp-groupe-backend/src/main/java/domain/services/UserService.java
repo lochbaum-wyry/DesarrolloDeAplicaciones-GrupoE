@@ -102,4 +102,9 @@ public class UserService {
     public User getUser(Integer id) {
         return userRepository.findById(id);
     }
+
+    @Transactional
+    public List<User> getUsers(){
+        return userRepository.findAll();
+    }
 }

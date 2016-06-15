@@ -36,6 +36,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
             <ref bean="gamingRest"/>
             <ref bean="productRest"/>
             <ref bean="post"/>
+            <ref bean="chat"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -81,6 +82,12 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
     <bean id="post" class="domain.servicesRest.PostServiceRest">
         <constructor-arg>
             <ref bean="services.post" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="chat" class="domain.servicesRest.ChatServiceRest">
+        <constructor-arg>
+            <ref bean="services.chat" />
         </constructor-arg>
     </bean>
 

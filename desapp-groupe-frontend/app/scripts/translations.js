@@ -1,3 +1,4 @@
+'use strict';
 var trans = [] ; 
 
 function getTranslations(language) {

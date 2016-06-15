@@ -3,14 +3,31 @@
 
 angular.module('desappGrupoeFrontendApp').controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl($localStorage,PostService) {
+function ProfileCtrl(PostService,SessionService,UserService, $routeParams) {
 
   var vm = this; 
-  vm.user = $localStorage.userProfile;
+  vm.profileUserId = $routeParams.id;
+  vm.user = {}; 
   vm.posts = [];
   vm.text = "Escribe algo :)"
 
   /* String */ vm.ERROR_MSG;
+
+  loadProfile(vm.profileUserId);
+  
+  function loadProfile(id) {
+    var userPromise = UserService.getUser(id);
+    userPromise.then(onSuccUser);
+    userPromise.catch(onFailUser);
+
+    function onSuccUser(result){
+        vm.user = result;
+    }
+
+    function onFailUser(error){
+        vm.ERROR_MSG = error;
+    }
+  }
 
   vm.getPosts = function() {
 
@@ -22,7 +39,7 @@ function ProfileCtrl($localStorage,PostService) {
         vm.ERROR_MSG = error;
     };
     
-    PostService.getPosts(vm.user.id) 
+    PostService.getPosts(vm.profileUserId) 
             .then(onSuccess)
             .catch(onFailure);
   };
@@ -38,7 +55,7 @@ function ProfileCtrl($localStorage,PostService) {
         vm.ERROR_MSG = error;
     };
     
-    var post = {'publisher':$localStorage.user,'date':0,'content':vm.text,'wallOwner':vm.user};
+    var post = {'publisher':SessionService.user(),'date':0,'content':vm.text,'wallOwner':vm.user};
 
     PostService.sendPost(post) 
             .then(onSuccess)

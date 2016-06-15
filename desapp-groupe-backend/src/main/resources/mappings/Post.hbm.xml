@@ -8,8 +8,8 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="publisher" class="domain.User" />
-        <one-to-one name="wallOwner" class="domain.User" />
+        <many-to-one name="publisher" class="domain.User" lazy="false" />
+        <many-to-one name="wallOwner" class="domain.User" lazy="false"/>
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="content" />
     </class>

@@ -66,9 +66,10 @@
                   Send</button>
               </span>
         	</div>
-      		<div class="list-group" dir-paginate="post in p.posts | itemsPerPage: 6">
+      		<div class="list-group" dir-paginate="post in p.posts | itemsPerPage: 3">
            		<a href="" value ='post' class="list-group-item" ng-model="post.selected">
            			<p>Usuario : {{post.publisher.name}}</p>
+                <p>dueño de post : {{post.wallOwner.name}}</p>
              		<p>{{post.content}}</p> 
            		</a>
         	</div>

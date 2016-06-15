@@ -87,6 +87,13 @@ public class UserServiceRest {
         return userService.getUser(id);
     }
 
+    @GET
+    @Path("getUsers")
+    @Produces("application/json")
+    public List<User> getUsers() {
+        return userService.getUsers();
+    }
+
     @POST
     @Path("{id}/addRoute/")
     @Consumes("application/json")

@@ -83,6 +83,7 @@ public class SetupExampleData {
             dan.getOrAddChatWith(fede);
             dan.getOrAddChatWith(otro);
 
+
             userService.addRoute(dan,route);
 
             DateTime date = new DateTime(2016,5,6,8,45);

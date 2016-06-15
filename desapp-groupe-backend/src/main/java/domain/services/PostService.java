@@ -41,7 +41,7 @@ public class PostService {
     public List<Post> posts(Integer id) {
         User user = userRepository.findById(id);
         List<Post> list = postRepository.findByUser(user);
-        return list.stream().sorted().collect(Collectors.toList());
+        return list;
     }
 
     @Transactional

@@ -6,12 +6,28 @@ angular.module('desappGrupoeFrontendApp')
 
     var userService = {
       addRoute: addRoute,
-      getUser: getUser
+      getUser: getUser,
+      getUsers: getUsers
     };
 
 
     function getUser(user_id) {
         return $http.get(url + '/getUser/' + user_id)
+          .then(onSuccessGetUser)
+          .catch(onFailureGetUser);
+    
+        function onSuccessGetUser(response){
+          return response.data;
+        }
+
+        function onFailureGetUser(error){
+            $log.error('Ocurrio un error: ' + error.data);
+            return 'Ocurrio un error';
+        }
+      };
+
+    function getUsers() {
+        return $http.get(url + '/getUsers/')
           .then(onSuccessGetUser)
           .catch(onFailureGetUser);
     
