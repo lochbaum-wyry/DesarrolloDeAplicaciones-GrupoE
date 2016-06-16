@@ -13,8 +13,8 @@
         <many-to-one name="route" class="domain.Route" lazy="false" />
         <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="dateRequested" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
-        <one-to-one name="boardingAt" class="domain.RoutePoint" lazy="false"/>
-        <one-to-one name="getOffAt" class="domain.RoutePoint" lazy="false" />
+        <many-to-one name="boardingAt" class="domain.RoutePoint" lazy="false"/>
+        <many-to-one name="getOffAt" class="domain.RoutePoint" lazy="false" />
         <property name="status" />
 
     </class>
