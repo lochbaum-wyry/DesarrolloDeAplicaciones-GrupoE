@@ -29,7 +29,7 @@ public class ChatServiceTest extends AbstractServiceTest{
         userRepository.save(user);
         userRepository.save(user2);
 
-        chatService.sendMessage(user,user2,"como estas ?");
+        chatService.sendMessage(user.getId(),user2.getId(),"como estas ?");
 
         Assert.assertEquals(user2.getChats().size(),1);
     }
@@ -42,9 +42,9 @@ public class ChatServiceTest extends AbstractServiceTest{
         userRepository.save(user);
         userRepository.save(user2);
 
-        chatService.sendMessage(user,user2,"como estas ?");
-        chatService.sendMessage(user2,user,"todo bien, vos ?");
-        chatService.sendMessage(user,user2,"aca andamos");
+        chatService.sendMessage(user.getId(),user2.getId(),"como estas ?");
+        chatService.sendMessage(user2.getId(),user.getId(),"todo bien, vos ?");
+        chatService.sendMessage(user.getId(),user2.getId(),"aca andamos");
 
         Assert.assertEquals(chatService.chatsUser(user).get(0).getMessages().size(),3);
         Assert.assertEquals(chatService.chatsUser(user).size(),1);
