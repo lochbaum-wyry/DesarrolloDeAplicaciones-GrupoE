@@ -6,6 +6,7 @@ public class GoogleOauthCredential extends Entity {
     private String googleAccessToken;
     private String googleRefreshToken;
 
+    public GoogleOauthCredential(){}
 
     public String getGoogleUserId() {
         return googleUserId;
