@@ -226,6 +226,7 @@ public class User  extends Entity
                 .findFirst();
     }
 
+    @JsonIgnore
     public GoogleOauthCredential getToken() {
         return token;
     }
