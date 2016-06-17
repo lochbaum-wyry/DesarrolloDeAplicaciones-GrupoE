@@ -18,6 +18,7 @@ function RequestedRidesCtrl(RideService,SessionService) {
   // Scope functions declarations
   //------------------------------
 
+  vm.cancelRequest = cancelRequest; 
   //---------------------------
   // Controller initialization
   //---------------------------
@@ -43,9 +44,24 @@ function RequestedRidesCtrl(RideService,SessionService) {
     }
 
     function onFailRR(error) {
-      vm.requestedRides = [] ;
       infoModal("failed_getting_requested_rides", 'error');
      }
+
+
+  }
+
+  function cancelRequest(requestId) {    
+    RideService.cancelRequest(requestId)
+       .then( onSuccCancel.bind(requestId) )
+       .catch(onFailCancel);
+
+    function onSuccCancel(data) {
+      vm.requestedRides = vm.requestedRides.filter( hasId.bind( this ) );
+      function hasId (rideReq) { return rideReq.id != this; }
+    }
+
+
+    function onFailCancel(error) { infoModal("failed_cancelling_request", 'error');  }
   }
 
 

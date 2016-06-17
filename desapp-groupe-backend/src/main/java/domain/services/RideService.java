@@ -79,6 +79,14 @@ public class RideService extends GenericService<Ride>
         return ride;
     }
 
+
+    @Transactional
+    public void cancelRideRequest(int rideRequestId)
+    {
+        if (rideRequestRepository.exists(rideRequestId))
+            rideRequestRepository.deleteById(rideRequestId);
+    }
+
 //    public List<Ride> getRidesOfUserAsDriver(User user)
 //    {
 //        return null;

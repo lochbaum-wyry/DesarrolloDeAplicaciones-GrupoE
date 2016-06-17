@@ -41,6 +41,18 @@ public class RideServiceRest
         List<RideRequest> list = rideService.getPendingRequestsBy(requester);
         return list;
     }
+
+    @GET
+    @Path("cancelRequest/{rideRequestId}")
+    @Produces("application/json")
+    public Response cancelRideRequests(@PathParam("rideRequestId") final int rideRequestId)
+    {
+        rideService.cancelRideRequest(rideRequestId);
+        Response response = Response.ok().tag("Se canceló el request.").build();
+        return response;
+    }
+
+
 //
 //    @GET
 //    @Path("pendingRequestsFor/{driverId}")
