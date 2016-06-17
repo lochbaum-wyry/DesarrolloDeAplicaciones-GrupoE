@@ -8,15 +8,8 @@ http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
     <aop:aspectj-autoproxy />
 
-<!--
-    <bean id="userRest" class="domain.servicesRest.UserServiceRest">
-        <property name="dialogo" value="Necesito un aspirina - guiño guiño .." />
-    </bean>
+    <bean id="loggerAspect" class="helpers.aspect.LoggerAspect" />
 
-
-
-    <bean id="afterMalaOnda" class="example.aop.aspects.MalaOndaAfterAspect" />
--->
     <!--	   <bean id="beforeMalaOnda" class="example.aop.aspects.MalaOndaBeforeAspect" />
 
        <bean id="aroundBuenaOnda" class="example.aop.aspects.BuenaOndaAdviceAspect"/>-->

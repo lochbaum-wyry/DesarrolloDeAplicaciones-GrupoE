@@ -1,9 +1,6 @@
 package domain.servicesRest;
 
 import domain.Chat;
-import domain.Message;
-import domain.Post;
-import domain.User;
 import domain.services.ChatService;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +50,8 @@ public class ChatServiceRest {
     @Path("getChatByUser/{userId}/{userChatId}")
     @Produces("application/json")
     @Consumes("application/json")
-    public Chat getChatByUser(@PathParam("userId") final Integer userId,@PathParam("userChatId") final Integer userChatId){
+    public Chat getChatByUser(@PathParam("userId") final Integer userId,@PathParam("userChatId") final Integer userChatId)
+    {
         return chatService.getChatByUser(userId,userChatId);
     }
 

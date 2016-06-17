@@ -1,10 +1,13 @@
 package domain.services;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.services.oauth2.model.Userinfoplus;
 import domain.*;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
+import helpers.UserAuthorization;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -17,11 +20,14 @@ public class UserService {
     private UserRepository userRepository;
     private RouteRepository routeRepository;
 
+    private UserTokenService userTokenService;
+
     public UserService(){}
 
-    public UserService(UserRepository userRepository,RouteRepository routeRepository){
+    public UserService(UserRepository userRepository,RouteRepository routeRepository,UserTokenService userTokenService){
         this.userRepository = userRepository;
         this.routeRepository = routeRepository;
+        this.userTokenService = userTokenService;
     }
 
     public UserRepository getUserRepository() {
@@ -29,9 +35,10 @@ public class UserService {
     }
 
     @Transactional
-    public Boolean existUser(String email){
-        return userRepository.getUserByEmail(email) != null;
+    public Boolean existUser(Userinfoplus userinfoplus){
+        return userRepository.getUserByEmail(userinfoplus.getEmail()) != null;
     }
+
 
     @Transactional
     public User signUp(String name, String lastName, String userName, String email,String image) throws SingUpException
@@ -94,7 +101,7 @@ public class UserService {
 //    }
 //
     @Transactional
-    public User login(String email, String token) {
+    public User login(String email) {
         return userRepository.getUserByEmail(email);
     }
 
@@ -104,7 +111,31 @@ public class UserService {
     }
 
     @Transactional
-    public List<User> getUsers(){
+    public User signUpWithCredentials(Userinfoplus userinfoplus, GoogleOauthCredential googleOauthCredential)
+    {
+        User newUser = this.signUp2(userinfoplus.getName(),userinfoplus.getFamilyName(),userinfoplus.getEmail(),userinfoplus.getPicture());
+        newUser.setToken(googleOauthCredential);
+        userRepository.update(newUser);
+
+        return newUser;
+    }
+
+    @Transactional
+    public User signUp2(String fullName,String familyName, String email,String picture)
+    {
+        User user = new User(fullName,familyName,fullName,email);
+        user.setImage(picture);
+        userRepository.save(user);
+        user = userRepository.findById(user.getId());
+
+        userTokenService.create(user);
+
+        return user;
+    }
+
+    @Transactional
+    public List<User> getUsers()
+    {
         return userRepository.findAll();
     }
 }

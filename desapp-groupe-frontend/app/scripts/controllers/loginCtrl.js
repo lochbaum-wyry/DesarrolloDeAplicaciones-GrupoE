@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('LoginCtrl', loginCtrl );
 
 /* @ngInject */
-function loginCtrl(SessionService,LoginService,$window) {
+function loginCtrl(SessionService,LoginService,$window,AuthService) {
   var vm = this; 
 
 /*
@@ -25,6 +25,29 @@ function loginCtrl(SessionService,LoginService,$window) {
 
   vm.signUpAndLogin = signUpAndLogin;
   vm.unsetError = unsetError;
+
+  //inicio Login Google
+  vm.isLoggedIn = AuthService.isLoggedIn();
+  vm.googleSigin = document.querySelector('google-signin');
+
+  vm.googleSigin.addEventListener('google-signin-offline-success', function(
+      auth) {
+      LoginService.googleLogin(auth.detail.code)
+        .then(function(response) {
+            if (SessionService.isInitialized())
+                $window.location.href = "/indexHome.html";
+            else {
+                vm.ERROR_MSG = "Oops... could not login. Try again."
+      }
+            AuthService.login(response.data.token);
+            //$window.location.assign('/');
+          },
+          function(error) {
+            console.log(error);
+          });
+    });
+
+  //fin Login Google
 
   function unsetError() {
     vm.ERROR_MSG = null; 

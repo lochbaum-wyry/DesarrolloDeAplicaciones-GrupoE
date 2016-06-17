@@ -52,6 +52,7 @@ public class ChatService {
         userRepository.update(user);
         userRepository.update(userChat);
 
-        return chatRepository.findById(chat.getId());
+        chat = chatRepository.findById(chat.getId());
+        return chat;
     }
 }

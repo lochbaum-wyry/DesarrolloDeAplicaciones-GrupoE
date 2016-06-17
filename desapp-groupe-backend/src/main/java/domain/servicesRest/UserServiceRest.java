@@ -1,13 +1,16 @@
 package domain.servicesRest;
 
-import domain.LatLng;
-import domain.Route;
-import domain.Schedule;
-import domain.User;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.services.oauth2.model.Userinfoplus;
+import domain.*;
 import domain.builders.UserBuilder;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
+import domain.services.GoogleCredentialsService;
 import domain.services.UserService;
+import domain.services.UserTokenService;
+import helpers.UserAuthorization;
+import helpers.UserTokenResponse;
 import org.springframework.stereotype.Service;
 
 
@@ -20,10 +23,14 @@ import java.util.List;
 public class UserServiceRest {
 
 
-    UserService userService;
+     UserService userService;
+     GoogleCredentialsService googleCredentialsService;
+     UserTokenService userTokenService;
 
-    public UserServiceRest(UserService userService) {
+    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService) {
         this.userService = userService;
+        this.googleCredentialsService = googleCredentialsService;
+        this.userTokenService = userTokenService;
     }
 
     @GET
@@ -50,23 +57,40 @@ public class UserServiceRest {
     @Path("signUpAndLogin")
     @Consumes("application/json")
     @Produces("application/json")
-    public User signUp(User user){
+    public User signUp(UserAuthorization userAuthorization){
 
         User realUser = null;
+        Credential credential = googleCredentialsService.create(userAuthorization.getAuthorizationCode());
+        Userinfoplus userinfoplus = googleCredentialsService.getUserinfo(credential);
 
-        if(userService.existUser(user.getEmail()))
+        if(userService.existUser(userinfoplus))
         {
-            realUser = userService.login(user.getEmail(),"un token ");
+            realUser = userService.login(userinfoplus.getEmail());
         } else {
             try {
-                realUser = userService.signUp(user.getName(), user.getLastName(), user.getUserName(), user.getEmail(),user.getImage());
+                realUser = signUp2(userinfoplus);
 
-            } catch (SingUpException e) {
+            } catch (Exception e) {
                 realUser = null;
             }
         }
         return realUser;
     }
+
+
+    public User signUp2(Userinfoplus userinfoplus)
+    {
+
+        GoogleOauthCredential googleOauthCredential = googleCredentialsService.get(userinfoplus.getId());
+
+        User user = userService.signUpWithCredentials(userinfoplus, googleOauthCredential);
+
+        UserToken token = userTokenService.findByUserId(user.getId());
+
+
+        return user;//return new UserTokenResponse(token.getToken());
+    }
+
 
     @GET
     @Path("login/{email}/{passwd}")
@@ -77,7 +101,7 @@ public class UserServiceRest {
         } catch (SingUpException e) {
             e.printStackTrace();
         }*/
-        return userService.login(email,token);
+        return userService.login(email);
     }
 
     @GET

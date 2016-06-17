@@ -15,6 +15,7 @@
         <property name="image" />
         <property name="goodRateCount" />
         <property name="badRateCount" />
+        <one-to-one name="token" class="domain.GoogleOauthCredential" />
 
         <property name="points" />
 
