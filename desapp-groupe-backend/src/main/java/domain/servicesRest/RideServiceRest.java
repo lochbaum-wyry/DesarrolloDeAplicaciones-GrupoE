@@ -66,7 +66,7 @@ public class RideServiceRest
     private RideRequest rideRequestFromDTO(RideRequestDTO rideRequestDTO)
     {
         User driver = userService.getUserRepository().findById(rideRequestDTO.getDriverId());
-        User requester = userService.getUserRepository().findById(rideRequestDTO.getDriverId());
+        User requester = userService.getUserRepository().findById(rideRequestDTO.getRequesterId());
         DateTime date = rideRequestDTO.getDate();
         Route route = routeService.getRouteRepository().findById(rideRequestDTO.getRouteId());
         RoutePoint boardingAt = routeService.getRoutePointRepository().findById(rideRequestDTO.getBoardingAtId());
