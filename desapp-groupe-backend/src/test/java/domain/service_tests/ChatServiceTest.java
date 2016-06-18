@@ -1,5 +1,6 @@
 package domain.service_tests;
 
+import domain.Chat;
 import domain.User;
 import domain.repositories.UserRepository;
 import domain.services.ChatService;
@@ -20,8 +21,6 @@ public class ChatServiceTest extends AbstractServiceTest{
     @Autowired
     public ChatService chatService;
 
-    /*
-
     @Test
     public void test_sendMessage(){
         User user = new User("fede","fede","fede","fede");
@@ -30,8 +29,9 @@ public class ChatServiceTest extends AbstractServiceTest{
         userRepository.save(user);
         userRepository.save(user2);
 
-        chatService.sendMessage(user.getId(),user2.getId(),"como estas ?");
+        Chat chat = chatService.getChatByUser(user.getId(),user2.getId());
 
+        chatService.sendMessage(user.getId(),chat.getId(),"hola como estas");
         Assert.assertEquals(user2.getChats().size(),1);
     }
 
@@ -43,12 +43,21 @@ public class ChatServiceTest extends AbstractServiceTest{
         userRepository.save(user);
         userRepository.save(user2);
 
-        chatService.sendMessage(user.getId(),user2.getId(),"como estas ?");
-        chatService.sendMessage(user2.getId(),user.getId(),"todo bien, vos ?");
-        chatService.sendMessage(user.getId(),user2.getId(),"aca andamos");
+        Chat chat = chatService.getChatByUser(user.getId(),user2.getId());
+
+        chatService.sendMessage(user.getId(),chat.getId(),"hola como estas");
+
+
+        Chat chat2 = chatService.getChatByUser(user2.getId(),user.getId());
+
+        chatService.sendMessage(user.getId(),chat.getId(),"todo bien vos?");
+
+        Chat chat3 = chatService.getChatByUser(user.getId(),user2.getId());
+
+        chatService.sendMessage(user.getId(),chat.getId(),"aca andamos");
+
 
         Assert.assertEquals(chatService.chatsUser(user).get(0).getMessages().size(),3);
         Assert.assertEquals(chatService.chatsUser(user).size(),1);
     }
-    */
 }
