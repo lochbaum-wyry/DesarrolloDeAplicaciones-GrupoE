@@ -24,8 +24,8 @@ public class RideRequestRepository extends HibernateGenericDao<RideRequest> impl
         String hql = "select rr " +
                 "FROM RideRequest rr " +
                 "WHERE rr.driver = :driver " +
-                "and rr.status = :status " ; //+
-//                "and rr.date <=  now()";
+                "and rr.status = :status " +
+                "and rr.date <=  now()";
         Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
 
         q.setEntity("driver", driver);

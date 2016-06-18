@@ -68,6 +68,11 @@ angular
         controller: 'RequestedRidesCtrl',
         controllerAs: 'rrc'
       })
+      .when('/rideRequests', {
+        templateUrl: '/views/rideRequests.html',
+        controller: 'RideRequestsCtrl',
+        controllerAs: 'rrc'
+      })
       .otherwise({
         templateUrl: 'views/home.html',
         controller: 'UserCtrl',

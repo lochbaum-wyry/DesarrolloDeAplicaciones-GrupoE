@@ -13,7 +13,10 @@ function RideService($http,$log) {
     var rideService = {
         requestRide: requestRide,
         pendingRequestsBy: pendingRequestsBy,
+        pendingRequestsFor: pendingRequestsFor,
         cancelRequest: cancelRequest
+        rejectRequest: rejectRequest
+        acceptRequest: acceptRequest
     };
 
     //////////////////////////////////////////////////
@@ -31,6 +34,15 @@ function RideService($http,$log) {
     function cancelRequest(id) {
         return $http.get(url + '/cancelRequest/' + id).then(onSuccess).catch(onFail)
     }    
+
+    function rejectRequest(id) {
+        return $http.get(url + '/rejectRequest/' + id).then(onSuccess).catch(onFail)
+    }    
+
+    function acceptRequest(id) {
+        return $http.get(url + '/acceptRequest/' + id).then(onSuccess).catch(onFail)
+    }    
+
 
     function pendingRequestsBy(userId) {
         return $http.get(url + '/pendingRequestsBy/' + userId).then(onSuccess).catch(onFail)

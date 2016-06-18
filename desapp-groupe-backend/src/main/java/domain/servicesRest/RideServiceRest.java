@@ -42,6 +42,17 @@ public class RideServiceRest
         return list;
     }
 
+
+    @GET
+    @Path("pendingRequestsFor/{driverId}")
+    @Produces("application/json")
+    public List<RideRequest> getPendingRequestsFor(@PathParam("driverId") final int driverId)
+    {
+        User driver = userService.getUser(driverId);
+        List<RideRequest> list = rideService.getPendingRequestsFor(driver);
+        return list;
+    }
+
     @GET
     @Path("cancelRequest/{rideRequestId}")
     @Produces("application/json")
