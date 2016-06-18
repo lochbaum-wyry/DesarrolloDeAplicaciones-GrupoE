@@ -20,6 +20,7 @@ public class ChatServiceTest extends AbstractServiceTest{
     @Autowired
     public ChatService chatService;
 
+    /*
 
     @Test
     public void test_sendMessage(){
@@ -49,5 +50,5 @@ public class ChatServiceTest extends AbstractServiceTest{
         Assert.assertEquals(chatService.chatsUser(user).get(0).getMessages().size(),3);
         Assert.assertEquals(chatService.chatsUser(user).size(),1);
     }
-
+    */
 }
