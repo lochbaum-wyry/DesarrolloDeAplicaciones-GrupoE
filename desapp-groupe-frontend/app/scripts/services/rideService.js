@@ -14,8 +14,8 @@ function RideService($http,$log) {
         requestRide: requestRide,
         pendingRequestsBy: pendingRequestsBy,
         pendingRequestsFor: pendingRequestsFor,
-        cancelRequest: cancelRequest
-        rejectRequest: rejectRequest
+        cancelRequest: cancelRequest,
+        rejectRequest: rejectRequest,
         acceptRequest: acceptRequest
     };
 

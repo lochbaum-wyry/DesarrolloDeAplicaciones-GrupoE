@@ -1,10 +1,10 @@
 
-trans['requestedRides'] = {
+trans['rideRequests'] = {
 	en: {
 		'failed_getting_requested_rides': "Could not retrieve requested rides list",
 		'failed_cancelling_request': 'Could not cancel request', 
 		
-		'accept_request_btn': 'Accept'
+		'accept_request_btn': 'Accept',
 		'reject_request_btn': 'Reject'
 
 	}, 
@@ -13,7 +13,7 @@ trans['requestedRides'] = {
 		'failed_cancelling_request': 'No se pudo cancelar la solicitud', 
 
 
-		'accept_request_btn': 'Aceptar'
+		'accept_request_btn': 'Aceptar',
 		'reject_request_btn': 'Rechazar'
 
 	}

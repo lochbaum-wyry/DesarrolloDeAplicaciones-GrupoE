@@ -10,7 +10,6 @@ trans['requestedRides'] = {
 		'failed_getting_requested_rides': "No se pudo obtener la lista de viajes solicitados",
 		'failed_cancelling_request': 'No se pudo cancelar la solicitud', 
 
-
 		'cancel_request_btn': 'Cancelar'
 
 	}
