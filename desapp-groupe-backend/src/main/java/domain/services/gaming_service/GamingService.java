@@ -1,10 +1,13 @@
 package domain.services.gaming_service;
 
+import domain.User;
 import domain.repositories.RankingRepository;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
 import domain.services.MonthlyRanking;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 public class GamingService
 {
@@ -38,6 +41,7 @@ public class GamingService
             ranking.setBestVehicles(vehicleRepository.getBestVehiclesInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             ranking.setWorstVehicles(vehicleRepository.getWorstVehiclesInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             ranking.setMostEfficientDrivers(userRepository.getMostEfficientDriversInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
+            assignEfficiencyPoints(ranking.getMostEfficientDrivers());
             rankingRepository.save(ranking);
             ranking = rankingRepository.getRankingIn(month,year);
 
@@ -45,10 +49,12 @@ public class GamingService
         return ranking ;
     }
 
-    public void assignEfficiencyPoints(Integer month, Integer year)
+    public void assignEfficiencyPoints(List<User> users)
     {
-//        userRepository.getMostEfficientDriversInMonthYear(month,year,MAX_NUMBER_USERS_RANKING).stream()
-//            .forEach(user -> user.addPoints(5000));
+        for (User user : users){
+            user.addPoints(5000);
+            userRepository.update(user);
+        }
     }
 }
 

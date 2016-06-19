@@ -4,11 +4,11 @@
       	<form>
           <div class="form-group">
             <label for="mes">{{'mes' | translate}}:</label>
-            <input type="text"  class="form-control" id="mes" placeholder="{{'mes' | translate}}">
+            <input type="text" ng-model="rnk.monthSelected"  class="form-control" id="mes" placeholder="{{'mes' | translate}}">
           </div>
           <div class="form-group">
             <label for="anio">{{'año' | translate}}:</label>
-            <input type="text" class="form-control" id="anio" placeholder="{{'año' | translate}}">
+            <input type="text" ng-model="rnk.yearSelected" class="form-control" id="anio" placeholder="{{'año' | translate}}">
           </div>
           <div class="btn-group form-group btn-group-sm" role="group" aria-label="">
   			<button type="button" class="btn ">{{'conductores' | translate}}</button>
@@ -16,7 +16,7 @@
   			<button type="button" class="btn ">{{'vehiculos' | translate}}</button>
 		  </div>
           <div class="form-group ">
-            <input class="btn" type="button" value="{{'buscar' | translate}}" id="" ng-click="rnk.getRanking()">
+            <input class="btn" type="button" value="{{'buscar' | translate}}" id="" ng-click="rnk.getRankingForDate()">
           </div>
         </form>
       </div>
