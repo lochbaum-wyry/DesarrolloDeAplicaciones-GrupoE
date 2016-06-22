@@ -9,7 +9,10 @@ public class NoSeatsAvailableException extends SubiQueTeLlevoException
 
     public NoSeatsAvailableException(RoutePoint boardingAt, RoutePoint getOffAt)
     {
+        super("no_seats_available");
         this.boardingAt = boardingAt ;
         this.getOffAt = getOffAt ;
     }
+
+
 }

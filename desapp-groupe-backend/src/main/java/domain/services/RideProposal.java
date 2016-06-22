@@ -66,7 +66,7 @@ public class RideProposal
 
     public RideProposal(User driver, Route route, Schedule schedule, DateTime departureDateTime, RoutePoint boardingPoint, RoutePoint getOffPoint)
     {
-        int minute = schedule.getArrivalTime().getMinuteOfHour();
+        int minute = schedule.getDepartureTime().getMinuteOfHour();
         int hour = schedule.getDepartureTime().getHourOfDay();
         int year = departureDateTime.getYear();
         int month = departureDateTime.getMonthOfYear();

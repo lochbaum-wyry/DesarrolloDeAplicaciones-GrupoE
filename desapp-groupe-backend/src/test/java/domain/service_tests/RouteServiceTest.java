@@ -48,7 +48,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.FRIDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);
@@ -81,7 +80,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.FRIDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);
@@ -114,7 +112,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.FRIDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);
@@ -146,7 +143,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.FRIDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);
@@ -180,7 +176,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.FRIDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);
@@ -215,7 +210,6 @@ public class RouteServiceTest extends AbstractServiceTest
         Schedule schedule = ScheduleBuilder.aSchedule()
                 .withDay(DayOfWeek.THURSDAY)
                 .withDepartureTimeAt(9,30)
-                .withArrivalTimeAt(10,30)
                 .build();
 
         route.addSchedule(schedule);

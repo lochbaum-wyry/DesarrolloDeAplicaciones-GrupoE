@@ -14,19 +14,15 @@ public class Schedule extends Entity
 {
     private DayOfWeek day;
 
-    @JsonSerialize(using= LocalTimeSerializer.class)
-    @JsonDeserialize(using= LocalTimeDeserializer.class)
+    @JsonSerialize(using=LocalTimeSerializer.class)
+    @JsonDeserialize(using=LocalTimeDeserializer.class)
     private LocalTime departureTime;
 
-    @JsonSerialize(using= LocalTimeSerializer.class)
-    @JsonDeserialize(using= LocalTimeDeserializer.class)
-    private LocalTime arrivalTime;
 
     public Schedule() { }
-    public Schedule(DayOfWeek day, LocalTime departureTime, LocalTime arrivalTime)
+    public Schedule(DayOfWeek day, LocalTime departureTime)
     {
         this.day = day;
-        this.arrivalTime = arrivalTime;
         this.departureTime = departureTime;
     }
 
@@ -34,17 +30,11 @@ public class Schedule extends Entity
         return day;
     }
 
-    public LocalTime getArrivalTime() {
-        return arrivalTime;
-    }
 
     public LocalTime getDepartureTime() {
         return departureTime;
     }
 
-    public void setArrivalTime(LocalTime arrivalTime) {
-        this.arrivalTime = arrivalTime;
-    }
 
     public void setDay(DayOfWeek day) {
         this.day = day;

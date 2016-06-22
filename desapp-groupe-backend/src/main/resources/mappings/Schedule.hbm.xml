@@ -10,7 +10,6 @@
 
         <property name="day" />
         <property name="departureTime" type="org.joda.time.contrib.hibernate.PersistentLocalTimeAsTimestamp"/>
-        <property name="arrivalTime" type="org.joda.time.contrib.hibernate.PersistentLocalTimeAsTimestamp"/>
 
     </class>
 </hibernate-mapping>

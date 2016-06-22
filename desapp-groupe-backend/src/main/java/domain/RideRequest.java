@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import domain.services.ReducedUserSerializer;
-import domain.servicesRest.JodaDateTimeDeserializer;
+import domain.servicesRest.serialization.JodaDateTimeDeserializer;
 import org.joda.time.DateTime;
 
 public class RideRequest extends Entity

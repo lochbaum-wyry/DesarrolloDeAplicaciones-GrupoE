@@ -1,5 +1,13 @@
 trans['allTogetherTmp'] = {
   es: {
+    'monday': 'Lunes', 
+    'tuesday': 'Martes', 
+    'wednesday': 'Miércoles', 
+    'thursday': 'Jueves',
+    'friday': 'Viernes', 
+    'saturday': 'Sabado', 
+    'sunday': 'Domingo',
+
     'home': 'Home',
     'viajes':'Viajes',
     'confirmados':'Confirmados',
@@ -56,6 +64,14 @@ trans['allTogetherTmp'] = {
     'hora_partida': 'Hora'
   }, 
   en: { 
+    'monday': 'Monday', 
+    'tuesday': 'Tuesday', 
+    'wednesday': 'Wednesday', 
+    'thursday': 'Thursday',
+    'friday': 'Friday', 
+    'saturday': 'Saturday', 
+    'sunday': 'Sunday',
+
     'home': 'Home',
     'viajes':'Rides',
     'confirmados':'Confirmed',

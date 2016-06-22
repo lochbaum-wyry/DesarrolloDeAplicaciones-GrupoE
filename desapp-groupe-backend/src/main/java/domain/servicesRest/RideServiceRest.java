@@ -4,6 +4,7 @@ import domain.RideRequest;
 import domain.Route;
 import domain.RoutePoint;
 import domain.User;
+import domain.exceptions.NoSeatsAvailableException;
 import domain.services.RideService;
 import domain.services.RouteService;
 import domain.services.UserService;
@@ -59,7 +60,34 @@ public class RideServiceRest
     public Response cancelRideRequests(@PathParam("rideRequestId") final int rideRequestId)
     {
         rideService.cancelRideRequest(rideRequestId);
-        Response response = Response.ok().tag("Se canceló el request.").build();
+        Response response = Response.ok().tag("cancelled_request_msg").build();
+        return response;
+    }
+
+    @GET
+    @Path("rejectRequest/{rideRequestId}")
+    @Produces("application/json")
+    public Response rejectRideRequests(@PathParam("rideRequestId") final int rideRequestId)
+    {
+        RideRequest rideRequest = rideService.getRideRequestRepository().findById(rideRequestId);
+        rideService.rejectRideRequest(rideRequest);
+        Response response = Response.ok().tag("rejected_request_msg").build();
+        return response;
+    }
+
+    @GET
+    @Path("acceptRequest/{rideRequestId}")
+    @Produces("application/json")
+    public Response acceptRideRequests(@PathParam("rideRequestId") final int rideRequestId)
+    {
+        Response response;
+        RideRequest rideRequest = rideService.getRideRequestRepository().findById(rideRequestId);
+        try {
+            rideService.acceptRideRequest(rideRequest);
+            response = Response.ok().tag("accepted_request_msg").build();
+        } catch (NoSeatsAvailableException e) {
+            response = Response.serverError().tag(e.getMessage()).build();
+        }
         return response;
     }
 
@@ -82,7 +110,7 @@ public class RideServiceRest
         Response response;
         RideRequest rideRequest = rideRequestFromDTO(rideRequestDTO);
         rideService.requestRide(rideRequest);
-        response = Response.ok().tag("Se solicitó el viaje al conductor").build();
+        response = Response.ok().tag("request_sent_msg").build();
         return response;
     }
 

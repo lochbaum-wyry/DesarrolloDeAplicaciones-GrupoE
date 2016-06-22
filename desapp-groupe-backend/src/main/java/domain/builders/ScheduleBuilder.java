@@ -9,7 +9,6 @@ import java.time.DayOfWeek;
 public class ScheduleBuilder {
     private DayOfWeek day;
     private LocalTime departureTime ;
-    private LocalTime arrivalTime;
 
     public static ScheduleBuilder aSchedule()
     {
@@ -20,7 +19,6 @@ public class ScheduleBuilder {
     {
         // Inicializacion de valores por defecto para el momento actual
         departureTime = new LocalTime();
-        arrivalTime = new LocalTime();
         day = DayOfWeek.of(new DateTime().getDayOfWeek());
     }
 
@@ -35,14 +33,10 @@ public class ScheduleBuilder {
         return this;
     }
 
-    public ScheduleBuilder withArrivalTime(LocalTime dateTime) {
-        this.arrivalTime = dateTime;
-        return this;
-    }
 
 
     public Schedule build() {
-        return new Schedule(day,departureTime,arrivalTime);
+        return new Schedule(day,departureTime);
     }
 
     public ScheduleBuilder withDepartureTimeAt(int hour, int minute)
@@ -51,9 +45,4 @@ public class ScheduleBuilder {
         return this;
     }
 
-    public ScheduleBuilder withArrivalTimeAt(int hour, int minute)
-    {
-        arrivalTime = new LocalTime(hour,minute);
-        return this;
-    }
 }

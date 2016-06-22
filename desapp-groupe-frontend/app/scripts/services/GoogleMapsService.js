@@ -9,6 +9,8 @@ function GoogleMapsService() {
   var markers = []; 
   var routes = []; 
   var routeCreationMarkers = [];
+  var routeCreationLocations = [] ; 
+  var routeCreationAddMarkerMapListener = null ; 
 
   var mapservice = {
     instanceMap: instanceMap,
@@ -16,10 +18,10 @@ function GoogleMapsService() {
     renderRoute: renderRoute, 
     latLng: buildLatLng, 
     latLngFromRoutePoint: buildLatLngFromRoutePoint, 
-    addMarker: addMarker
-    /*,
-    addRouteCreationMarker: addRouteCreationMarker 
-    */
+    addMarker: addMarker,
+    initRouteCreationWithMarkers: initRouteCreationWithMarkers,
+    addRouteCreationMarker: addRouteCreationMarker,
+    endRouteCreationWithMarkers: endRouteCreationWithMarkers
   }; 
 
   return mapservice; 
@@ -29,31 +31,49 @@ function GoogleMapsService() {
   }
 
   function instanceMap(containerDiv) {
-    map = new google.maps.Map(document.getElementById('mapRouteFind'), {
-      zoom: 8,
-      center: {lat: -34.397, lng: 150.644}
+    map = new google.maps.Map(document.getElementById(containerDiv), {
+      zoom: 14,
+      center: {lat: -34.585963, lng: -58.4473145}
     });
 
     directionsDisplay.setMap(map);
   }
-/*
+
   function initRouteCreationWithMarkers() {
     routeCreationMarkers = [];
+    routeCreationAddMarkerMapListener = map.addListener('dblclick', function (e) { 
+      var position = buildLatLng(e.latLng.lat(), e.latLng.lng());
+      addRouteCreationMarker(e.latLng);
+    });
   }
 
   function addRouteCreationMarker(location) {
-    var marker = addMarker(location, false, markersInfo[idx].content);
+    var marker = addMarker(location, false);
+    routeCreationMarkers.push(marker);
+    routeCreationLocations.push(location);
+
+    if (routeCreationLocations.length >= 2) {
+      var waypoints = [] ; 
+      if (routeCreationLocations.length > 2) 
+        waypoints = routeCreationLocations.slice(2).map(buildWaypoint); 
+
+      clearMap();
+      directionsDisplay.setMap(map);
+      calculateAndDisplayRoute(routeCreationLocations[0],routeCreationLocations[1], waypoints);
+    }
   }
 
   function endRouteCreationWithMarkers() {
-    return routeCreationMarkers; 
+    google.maps.event.removeListener(routeCreationAddMarkerMapListener);
+    routeCreationAddMarkerMapListener = null; 
+    return routeCreationLocations; 
   }
-*/
+
   function renderRoute(points, draggablePoints, markersInfo) {
     var origin = points[0]; 
     var destination = points[points.length-1]; 
     var waypoints = getWaypoints(points) ; 
-    
+
     calculateAndDisplayRoute(origin, destination, waypoints); 
 
     for (var idx in markersInfo) {
@@ -71,9 +91,10 @@ function GoogleMapsService() {
   }
 
   function buildWaypoint(point,stopover) {
-    stopover = stopover || true; 
+
+    stopover = stopover===true || false; 
     return {
-      location: buildLatLngPoint, 
+      location: point, 
       stopover: stopover
     };
   }
@@ -81,7 +102,7 @@ function GoogleMapsService() {
   function getWaypoints(points) {
     var waypoints = []; 
     if (points.length > 2) {
-      for (var i = 1 ; i < points.lengt-2 ; ++i) {
+      for (var i = 1 ; i <= points.length-2 ; ++i) {
         waypoints.push( buildWaypoint(points[i]) );
       }
     }
@@ -111,7 +132,7 @@ function GoogleMapsService() {
 
   function calculateAndDisplayRoute(origin, destination, waypoints) {
 
-    map.setCenter(origin); 
+    // map.setCenter(origin); 
 
     var directiosnRequest = {
       origin: origin,
@@ -134,41 +155,3 @@ function GoogleMapsService() {
 }
 
 })();
-
-
-  /*
-    var infowindow = new google.maps.InfoWindow({
-      content: "Inicio del Recorrido<br>Arrastre el marcador hasta el punto deseado"
-    });
-
-    var marker = new google.maps.Marker({
-      position: start,
-      map: map,
-      draggable: draggablePoints,
-    });
-
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-
-    var marker2 = new google.maps.Marker({
-      position: end,
-      map: map,
-      draggable: draggablePoints,
-    });
-
-    marker2.addListener('click', function() {
-      infowindow2.open(map, marker2);
-    });
-
-
-    google.maps.event.addListener(marker, 'dragend', function() { 
-      calculateAndDisplayRoute(directionsService, directionsDisplay);
-    });
-    google.maps.event.addListener(marker2, 'dragend', function() { 
-      calculateAndDisplayRoute(directionsService, directionsDisplay);
-    });
-
-    infowindow.open(map, marker);
-
-  */

@@ -3,68 +3,121 @@
 
 angular.module('desappGrupoeFrontendApp').controller('AddRouteCtrl', AddRouteCtrl);
 
-function AddRouteCtrl(UserService,$localStorage, SessionService) {
+function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService) {
 
   var vm = this;
   
-  /* String */ vm.ERROR_MSG;
+  /* String */        vm.ERROR_MSG;
 
-  /* User */ vm.user = SessionService.user();
-  /* Route[] */ vm.userRoutes = vm.user.routes ; 
-  /* RoutePoint[] */ vm.routePointList = [];
-  /* LatLng */ vm.latLng = {};
-  /* Float */ vm.distanceInKms = 10.0; 
-  /* Float */ vm.fixedCosts = 100.0;
+  /* User */          vm.user = SessionService.user();
+  /* Route[] */       vm.userRoutes = vm.user.routes ; 
+  /* RoutePoint[] */  vm.routePoints = [] ;
+  /* Schedule[] */    vm.schedules   = [] ;
+  /* Float */         vm.distanceInKms = 7.8; // datos de ejemplo 
+
+  /* Float */         vm.fixedCosts; // datos por default/sugeridos
+  /* int */           vm.scheduleDay = moment().weekday();
+  /* DateTime */      vm.scheduleDepartureTime = moment();
+
+   
 
   //-------------------
   //-- Scope functions
   //-------------------
   vm.addPoint = addPoint;
+  vm.addSchedule = addSchedule; 
   vm.addRoute = addRoute; 
 
-  resetLatLng();
+  //-----------------------------
+  //-- Controller initialization
+  //-----------------------------
 
-  function resetLatLng() {
-    vm.latLng = { 
-      latitude: 0,
-      longitude: 0 
-    }  ;
+
+  addPoint(-34.702742,-58.2937437); // datos de ejemplo 
+  addPoint(-34.6753329,-58.342759); // datos de ejemplo 
+
+  setDefaultSchedule();
+  GoogleMapsService.instanceMap('mapAddRoute');
+  GoogleMapsService.initRouteCreationWithMarkers();
+
+  //-------------------
+  //-- Functions
+  //-------------------
+
+  function setDefaultSchedule()
+  {
+    vm.scheduleDay = moment().weekday() + ""; // lo convierto a string porque parece no ser tan mágico
+    vm.scheduleDepartureTime = moment();
   }
 
-  function addPoint() {
-    var latlng = {
-      latitude:  parseFloat(vm.latitude),
-      longitude: parseFloat(vm.longitude)
-    }
 
-    vm.routePointList.push(vm.latLng);
-    resetLatLng();
-  };
-  
-  function addRoute() {
+  //----------------------------------
+  //-- Scope functions implementation
+  //----------------------------------
 
-    function onSuccess(result){
-      vm.latLng = {
-        latitude:0,
-        longitude:0
-      };
-      vm.routePointList = [];
-      SessionService.reloadUser();
-      vm.user = SessionService.user();
-      vm.userRoutes = SessionService.user().routes;
+  function addPoint(latitude, longitude) {
+    var latLng = {
+      latitude:  parseFloat(latitude),
+      longitude: parseFloat(longitude)
     };
 
-      function onFailure(error){
-        vm.ERROR_MSG = error;
-      };
+    vm.routePoints.push(latLng);
+  }
 
-      var schedules = [];
+  function addSchedule() {
+    var dia = parseInt(vm.scheduleDay);
+    var diaStr = moment().weekday(vm.scheduleDay);
+    var schedule = { 
+      day:            dia,
+      dayStr:         diaStr.format("dddd"),
+      departureTime:  vm.scheduleDepartureTime
+    };
 
-      UserService.addRoute(vm.user.id,vm.routePointList,vm.distanceInKms,vm.fixedCosts,schedules) 
+    vm.schedules.push(schedule);
+    setDefaultSchedule();
+  }
+  
+  function addRoute() {
+    var schedules = vm.schedules.map(convertToSchedule);
+
+    UserService.addRoute(vm.user.id,vm.routePoints,vm.distanceInKms,vm.fixedCosts, schedules) 
               .then(onSuccess)
               .catch(onFailure);
-  };
+
+    function convertToSchedule(schedule) {
+      return {
+        day: schedule['day'], 
+        departureTime: toJodaLocalTime(schedule['departureTime'])
+      };
+    }
+
+    /** 
+     * Formato que espera el desserializador de jodatime para el tipo LocalTime
+     */
+    function toJodaLocalTime(datetime) {
+      return [
+        datetime.hour(), 
+        datetime.minutes(),
+        datetime.seconds(),
+        datetime.milliseconds()
+      ];
+    }
+  }
+
+  
+  function onSuccess(result) {
+    vm.routePoint = [];
+    SessionService.reloadUser();
+    vm.user = SessionService.user();
+    vm.userRoutes = SessionService.user().routes;
+  }
+
+  function onFailure(error){
+    vm.ERROR_MSG = error;
+  }
 
 } // addRouteCtrl
+
+
 
 })()
