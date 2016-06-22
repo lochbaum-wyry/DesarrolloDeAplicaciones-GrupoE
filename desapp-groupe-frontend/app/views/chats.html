@@ -24,7 +24,8 @@
       </div>
       <div class="list-group" ng-repeat="message in ct.chatSelected.messages">
            <p value ='message' class="list-group-item" ">
-             {{message.sender.name}} : {{message.content}}
+             <span>{{message.sender.name}} : {{message.content}}</span>
+             <span class="pull-right">{{message.timestamp.millis | date:'EEE  H:mm'}}</span>
            </p>
           </div>
       <div class="panel-collapse collapse" id="collapseOne">

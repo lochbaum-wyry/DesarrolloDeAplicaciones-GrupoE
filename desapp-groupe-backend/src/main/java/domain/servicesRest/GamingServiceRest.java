@@ -8,6 +8,7 @@ import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 
@@ -27,5 +28,12 @@ public class GamingServiceRest {
     @Produces("application/json")
     public MonthlyRanking ranking(){
         return gamingService.createRanking(new DateTime().getMonthOfYear(),new DateTime().getYearOfEra());
+    }
+
+    @GET
+    @Path("getRankingForDate/{year}/{month}")
+    @Produces("application/json")
+    public MonthlyRanking getRankingForDate(@PathParam("year") final Integer year,@PathParam("month") final Integer month){
+        return gamingService.createRanking(month,year);
     }
 }

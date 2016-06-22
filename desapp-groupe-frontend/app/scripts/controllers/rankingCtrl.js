@@ -6,14 +6,16 @@ angular.module('desappGrupoeFrontendApp').controller('RankingCtrl', RankingCtrl)
 function RankingCtrl(RankingService,$localStorage) {
 
   var vm = this; 
-  vm.ranking = $localStorage.ranking ;
+  vm.ranking = {};
+  vm.monthSelected = 0;
+  vm.yearSelected = 0;
 
   /* String */ vm.ERROR_MSG;
 
   vm.getRanking = function() {
 
     function onSuccess(result){
-        $localStorage.ranking =  result;
+        vm.ranking =  result;
     };
 
     function onFailure(error){
@@ -23,6 +25,23 @@ function RankingCtrl(RankingService,$localStorage) {
       var schedules = [];
 
       RankingService.ranking() 
+              .then(onSuccess)
+              .catch(onFailure);
+  };
+
+
+  vm.getRankingForDate = function(){
+    function onSuccess(result){
+        vm.ranking =  result;
+    };
+
+    function onFailure(error){
+        vm.ERROR_MSG = error;
+    };
+
+      var schedules = [];
+
+      RankingService.getRankingForDate(vm.yearSelected,vm.monthSelected) 
               .then(onSuccess)
               .catch(onFailure);
   };

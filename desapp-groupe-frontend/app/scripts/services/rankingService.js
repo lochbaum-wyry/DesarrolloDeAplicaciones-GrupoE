@@ -8,7 +8,8 @@ function RankingService($http,$log){
   var url = 'http://localhost:8080/domain/servicesRest/gaming';
 
   var rankingService = {
-    ranking : ranking
+    ranking : ranking,
+    getRankingForDate: getRankingForDate
   };
 
   function ranking() {
@@ -21,6 +22,21 @@ function RankingService($http,$log){
     }
 
     function failRanking(error){
+      $log.error('Ocurrio un error: ' + error.data);
+      return 'Ocurrio un error';
+    }
+  };
+
+  function getRankingForDate(year,month){
+    return $http.get(url + '/getRankingForDate/' + year + '/' + month)
+              .then(succgetRankingForDate)                                                                                                                                                                                                                                                                                                  
+              .catch(failgetRankingForDate);
+
+    function succgetRankingForDate(response){
+      return response.data;
+    }
+
+    function failgetRankingForDate(error){
       $log.error('Ocurrio un error: ' + error.data);
       return 'Ocurrio un error';
     }

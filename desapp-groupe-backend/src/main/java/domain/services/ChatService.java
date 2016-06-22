@@ -48,7 +48,7 @@ public class ChatService {
 
         Chat chat = user.getOrAddChatWith(userChat);
 
-        chatRepository.update(chat);
+        chatRepository.saveOrUpdate(chat);
         userRepository.update(user);
         userRepository.update(userChat);
 

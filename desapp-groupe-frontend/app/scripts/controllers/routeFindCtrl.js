@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
 /* @ngInject */
-function RouteFindCtrl(RouteService,RideService,SessionService) {
+function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService) {
   /* RouteFindCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -33,8 +33,8 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
   //---------------------------
   // Controller initialization
 
-  setDefaultValues() 
-
+  setDefaultValues() ;
+  GoogleMapsService.instanceMap('mapRouteFind');
 
 
   //--------------------------------
@@ -66,13 +66,14 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
 
     function onFailure(error) {
       infoModal("failed_getting_proposals", 'error');
-      console.log(error);
      }
   }
 
   function selectRideProposal(index)
   {
     vm.selRideProposalIdx = index;
+    // GoogleMapsService.clearMap();
+    renderRideProposal(index);
   }
 
   function requestRide() {
@@ -132,8 +133,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
     renderRouteOnMap(
       rideProposal['route']['routePoints'], 
       rideProposal['boardingPoint'],  // punto cercano al que el usuario solicito subirse 
-      rideProposal['getOffPoint'],  // punto cercano al que el usuairo solicita bajarse 
-      "marker info"
+      rideProposal['getOffPoint']  // punto cercano al que el usuairo solicita bajarse 
     );
   } 
 
@@ -141,13 +141,21 @@ function RouteFindCtrl(RouteService,RideService,SessionService) {
    * RoutePoint[] points: lista de todos los puntos que componen la ruta:
    * RoutePoint boardingPoint: Punto mas cercano dentro de la ruta al que el usuario seleccionó para subirse
    * RoutePoint getOffPoint: Punto mas cercano dentro de la ruta al que el usuario seleccionó para bajarse
-   * String: markerInfo: información para imprimir en los markers del mapa (info del usuario y horario de partida por ej.)
    */ 
-  function renderRouteOnMap(points, boardingPoint, getOffPoint, markerInfo) { 
-    // hacer la magia con google maps
+  function renderRouteOnMap(points, boardingPoint, getOffPoint) {
+      var markersInfo = [
+        { index: boardingPoint['indexInRoute'], content: "Boarding here" },
+        { index: getOffPoint['indexInRoute'], content: "Getting off here" }
+      ];
+
+      var latLngPoints = points.map(GoogleMapsService.latLngFromRoutePoint); 
+      GoogleMapsService.renderRoute(latLngPoints,false,  markersInfo); 
   }
 
 
 } // RouteFindCtrl
 
+
 })()
+
+
