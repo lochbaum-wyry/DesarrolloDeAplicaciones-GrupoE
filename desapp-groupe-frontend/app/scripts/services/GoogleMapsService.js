@@ -6,28 +6,25 @@ angular.module('desappGrupoeFrontendApp')
 /* @ngInyect */
 function GoogleMapsService() {
 
-  var markers = []; 
-  var routes = []; 
-  var routeCreationMarkers = [];
-  var routeCreationLocations = [] ; 
-  var routeCreationAddMarkerMapListener = null ; 
+  var markers = [];   
 
   var mapservice = {
-    instanceMap: instanceMap,
     clearMap: clearMap, 
-    renderRoute: renderRoute, 
-    latLng: buildLatLng, 
-    latLngFromRoutePoint: buildLatLngFromRoutePoint, 
+    instanceMap: instanceMap,
     addMarker: addMarker,
-    initRouteCreationWithMarkers: initRouteCreationWithMarkers,
-    addRouteCreationMarker: addRouteCreationMarker,
-    endRouteCreationWithMarkers: endRouteCreationWithMarkers
+    renderRoute: renderRoute, 
+
+    
+    latLng: buildLatLng, 
+    waypoint: buildWaypoint,
+    calculateAndDisplayRoute: calculateAndDisplayRoute
   }; 
 
   return mapservice; 
 
   function clearMap() {
     directionsDisplay.setMap(null);
+    directionsDisplay.setMap(map);
   }
 
   function instanceMap(containerDiv) {
@@ -39,42 +36,13 @@ function GoogleMapsService() {
     directionsDisplay.setMap(map);
   }
 
-  function initRouteCreationWithMarkers() {
-    routeCreationMarkers = [];
-    routeCreationAddMarkerMapListener = map.addListener('dblclick', function (e) { 
-      var position = buildLatLng(e.latLng.lat(), e.latLng.lng());
-      addRouteCreationMarker(e.latLng);
-    });
-  }
-
-  function addRouteCreationMarker(location) {
-    var marker = addMarker(location, false);
-    routeCreationMarkers.push(marker);
-    routeCreationLocations.push(location);
-
-    if (routeCreationLocations.length >= 2) {
-      var waypoints = [] ; 
-      if (routeCreationLocations.length > 2) 
-        waypoints = routeCreationLocations.slice(2).map(buildWaypoint); 
-
-      clearMap();
-      directionsDisplay.setMap(map);
-      calculateAndDisplayRoute(routeCreationLocations[0],routeCreationLocations[1], waypoints);
-    }
-  }
-
-  function endRouteCreationWithMarkers() {
-    google.maps.event.removeListener(routeCreationAddMarkerMapListener);
-    routeCreationAddMarkerMapListener = null; 
-    return routeCreationLocations; 
-  }
 
   function renderRoute(points, draggablePoints, markersInfo) {
     var origin = points[0]; 
     var destination = points[points.length-1]; 
     var waypoints = getWaypoints(points) ; 
 
-    calculateAndDisplayRoute(origin, destination, waypoints); 
+    calculateAndDisplayRoute(origin, destination, waypoints, false); 
 
     for (var idx in markersInfo) {
       var location = points[markersInfo[idx].index];
@@ -86,13 +54,10 @@ function GoogleMapsService() {
     return {lat: lat, lng: lng };
   }
 
-  function buildLatLngFromRoutePoint(routePoint) {
-    return buildLatLng(routePoint['latitude'], routePoint['longitude']);
-  }
 
   function buildWaypoint(point,stopover) {
 
-    stopover = stopover===true || false; 
+    stopover = (stopover===true) || false; 
     return {
       location: point, 
       stopover: stopover
@@ -117,7 +82,7 @@ function GoogleMapsService() {
       draggable: draggable,
     });
 
-    withInfoWindow = withInfoWindow || false; 
+    withInfoWindow = (withInfoWindow == undefined) ? false : withInfoWindow  ; 
     if (withInfoWindow) {
       var infoWindow = buildInfoWindow(withInfoWindow);
       infoWindow.open(map, marker);
@@ -130,26 +95,25 @@ function GoogleMapsService() {
     return ( new google.maps.InfoWindow({ content: content }) );
   }
 
-  function calculateAndDisplayRoute(origin, destination, waypoints) {
-
-    // map.setCenter(origin); 
-
-    var directiosnRequest = {
+  function calculateAndDisplayRoute(origin, destination, waypoints, optimizeWaypoints) {
+    optimizeWaypoints = (optimizeWaypoints == undefined) ? true : optimizeWaypoints ;
+    var directionsRequest = {
       origin: origin,
       destination: destination,
       travelMode: google.maps.TravelMode.DRIVING,
-      waypoints: waypoints
+      waypoints: waypoints, 
+      optimizeWaypoints: optimizeWaypoints
     }; 
+    directionsService.route(directionsRequest, displayCallback);
 
-    var callback = function(response, status) {
-      if (status === google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
+    function displayCallback(response, status) {
+      if (status === google.maps.DirectionsStatus.OK) { 
+       directionsDisplay.setDirections(response);
       } else {
         window.alert('Directions request failed due to ' + status);
       }
-    };
+    }
 
-    directionsService.route(directiosnRequest, callback);
   }
 
 }

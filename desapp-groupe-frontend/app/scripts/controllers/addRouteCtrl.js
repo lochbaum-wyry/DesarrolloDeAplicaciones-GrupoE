@@ -3,7 +3,7 @@
 
 angular.module('desappGrupoeFrontendApp').controller('AddRouteCtrl', AddRouteCtrl);
 
-function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService) {
+function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService, GMRouteService, GmSubiConv) {
 
   var vm = this;
   
@@ -38,7 +38,7 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
 
   setDefaultSchedule();
   GoogleMapsService.instanceMap('mapAddRoute');
-  GoogleMapsService.initRouteCreationWithMarkers();
+  GMRouteService.createRouteWithMarkers();
 
   //-------------------
   //-- Functions
@@ -78,9 +78,12 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
   }
   
   function addRoute() {
+    var directions = GMRouteService.endRouteWithMarkers(); 
+    var route = GmSubiConv.routeFromDirections(directions);
+
     var schedules = vm.schedules.map(convertToSchedule);
 
-    UserService.addRoute(vm.user.id,vm.routePoints,vm.distanceInKms,vm.fixedCosts, schedules) 
+    UserService.addRoute(vm.user.id,route.routePoints,route.distanceInKms,vm.fixedCosts, schedules) 
               .then(onSuccess)
               .catch(onFailure);
 

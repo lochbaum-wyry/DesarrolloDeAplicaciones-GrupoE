@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
 /* @ngInject */
-function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService) {
+function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService, GmSubiConv) {
   /* RouteFindCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
