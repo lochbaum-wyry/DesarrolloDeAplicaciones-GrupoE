@@ -1,0 +1,47 @@
+<div class = "col-md-12 header-right">
+    <div class="head-colum3">
+        <div class="col-md-3 list-group">
+        	<a ng-repeat="r in rr.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' >
+              <div class="row">
+                <div class="section-box">
+                  <div class="col-xs-3 col-md-3 text-center">                      
+                    <img style='max-width:70% ; max-height:70%' ng-src=''/>
+                  </div>
+                  <h4>
+                    {{ r.diver.name }} {{ r.driver.lastName}} ({{ r.driver.userName }})
+                  </h4>
+                  <h2>
+                    {{r.date}}
+                  </h2>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-md-5 list-group">
+       <a>Conductor : {{rr.rideSelected.driver}}</a>
+       <a>Vehicle : {{rr.rideSelected.vehicle}}</a>
+        <a ng-repeat="u in rr.users" class='list-group-item' title='Votar Compañero' >
+              <div class="row">
+                <div class="section-box">
+                  <div class="col-xs-3 col-md-3 text-center">                      
+                    <img style='max-width:70% ; max-height:70%' ng-src=''/>
+                  </div>
+                  <h4>
+                    {{ u.name }} {{ u.lastName}} ({{ w.userName }})
+                  </h4>
+                </div>
+              </div>
+            </a>
+          </div>
+    </div>
+
+    <div class="col-md-4 list-group">
+        <!--Seleccion de voto para el usuario seleccionado-->
+
+    </div>
+
+
+</div>

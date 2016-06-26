@@ -133,4 +133,14 @@ public class RideService extends GenericService<Ride>
     {
         return rideRequestRepository.getPendingRequestsBy(requester);
     }
+
+    public List<Ride> getRateablesRides(int userId) {
+        //return rideRepository.getRidesAwaingRates(userId);
+        return rideRepository.findAll();
+    }
+
+    public List<User> getUsersAwaingRates(int rideId, int userId) {
+        //falta implementar
+        return new ArrayList<User>();
+    }
 }
