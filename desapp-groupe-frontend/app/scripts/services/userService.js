@@ -13,14 +13,32 @@ angular.module('desappGrupoeFrontendApp')
 
     function getUser(user_id) {
         return $http.get(url + '/getUser/' + user_id)
-          .then(onSuccess)
-          .catch(onFailure);
+          .then(onSuccessGetUser)
+          .catch(onFailureGetUser);
+
+          function onSuccessGetUser(response){
+             return response.data;
+          }
+  
+          function onFailureGetUser(error){
+              $log.error('Ocurrio un error: ' + error.data);
+              return 'Ocurrio un error';
+          }
       };
 
     function getUsers() {
         return $http.get(url + '/getUsers/')
-          .then(onSuccess)
-          .catch(onFailure);
+          .then(onSuccessGetUser)
+          .catch(onFailureGetUser);
+
+          function onSuccessGetUser(response){
+             return response.data;
+          }
+  
+          function onFailureGetUser(error){
+              $log.error('Ocurrio un error: ' + error.data);
+              return 'Ocurrio un error';
+          }
       };
 
     function addRoute(user_id,points,distanceInKms,fixedCosts,schedules) {

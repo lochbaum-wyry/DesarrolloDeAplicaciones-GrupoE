@@ -69,6 +69,11 @@ angular
         controller: 'RequestedRidesCtrl',
         controllerAs: 'rrc'
       })
+      .when('/rateRide', {
+        templateUrl: '/views/rateRide.html',
+        controller: 'RateRideCtrl',
+        controllerAs: 'rrc'
+      })
       .when('/rideRequests', {
         templateUrl: '/views/rideRequests.html',
         controller: 'RideRequestsCtrl',

@@ -1,9 +1,6 @@
 package domain.servicesRest;
 
-import domain.RideRequest;
-import domain.Route;
-import domain.RoutePoint;
-import domain.User;
+import domain.*;
 import domain.exceptions.NoSeatsAvailableException;
 import domain.services.RideService;
 import domain.services.RouteService;
@@ -43,6 +40,19 @@ public class RideServiceRest
         return list;
     }
 
+    @GET
+    @Path("getRateablesRides/{userId}")
+    @Produces("application/json")
+    public List<Ride> getRateablesRides(@PathParam("userId") final int userId){
+        return rideService.getRateablesRides(userId);
+    }
+
+    @GET
+    @Path("getUsersAwaingRates/{rideId}/{userId}")
+    @Produces("application/json")
+    public List<User> getUsersAwaingRates(@PathParam("rideId") final int rideId,@PathParam("userId") final int userId){
+        return rideService.getUsersAwaingRates(rideId,userId);
+    }
 
     @GET
     @Path("pendingRequestsFor/{driverId}")

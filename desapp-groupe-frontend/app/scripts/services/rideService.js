@@ -16,6 +16,8 @@ function RideService($http,$log) {
         pendingRequestsFor: pendingRequestsFor,
         cancelRequest: cancelRequest,
         rejectRequest: rejectRequest,
+        usersAwaingRates: usersAwaingRates,
+        getRateablesRides: getRateablesRides,
         acceptRequest: acceptRequest
     };
 
@@ -27,6 +29,14 @@ function RideService($http,$log) {
      * data format expected
      * { }
      */
+    function getRateablesRides(userId){
+        return $http.get(url + '/getRateablesRides/' + userId).then(onSuccess).catch(onFail);
+    }
+
+    function usersAwaingRates(rideId,userId){
+        return $http.get(url + '/usersAwaingRates/' + rideId + '/' + userId).then(onSuccess).catch(onFail);
+    }
+
     function requestRide(data) {
         return $http.post(url + '/requestRide',data).then(onSuccess).catch(onFail);
     }
