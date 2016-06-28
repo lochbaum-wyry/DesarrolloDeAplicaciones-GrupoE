@@ -89,7 +89,9 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.route" />
         </constructor-arg>
-
+        <constructor-arg>
+            <ref bean="services.rating" />
+        </constructor-arg>
     </bean>
 
     <bean id="post" class="domain.servicesRest.PostServiceRest">

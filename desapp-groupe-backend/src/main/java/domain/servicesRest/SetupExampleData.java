@@ -82,8 +82,11 @@ public class SetupExampleData {
             dan.getOrAddChatWith(fede);
             dan.getOrAddChatWith(otro);
 
-
             userService.addRoute(dan,route);
+
+
+            RideRequest rr = rideService.requestRide(fede,dan,new DateTime(),route,new RoutePoint(),new RoutePoint());
+            rideService.acceptRideRequest(rr);
 
             DateTime date = new DateTime(2016,5,6,8,45);
             RoutePoint boardingAt = route.getRoutePoints().get(0);

@@ -1,5 +1,6 @@
 package domain;
 
+
 import domain.exceptions.NoSeatsAvailableException;
 import helpers.CalculationHelpers;
 import org.joda.time.DateTime;

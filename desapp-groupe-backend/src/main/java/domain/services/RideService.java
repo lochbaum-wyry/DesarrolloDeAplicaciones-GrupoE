@@ -2,14 +2,13 @@ package domain.services;
 
 
 import domain.*;
-import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RideRepository;
 import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
 import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -52,7 +51,7 @@ public class RideService extends GenericService<Ride>
     public RideRequest requestRide(User requester, User driver, DateTime date, Route route, RoutePoint boardingAt, RoutePoint getOffAt)
     {
         RideRequest rideRequest = new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
-        rideRequestRepository.save(rideRequest);
+        rideRequestRepository.saveOrUpdate(rideRequest);
         return rideRequestRepository.findById(rideRequest.getId());
     }
 
@@ -134,13 +133,15 @@ public class RideService extends GenericService<Ride>
         return rideRequestRepository.getPendingRequestsBy(requester);
     }
 
+    @Transactional
     public List<Ride> getRateablesRides(int userId) {
         //return rideRepository.getRidesAwaingRates(userId);
         return rideRepository.findAll();
     }
 
-    public List<User> getUsersAwaingRates(int rideId, int userId) {
-        //falta implementar
-        return new ArrayList<User>();
+    @Transactional
+    public Ride getRateablesFrom(int rideId, int userId) {
+        //falta hacer los filtros bien
+        return rideRepository.findById(rideId);
     }
 }

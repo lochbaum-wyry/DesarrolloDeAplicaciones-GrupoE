@@ -2,6 +2,7 @@ package domain.servicesRest;
 
 import domain.*;
 import domain.exceptions.NoSeatsAvailableException;
+import domain.services.RatingService;
 import domain.services.RideService;
 import domain.services.RouteService;
 import domain.services.UserService;
@@ -21,12 +22,14 @@ public class RideServiceRest
     UserService userService;
     RideService rideService;
     RouteService routeService;
+    RatingService ratingService;
 
-    public RideServiceRest(RideService rideService, UserService userService, RouteService routeService)
+    public RideServiceRest(RideService rideService, UserService userService, RouteService routeService,RatingService ratingService)
     {
         this.userService = userService;
         this.rideService = rideService;
         this.routeService = routeService;
+        this.ratingService = ratingService;
     }
 
 
@@ -44,14 +47,15 @@ public class RideServiceRest
     @Path("getRateablesRides/{userId}")
     @Produces("application/json")
     public List<Ride> getRateablesRides(@PathParam("userId") final int userId){
-        return rideService.getRateablesRides(userId);
+        List<Ride> rides = rideService.getRateablesRides(userId);
+        return rides;
     }
 
     @GET
-    @Path("getUsersAwaingRates/{rideId}/{userId}")
+    @Path("getRateablesFrom/{rideId}/{userId}")
     @Produces("application/json")
-    public List<User> getUsersAwaingRates(@PathParam("rideId") final int rideId,@PathParam("userId") final int userId){
-        return rideService.getUsersAwaingRates(rideId,userId);
+    public Ride getRateablesFrom(@PathParam("rideId") final int rideId,@PathParam("userId") final int userId){
+        return rideService.getRateablesFrom(rideId,userId);
     }
 
     @GET
@@ -122,6 +126,27 @@ public class RideServiceRest
         rideService.requestRide(rideRequest);
         response = Response.ok().tag("request_sent_msg").build();
         return response;
+    }
+
+    @POST
+    @Path("rate")
+    @Consumes("application/json")
+    public Response rate(Rate rate){
+        try
+        {
+            switch (rate.getRateType()) {
+                case Driving:
+                    ratingService.rateDriverOfRide(rate.getRater(),rate.getRide(),rate.getRateValue(),rate.getComment());
+                case Accompany:
+                    ratingService.ratePassengerOfRide(rate.getRater(),rate.getRatedUser(),rate.getRide(),rate.getRateValue(),rate.getComment());
+                case CarState:
+                    ratingService.rateVehicleOfRide(rate.getRater(),rate.getRide(),rate.getRateValue(),rate.getComment());
+            }
+            return Response.ok().tag("Se califico correctamente").build();
+        }
+        catch (Exception e){
+          return Response.serverError().build();
+        }
     }
 
     private RideRequest rideRequestFromDTO(RideRequestDTO rideRequestDTO)
