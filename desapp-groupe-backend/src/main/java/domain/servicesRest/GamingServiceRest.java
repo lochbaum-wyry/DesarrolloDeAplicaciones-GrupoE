@@ -22,6 +22,7 @@ public class GamingServiceRest {
         this.gamingService = gamingService;
     }
 
+    public GamingServiceRest(){}
 
     @GET
     @Path("ranking")

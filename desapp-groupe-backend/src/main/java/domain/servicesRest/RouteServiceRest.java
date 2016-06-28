@@ -20,6 +20,8 @@ public class RouteServiceRest {
         this.routeService = routeService;
     }
 
+    public RouteServiceRest(){}
+
     @GET
     @Path("getRideProposals/{date}/{departurePoint}/{arrivalPoint}")
     @Produces("application/json")

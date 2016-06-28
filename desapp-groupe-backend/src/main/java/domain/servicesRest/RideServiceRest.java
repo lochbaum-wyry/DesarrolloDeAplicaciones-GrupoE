@@ -32,6 +32,8 @@ public class RideServiceRest
         this.ratingService = ratingService;
     }
 
+    public RideServiceRest(){}
+
 
     @GET
     @Path("pendingRequestsBy/{requesterId}")

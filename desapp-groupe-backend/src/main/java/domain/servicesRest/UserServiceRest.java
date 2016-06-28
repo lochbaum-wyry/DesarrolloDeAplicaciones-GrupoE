@@ -33,6 +33,7 @@ public class UserServiceRest {
         this.userTokenService = userTokenService;
     }
 
+    public UserServiceRest(){}
     @GET
     @Path("user")
     @Produces("application/json")
