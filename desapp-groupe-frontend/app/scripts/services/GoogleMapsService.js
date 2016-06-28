@@ -22,7 +22,8 @@ function GoogleMapsService() {
     waypoint: buildWaypoint,
     calculateAndDisplayRoute: calculateAndDisplayRoute, 
 
-    locationFromAddress: locationFromAddress,
+    latLngFromAddress: latLngFromAddress,
+    addressFromLatLng: addressFromLatLng,
 
     addListener: google.maps.event.addListener, 
     onMapDblClick: onMapDblClick
@@ -140,8 +141,19 @@ function GoogleMapsService() {
 
   }
 
+  function addressFromLatLng(address, onSuccCallback, onFailCallback) {
+    console.log(address);
+    geocoder.geocode({'location': address}, function(results, status) {
+      console.log(status);
+      if (status === google.maps.GeocoderStatus.OK) {
+        onSuccCallback(results[1].formatted_address);
+      } else {
+        onFailCallback(status);
+      }
+    });
+  }
 
-  function locationFromAddress(address, onSuccCallback, onFailCallback) {
+  function latLngFromAddress(address, onSuccCallback, onFailCallback) {
     geocoder.geocode( { 'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
         onSuccCallback(results[0].geometry.location);

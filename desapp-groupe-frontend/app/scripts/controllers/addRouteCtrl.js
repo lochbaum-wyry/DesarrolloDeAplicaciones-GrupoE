@@ -83,7 +83,9 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
 
     var schedules = vm.schedules.map(convertToSchedule);
 
-    UserService.addRoute(vm.user.id,route.routePoints,route.distanceInKms,vm.fixedCosts, schedules) 
+    console.log(route);
+
+    UserService.addRoute(vm.user.id,route.latLngs,route.distanceInKms,vm.fixedCosts, schedules) 
               .then(onSuccAddRoute)
               .catch(onFailAddRoute);
 

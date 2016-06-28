@@ -41,23 +41,6 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
   GoogleMapsService.instanceMap('mapRouteFind');
   GoogleMapsService.onMapDblClick( addFindMarkers ) ; 
 
-  var origin_autocomplete = new google.maps.places.Autocomplete((document.getElementById('subeEn')),{types: ['geocode']});
-
-//   var destination_autocomplete = new google.maps.places.Autocomplete((document.getElementById('bajaEn')), {'types': ['geocode']});
-
-
-  origin_autocomplete.addListener('place_changed', function() {
-    var place = origin_autocomplete.getPlace();
-    console.log(place);
-    // if (!place.geometry) {
-    //   window.alert("Autocomplete's returned place contains no geometry");
-    //   return;
-    // }
-
-  });
-
-
-
   //--------------------------------
   // Scope functions implementation
   //--------------------------------
@@ -208,11 +191,16 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
       switch(whichPoint) { 
         case 'boarding': 
           vm.selDeparturePoint = pos ; 
+          GoogleMapsService.addressFromLatLng(pos, updateDepartureInput, infoModal );
           break; 
         case 'getOff': 
           vm.selArrivalPoint = pos ; 
+          GoogleMapsService.addressFromLatLng(pos, updateArrivalInput, infoModal );
           break; 
       }
+
+      function updateDepartureInput(address) { vm.departureInput = address ; } 
+      function updateArrivalInput(address) { vm.arrivalInput = address ; } 
     }
   }
 
