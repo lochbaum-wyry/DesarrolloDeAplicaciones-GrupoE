@@ -8,6 +8,7 @@ import domain.repositories.UserRepository;
 import domain.Rate;
 import domain.RateType;
 import domain.RateValue;
+import org.springframework.transaction.annotation.Transactional;
 
 
 public class RatingService
@@ -23,19 +24,20 @@ public class RatingService
         this.rateRepository = rateRepository;
     }
 
+    @Transactional
     public void rateDriverOfRide(User rater, Ride ride, RateValue qualification, String comment) throws RatingException {
-
-        User ratedUser = ride.getDriver();
-        validateRateUser(rater,ratedUser,ride);
-        Rate rate = new Rate(rater, ratedUser, ride, RateType.Driving, qualification, comment);
-        addRate(rater,rate);
+        User raterUser = userRepository.findById(rater.getId());
+        User ratedUser = userRepository.findById(ride.getDriver().getId());
+        validateRateUser(raterUser,ratedUser,ride);
+        Rate rate = new Rate(raterUser, ratedUser, ride, RateType.Driving, qualification, comment);
+        addRate(raterUser,rate);
     }
 
     private void validateRateUser(User rater,User user,Ride ride) throws RatingException {
         validateNoSelfRate(rater,user);
         validateNoRateTwiceUser(rater,user,ride);
     }
-
+    @Transactional
     private void validateNoRateTwiceUser(User rater, User ratedUser, Ride ride) throws RatingException {
         Rate rate = rateRepository.findRateUserByRaterInRide(rater,ratedUser,ride);
         if(rate !=null){
@@ -49,6 +51,7 @@ public class RatingService
         }
     }
 
+    @Transactional
     public void rateVehicleOfRide(User rater, Ride ride, RateValue qualification, String comment) throws RatingException {
         User ratedUser = ride.getDriver();
         validateRateVehicle(rater,ride.getVehicle(),ride);
@@ -63,7 +66,7 @@ public class RatingService
         validateNoMyVehicle(rater,ratedVehicle);
         validateNoRateTwiceVehicle(rater,ratedVehicle,ride);
     }
-
+    @Transactional
     private void validateNoRateTwiceVehicle(User rater, Vehicle ratedVehicle, Ride ride) throws RatingException {
         Rate rate = rateRepository.findRateVehicleByRaterInRide(rater,ratedVehicle,ride);
         if(rate !=null){
@@ -76,7 +79,7 @@ public class RatingService
             throw new RatingException();
         }
     }
-
+    @Transactional
     public void ratePassengerOfRide(User rater, User ratedUser, Ride ride, RateValue qualification, String comment) throws RatingException {
         validateRateUser(rater,ratedUser,ride);
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Accompany, qualification, comment);
@@ -84,10 +87,12 @@ public class RatingService
         addRate(rater,rate);
     }
 
+    @Transactional
     public void addRate(User rater, Rate rate)
     {
         rateRepository.save(rate);
         rater.updateRateCounters(rate) ;
+        userRepository.update(rater);
     }
 
 //    public void getRatesForUserBetweenDates(User user, DateTime from, DateTime to)

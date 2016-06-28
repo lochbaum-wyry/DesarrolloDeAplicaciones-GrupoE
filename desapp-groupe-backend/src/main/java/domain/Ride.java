@@ -2,7 +2,11 @@ package domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import domain.exceptions.NoSeatsAvailableException;
+import domain.servicesRest.serialization.JodaDateTimeDeserializer;
 import helpers.CalculationHelpers;
 import org.joda.time.DateTime;
 
@@ -16,6 +20,8 @@ public class Ride extends Entity
     private Float oilPrice ;
     private Vehicle vehicle;
 
+    @JsonSerialize(using=DateTimeSerializer.class)
+    @JsonDeserialize(using=JodaDateTimeDeserializer.class)
     private DateTime date;
     private Route route;
     private User driver;
@@ -200,6 +206,7 @@ public class Ride extends Entity
         this.rideCostCalculator = rideCostCalculator;
     }
 
+    @JsonIgnore
     public Integer getNumberOfPassengers()
     {
         return this.getTakenSeats().size()  ; /// + 1 is the driver

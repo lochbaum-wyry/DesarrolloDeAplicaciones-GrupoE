@@ -1,7 +1,7 @@
 <div class = "col-md-12 header-right">
     <div class="head-colum3">
         <div class="col-md-3 list-group">
-        	<a ng-repeat="r in rrc.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' ng-click="rrc.getRateablesFromRide(r.id)">
+        	<a href="" ng-repeat="r in rrc.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' ng-click="rrc.getRateablesFromRide(r.id)">
               <div class="row">
                 <div class="section-box">
                   <div class="col-xs-3 col-md-3 text-center">                      
@@ -11,7 +11,7 @@
                     {{ r.diver.name }} {{ r.driver.lastName}} ({{ r.driver.userName }})
                   </h4>
                   <h4>
-                    {{r.date}}
+                    {{r.date | date}}
                   </h4>
                 </div>
               </div>
@@ -23,16 +23,16 @@
         <p> Conductor : {{rrc.rideSelected.driver.name}}<p> 
       </div>
       <div class="content-cal1 btn" ng-click="rrc.selectVehicle()">
-        <p> Vehiculo : {{rrc.rideSelected.vehicle}}<p>
+        <p> Vehiculo <p>
       </div>
-        <a ng-repeat="u in rrc.rideSelected.users" class='list-group-item' title='Votar Compañero' ng-click="rrc.selectUser(u)">
+        <a href="" ng-repeat="tk in rrc.rideSelected.takenSeats" class='list-group-item' title='Votar Compañero' ng-click="rrc.selectUser(tk.passenger)">
               <div class="row">
                 <div class="section-box">
                   <div class="col-xs-3 col-md-3 text-center">                      
                     <img style='max-width:70% ; max-height:70%' ng-src=''/>
                   </div>
                   <h4>
-                    {{ u.name }} {{ u.lastName}} ({{ u.userName }})
+                    {{ tk.passenger.name }} {{ tk.passenger.lastName}} ({{ tk.passenger.userName }})
                   </h4>
                 </div>
               </div>
@@ -41,7 +41,7 @@
 
     <div class="col-md-4">
       <div class="content-cal1">
-          {{rr.userSelected.name}}
+          {{rrc.title}}
         <div class="btn-group btn-group-lg form-group" role="group" aria-label="">
             <button type="button" class="btn btn-default glyphicon glyphicon-thumbs-up" ng-click="rrc.goodRate()"></button>
             <button type="button" class="btn btn-default glyphicon glyphicon-thumbs-down" ng-click="rrc.badRate()"></button>
