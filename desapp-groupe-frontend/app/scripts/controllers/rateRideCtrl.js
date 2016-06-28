@@ -9,11 +9,20 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   /* String */ vm.ERROR_MSG = null;
 
   vm.rateablesRides = [];
-  vm.rideSelected = {'driver':{'name':'fede','lastName':'Lochbaum','userName':'fede'},'vehicle':{},'users':[{'name':'fede2','lastName':'Lochbaum2','userName':'fede2'},{'name':'blabla','lastName':'Nada','userName':'sarasa'}]};
+  vm.rideSelected = {};
   vm.userSelected = {'name':'fede','lastName':'Lochbaum','userName':'fede'};
   vm.comment = "Escrime un comentario aqui";
   vm.rateValue = 1;
-  vm.rateType = "";
+  vm.rateType = 0;
+  vm.getRateablesFromRide=getRateablesFromRide;
+  vm.selectUser=selectUser;
+  vm.selectDriver=selectDriver;
+  vm.selectVehicle=selectVehicle;
+  vm.title="";
+  vm.goodRate=goodRate;
+  vm.badRate=badRate;
+  vm.rate=rate;
+
 
   function getRateablesRides() {
     var routePromise = RideService.getRateablesRides($localStorage.user.id)
@@ -44,7 +53,7 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   }
 
   function rate() {
-    var rate = {'rater':$localStorage.user,'ratedUser':vm.userSelected,'ride':vm.rideSelected,'rateType':vm.rateType,'rateValue':vm.rateValue,'comment':vm.comment};
+    var rate = {'rater':$localStorage.user,'ratedUser':vm.userSelected,'ride':vm.rideSelected,'rateType':vm.rateType,'rateValue':vm.rateValue,'comment':vm.comment,'date':moment().format("x"),'vehicle':vm.rideSelected.vehicle};
     var routePromise = RideService.rate(rate)
               .then(onSuccess)
               .catch(onFailure);
@@ -63,28 +72,37 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   }
 
   function selectUser(user) {
-    vm.rateType = "Accompany";
+    vm.rateType = 1;
     vm.userSelected = user;
+    vm.title=user.name;
   }
 
   function selectDriver(){
-    vm.rateType = "Driving";
-    vm.userSelected = vm.selectDriver.driver;
+    vm.rateType = 0;
+    vm.userSelected = vm.rideSelected.driver;
+    vm.title=vm.userSelected.name;
   };
 
   function selectVehicle(){
-    vm.rateType = "CarState";
-    vm.userSelected = vm.selectDriver.vehicle;
+    vm.rateType = 2;
+    vm.userSelected = vm.rideSelected.vehicle;
+    vm.title= "Vehicle";
   };
 
   function goodRate(){
-    vm.rateValue = 1;
+    vm.rateValue = 0;
   };
 
   function badRate(){
-    vm.rateValue = -1;
+    vm.rateValue = 1;
   };  
 
+  function infoModal(msg, type) {
+    if (type && type=='error') {
+      msg = "Error: " + msg; 
+    }
+    alert(msg);
+  }
 
 
   getRateablesRides();

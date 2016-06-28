@@ -1,5 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
+import domain.servicesRest.serialization.JodaDateTimeDeserializer;
 import org.joda.time.DateTime;
 
 public class Rate extends Entity{
@@ -10,6 +14,8 @@ public class Rate extends Entity{
     private RateValue rateValue;
     private String comment;
 
+    @JsonSerialize(using=DateTimeSerializer.class)
+    @JsonDeserialize(using=JodaDateTimeDeserializer.class)
     private DateTime date;
     private Vehicle vehicle;
 

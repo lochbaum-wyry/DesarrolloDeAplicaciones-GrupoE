@@ -133,7 +133,8 @@ public class RideServiceRest
     @POST
     @Path("rate")
     @Consumes("application/json")
-    public Response rate(Rate rate){
+    @Produces("application/json")
+    public Response rate(final Rate rate){
         try
         {
             switch (rate.getRateType()) {

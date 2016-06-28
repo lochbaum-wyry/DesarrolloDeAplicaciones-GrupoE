@@ -39,7 +39,7 @@ function RideService($http,$log) {
     }
 
     function getRateablesFromRide(rideId,userId){
-        return $http.get(url + '/getRateablesFromRide/' + rideId + '/' + userId).then(onSuccess).catch(onFail);
+        return $http.get(url + '/getRateablesFrom/' + rideId + '/' + userId).then(onSuccess).catch(onFail);
     }
 
     function requestRide(data) {
