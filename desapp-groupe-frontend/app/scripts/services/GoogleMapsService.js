@@ -6,7 +6,8 @@ angular.module('desappGrupoeFrontendApp')
 /* @ngInyect */
 function GoogleMapsService() {
 
-  var markers = [];   
+  var markers = [];
+  var mapEvents = [] ; 
 
   var mapservice = {
     clearMap: clearMap, 
@@ -14,17 +15,28 @@ function GoogleMapsService() {
     addMarker: addMarker,
     renderRoute: renderRoute, 
 
-    
+    directionsRequest: buildDirectionsRequest,
+    directionsReqFromPointList: buildDirectionsReqFromPointList,
+    latLngsFromDirections: buildLatLngsFromDirections,
     latLng: buildLatLng, 
     waypoint: buildWaypoint,
-    calculateAndDisplayRoute: calculateAndDisplayRoute
+    calculateAndDisplayRoute: calculateAndDisplayRoute, 
+
+    locationFromAddress: locationFromAddress,
+
+    addListener: google.maps.event.addListener, 
+    onMapDblClick: onMapDblClick
   }; 
 
   return mapservice; 
 
   function clearMap() {
-    directionsDisplay.setMap(null);
-    directionsDisplay.setMap(map);
+    for (var i in markers) {
+      markers[i].setMap(null);
+      markers[i] = null ; 
+    }
+    markers = []; 
+    initMap();
   }
 
   function instanceMap(containerDiv) {
@@ -37,17 +49,9 @@ function GoogleMapsService() {
   }
 
 
-  function renderRoute(points, draggablePoints, markersInfo) {
-    var origin = points[0]; 
-    var destination = points[points.length-1]; 
-    var waypoints = getWaypoints(points) ; 
-
-    calculateAndDisplayRoute(origin, destination, waypoints, false); 
-
-    for (var idx in markersInfo) {
-      var location = points[markersInfo[idx].index];
-      addMarker(location, false, markersInfo[idx].content);
-    }
+  function renderRoute(points) {
+    var request = buildDirectionsReqFromPointList(points);
+    calculateAndDisplayRoute(request); 
   }
 
   function buildLatLng(lat,lng) {
@@ -64,16 +68,6 @@ function GoogleMapsService() {
     };
   }
 
-  function getWaypoints(points) {
-    var waypoints = []; 
-    if (points.length > 2) {
-      for (var i = 1 ; i <= points.length-2 ; ++i) {
-        waypoints.push( buildWaypoint(points[i]) );
-      }
-    }
-    return waypoints; 
-  }
-
   function addMarker(position, draggable, withInfoWindow) {
 
     var marker = new google.maps.Marker({
@@ -88,6 +82,8 @@ function GoogleMapsService() {
       infoWindow.open(map, marker);
     }
 
+    markers.push(marker);
+
     return marker;
   }
 
@@ -95,25 +91,68 @@ function GoogleMapsService() {
     return ( new google.maps.InfoWindow({ content: content }) );
   }
 
-  function calculateAndDisplayRoute(origin, destination, waypoints, optimizeWaypoints) {
+  function buildLatLngsFromDirections(directions) {
+    /* DirectionsRoute */ var dirRoute = directions.routes[0];
+    /* Step[] */ var steps = dirRoute.legs[0].steps; 
+    /* LatLng[] */ var latLngs = [ buildLatLng(steps[0].start_point.lat(), steps[0].start_point.lng()) ];
+
+    for (var i = 0 ; i < steps.length ; i++ ) {
+      var latLng = buildLatLng(steps[i].end_point.lat(), steps[i].end_point.lng()); 
+      latLngs.push(latLng);
+    }
+
+    return latLngs;
+  }
+
+
+  function buildDirectionsReqFromPointList(ps, optimizeWaypoints) {
+      var waypoints = (ps.length < 3) ? [] : ps.slice(2, ps.length).map(buildWaypoint);
+      console.log(waypoints);
+      return buildDirectionsRequest(ps[0], ps[ps.length-1], waypoints, optimizeWaypoints);
+  }
+
+  function buildDirectionsRequest(origin, destination, waypoints, optimizeWaypoints) {
     optimizeWaypoints = (optimizeWaypoints == undefined) ? true : optimizeWaypoints ;
     var directionsRequest = {
+      travelMode: google.maps.TravelMode.DRIVING,
       origin: origin,
       destination: destination,
-      travelMode: google.maps.TravelMode.DRIVING,
       waypoints: waypoints, 
       optimizeWaypoints: optimizeWaypoints
     }; 
-    directionsService.route(directionsRequest, displayCallback);
+    return directionsRequest; 
+  }
+
+  function calculateAndDisplayRoute(request, callback) {
+    directionsService.route(request, displayCallback);
 
     function displayCallback(response, status) {
       if (status === google.maps.DirectionsStatus.OK) { 
        directionsDisplay.setDirections(response);
+
+       if (callback != undefined) 
+        callback(response);
+
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     }
 
+  }
+
+
+  function locationFromAddress(address, onSuccCallback, onFailCallback) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        onSuccCallback(results[0].geometry.location);
+      } else {
+        onFailCallback(status);
+      }
+    });
+  }
+
+  function onMapDblClick(callback) {
+    map.addListener('dblclick', callback);
   }
 
 }

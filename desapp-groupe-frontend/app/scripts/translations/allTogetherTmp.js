@@ -114,7 +114,7 @@ trans['allTogetherTmp'] = {
     'sube en':'Board at',
     'baja en':'Get off at',
     'un lugar':'A place',
-    'fecha y hora':'Date and Hour',
+    'fecha y hora':'Date and time',
     'buscar':'Search',
     'mes':'Month',
     'año':'Year',

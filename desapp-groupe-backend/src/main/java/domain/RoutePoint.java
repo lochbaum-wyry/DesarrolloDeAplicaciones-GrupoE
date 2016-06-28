@@ -56,6 +56,7 @@ public class RoutePoint extends Entity
         return this.latitude;
     }
 
+    @JsonIgnore
     public Boolean isNear(RoutePoint routePoint, Float radioCloseness)
     {
         return this.pointIsInCircle(routePoint.getLongitude(), routePoint.getLatitude(), radioCloseness);
@@ -76,6 +77,7 @@ public class RoutePoint extends Entity
         this.indexInRoute = indexInRoute;
     }
 
+    @JsonIgnore
     public boolean isSameLatLng(Double latitude, Double longitude)
     {
         return getLatitude().equals(latitude) && getLongitude().equals(longitude);

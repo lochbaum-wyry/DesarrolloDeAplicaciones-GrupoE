@@ -85,7 +85,7 @@ public class SetupExampleData {
             userService.addRoute(dan,route);
 
 
-            RideRequest rr = rideService.requestRide(fede,dan,new DateTime(),route,new RoutePoint(),new RoutePoint());
+            RideRequest rr = rideService.requestRide(fede,dan,new DateTime(),route,route.getRoutePoints().get(0),route.getRoutePoints().get(1));
             rideService.acceptRideRequest(rr);
 
             DateTime date = new DateTime(2016,5,6,8,45);

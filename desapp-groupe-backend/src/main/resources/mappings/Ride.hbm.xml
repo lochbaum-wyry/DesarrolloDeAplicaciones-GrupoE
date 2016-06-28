@@ -13,15 +13,14 @@
         <property name="date"  type="org.joda.time.contrib.hibernate.PersistentDateTime" />
         <property name="cancelled" />
 
-        <many-to-one name="vehicle" class="domain.Vehicle" column="vehicleId"/>
-        <many-to-one name="route" class="domain.Route" column="routeId"/>
-        <many-to-one name="driver" class="domain.User" column="driverId"/>
+        <many-to-one name="vehicle" class="domain.Vehicle" column="vehicleId" lazy="false"/>
+        <many-to-one name="route" class="domain.Route" column="routeId" lazy="false"/>
+        <many-to-one name="driver" class="domain.User" column="driverId" lazy="false"/>
 
-        <list name="takenSeats" lazy="false" cascade="save-update" >
+        <bag name="takenSeats" lazy="false" cascade="save-update" >
             <key column="takenSeatId" />
-            <list-index column="id" />
             <one-to-many class="domain.TakenSeat" />
-        </list>
+        </bag>
 
 
     </class>

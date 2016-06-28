@@ -50,15 +50,15 @@ angular.module('desappGrupoeFrontendApp')
       };
 
       return $http.post(url + '/' + user_id + '/addRoute' , route)
-            .then(onSuccess)
-            .catch(onFailure);
+            .then(onSucc)
+            .catch(onFail);
 
     };
 
     return userService;
   });
 
-  function onSuccess(response) {
+  function onSucc(response) {
     return response.data;
   }
 

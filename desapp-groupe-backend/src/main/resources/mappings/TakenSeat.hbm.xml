@@ -8,10 +8,10 @@
             <generator class="native" />
         </id>
 
-        <one-to-one name="passenger" class="domain.User" />
-        <one-to-one name="boardingAt" class="domain.RoutePoint" />
-        <one-to-one name="getOffAt" class="domain.RoutePoint" />
-        <one-to-one name="ride" class="domain.Ride" />
+        <many-to-one name="passenger" class="domain.User" lazy="false" />
+        <many-to-one name="boardingAt" class="domain.RoutePoint" lazy="false" />
+        <many-to-one name="getOffAt" class="domain.RoutePoint" lazy="false" />
+        <many-to-one name="ride" class="domain.Ride" lazy="false" />
 
     </class>
 </hibernate-mapping>

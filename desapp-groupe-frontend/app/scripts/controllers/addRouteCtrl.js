@@ -84,8 +84,8 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
     var schedules = vm.schedules.map(convertToSchedule);
 
     UserService.addRoute(vm.user.id,route.routePoints,route.distanceInKms,vm.fixedCosts, schedules) 
-              .then(onSuccess)
-              .catch(onFailure);
+              .then(onSuccAddRoute)
+              .catch(onFailAddRoute);
 
     function convertToSchedule(schedule) {
       return {
@@ -107,20 +107,26 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
     }
   }
 
-  
-  function onSuccess(result) {
-    vm.routePoint = [];
-    SessionService.reloadUser();
-    vm.user = SessionService.user();
-    vm.userRoutes = SessionService.user().routes;
+  function onSuccAddRoute(result) {
+    console.log('llego');
+    infoModal('route_added_successfully_msg');
   }
 
-  function onFailure(error){
-    vm.ERROR_MSG = error;
+  function onFailAddRoute(error){
+    // vm.ERROR_MSG = error;
+    infoModal(error, 'error');
+  }
+
+
+  function infoModal(msg, type) {
+    if (type && type=='error') {
+      msg = "Error: " + msg; 
+    }
+    alert(msg);
   }
 
 } // addRouteCtrl
 
 
 
-})()
+})();

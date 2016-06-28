@@ -1,37 +1,34 @@
 (function () {
 'use strict';
-angular.module('desappGrupoeFrontendApp')
-  .factory('GmSubiConv',GmSubiConv);
+angular.module('desappGrupoeFrontendApp').factory('GmSubiConv',GmSubiConv);
 
 /* @ngInyect */
 function GmSubiConv(GoogleMapsService,GMRouteService) {
   var gmSubiConv = {
     latLngFromRoutePoint: buildLatLngFromRoutePoint, 
-    routeFromDirections: buildRouteFromDirections
+    routeFromDirections: buildRouteFromDirections, 
+    directionsReqFromRoute: buildDirectionsReqFromRoute
   };
   return gmSubiConv;
 
   function buildLatLngFromRoutePoint(routePoint) {
-    return buildLatLng(routePoint['latitude'], routePoint['longitude']);
+    return GoogleMapsService.latLng(routePoint['latitude'], routePoint['longitude']);
   }
 
   function buildRouteFromDirections(directions) {
-    var dirRoute = directions.routes[0];
-    console.log(dirRoute);
-    var steps = dirRoute.legs[0].steps; 
-    var distanceInKms = dirRoute.legs[0].distance.value / 1000 ; 
-
-    var latLngs = [ GoogleMapsService.latLng(steps[0].start_point.lat(), steps[0].start_point.lng()) ];
-
-    for (var i = 0 ; i < steps.length ; i++ )  { 
-      var latLng = GoogleMapsService.latLng(steps[i].end_point.lat(), steps[i].end_point.lng()); 
-      latLngs.push(latLng) ;
-    }
-
+    /* DirectionsRoute */ var dirRoute = directions.routes[0];
+    /* Step[] */ var steps = dirRoute.legs[0].steps; 
+    /* Float */ var distanceInKms = dirRoute.legs[0].distance.value / 1000 ; 
+    /* LatLng[] */ var latLngs = GoogleMapsService.latLngsFromDirections(directions);
     return {
       latLngs: latLngs,
       distanceInKms: distanceInKms
     };
+  }
+
+  function buildDirectionsReqFromRoute(route, optimizeWaypoints) {
+    var ps = route.routePoints.map(GoogleMapsService.latLngFromRoutePoint);
+    return GoogleMapsService.buildDirectionsReqFromPointList(ps, optimizeWaypoints);
   }
 
 }

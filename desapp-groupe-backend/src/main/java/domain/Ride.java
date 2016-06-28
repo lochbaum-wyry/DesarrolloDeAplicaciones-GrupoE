@@ -1,6 +1,7 @@
 package domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import domain.exceptions.NoSeatsAvailableException;
 import helpers.CalculationHelpers;
 import org.joda.time.DateTime;
@@ -173,16 +174,19 @@ public class Ride extends Entity
                                             idxSeatBoardingAt, idxSeatGetOffAt );
     }
 
+    @JsonIgnore
     public Optional<TakenSeat> getSeatTakenBy(User passenger)
     {
         return takenSeats.stream().filter(seat -> seat.getPassenger() == passenger).findFirst();
     }
 
+    @JsonIgnore
     public Float getTotalCost()
     {
         return this.getRoute().getFixedCosts() + this.getVehicleUseCosts();
     }
 
+    @JsonIgnore
     public Float getVehicleUseCosts() {
         return this.getVehicle().getOilUsePerKmInLts()
                 * this.getRoute().getDistanceInKms() * this.oilPrice;
@@ -201,11 +205,13 @@ public class Ride extends Entity
         return this.getTakenSeats().size()  ; /// + 1 is the driver
     }
 
+    @JsonIgnore
     public Float getCostForPassenger(User passenger)
     {
         return rideCostCalculator.calculateCostForPassenger(passenger);
     }
 
+    @JsonIgnore
     public Float getSavedAmount()
     {
         return getPassengers().stream().map(passenger -> getCostForPassenger(passenger)).reduce(0f, Float::sum);
@@ -216,6 +222,7 @@ public class Ride extends Entity
         return this.takenSeats.stream().map(takenSeat -> takenSeat.getPassenger()).collect(Collectors.toList());
     }
 
+    @JsonIgnore
     public Boolean isDriver(User user)
     {
         return this.getDriver().equals(user);
@@ -248,6 +255,7 @@ public class Ride extends Entity
         this.takenSeats = takenSeats;
     }
 
+    @JsonIgnore
     public boolean isPassenger(User requester) {
         return getSeatTakenBy(requester).isPresent();
     }

@@ -28,24 +28,32 @@ function GMRouteService(GoogleMapsService) {
       suppressBicyclingLayer: true
     });
 
-    routeAddMarkerMapListener = map.addListener('dblclick', function (e) { 
+    routeAddMarkerMapListener = GoogleMapsService.onMapDblClick(function (e) { 
       var position = GoogleMapsService.latLng(e.latLng.lat(), e.latLng.lng());
-      addRouteMarker(e.latLng);
+      addRouteMarker(position);
     });
   }
 
   function addRouteMarker(location, displayInstantly) {
+
+    if (routeLocations.length == 2) 
+      routeLocations = [] ; 
+
     if (routeLocations.length == 0) {
+      
       initialMarker = GoogleMapsService.addMarker(location, true);
       /* int */ var idx = routeLocations.length ; 
-      google.maps.event.addListener(initialMarker, 'dragend', markerDragendEvtHandler.bind( idx ));
+      GoogleMapsService.addListener(initialMarker, 'dragend', markerDragendEvtHandler.bind( idx ));
+
     } else if (routeLocations.length == 1) {
+
       initialMarker.setMap(null) ; 
       initialMarker = null ; 
+
     }
 
     routeLocations.push(location);
-
+    
     displayInstantly = (displayInstantly == undefined) ? true : displayInstantly ; 
     if (displayInstantly)
       displayRouteWithMarkers();
@@ -71,25 +79,14 @@ function GMRouteService(GoogleMapsService) {
 
   function displayRouteWithMarkers() {
     if (routeLocations.length >= 2) {
-      var waypoints = [] ; 
-      if (routeLocations.length > 2) 
-        waypoints = routeLocations.slice(2).map(GoogleMapsService.waypoint); 
-
-      GoogleMapsService.clearMap();
-      GoogleMapsService.calculateAndDisplayRoute(routeLocations[0],routeLocations[1], waypoints);
+      var request = GoogleMapsService.directionsReqFromPointList(routeLocations);
+      GoogleMapsService.calculateAndDisplayRoute(request);
     }
 
   }
 
   function latLngFromEvt(e) { return GoogleMapsService.latLng(e.latLng.lat(), e.latLng.lng()) ; }
-  
-  function computeRouteDistance(route) {
-    var total = 0;
-    for (var i = 0; i < route.legs.length; i++) {
-      total += route.legs[i].distance.value;
-    }
-    return total;
-  }
+
 
 }
 

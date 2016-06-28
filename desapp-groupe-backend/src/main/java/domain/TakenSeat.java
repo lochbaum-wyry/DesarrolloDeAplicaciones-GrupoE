@@ -1,7 +1,10 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class TakenSeat extends Entity
 {
+    @JsonIgnore
     private Ride ride;
     private User passenger;
     private RoutePoint boardingAt;
@@ -42,6 +45,7 @@ public class TakenSeat extends Entity
         this.passenger = passenger;
     }
 
+    @JsonIgnore
     public Ride getRide() {
         return ride;
     }
