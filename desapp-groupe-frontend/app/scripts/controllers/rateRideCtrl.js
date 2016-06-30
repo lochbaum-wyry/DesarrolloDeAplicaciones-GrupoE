@@ -9,8 +9,8 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   /* String */ vm.ERROR_MSG = null;
 
   vm.rateablesRides = [];
-  vm.rideSelected = {};
-  vm.userSelected = {'name':'fede','lastName':'Lochbaum','userName':'fede'};
+  vm.rideSelected = null;
+  vm.userSelected = null;
   vm.comment = "Escrime un comentario aqui";
   vm.rateValue = 1;
   vm.rateType = 0;

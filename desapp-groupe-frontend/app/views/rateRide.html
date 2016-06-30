@@ -18,7 +18,7 @@
             </a>
         </div>
       </div>
-    <div class="col-md-5 list-group">
+    <div class="col-md-5 list-group" ng-show='rrc.rideSelected != null' >
       <div class="content-cal1 btn" ng-click="rrc.selectDriver()">
         <p> Conductor : {{rrc.rideSelected.driver.name}}<p> 
       </div>
@@ -39,7 +39,7 @@
             </a>
           </div>
 
-    <div class="col-md-4">
+    <div class="col-md-4" ng-show='rrc.userSelected != null'>
       <div class="content-cal1">
           {{rrc.title}}
         <div class="btn-group btn-group-lg form-group" role="group" aria-label="">
