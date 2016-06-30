@@ -4,6 +4,7 @@ package domain.services;
 import domain.*;
 import domain.exceptions.RatingException;
 import domain.repositories.RateRepository;
+import domain.repositories.RideRepository;
 import domain.repositories.UserRepository;
 import domain.Rate;
 import domain.RateType;
@@ -15,18 +16,21 @@ public class RatingService
 {
     RateRepository rateRepository ;
     UserRepository userRepository ;
+    RideRepository rideRepository;
 
     public RatingService(){}
 
-    public RatingService(final UserRepository userRepository, final RateRepository rateRepository)
+    public RatingService(final UserRepository userRepository, final RateRepository rateRepository,RideRepository rideRepository)
     {
         this.userRepository = userRepository;
         this.rateRepository = rateRepository;
+        this.rideRepository = rideRepository;
     }
 
     @Transactional
-    public void rateDriverOfRide(User rater, Ride ride, RateValue qualification, String comment) throws RatingException {
+    public void rateDriverOfRide(User rater, Ride ride1, RateValue qualification, String comment) throws RatingException {
         User raterUser = userRepository.findById(rater.getId());
+        Ride ride = rideRepository.findById(ride1.getId());
         User ratedUser = userRepository.findById(ride.getDriver().getId());
         validateRateUser(raterUser,ratedUser,ride);
         Rate rate = new Rate(raterUser, ratedUser, ride, RateType.Driving, qualification, comment);
@@ -52,8 +56,10 @@ public class RatingService
     }
 
     @Transactional
-    public void rateVehicleOfRide(User rater, Ride ride, RateValue qualification, String comment) throws RatingException {
-        User ratedUser = ride.getDriver();
+    public void rateVehicleOfRide(User rater1, Ride ride1, RateValue qualification, String comment) throws RatingException {
+        Ride ride = rideRepository.findById(ride1.getId());
+        User rater = userRepository.findById(rater1.getId());
+        User ratedUser = userRepository.findById(ride.getDriver().getId());
         validateRateVehicle(rater,ride.getVehicle(),ride);
         Rate rate = new Rate(rater, ratedUser, ride, RateType.CarState, qualification, comment);
         rate.setVehicle(ride.getVehicle());
@@ -80,7 +86,10 @@ public class RatingService
         }
     }
     @Transactional
-    public void ratePassengerOfRide(User rater, User ratedUser, Ride ride, RateValue qualification, String comment) throws RatingException {
+    public void ratePassengerOfRide(User rater1, User ratedUser1, Ride ride1, RateValue qualification, String comment) throws RatingException {
+        Ride ride = rideRepository.findById(ride1.getId());
+        User ratedUser = userRepository.findById(ratedUser1.getId());
+        User rater = userRepository.findById(rater1.getId());
         validateRateUser(rater,ratedUser,ride);
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Accompany, qualification, comment);
 
@@ -88,10 +97,12 @@ public class RatingService
     }
 
     @Transactional
-    public void addRate(User rater, Rate rate)
+    public void addRate(User rater, Rate rate1)
     {
-        rateRepository.save(rate);
-        rater.updateRateCounters(rate) ;
+        rateRepository.saveOrUpdate(rate1);
+
+        Rate rate = rateRepository.findById(rate1.getId());
+        rater.updateRateCounters(rate);
         userRepository.update(rater);
     }
 

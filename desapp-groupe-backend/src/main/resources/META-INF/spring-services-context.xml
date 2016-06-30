@@ -59,6 +59,9 @@
 		<constructor-arg>
 			<ref bean="persistence.raterepository" />
 		</constructor-arg>
+		<constructor-arg>
+			<ref bean="persistence.riderepository" />
+		</constructor-arg>
 	</bean>
 
 	<bean id="services.chat" class="domain.services.ChatService">

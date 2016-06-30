@@ -1,5 +1,6 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
@@ -44,10 +45,12 @@ public class Rate extends Entity{
         return rater;
     }
 
+    @JsonIgnore
     public Integer getMonth() {
         return date.getMonthOfYear();
     }
 
+    @JsonIgnore
     public Integer getYear() {
         return date.getYearOfEra();
     }
