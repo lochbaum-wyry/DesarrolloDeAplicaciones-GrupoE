@@ -73,9 +73,11 @@ public class UserService {
     }
 
     @Transactional
-    public void addVehicleForUser(User user,Vehicle vehicle){
-        user.setVehicle(vehicle);
-        userRepository.update(user);
+    public void addVehicleForUser(User user,Vehicle vehicle) throws SubiQueTeLlevoException {
+        if(user.getVehicle() == null){
+            user.setVehicle(vehicle);
+            userRepository.saveOrUpdate(user);
+        }
     }
 
     @Transactional

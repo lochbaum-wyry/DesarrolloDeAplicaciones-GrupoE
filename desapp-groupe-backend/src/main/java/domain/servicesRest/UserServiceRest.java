@@ -112,6 +112,22 @@ public class UserServiceRest {
         return userService.getUser(id);
     }
 
+    @POST
+    @Path("addVehicle/{userId}")
+    @Consumes("application/json")
+    public Response addVehicle(@PathParam("userId") final Integer id, Vehicle vehicle){
+        Response response;
+        try {
+            User user = userService.getUser(id);
+            userService.addVehicleForUser(user,vehicle);
+            response = Response.ok().tag("El vehiculo fue agregado correctamente").build();
+        } catch (SubiQueTeLlevoException e) {
+            response = Response.serverError().tag("No se pudo agregar el Vehiculo").build();
+        }
+
+        return response;
+    }
+
     @GET
     @Path("getUsers")
     @Produces("application/json")
