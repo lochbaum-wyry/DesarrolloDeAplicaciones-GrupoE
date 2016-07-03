@@ -41,7 +41,7 @@ public class RideService extends GenericService<Ride>
     @Transactional
     public RideRequest requestRide(RideRequest rideRequest)
     {
-        rideRequestRepository.save(rideRequest);
+        rideRequestRepository.saveOrUpdate(rideRequest);
         return rideRequestRepository.findById(rideRequest.getId());
     }
 
