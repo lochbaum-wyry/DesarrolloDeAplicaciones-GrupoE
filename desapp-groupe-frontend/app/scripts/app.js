@@ -44,6 +44,11 @@ angular
         controller: 'WebShopCtrl',
         controllerAs: 'ws'
       })
+      .when('/user_data', {
+        templateUrl: '/views/user_data.html',
+        controller: 'UserDataCtrl',
+        controllerAs: 'ud'
+      })
       .when('/chats', {
         templateUrl: '/views/chats.html',
         controller: 'ChatCtrl',

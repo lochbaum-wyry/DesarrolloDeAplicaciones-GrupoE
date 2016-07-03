@@ -1,0 +1,51 @@
+<div class = "col-md-12 header-right">
+	<div class = "col-md-3 ">
+	</div>
+	<div class = "col-md-6 ">
+		<div class = "content-cal1">
+		<form>
+          <div class="avari-info">
+            <h2>{{'editar Perfil' | translate}}</h2>
+          </div>
+          <div class="form-group ">
+            <p for="name">{{'nombre' | translate}}:</p>
+            <input type="text"  class="form-control" ng-model="ud.name">
+          </div>
+          <div class="form-group ">
+            <p for="lastName">{{'apellido' | translate}}:</p>
+            <input type="text"  class="form-control" ng-model="ud.lastName" >
+          </div>
+          <div class="form-group ">
+            <p for="userName">{{'nombreDeUsuario' | translate}}:</p>
+            <input type="text"  class="form-control" ng-model="ud.userName" >
+          </div>
+          <div class="form-group ">
+            <p for="image">{{'imagen' | translate}}:</p>
+            <input type="text"  class="form-control" ng-model="ud.image" >
+          </div>
+        </form>
+        <div class="form-group ">
+        	<p for="hasVehicle">{{'tieneVehiculo' | translate}}:</p>
+        	<input type='checkbox'  ng-click="ud.toggleShowVehicle()" />
+        </div>
+          <div id='div_del_formulario'  >
+  			<form ng-show="ud.showVehicle" >
+  				<div class="form-group ">
+            		<p for="capacity">{{'capacidad' | translate}}:</p>
+            		<input type="text"  class="form-control" ng-model="ud.capacity" >
+          		</div>
+          		<div class="form-group ">
+            		<p for="oilWastePerKm">{{'combustiblePorHora' | translate}}:</p>
+            		<input type="text"  class="form-control" ng-model="ud.oilWastePerKm">
+          		</div>
+  			</form> 
+		  </div>
+		  	<div class="form-group">
+            	<input class="btn" type="button" ng-click="ud.back()" value="{{'volver' | translate}}">
+            	<input class="btn" type="button" ng-click="ud.save()" value="{{'guardar' | translate}}">
+        	</div>
+		</div>
+	</div>
+	<div class = "col-md-3 ">
+	</div>
+</div>

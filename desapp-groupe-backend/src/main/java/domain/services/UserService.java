@@ -1,18 +1,17 @@
 package domain.services;
 
-import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.services.oauth2.model.Userinfoplus;
-import domain.*;
+import domain.GoogleOauthCredential;
+import domain.Route;
+import domain.User;
+import domain.Vehicle;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
-import helpers.UserAuthorization;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import java.lang.*;
 import java.util.List;
 
 public class UserService {
@@ -135,11 +134,17 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
     public VehicleRepository getVehicleRepository() {
         return vehicleRepository;
     }
 
     public RouteRepository getRouteRepository() {
         return routeRepository;
+    }
+
+    public void updateUser(User user) throws SubiQueTeLlevoException {
+        //tal vez podriamos validar mejor
+        userRepository.update(user);
     }
 }

@@ -36,7 +36,7 @@ public class UserServiceTest extends AbstractServiceTest{
     }
 
     @Test
-    public void test_addVehicleForUser(){
+    public void test_addVehicleForUser() throws SubiQueTeLlevoException {
 
         User user = new User("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
 
