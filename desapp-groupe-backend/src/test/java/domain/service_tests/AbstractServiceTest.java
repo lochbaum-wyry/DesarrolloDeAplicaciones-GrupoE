@@ -60,7 +60,7 @@ abstract public class AbstractServiceTest implements ServiceTestHelpersTrait
     @Autowired
     public RideRequestRepository rideRequestRepo ;
 
-
+    @Transactional
     protected RideRequest aPersistedRideRequestMatchingOtherRequest(RideRequest exampleRideRequest) {
         User requester = aPersistedPassenger();
 
@@ -69,7 +69,7 @@ abstract public class AbstractServiceTest implements ServiceTestHelpersTrait
 
         return rideRequest;
     }
-
+    @Transactional
     protected RideRequest aPersistedRideRequest()
     {
         Route route = aCommonRouteWithLocations(5,50,0);
@@ -85,7 +85,7 @@ abstract public class AbstractServiceTest implements ServiceTestHelpersTrait
         return rideRequest;
     }
 
-
+    @Transactional
     protected  User aPersistedPassenger() {
         User passenger = aPassenger();
         userRepo.save(passenger);
@@ -97,6 +97,7 @@ abstract public class AbstractServiceTest implements ServiceTestHelpersTrait
      * Returns a persisted driver with a vehicle with capacity for 4 passengers at most, and oilWasterPerHour = 0.05f
      * @return
      */
+    @Transactional
     protected  User aPersistedDriver() {
         User driver = aDriver();
         userRepo.save(driver);

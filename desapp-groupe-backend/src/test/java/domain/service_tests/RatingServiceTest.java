@@ -60,6 +60,7 @@ public class RatingServiceTest extends AbstractServiceTest{
         userRepository.save(driver);
 
         Vehicle vehicle = VehicleBuilder.aVehicle().build();
+        vehicle.setOwner(driver);
 
         Ride ride = RideBuilder.aRide().withDriver(driver).withVehicle(vehicle).build();
         rideRepository.save(ride);

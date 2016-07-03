@@ -21,13 +21,15 @@ public interface TestHelpersTrait
     default public User aDriver()
     {
         Vehicle vehicle = aVehicle();
-        return UserBuilder.aUser()
+        User user = UserBuilder.aUser()
                 .withName("Sarasa")
                 .withLastName("Gil")
                 .withEmail("sarasa@gmail.com")
                 .withUserName("sarasa1982")
                 .withVehicle(vehicle)
                 .build();
+        vehicle.setOwner(user);
+        return user;
     }
 
     default Vehicle aVehicle() {

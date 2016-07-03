@@ -43,6 +43,7 @@ public class UserServiceTest extends AbstractServiceTest{
         userRepository.save(user);
 
         Vehicle vehicle = new Vehicle(2,4f);
+        vehicle.setOwner(user);
         vehicleRepository.save(vehicle);
 
         try {
