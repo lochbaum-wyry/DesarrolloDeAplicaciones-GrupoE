@@ -15,7 +15,7 @@ function userDataCtrl(SessionService,UserService) {
   vm.userName = "";
   vm.image = "";
   vm.capacity = "";
-  vm.oilWasterPerKm = "";
+  vm.oilWastePerKmInLts = "";
   vm.showVehicle = false ; 
   vm.toggleShowVehicle = toggleShowVehicle;
   vm.back = back;
@@ -34,22 +34,26 @@ function userDataCtrl(SessionService,UserService) {
   	if(vm.user.vehicle != null){
   		vm.showVehicle = true;
   		vm.capacity = vm.user.vehicle.capacity;
-  		vm.oilWasterPerKm = vm.user.vehicle.oilWasterPerKm;
+  		vm.oilWastePerKmInLts = vm.user.vehicle.oilWastePerKmInLts;
   	}
   }
 
-  function save(){
+  function save() {
   	vm.user.name = vm.name;
   	vm.user.lastName = vm.lastName;
   	vm.user.userName = vm.userName;
   	vm.user.image = vm.image;
-  	if(vm.showVehicle){
-  		var vehicle = {'capacity':vm.capacity,'oilWasterPerKm': vm.oilWasterPerKm};
+
+  	if(vm.showVehicle) {
+  		var vehicle = {
+        capacity: vm.capacity,
+        oilWastePerKmInLts: vm.oilWastePerKmInLts
+      };
   	}
 
   	UserService.updateDataUser(vm.user,vehicle)
-  				.then(onSuccess)
-              	.catch(onFailure);
+			.then(onSuccess)
+      .catch(onFailure);
 
     function onSuccess(result){
     	return result
