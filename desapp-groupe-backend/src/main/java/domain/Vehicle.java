@@ -89,7 +89,7 @@ public class Vehicle  extends Entity
         return capacity;
     }
 
-    public Float getOilUsePerKmInLts() {
+    public Float getOilWastePerKmInLts() {
         return oilWastePerKmInLts;
     }
 

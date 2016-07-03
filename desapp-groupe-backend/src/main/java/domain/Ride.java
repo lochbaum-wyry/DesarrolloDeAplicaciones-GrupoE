@@ -194,7 +194,7 @@ public class Ride extends Entity
 
     @JsonIgnore
     public Float getVehicleUseCosts() {
-        return this.getVehicle().getOilUsePerKmInLts()
+        return this.getVehicle().getOilWastePerKmInLts()
                 * this.getRoute().getDistanceInKms() * this.oilPrice;
     }
 

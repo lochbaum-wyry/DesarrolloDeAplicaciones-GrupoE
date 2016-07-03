@@ -194,9 +194,9 @@ public class RideTest extends AbstractDomainTest
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
+        when(vehicle.getOilWastePerKmInLts()).thenReturn(0.05f);
 
-        double oilCostPerKm = oilPrice * vehicle.getOilUsePerKmInLts();
+        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKmInLts();
 
         User driver = mock(User.class);
         when(driver.getVehicle()).thenReturn(vehicle);
@@ -242,9 +242,9 @@ public class RideTest extends AbstractDomainTest
         when(route.getDistanceInKms()).thenReturn(routeDistanceInKms);
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
+        when(vehicle.getOilWastePerKmInLts()).thenReturn(0.05f);
 
-        double oilCostPerKm = oilPrice * vehicle.getOilUsePerKmInLts();
+        double oilCostPerKm = oilPrice * vehicle.getOilWastePerKmInLts();
 
         User driver = mock(User.class);
         when(driver.getVehicle()).thenReturn(vehicle);
@@ -364,7 +364,7 @@ public class RideTest extends AbstractDomainTest
 
 
         Vehicle vehicle = mock(Vehicle.class);
-        when(vehicle.getOilUsePerKmInLts()).thenReturn(vehicleOilWastePerKm);
+        when(vehicle.getOilWastePerKmInLts()).thenReturn(vehicleOilWastePerKm);
 
 
         Ride ride = RideBuilder.aRide()
@@ -412,7 +412,7 @@ public class RideTest extends AbstractDomainTest
 
         Vehicle vehicle = mock(Vehicle.class);
         when(vehicle.getCapacity()).thenReturn(2);
-        when(vehicle.getOilUsePerKmInLts()).thenReturn(0.05f);
+        when(vehicle.getOilWastePerKmInLts()).thenReturn(0.05f);
 
         User occupierPassenger = mock(User.class);
 

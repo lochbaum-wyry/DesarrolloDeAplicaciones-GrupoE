@@ -1,26 +1,10 @@
 package domain;
 
 import domain.builders.*;
-import domain.repositories.RideRepository;
-import domain.repositories.UserRepository;
-import domain.repositories.VehicleRepository;
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
-import org.joda.time.DateTime;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.*;
-import java.lang.System;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +28,7 @@ public class VehicleTest
         Float oilWastePerKm = 0.05f;
         Vehicle vehicle = new Vehicle(1, oilWastePerKm);
 
-        Assert.assertEquals(oilWastePerKm,vehicle.getOilUsePerKmInLts());
+        Assert.assertEquals(oilWastePerKm,vehicle.getOilWastePerKmInLts());
 
     }
 
