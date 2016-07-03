@@ -10,6 +10,7 @@
 
         <many-to-one name="rater" class="domain.User" lazy="false"/>
         <many-to-one name="ride" class="domain.Ride" lazy="false"/>
+        <property name="rateType" lazy="false"/>
         <property name="rateValue" lazy="false"/>
         <many-to-one name="ratedUser" class="domain.User" lazy="false"/>
         <many-to-one name="vehicle" class="domain.Vehicle" lazy="false"/>

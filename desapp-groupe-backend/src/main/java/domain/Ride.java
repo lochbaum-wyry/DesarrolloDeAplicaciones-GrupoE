@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import domain.exceptions.NoSeatsAvailableException;
+import domain.services.ReducedUserSerializer;
 import domain.servicesRest.serialization.JodaDateTimeDeserializer;
 import helpers.CalculationHelpers;
 import org.joda.time.DateTime;
@@ -24,6 +25,7 @@ public class Ride extends Entity
     @JsonDeserialize(using=JodaDateTimeDeserializer.class)
     private DateTime date;
     private Route route;
+    @JsonSerialize(using= ReducedUserSerializer.class)
     private User driver;
     private List<TakenSeat> takenSeats = new ArrayList<TakenSeat>();
     private Boolean cancelled;

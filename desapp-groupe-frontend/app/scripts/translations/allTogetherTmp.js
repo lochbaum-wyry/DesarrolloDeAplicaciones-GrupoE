@@ -26,7 +26,7 @@ trans['allTogetherTmp'] = {
     'proximos viajes':'Proximos Viajes',
     'votos buenos':'Votos Buenos',
     'votos malos':'Votos Malos',
-    'total de votos':'Total de Votos',
+    'total de votos':'Votos Totales',
     'dia':'Dia',
     'hora':'Hora',
     'origen':'Origen',

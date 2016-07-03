@@ -32,18 +32,18 @@ public class RatingService
         User raterUser = userRepository.findById(rater.getId());
         Ride ride = rideRepository.findById(ride1.getId());
         User ratedUser = userRepository.findById(ride.getDriver().getId());
-        validateRateUser(raterUser,ratedUser,ride);
+        validateRateUser(raterUser,ratedUser,ride,RateType.Driving);
         Rate rate = new Rate(raterUser, ratedUser, ride, RateType.Driving, qualification, comment);
         addRate(raterUser,rate);
     }
 
-    private void validateRateUser(User rater,User user,Ride ride) throws RatingException {
+    private void validateRateUser(User rater,User user,Ride ride,RateType rateType) throws RatingException {
         validateNoSelfRate(rater,user);
-        validateNoRateTwiceUser(rater,user,ride);
+        validateNoRateTwiceUser(rater,user,ride,rateType);
     }
     @Transactional
-    private void validateNoRateTwiceUser(User rater, User ratedUser, Ride ride) throws RatingException {
-        Rate rate = rateRepository.findRateUserByRaterInRide(rater,ratedUser,ride);
+    private void validateNoRateTwiceUser(User rater, User ratedUser, Ride ride,RateType rateType) throws RatingException {
+        Rate rate = rateRepository.findRateUserByRaterInRide(rater,ratedUser,ride,rateType);
         if(rate !=null){
             throw new RatingException();
         }
@@ -66,6 +66,7 @@ public class RatingService
 
         rateRepository.save(rate);
         ride.getVehicle().updateRateCounters(rate);
+        rideRepository.update(ride);
     }
 
     private void validateRateVehicle(User rater, Vehicle ratedVehicle, Ride ride) throws RatingException {
@@ -90,7 +91,7 @@ public class RatingService
         Ride ride = rideRepository.findById(ride1.getId());
         User ratedUser = userRepository.findById(ratedUser1.getId());
         User rater = userRepository.findById(rater1.getId());
-        validateRateUser(rater,ratedUser,ride);
+        validateRateUser(rater,ratedUser,ride,RateType.Accompany);
         Rate rate = new Rate(rater, ratedUser, ride, RateType.Accompany, qualification, comment);
 
         addRate(rater,rate);
