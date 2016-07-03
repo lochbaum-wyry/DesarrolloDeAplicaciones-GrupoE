@@ -111,6 +111,9 @@
 			<ref bean="persistence.routerepository" />
 		</constructor-arg>
 		<constructor-arg>
+			<ref bean="persistence.vehiclerepository" />
+		</constructor-arg>
+		<constructor-arg>
 			<ref bean="services.tokenService" />
 		</constructor-arg>
 	</bean>

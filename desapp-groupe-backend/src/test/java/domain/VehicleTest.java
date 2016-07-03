@@ -120,12 +120,4 @@ public class VehicleTest
         Assert.assertEquals(vehicle.getCapacity().intValue(),20);
     }
 
-    @Test
-    public void test_setAndGetOilWastePerKm(){
-        Vehicle vehicle = VehicleBuilder.aVehicle().build();
-
-        vehicle.setOilWastePerKm(24f);
-
-        Assert.assertEquals(vehicle.getOilWastePerKm().intValue(),24);
-    }
 }

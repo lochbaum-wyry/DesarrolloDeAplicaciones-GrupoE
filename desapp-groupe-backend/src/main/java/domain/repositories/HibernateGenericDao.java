@@ -92,5 +92,9 @@ public abstract class HibernateGenericDao<T> extends HibernateDaoSupport impleme
 //        this.getHibernateTemplate().flush();
     }
 
+    public void merge(final T entity) {
+        this.getHibernateTemplate().merge(entity);
+    }
+
 
 }

@@ -7,6 +7,7 @@ import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RouteRepository;
 import domain.repositories.UserRepository;
+import domain.repositories.VehicleRepository;
 import helpers.UserAuthorization;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,16 +19,18 @@ public class UserService {
 
 
     private UserRepository userRepository;
+    private VehicleRepository vehicleRepository ;
     private RouteRepository routeRepository;
 
     private UserTokenService userTokenService;
 
     public UserService(){}
 
-    public UserService(UserRepository userRepository,RouteRepository routeRepository,UserTokenService userTokenService){
+    public UserService(UserRepository userRepository,RouteRepository routeRepository,VehicleRepository vehicleRepository,UserTokenService userTokenService){
         this.userRepository = userRepository;
         this.routeRepository = routeRepository;
         this.userTokenService = userTokenService;
+        this.vehicleRepository = vehicleRepository;
     }
 
     public UserRepository getUserRepository() {
@@ -48,6 +51,7 @@ public class UserService {
         user.setImage(image);
 
         userRepository.save(user);
+        user = userRepository.findById(user.getId());
 
         return user;
     }
@@ -74,8 +78,9 @@ public class UserService {
 
     @Transactional
     public void addVehicleForUser(User user,Vehicle vehicle) throws SubiQueTeLlevoException {
-        if(user.getVehicle() == null){
+        if(user.getVehicle() == null) {
             user.setVehicle(vehicle);
+            vehicle.setOwner(user);
             userRepository.saveOrUpdate(user);
         }
     }
@@ -128,5 +133,13 @@ public class UserService {
     public List<User> getUsers()
     {
         return userRepository.findAll();
+    }
+
+    public VehicleRepository getVehicleRepository() {
+        return vehicleRepository;
+    }
+
+    public RouteRepository getRouteRepository() {
+        return routeRepository;
     }
 }

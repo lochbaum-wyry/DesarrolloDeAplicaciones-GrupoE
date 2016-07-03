@@ -19,7 +19,8 @@
 
         <property name="points" />
 
-        <one-to-one name="vehicle" class="domain.Vehicle" />
+        <one-to-one name="vehicle" class="domain.Vehicle" cascade="all"/>
+
         <bag name="routes" lazy="false">
             <key column="routeId" />
             <one-to-many class="domain.Route" />

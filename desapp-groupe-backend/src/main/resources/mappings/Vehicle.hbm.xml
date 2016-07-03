@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field"
-                   default-cascade="save-update">
+<hibernate-mapping default-access="field">
     <class name="domain.Vehicle">
         <id column="ID" name="id">
-            <generator class="native" />
+            <generator class="foreign">
+                <param name="property">owner</param>
+            </generator>
         </id>
         <property name="capacity" />
-        <property name="oilWastePerKm" />
+        <property name="oilWastePerKmInLts" />
         <property name="goodRateCount" />
         <property name="badRateCount" />
-        <one-to-one name="owner" class="domain.User" />
+        <one-to-one name="owner" class="domain.User" constrained="true" />
 
     </class>
 </hibernate-mapping>

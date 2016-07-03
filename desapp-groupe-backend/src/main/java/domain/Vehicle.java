@@ -12,7 +12,7 @@ public class Vehicle  extends Entity
     @JsonIgnore
     private User owner;
     private Integer capacity;
-    private Float oilWastePerKm;
+    private Float oilWastePerKmInLts;
     @JsonIgnore
     private List<Rate> rates;
     private Integer totalRateCount = 0 ;
@@ -21,10 +21,10 @@ public class Vehicle  extends Entity
 
     public Vehicle() {}
 
-    public Vehicle(Integer capacity,Float oilWastePerKm)
+    public Vehicle(Integer capacity,Float oilWastePerKmInLts)
     {
         this.capacity = capacity;
-        this.oilWastePerKm = oilWastePerKm;
+        this.oilWastePerKmInLts = oilWastePerKmInLts;
         this.rates = new ArrayList<Rate>();
     }
 
@@ -63,12 +63,9 @@ public class Vehicle  extends Entity
         this.goodRateCount = goodRateCount;
     }
 
-    public Float getOilWastePerKm() {
-        return oilWastePerKm;
-    }
 
-    public void setOilWastePerKm(Float oilWastePerKm) {
-        this.oilWastePerKm = oilWastePerKm;
+    public void setOilWastePerKmInLts(Float oilWastePerKmInLts) {
+        this.oilWastePerKmInLts = oilWastePerKmInLts;
     }
 
     @JsonIgnore
@@ -92,9 +89,8 @@ public class Vehicle  extends Entity
         return capacity;
     }
 
-    @JsonIgnore
     public Float getOilUsePerKmInLts() {
-        return oilWastePerKm;
+        return oilWastePerKmInLts;
     }
 
     @JsonIgnore
