@@ -150,8 +150,8 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
    */ 
   function renderRouteOnMap(points, boardingPoint, getOffPoint) {
       var markersInfo = [
-        { index: boardingPoint['indexInRoute'], content: "Boarding here" },
-        { index: getOffPoint['indexInRoute'], content: "Getting off here" }
+        { pos: GmSubiConv.latLngFromRoutePoint(boardingPoint), content: "Boarding here" },
+        { pos: GmSubiConv.latLngFromRoutePoint(getOffPoint), content: "Getting off here" }
       ];
 
       var latLngPoints = points.map(GmSubiConv.latLngFromRoutePoint); 

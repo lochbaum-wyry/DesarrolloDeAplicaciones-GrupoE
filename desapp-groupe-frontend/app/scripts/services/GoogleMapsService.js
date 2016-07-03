@@ -50,9 +50,18 @@ function GoogleMapsService() {
   }
 
 
-  function renderRoute(points) {
+  function renderRoute(points, markersInfo) {
     var request = buildDirectionsReqFromPointList(points);
+
+    for (var  i = 0 ; i < markersInfo.length ; i++) { 
+      var mkrLoc = markersInfo[i]['pos'];
+      var mkrInfo = markersInfo[i]['content'] ; 
+      addMarker(mkrLoc, false, mkrInfo);
+    }
+
     calculateAndDisplayRoute(request); 
+
+
   }
 
   function buildLatLng(lat,lng) {
@@ -69,17 +78,17 @@ function GoogleMapsService() {
     };
   }
 
-  function addMarker(position, draggable, withInfoWindow) {
+  function addMarker(/* LatLng */ position, /* bool */ draggable, /* String */ infoWindowContent) {
 
     var marker = new google.maps.Marker({
       position: position,
       map: map,
-      draggable: draggable,
+      draggable: draggable
     });
 
-    withInfoWindow = (withInfoWindow == undefined) ? false : withInfoWindow  ; 
+    var withInfoWindow = ! (infoWindowContent === undefined)  ; 
     if (withInfoWindow) {
-      var infoWindow = buildInfoWindow(withInfoWindow);
+      var infoWindow = buildInfoWindow(infoWindowContent);
       infoWindow.open(map, marker);
     }
 
@@ -108,7 +117,6 @@ function GoogleMapsService() {
 
   function buildDirectionsReqFromPointList(ps, optimizeWaypoints) {
       var waypoints = (ps.length < 3) ? [] : ps.slice(2, ps.length).map(buildWaypoint);
-      console.log(waypoints);
       return buildDirectionsRequest(ps[0], ps[ps.length-1], waypoints, optimizeWaypoints);
   }
 
