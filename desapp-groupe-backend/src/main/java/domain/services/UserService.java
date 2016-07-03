@@ -129,4 +129,9 @@ public class UserService {
     {
         return userRepository.findAll();
     }
+
+    public void updateUser(User user) throws SubiQueTeLlevoException {
+        //tal vez podriamos validar mejor
+        userRepository.update(user);
+    }
 }

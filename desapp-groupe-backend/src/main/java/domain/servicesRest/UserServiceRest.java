@@ -128,6 +128,19 @@ public class UserServiceRest {
         return response;
     }
 
+    @POST
+    @Path("updateUser")
+    @Consumes("application/json")
+    public Response updateUser(User user){
+        try {
+            userService.updateUser(user);
+            return Response.ok().tag("Se actualizo el usuario correctamente").build();
+        } catch (SubiQueTeLlevoException e) {
+            return Response.serverError().tag("Error al actualizar el usuario").build();
+        }
+    }
+
+
     @GET
     @Path("getUsers")
     @Produces("application/json")

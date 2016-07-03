@@ -7,6 +7,9 @@ angular.module('desappGrupoeFrontendApp')
     var userService = {
       addRoute: addRoute,
       getUser: getUser,
+      updateDataUser:updateDataUser,
+      updateUser:updateUser,
+      addVehicle:addVehicle,
       getUsers: getUsers
     };
 
@@ -57,6 +60,41 @@ angular.module('desappGrupoeFrontendApp')
 
     return userService;
   });
+
+  function updateDataUser(user,vehicle){
+    updateUser(user);
+    addVehicle(user.id,vehicle);
+  }
+
+  function updateUser(user){
+    return $http.post(url +  '/updateUser' , user)
+          .then(onSuccessUpdateUser)
+          .catch(onFailureUpdateUser);
+
+          function onSuccessUpdateUser(response){
+             return response.data;
+          }
+  
+          function onFailureUpdateUser(error){
+              $log.error('Ocurrio un error: ' + error.data);
+              return 'Ocurrio un error';
+          }
+  };
+
+  function addVehicle(userId,vehicle){
+    return $http.post(url +  '/addVehicle/' + userId , vehicle)
+          .then(onSuccessAddVehicle)
+          .catch(onFailureAddVehicle);
+
+          function onSuccessAddVehicle(response){
+             return response.data;
+          }
+  
+          function onFailureAddVehicle(error){
+              $log.error('Ocurrio un error: ' + error.data);
+              return 'Ocurrio un error';
+          }
+  };
 
   function onSucc(response) {
     return response.data;

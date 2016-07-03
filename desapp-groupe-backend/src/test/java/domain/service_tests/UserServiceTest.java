@@ -2,6 +2,7 @@ package domain.service_tests;
 import domain.User;
 import domain.Vehicle;
 import domain.exceptions.SingUpException;
+import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.UserRepository;
 import domain.repositories.VehicleRepository;
 import domain.services.UserService;
@@ -35,7 +36,7 @@ public class UserServiceTest extends AbstractServiceTest{
     }
 
     @Test
-    public void test_addVehicleForUser(){
+    public void test_addVehicleForUser() throws SubiQueTeLlevoException {
 
         User user = new User("federico","lochbaum","trimegisto","federico.lochbaum@gmail.com");
 
