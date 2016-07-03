@@ -13,6 +13,7 @@ public class Vehicle  extends Entity
     private User owner;
     private Integer capacity;
     private Float oilWastePerKm;
+    @JsonIgnore
     private List<Rate> rates;
     private Integer totalRateCount = 0 ;
     private Integer goodRateCount = 0 ;
@@ -70,6 +71,7 @@ public class Vehicle  extends Entity
         this.oilWastePerKm = oilWastePerKm;
     }
 
+    @JsonIgnore
     public List<Rate> getRates() {
         return rates;
     }
