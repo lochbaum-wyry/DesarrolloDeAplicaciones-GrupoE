@@ -5,6 +5,7 @@ import domain.builders.RideBuilder;
 import domain.builders.UserBuilder;
 import domain.builders.VehicleBuilder;
 import domain.exceptions.RatingException;
+import domain.exceptions.SubiQueTeLlevoException;
 import domain.repositories.RateRepository;
 import domain.repositories.RideRepository;
 import domain.repositories.UserRepository;
@@ -45,11 +46,13 @@ public class RatingServiceTest extends AbstractServiceTest{
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
         rideRepository.save(ride);
 
-        ratingService.rateDriverOfRide(rater,ride, RateValue.GOOD,"un capo este pibe");
+        Rate rate = new Rate(rater, driver, ride, RateType.Driving, RateValue.GOOD, "un capo el pibe");
 
-        List<Rate> ratesDriving = rateRepository.findAll().stream().filter(rate -> rate.getRateType().equals(RateType.Driving)).collect(Collectors.toList());
+        ratingService.rate(rate);
 
-        Assert.assertTrue(ratesDriving.stream().anyMatch(rate -> rate.getRatedUser().equals(driver)));
+        List<Rate> ratesDriving = rateRepository.findAll().stream().filter(r -> r.getRateType().equals(RateType.Driving)).collect(Collectors.toList());
+
+        Assert.assertTrue(ratesDriving.stream().anyMatch(r -> r.getRatedUser().equals(driver)));
     }
 
     @Test
@@ -65,11 +68,13 @@ public class RatingServiceTest extends AbstractServiceTest{
         Ride ride = RideBuilder.aRide().withDriver(driver).withVehicle(vehicle).build();
         rideRepository.save(ride);
 
-        ratingService.rateVehicleOfRide(rater,ride, RateValue.GOOD,"un capo este pibe");
+        Rate rate = new Rate(rater, driver, ride, RateType.CarState, RateValue.GOOD, "un capo el pibe");
+        rate.setVehicle(vehicle);
+        ratingService.rate(rate);
 
-        List<Rate> ratesCarState = rateRepository.findAll().stream().filter(rate -> rate.getRateType().equals(RateType.CarState)).collect(Collectors.toList());
+        List<Rate> ratesCarState = rateRepository.findAll().stream().filter(r -> rate.getRateType().equals(RateType.CarState)).collect(Collectors.toList());
 
-        Assert.assertTrue(ratesCarState.stream().anyMatch(rate -> rate.getVehicle().equals(vehicle)));
+        Assert.assertTrue(ratesCarState.stream().anyMatch(r -> r.getVehicle().equals(vehicle)));
     }
 
     @Test
@@ -85,24 +90,15 @@ public class RatingServiceTest extends AbstractServiceTest{
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
         rideRepository.save(ride);
 
-        ratingService.ratePassengerOfRide(rater,rateado,ride,RateValue.BAD,"apesta");
+        Rate rate = new Rate(rater, rateado, ride, RateType.Accompany, RateValue.GOOD, "un capo el pibe");
+        rate.setVehicle(driver.getVehicle());
 
-        List<Rate> ratesAccompany = rateRepository.findAll().stream().filter(rate -> rate.getRateType().equals(RateType.Accompany)).collect(Collectors.toList());
+        ratingService.rate(rate);
 
-        Assert.assertTrue(ratesAccompany.stream().anyMatch(rate -> rate.getRatedUser().equals(rateado)));
-    }
 
-    @Test
-    public void test_addRate(){
+        List<Rate> ratesAccompany = rateRepository.findAll().stream().filter(r -> r.getRateType().equals(RateType.Accompany)).collect(Collectors.toList());
 
-        User rateado = UserBuilder.aUser().build();
-
-        Rate rate = RateBuilder.aRate().withRateValue(RateValue.GOOD).withUser(rateado).build();
-
-        ratingService.addRate(rateado,rate);
-
-        Assert.assertEquals(rateado.getGoodRateCount().intValue(),1);
-        Assert.assertEquals(rateRepository.count(),1);
+        Assert.assertTrue(ratesAccompany.stream().anyMatch(r -> r.getRatedUser().equals(rateado)));
     }
 
 }

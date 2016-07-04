@@ -44,7 +44,7 @@ public class RatingService
 //    }
 
     @Transactional
-    public void rate(Rate rate) throws SubiQueTeLlevoException {
+    public void rate(Rate rate) throws RatingException {
         validateRate(rate);
         rateRepository.save(rate);
         rate = rateRepository.findById(rate.getId());
@@ -69,19 +69,19 @@ public class RatingService
         }
     }
 
-    private void validateRate(Rate rate) throws SubiQueTeLlevoException {
+    private void validateRate(Rate rate) throws RatingException {
         validateNoSelfRating(rate);
         validateNotRatingTwice(rate);
     }
 
-    private void validateNoSelfRating(Rate rate) throws SubiQueTeLlevoException {
+    private void validateNoSelfRating(Rate rate) throws RatingException {
         if (rate.getRatedUser().getId() == rate.getRater().getId())
-            throw new SubiQueTeLlevoException("cant_rate_yourself");
+            throw new RatingException("cant_rate_yourself");
     }
 
-    private void validateNotRatingTwice(Rate rate) throws SubiQueTeLlevoException {
+    private void validateNotRatingTwice(Rate rate) throws RatingException {
         if (rateRepository.similarRateExists(rate))
-            throw new SubiQueTeLlevoException("cant_rate_twice");
+            throw new RatingException("cant_rate_twice");
     }
 
 }
