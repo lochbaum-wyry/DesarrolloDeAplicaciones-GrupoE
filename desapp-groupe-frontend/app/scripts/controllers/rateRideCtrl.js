@@ -69,7 +69,7 @@ function RateRideCtrl(RouteService,RideService,SessionService) {
               .catch(onFailure);
 
   function onSuccess(response) {
-      vm.userSelected = {};
+      vm.userSelected = null;
       vm.rateType = "";
       vm.rateValue = {};
       vm.comment = "";

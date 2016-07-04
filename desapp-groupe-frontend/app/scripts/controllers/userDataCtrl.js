@@ -44,16 +44,21 @@ function userDataCtrl(SessionService,UserService) {
   	vm.user.userName = vm.userName;
   	vm.user.image = vm.image;
 
+    UserService.updateUser(vm.user)
+      .then(onSuccess)
+      .catch(onFailure);
+
   	if(vm.showVehicle) {
   		var vehicle = {
         capacity: vm.capacity,
         oilWastePerKmInLts: vm.oilWastePerKmInLts
       };
+      UserService.addVehicle(vm.user.id,vehicle)
+        .then(onSuccess)
+        .catch(onFailure);
   	}
 
-  	UserService.updateDataUser(vm.user,vehicle)
-			.then(onSuccess)
-      .catch(onFailure);
+
 
     function onSuccess(result){
     	return result

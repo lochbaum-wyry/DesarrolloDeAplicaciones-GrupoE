@@ -143,8 +143,9 @@ public class UserService {
         return routeRepository;
     }
 
+    @Transactional
     public void updateUser(User user) throws SubiQueTeLlevoException {
         //tal vez podriamos validar mejor
-        userRepository.update(user);
+        userRepository.saveOrUpdate(user);
     }
 }

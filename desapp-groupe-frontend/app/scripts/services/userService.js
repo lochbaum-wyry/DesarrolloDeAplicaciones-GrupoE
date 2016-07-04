@@ -9,7 +9,6 @@ function UserService($http,$log) {
   var userService = {
     addRoute: addRoute,
     getUser: getUser,
-    updateDataUser: updateDataUser,
     updateUser:updateUser,
     addVehicle:addVehicle,
     getUsers: getUsers
@@ -40,13 +39,6 @@ function UserService($http,$log) {
     return $http.post(url + '/' + user_id + '/addRoute' , route)
           .then(onSucc)
           .catch(onFail);
-  }
-
-  function updateDataUser(user,vehicle){
-    return updateUser(user)
-      .then ( function () { return addVehicle(user.id,vehicle); } )
-      .catch(onFail);
-
   }
 
   function updateUser(user){
