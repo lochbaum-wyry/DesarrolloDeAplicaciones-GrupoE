@@ -60,6 +60,9 @@
 			<ref bean="persistence.raterepository" />
 		</constructor-arg>
 		<constructor-arg>
+			<ref bean="persistence.vehiclerepository" />
+		</constructor-arg>
+		<constructor-arg>
 			<ref bean="persistence.riderepository" />
 		</constructor-arg>
 	</bean>

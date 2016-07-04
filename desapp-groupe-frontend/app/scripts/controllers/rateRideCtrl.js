@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RateRideCtrl', RateRideCtrl);
 
 /* @ngInject */
-function RateRideCtrl(RouteService,RideService,$localStorage) {
+function RateRideCtrl(RouteService,RideService,SessionService) {
   /* RateRideCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -25,7 +25,7 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
 
 
   function getRateablesRides() {
-    var routePromise = RideService.getRateablesRides($localStorage.user.id)
+    var routePromise = RideService.getRateablesRides(SessionService.user().id)
               .then(onSuccess)
               .catch(onFailure);
 
@@ -39,7 +39,7 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   }
 
   function getRateablesFromRide(rideId) {
-    var routePromise = RideService.getRateablesFromRide(rideId,$localStorage.user.id)
+    var routePromise = RideService.getRateablesFromRide(rideId,SessionService.user().id)
               .then(onSuccess)
               .catch(onFailure);
 
@@ -53,7 +53,17 @@ function RateRideCtrl(RouteService,RideService,$localStorage) {
   }
 
   function rate() {
-    var rate = {'rater':$localStorage.user,'ratedUser':vm.userSelected,'ride':vm.rideSelected,'rateType':vm.rateType,'rateValue':vm.rateValue,'comment':vm.comment,'date':moment().format("x"),'vehicle':vm.rideSelected.vehicle};
+    var rate = {
+      raterId:    SessionService.user().id,
+      ratedUserId: vm.userSelected.id,
+      rideId: vm.rideSelected.id,
+      vehicleId: vm.rideSelected.vehicle.id,
+      rateType: vm.rateType,
+      rateValue: vm.rateValue,
+      comment: vm.comment,
+      date: moment().format("x")
+    };
+
     var routePromise = RideService.rate(rate)
               .then(onSuccess)
               .catch(onFailure);

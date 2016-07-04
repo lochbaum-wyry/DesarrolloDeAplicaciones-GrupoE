@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field"
-                   default-cascade="save-update">
+<hibernate-mapping default-access="field">
     <class name="domain.Rate">
         <id column="ID" name="id">
             <generator class="native" />
@@ -10,12 +9,12 @@
 
         <many-to-one name="rater" class="domain.User" lazy="false"/>
         <many-to-one name="ride" class="domain.Ride" lazy="false"/>
-        <property name="rateType" lazy="false"/>
-        <property name="rateValue" lazy="false"/>
+        <property name="rateType"/>
+        <property name="rateValue"/>
         <many-to-one name="ratedUser" class="domain.User" lazy="false"/>
         <many-to-one name="vehicle" class="domain.Vehicle" lazy="false"/>
-        <property name="comment" lazy="false"/>
-        <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime" lazy="false"/>
+        <property name="comment" />
+        <property name="date" type = "org.joda.time.contrib.hibernate.PersistentDateTime" />
 
     </class>
 </hibernate-mapping>

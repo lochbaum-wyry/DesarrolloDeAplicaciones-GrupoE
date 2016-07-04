@@ -43,4 +43,23 @@ public class RateRepository extends HibernateGenericDao<Rate> implements
 
         return rate;
     }
+
+    public boolean similarRateExists(Rate rate) {
+        String hql =    "SELECT r " +
+                        "FROM Rate r " +
+                        "WHERE " +
+                    "r.rater = :rater " +
+                "AND r.ride =:ride " +
+                "AND r.ratedUser = :ratedUser " +
+                "AND r.rateType = :type ";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+
+        query.setEntity("rater",rate.getRater());
+        query.setEntity("ratedUser",rate.getRatedUser());
+        query.setEntity("ride",rate.getRide());
+        query.setParameter("type", rate.getRateType());
+
+        return query.uniqueResult() != null ;
+    }
 }

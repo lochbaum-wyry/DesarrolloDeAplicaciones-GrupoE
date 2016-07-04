@@ -6,6 +6,7 @@ import domain.services.RatingService;
 import domain.services.RideService;
 import domain.services.RouteService;
 import domain.services.UserService;
+import domain.servicesRest.daos.RateDTO;
 import domain.servicesRest.daos.RideRequestDTO;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -134,21 +135,16 @@ public class RideServiceRest
     @Path("rate")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response rate(final Rate rate){
+    public Response rate(final RateDTO rateDTO){
+
+        Rate rate = rateFromDTO(rateDTO);
         try
         {
-            switch (rate.getRateType()) {
-                case Driving:
-                    ratingService.rateDriverOfRide(rate.getRater(),rate.getRide(),rate.getRateValue(),rate.getComment());
-                case Accompany:
-                    ratingService.ratePassengerOfRide(rate.getRater(),rate.getRatedUser(),rate.getRide(),rate.getRateValue(),rate.getComment());
-                case CarState:
-                    ratingService.rateVehicleOfRide(rate.getRater(),rate.getRide(),rate.getRateValue(),rate.getComment());
-            }
+            ratingService.rate(rate);
             return Response.ok().tag("Se califico correctamente").build();
         }
         catch (Exception e){
-          return Response.serverError().build();
+          return Response.serverError().tag(e.getMessage()).build();
         }
     }
 
@@ -162,6 +158,22 @@ public class RideServiceRest
         RoutePoint getOffAt = routeService.getRoutePointRepository().findById(rideRequestDTO.getGetOffAtId());
 
         return new RideRequest(requester, driver, date, route, boardingAt, getOffAt);
+    }
+
+    private Rate rateFromDTO(RateDTO rateDTO)
+    {
+        User rater = userService.getUserRepository().findById(rateDTO.getRaterId());
+        User ratedUser = userService.getUserRepository().findById(rateDTO.getRatedUserId());
+        Ride ride = rideService.getRideRepository().findById(rateDTO.getRideId());
+        Vehicle vehicle = userService.getVehicleRepository().findById(rateDTO.getVehicleId());
+        RateType rateType = rateDTO.getRateType();
+        RateValue rateValue = rateDTO.getRateValue();
+        String comment = rateDTO.getComment();
+
+        Rate rate = new Rate(rater, ratedUser, ride, rateType, rateValue, comment);
+        rate.setVehicle(vehicle);
+        return rate;
+
     }
 
 
