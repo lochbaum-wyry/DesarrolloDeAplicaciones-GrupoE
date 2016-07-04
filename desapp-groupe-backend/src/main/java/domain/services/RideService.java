@@ -5,6 +5,7 @@ import domain.*;
 import domain.repositories.RideRepository;
 import domain.repositories.RideRequestRepository;
 import domain.exceptions.NoSeatsAvailableException;
+import domain.repositories.UserRepository;
 import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class RideService extends GenericService<Ride>
 {
     private SystemSettings systemSettings;
     private RideRepository rideRepository ;
+    private UserRepository userRepository;
 
     public RideRequestRepository getRideRequestRepository() {
         return rideRequestRepository;
@@ -31,11 +33,12 @@ public class RideService extends GenericService<Ride>
     public RideService(){
     }
 
-    public RideService(RideRepository rideRepository, RideRequestRepository rideRequestRepository)
+    public RideService(RideRepository rideRepository, RideRequestRepository rideRequestRepository,UserRepository userRepository)
     {
         this.systemSettings = new SystemSettings();
         this.rideRepository = rideRepository ;
         this.rideRequestRepository = rideRequestRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -135,8 +138,9 @@ public class RideService extends GenericService<Ride>
 
     @Transactional
     public List<Ride> getRateablesRides(int userId) {
-        //return rideRepository.getRidesAwaingRates(userId);
-        return rideRepository.findAll();
+        User user = userRepository.findById(userId);
+        return rideRepository.getRidesAwaingRates(user);
+        //return rideRepository.findAll();
     }
 
     @Transactional
