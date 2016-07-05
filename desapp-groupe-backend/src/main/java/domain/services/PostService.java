@@ -47,6 +47,6 @@ public class PostService {
     @Transactional
     public void createPost(Post post) {
         Post newPost = new Post(post.getPublisher(),post.getDate(),post.getContent(),post.getWallOwner());
-        postRepository.save(newPost);
+        postRepository.saveOrUpdate(newPost);
     }
 }
