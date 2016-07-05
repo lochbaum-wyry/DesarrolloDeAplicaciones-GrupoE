@@ -7,6 +7,7 @@ import domain.builders.UserBuilder;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
 import domain.services.GoogleCredentialsService;
+import domain.services.RatingService;
 import domain.services.UserService;
 import domain.services.UserTokenService;
 import helpers.UserAuthorization;
@@ -26,11 +27,13 @@ public class UserServiceRest {
      UserService userService;
      GoogleCredentialsService googleCredentialsService;
      UserTokenService userTokenService;
+     RatingService ratingService;
 
-    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService) {
+    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService,RatingService ratingService) {
         this.userService = userService;
         this.googleCredentialsService = googleCredentialsService;
         this.userTokenService = userTokenService;
+        this.ratingService = ratingService;
     }
 
     public UserServiceRest(){}
@@ -110,6 +113,13 @@ public class UserServiceRest {
     @Produces("application/json")
     public User getUser(@PathParam("id") final Integer id) {
         return userService.getUser(id);
+    }
+
+    @GET
+    @Path("getRates/{id}")
+    @Produces("application/json")
+    public List<Rate> getRates(@PathParam("id") final Integer id) {
+        return ratingService.getRates(id);
     }
 
     @POST

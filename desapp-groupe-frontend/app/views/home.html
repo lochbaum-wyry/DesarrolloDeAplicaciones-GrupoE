@@ -11,7 +11,7 @@
             <img class="img-circle img-profile" ng-src="{{user.image}}" alt="">
           </div>
           <div class="avari-info">
-            <h2>{{user.name}}</h2>
+            <h2 ng-click="userProfile(user.id)" class="btn">{{user.name}}</h2>
           </div>
           <div class="joker-block">
             <div class="col-md-4 views">
@@ -94,43 +94,26 @@
       <div class="avari-info nav">
             <h2>{{'comentarios' | translate}}</h2>
       </div>
-          <ul id="comments-list" class="comments-list">
-      <li>
-        <div class="comment-main-level">
-          <!-- Avatar -->
-          <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
-          <!-- Contenedor del Comentario -->
-          <div class="comment-box">
-            <div class="comment-head">
-              <h6 class="comment-name by-author"><a href="" >Agustin Ortizas</a></h6>
-              <span>hace 20 minutos</span>
-              <i class="fa fa-reply"></i>
-              <i class="fa fa-heart"></i>
-            </div>
-            <div class="comment-content">
-              Me encanta como manejas!,tenemos que salir a correr picadas, conozco un flaco que te puede preparar el auto, te lo deja 10 puntos.
-            </div>
-          </div>
-        </div>
+          <ul id="comments-list" class="comments-list" dir-paginate=" rate in rates | itemsPerPage: 2">
 
           <li>
             <!-- Avatar -->
-            <div class="comment-avatar"><img src="https://media.licdn.com/mpr/mpr/shrinknp_200_200/p/8/005/074/165/2458a49.jpg" alt=""></div>
+            <div class="comment-avatar"><img src={{rate.rater.image}} alt=""></div>
             <!-- Contenedor del Comentario -->
             <div class="comment-box">
               <div class="comment-head">
-                <h6 class="comment-name by-author"><a href="" ng-click="userProfile(1)">Federico Lochbaum</a></h6>
-                <span>hace 10 minutos</span>
+                <h6 class="comment-name by-author"><a href="" ng-click="userProfile(rate.rater.id)">{{rate.rater.name}}</a></h6>
+                <span>{{rate.date | date: 'EEE, dd MMM hh:mm'}}</span>
                 <i class="fa fa-reply"></i>
                 <i class="fa fa-heart"></i>
               </div>
               <div class="comment-content">
-                Sos un grande maestro, tus mates son los mejores, aunque me habria gustado que manejes mas tranqui.
+                {{rate.comment}}
               </div>
             </div>
           </li>
         </ul>
-      </li>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
     </ul>
       <!-- fin de Comentarios-->
     </div>

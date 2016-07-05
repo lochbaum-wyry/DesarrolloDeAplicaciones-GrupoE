@@ -3,6 +3,8 @@ package domain.repositories;
 import domain.*;
 import org.hibernate.Query;
 
+import java.util.List;
+
 public class RateRepository extends HibernateGenericDao<Rate> implements
         GenericRepository<Rate> {
 
@@ -61,5 +63,15 @@ public class RateRepository extends HibernateGenericDao<Rate> implements
         query.setParameter("type", rate.getRateType());
 
         return query.uniqueResult() != null ;
+    }
+
+    public List<Rate> getRatesForUser(User user) {
+        String hql = "SELECT r FROM " + Rate.class.getName() + " r " +
+                "WHERE r.ratedUser = :user";
+
+        Query query =  getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+        query.setEntity("user",user);
+
+        return query.list();
     }
 }

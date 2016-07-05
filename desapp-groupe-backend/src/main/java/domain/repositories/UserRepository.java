@@ -111,7 +111,7 @@ public class UserRepository extends HibernateGenericDao<User> implements
     {
         String hql =    "SELECT r.driver.id " +
                 ", AVG(r.efficiencyPercentage) as percentage " +
-                        "FROM Ride r "+
+                        "FROM " + Ride.class.getName() + " r "+
                         "WHERE month(r.date) = :month and year(r.date) = :year " +
                         "GROUP BY r.driver.id " +
                         "ORDER BY percentage DESC";

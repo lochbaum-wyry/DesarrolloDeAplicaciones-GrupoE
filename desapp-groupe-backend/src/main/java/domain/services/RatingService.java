@@ -13,6 +13,8 @@ import domain.RateValue;
 import domain.repositories.VehicleRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 public class RatingService
 {
@@ -84,4 +86,9 @@ public class RatingService
             throw new RatingException("cant_rate_twice");
     }
 
+    @Transactional
+    public List<Rate> getRates(Integer userId) {
+        User user = userRepository.findById(userId);
+        return rateRepository.getRatesForUser(user);
+    }
 }
