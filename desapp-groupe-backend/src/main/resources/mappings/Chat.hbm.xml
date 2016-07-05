@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping default-access="field"
-                   default-cascade="save-update">
+<hibernate-mapping default-access="field">
     <class name="domain.Chat">
         <id column="ID" name="id">
             <generator class="native" />
@@ -12,13 +11,13 @@
 
         <bag name="users" lazy="false" table="chat_users">
             <key column="chatId" />
-            <many-to-many class="domain.User" column="userId"/>
+            <many-to-many class="domain.User" column="userId" />
         </bag>
-        <list name="messages" lazy="false">
-            <key column="messageId" />
-            <list-index column="id" />
+
+        <bag name="messages" lazy="false" cascade="save-update" order-by="id">
+            <key column="chatId" />
             <one-to-many class="domain.Message" />
-        </list>
+        </bag>
 
 
     </class>

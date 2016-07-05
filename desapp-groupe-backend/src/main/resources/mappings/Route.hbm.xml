@@ -12,15 +12,13 @@
         <property name="fixedCosts" />
 
         <bag name="schedules" lazy="false">
-            <key column="scheduleId" />
-            <!--<list-index column="id" />-->
+            <key column="routeId" />
             <one-to-many class="domain.Schedule" />
         </bag>
-        <list name="routePoints" lazy="false">
-            <key column="routePointId" />
-            <list-index column="indexInRoute" />
+        <bag name="routePoints" lazy="false" order-by="indexInRoute">
+            <key column="routeId" />
             <one-to-many class="domain.RoutePoint" />
-        </list>
+        </bag>
 
     </class>
 </hibernate-mapping>

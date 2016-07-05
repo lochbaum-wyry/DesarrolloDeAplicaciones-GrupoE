@@ -26,11 +26,10 @@
             <one-to-many class="domain.Route" />
         </bag>
 
-        <list name="chats" lazy="false">
+        <bag name="chats" lazy="false" >
             <key column="chatId" />
-            <list-index column="id" />
-            <many-to-many class="domain.Chat" />
-        </list>
+            <many-to-many class="domain.Chat"  />
+        </bag>
 
 
     </class>

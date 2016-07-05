@@ -10,36 +10,31 @@
 
         <property name="month"  type = "java.lang.Integer"/>
         <property name="year"  type = "java.lang.Integer"/>
-        <list name="bestDrivers" lazy="false">
-            <key column="userId" />
-            <list-index column="id" />
-            <one-to-many class="domain.User" />
-        </list>
-        <list name="worstDrivers" lazy="false">
-            <key column="userId" />
-            <list-index column="id" />
-            <one-to-many class="domain.User" />
-        </list>
-        <list name="bestPassenger" lazy="false">
-            <key column="userId" />
-            <list-index column="id" />
-            <one-to-many class="domain.User" />
-        </list>
-        <list name="worstPassenger" lazy="false">
-            <key column="userId" />
-            <list-index column="id" />
-            <one-to-many class="domain.User" />
-        </list>
-        <list name="bestVehicles" lazy="false">
-            <key column="vehicleId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Vehicle" />
-        </list>
-        <list name="worstVehicles" lazy="false">
-            <key column="vehicleId" />
-            <list-index column="id" />
-            <one-to-many class="domain.Vehicle" />
-        </list>
 
+
+        <bag name="bestDrivers" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.User" />
+        </bag>
+        <bag name="worstDrivers" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.User" />
+        </bag>
+        <bag name="bestPassenger" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.User" />
+        </bag>
+        <bag name="worstPassenger" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.User" />
+        </bag>
+        <bag name="bestVehicles" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.Vehicle" />
+        </bag>
+        <bag name="worstVehicles" lazy="false" >
+            <key column="rankingId" />
+            <many-to-many class="domain.Vehicle" />
+        </bag>
     </class>
 </hibernate-mapping>

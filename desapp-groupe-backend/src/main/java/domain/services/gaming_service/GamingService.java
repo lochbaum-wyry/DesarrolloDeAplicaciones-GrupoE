@@ -7,6 +7,7 @@ import domain.repositories.VehicleRepository;
 import domain.services.MonthlyRanking;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GamingService
@@ -40,7 +41,10 @@ public class GamingService
             ranking.setWorstPassenger(userRepository.getWorstPassengersInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             ranking.setBestVehicles(vehicleRepository.getBestVehiclesInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
             ranking.setWorstVehicles(vehicleRepository.getWorstVehiclesInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
-            ranking.setMostEfficientDrivers(userRepository.getMostEfficientDriversInMonthYear(month, year, MAX_NUMBER_USERS_RANKING));
+
+            List mostEfficientDrivers = userRepository.getMostEfficientDriversInMonthYear(month, year, MAX_NUMBER_USERS_RANKING);
+
+            ranking.setMostEfficientDrivers( getDriversFromTuples(mostEfficientDrivers));
             assignEfficiencyPoints(ranking.getMostEfficientDrivers());
             rankingRepository.save(ranking);
             ranking = rankingRepository.getRankingIn(month,year);
@@ -49,6 +53,19 @@ public class GamingService
         return ranking ;
     }
 
+    private List<User> getDriversFromTuples(List rows) {
+        List<User> result = new ArrayList<>();
+
+        for (int i = 0 ; i < rows.size() ; i++)
+        {
+            Object [] row = (Object [] )rows.get(i);
+            User driver = (User) row[0];
+            result.add(driver);
+        }
+        return result ;
+    }
+
+    @Transactional
     public void assignEfficiencyPoints(List<User> users)
     {
         for (User user : users){

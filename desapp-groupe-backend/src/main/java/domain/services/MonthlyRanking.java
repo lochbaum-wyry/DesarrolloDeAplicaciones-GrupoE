@@ -1,5 +1,6 @@
 package domain.services;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import domain.Entity;
 import domain.User;
 import domain.Vehicle;
@@ -11,10 +12,16 @@ public class MonthlyRanking extends Entity
 {
     private Integer month;
     private Integer year;
+
+    @JsonSerialize(using=ReducedUserListSerializer.class)
     private List<User> bestDrivers;
+    @JsonSerialize(using=ReducedUserListSerializer.class)
     private List<User> worstDrivers;
+    @JsonSerialize(using=ReducedUserListSerializer.class)
     private List<User> bestPassenger;
+    @JsonSerialize(using=ReducedUserListSerializer.class)
     private List<User> worstPassenger;
+    @JsonSerialize(using=ReducedUserListSerializer.class)
     private List<User> mostEfficientDrivers;
     private List<Vehicle> bestVehicles;
     private List<Vehicle> worstVehicles;

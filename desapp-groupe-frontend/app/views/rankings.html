@@ -35,7 +35,7 @@
         <td><strong>{{'votos malos' | translate}}</strong></td>
       </tr>
       </thead>
-      <tbody dir-paginate="user in rnk.ranking.bestPassenger | itemsPerPage: 8">
+      <tbody dir-paginate="user in rnk.ranking.bestDrivers | itemsPerPage: 8">
       <tr ng-model="user.selected">
         <td>{{user.name}}</td>
         <td>{{user.points}}</td>
