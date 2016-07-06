@@ -73,10 +73,10 @@ public class RideService extends GenericService<Ride>
         ride.validateSeatAvailableInSection(rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
 
         ride.takeSeat(rideRequest.getRequester(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
-        rideRequest.accept();
-
 
         rideRepository.saveOrUpdate(ride);
+
+        rideRequestRepository.delete(rideRequest);
 
         return ride;
     }
