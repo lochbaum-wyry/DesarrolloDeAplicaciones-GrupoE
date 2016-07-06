@@ -25,6 +25,11 @@ html, body{
   height: 400px;
 }
 
+.alert.ng-leave {
+  opacity: 0;
+  transition: opacity 1.5s ease-out;
+}
+
 ul {
   list-style-type: none;
 }

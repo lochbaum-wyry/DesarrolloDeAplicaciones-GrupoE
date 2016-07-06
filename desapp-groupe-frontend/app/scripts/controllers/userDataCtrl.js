@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('UserDataCtrl', userDataCtrl );
 
 /* @ngInject */
-function userDataCtrl(SessionService,UserService) {
+function userDataCtrl(SessionService,UserService,Flash) {
   var vm = this; 
 
 
@@ -53,6 +53,7 @@ function userDataCtrl(SessionService,UserService) {
         capacity: vm.capacity,
         oilWastePerKmInLts: vm.oilWastePerKmInLts
       };
+
       UserService.addVehicle(vm.user.id,vehicle)
         .then(onSuccess)
         .catch(onFailure);
@@ -61,12 +62,22 @@ function userDataCtrl(SessionService,UserService) {
 
 
     function onSuccess(result){
-    	return result
+    	successAlert("Los cambios fueron guardados con Exito");
     };
 
     function onFailure(error){
-        vm.ERROR_MSG = error;
+      failureAlert(error);
     };
+
+  function successAlert(msg) {
+        var message = '<strong>Bien! </strong>' + msg;
+        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
+  };
+
+  function failureAlert(error) {
+        var message = '<strong>Mal! </strong> ' + error;
+        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
+  };
 
     SessionService.reloadUser();
   };

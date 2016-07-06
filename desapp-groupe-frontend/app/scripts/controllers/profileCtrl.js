@@ -3,7 +3,7 @@
 
 angular.module('desappGrupoeFrontendApp').controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl(PostService,SessionService,UserService, $routeParams) {
+function ProfileCtrl(PostService,SessionService,UserService, $routeParams,Flash) {
 
   var vm = this; 
   vm.profileUserId = $routeParams.id;
@@ -48,11 +48,13 @@ function ProfileCtrl(PostService,SessionService,UserService, $routeParams) {
 
     function onSuccess(result){
         vm.getPosts();
+        vm.successAlert()
         return result
     };
 
     function onFailure(error){
         vm.ERROR_MSG = error;
+        vm.failureAlert(error)
     };
     
     var post = {'publisher':SessionService.user(),'date':0,'content':vm.text,'wallOwner':vm.user};
@@ -60,6 +62,16 @@ function ProfileCtrl(PostService,SessionService,UserService, $routeParams) {
     PostService.sendPost(post) 
             .then(onSuccess)
             .catch(onFailure);
+  };
+
+  vm.successAlert = function () {
+        var message = '<strong>Bien!</strong> El post se ha realizado con Exito';
+        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
+  };
+
+  vm.failureAlert = function (error) {
+        var message = '<strong>Mal! </strong> ' + error;
+        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
   };
 
   vm.getPosts();

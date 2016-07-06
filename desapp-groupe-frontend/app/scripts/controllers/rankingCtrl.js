@@ -7,6 +7,7 @@ function RankingCtrl(RankingService,$localStorage) {
 
   var vm = this; 
   vm.ranking = {};
+  vm.rankingSelected = [];
   vm.monthSelected = 0;
   vm.yearSelected = 0;
 
@@ -33,6 +34,7 @@ function RankingCtrl(RankingService,$localStorage) {
   vm.getRankingForDate = function(){
     function onSuccess(result){
         vm.ranking =  result;
+        vm.rankingSelected = vm.ranking.bestDrivers;
     };
 
     function onFailure(error){
@@ -44,6 +46,18 @@ function RankingCtrl(RankingService,$localStorage) {
       RankingService.getRankingForDate(vm.yearSelected,vm.monthSelected) 
               .then(onSuccess)
               .catch(onFailure);
+  };
+
+  vm.getDrivers = function(){
+    vm.rankingSelected = vm.ranking.bestDrivers;
+  };  
+
+  vm.getPassengers = function(){
+    vm.rankingSelected = vm.ranking.bestPassenger;
+  };
+
+  vm.getvehicles = function(){
+    vm.rankingSelected = vm.ranking.bestVehicles;
   };
 
   vm.getRanking();

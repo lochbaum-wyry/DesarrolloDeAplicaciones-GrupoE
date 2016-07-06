@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
 /* @ngInject */
-function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService, GmSubiConv) {
+function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService, GmSubiConv,Flash) {
   /* RouteFindCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -73,7 +73,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     }
 
     function onFailure(error) {
-      infoModal("failed_getting_proposals", 'error');
+      failureAlert("failed_getting_proposals", 'error');
      }
   }
 
@@ -90,13 +90,13 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     RideService.requestRide(rideRequest).then(onReqSucc).catch(onReqFail);
 
     function onReqSucc(data) {
-      infoModal("successfull_ride_request_msg");
+      successAlert("successfull_ride_request_msg");
       setDefaultValues();
       vm.rideProposals = [];
     }
 
     function onReqFail(error) {
-      infoModal("failed_requesting_ride", 'error');
+      failureAlert("failed_requesting_ride", 'error');
       console.log(error);
     }
   }
@@ -203,6 +203,16 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
       function updateArrivalInput(address) { vm.arrivalInput = address ; } 
     }
   }
+
+  function successAlert(msg) {
+        var message = '<strong>Bien! </strong>' + msg;
+        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
+  };
+
+  function failureAlert(error) {
+        var message = '<strong>Mal! </strong> ' + error;
+        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
+  };
 
 } // RouteFindCtrl
 

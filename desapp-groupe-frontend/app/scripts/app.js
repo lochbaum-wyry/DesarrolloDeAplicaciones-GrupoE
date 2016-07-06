@@ -19,10 +19,11 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap.datetimepicker',
+    'ngFlash',
     'angularUtils.directives.dirPagination',
     'ui.dateTimeInput'
   ])
-  .config(function ($routeProvider,$httpProvider,$translateProvider) {
+  .config(function ($routeProvider,$httpProvider,$translateProvider,FlashProvider) {
     $routeProvider
       .when('/about', {
         templateUrl: 'views/about.html',
@@ -97,4 +98,8 @@ angular
 
       var language = (navigator.language || navigator.browserLanguage).split('-')[0];
       $translateProvider.preferredLanguage(language);
+
+      FlashProvider.setTimeout(10);
+      FlashProvider.setShowClose(true);
+      
   });
