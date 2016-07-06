@@ -53,20 +53,19 @@
             <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'viajes' | translate}}<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#accepted">{{'confirmados' | translate}}</a></li>
-              <li><a href="#rideRequests">{{'solicitudes' | translate}}</a></li>
+              <li ng-show="nav.user.vehicle"><a href="#toDrive">{{'to_drive' | translate}}</a></li>
+              <li ><a href="#toTake">{{'to_take' | translate}}</a></li>
+              <li ng-show="nav.user.vehicle"><a href="#rideRequests">{{'solicitudes' | translate}}</a></li>
               <li><a href="#requestedRides">{{'solicitados' | translate}}</a></li>
               <li><a href="#rateRide">{{'calificar viaje' | translate}}</a></li>
             </ul>
             </li>
-            <li class="dropdown">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            {{'recorridos' | translate}}<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#user_routes">{{'mis rutas' | translate}}</a></li>
-              <li><a href="#addRoute">{{'agregar recorrido' | translate}}</a></li>
-            </ul>
+            <li class="dropdown" ng-show='nav.user.vehicle'>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'recorridos' | translate}}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#user_routes">{{'mis rutas' | translate}}</a></li>
+                <li><a href="#addRoute">{{'agregar recorrido' | translate}}</a></li>
+              </ul>
             </li>
             <li><a href="#chats">{{'chats' | translate}}</a></li>
             <li><a href="#webshop">{{'webShop' | translate}}</a></li>
