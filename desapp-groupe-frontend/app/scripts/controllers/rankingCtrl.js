@@ -8,8 +8,7 @@ function RankingCtrl(RankingService,$localStorage) {
   var vm = this; 
   vm.ranking = {};
   vm.rankingSelected = [];
-  vm.monthSelected = 0;
-  vm.yearSelected = 0;
+  vm.dateSelected = new Date() ;
 
   /* String */ vm.ERROR_MSG;
 
@@ -43,7 +42,7 @@ function RankingCtrl(RankingService,$localStorage) {
 
       var schedules = [];
 
-      RankingService.getRankingForDate(vm.yearSelected,vm.monthSelected) 
+      RankingService.getRankingForDate(vm.dateSelected.getFullYear(),vm.dateSelected.getMonth()) 
               .then(onSuccess)
               .catch(onFailure);
   };

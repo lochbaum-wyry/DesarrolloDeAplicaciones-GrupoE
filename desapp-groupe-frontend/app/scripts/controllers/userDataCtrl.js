@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('UserDataCtrl', userDataCtrl );
 
 /* @ngInject */
-function userDataCtrl(SessionService,UserService,Flash) {
+function userDataCtrl(SessionService,UserService,AlertService) {
   var vm = this; 
 
 
@@ -62,22 +62,12 @@ function userDataCtrl(SessionService,UserService,Flash) {
 
 
     function onSuccess(result){
-    	successAlert("Los cambios fueron guardados con Exito");
+    	AlertService.successAlert("Los cambios fueron guardados con Exito");
     };
 
     function onFailure(error){
-      failureAlert(error);
+      AlertService.failureAlert(error);
     };
-
-  function successAlert(msg) {
-        var message = '<strong>Bien! </strong>' + msg;
-        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
-
-  function failureAlert(error) {
-        var message = '<strong>Mal! </strong> ' + error;
-        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
 
     SessionService.reloadUser();
   };

@@ -3,7 +3,7 @@
 
 angular.module('desappGrupoeFrontendApp').controller('AddRouteCtrl', AddRouteCtrl);
 
-function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService, GMRouteService, GmSubiConv,Flash) {
+function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService, GMRouteService, GmSubiConv,AlertService) {
 
   var vm = this;
   
@@ -111,12 +111,12 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
 
   function onSuccAddRoute(result) {
     console.log('llego');
-    successAlert("El Recorrido fue agregado con Exito");
+    AlertService.successAlert("El Recorrido fue agregado con Exito");
   }
 
   function onFailAddRoute(error){
     // vm.ERROR_MSG = error;
-    failureAlert(error);
+    AlertService.failureAlert(error);
   }
 
 
@@ -127,15 +127,6 @@ function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsServi
     alert(msg);
   }
 
-  function successAlert(msg) {
-        var message = '<strong>Bien! </strong>' + msg;
-        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
-
-  function failureAlert(error) {
-        var message = '<strong>Mal! </strong> ' + error;
-        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
 
 } // addRouteCtrl
 

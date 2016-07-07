@@ -3,7 +3,7 @@
 
 angular.module('desappGrupoeFrontendApp').controller('ProfileCtrl', ProfileCtrl);
 
-function ProfileCtrl(PostService,SessionService,UserService, $routeParams,Flash) {
+function ProfileCtrl(PostService,SessionService,UserService, $routeParams,AlertService) {
 
   var vm = this; 
   vm.profileUserId = $routeParams.id;
@@ -48,13 +48,13 @@ function ProfileCtrl(PostService,SessionService,UserService, $routeParams,Flash)
 
     function onSuccess(result){
         vm.getPosts();
-        vm.successAlert()
+        AlertService.successAlert('El post se ha realizado con Exito');
         return result
     };
 
     function onFailure(error){
         vm.ERROR_MSG = error;
-        vm.failureAlert(error)
+        AlertService.failureAlert(error);
     };
     
     var post = {'publisher':SessionService.user(),'date':0,'content':vm.text,'wallOwner':vm.user};
@@ -62,16 +62,6 @@ function ProfileCtrl(PostService,SessionService,UserService, $routeParams,Flash)
     PostService.sendPost(post) 
             .then(onSuccess)
             .catch(onFailure);
-  };
-
-  vm.successAlert = function () {
-        var message = '<strong>Bien!</strong> El post se ha realizado con Exito';
-        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
-
-  vm.failureAlert = function (error) {
-        var message = '<strong>Mal! </strong> ' + error;
-        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
   };
 
   vm.getPosts();

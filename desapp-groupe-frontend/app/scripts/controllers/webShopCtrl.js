@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('WebShopCtrl', webShopCtrl );
 
 /* @ngInject */
-function webShopCtrl($localStorage,webShopService,SessionService,Flash) {
+function webShopCtrl($localStorage,webShopService,SessionService,AlertService) {
   var vm = this; 
 
   /* String */ vm.ERROR_MSG = null;
@@ -24,11 +24,11 @@ function webShopCtrl($localStorage,webShopService,SessionService,Flash) {
             SessionService.reloadUser();
             vm.user = SessionService.user();
             getProducts();
-            successAlert("El Producto fue canjeado con Exito");
+            AlertService.successAlert("El Producto fue canjeado con Exito");
         };
 
         function onFailure(error){
-            failureAlert(error);
+            AlertService.failureAlert(error);
         };
 
         if(vm.user.points >= product.cost){
@@ -37,7 +37,7 @@ function webShopCtrl($localStorage,webShopService,SessionService,Flash) {
                 .catch(onFailure);
         }
         else
-          failureAlert("No tienes puntos suficientes");
+          AlertService.failureAlert("No tienes puntos suficientes");
 
     };
 
@@ -48,7 +48,7 @@ function webShopCtrl($localStorage,webShopService,SessionService,Flash) {
         };
 
         function onFailure(error){
-            vm.ERROR_MSG = error;
+            AlertService.failureAlert(error);
         };
 
         webShopService.products() 
@@ -56,15 +56,6 @@ function webShopCtrl($localStorage,webShopService,SessionService,Flash) {
               .catch(onFailure);
     };
 
-  function successAlert(msg) {
-        var message = '<strong>Bien! </strong>' + msg;
-        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
-
-  function failureAlert(error) {
-        var message = '<strong>Mal! </strong> ' + error;
-        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
 
   }
 

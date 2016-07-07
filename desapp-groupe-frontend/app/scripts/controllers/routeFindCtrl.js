@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RouteFindCtrl', RouteFindCtrl);
 
 /* @ngInject */
-function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService, GmSubiConv,Flash) {
+function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService, GmSubiConv,AlertService) {
   /* RouteFindCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -73,7 +73,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     }
 
     function onFailure(error) {
-      failureAlert("failed_getting_proposals", 'error');
+      AlertService.failureAlert("failed_getting_proposals", 'error');
      }
   }
 
@@ -90,14 +90,13 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     RideService.requestRide(rideRequest).then(onReqSucc).catch(onReqFail);
 
     function onReqSucc(data) {
-      successAlert("successfull_ride_request_msg");
+      AlertService.successAlert("successfull_ride_request_msg");
       setDefaultValues();
       vm.rideProposals = [];
     }
 
     function onReqFail(error) {
-      failureAlert("failed_requesting_ride", 'error');
-      console.log(error);
+      AlertService.failureAlert("failed_requesting_ride" + error);
     }
   }
 
@@ -131,7 +130,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     if (type && type=='error') {
       msg = "Error: " + msg; 
     }
-    alert(msg);
+    AlertService.failureAlert(msg);
   }
 
   function renderRideProposal(rideProposalIdx) { 
@@ -204,15 +203,6 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     }
   }
 
-  function successAlert(msg) {
-        var message = '<strong>Bien! </strong>' + msg;
-        var id = Flash.create('success', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
-
-  function failureAlert(error) {
-        var message = '<strong>Mal! </strong> ' + error;
-        var id = Flash.create('danger', message, 2000, {class: 'custom-class', id: 'custom-id'}, true);
-  };
 
 } // RouteFindCtrl
 
