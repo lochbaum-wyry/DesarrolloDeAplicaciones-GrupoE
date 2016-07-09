@@ -8,10 +8,11 @@
  * Controller of the desappGrupoeFrontendApp
  */
 angular.module('desappGrupoeFrontendApp')
-  .controller('UserCtrl', function ($scope,UserService,RateService,$location,$localStorage) {
+  .controller('UserCtrl', function ($scope,UserService,RateService,RideService,$location,$localStorage) {
     $scope.ERROR_MSG = null;
     $scope.user = $localStorage.user;
     $scope.rates = [];
+    $scope.rides = [];
 
     var onSuccess,onFailure,userPromise;
 
@@ -25,6 +26,20 @@ angular.module('desappGrupoeFrontendApp')
         };
 
         userPromise = RateService.getRates($scope.user.id);
+        userPromise.then(onSuccess);
+        userPromise.catch(onFailure);
+    };
+
+    $scope.getFutureRides = function(){
+        onSuccess = function (result){
+            $scope.rides =  result;
+        };
+
+        onFailure = function (error){
+            $scope.ERROR_MSG = error;
+        };
+
+        userPromise = RideService.getFutureRides($scope.user.id);
         userPromise.then(onSuccess);
         userPromise.catch(onFailure);
     };
@@ -64,5 +79,6 @@ angular.module('desappGrupoeFrontendApp')
     }
 
     $scope.getRates();
+    $scope.getFutureRides();
 
   });

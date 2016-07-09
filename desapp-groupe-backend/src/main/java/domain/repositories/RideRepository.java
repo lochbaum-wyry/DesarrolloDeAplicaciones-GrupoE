@@ -54,4 +54,22 @@ public class RideRepository extends HibernateGenericDao<Ride> implements
 
         return query.list();
     }
+
+
+    public List<Ride> getFutureRides(User user) {
+        String hql = "SELECT distinct r FROM " + TakenSeat.class.getName() + " ts " +
+                " INNER JOIN ts.passenger u " +
+                " INNER JOIN ts.ride r  " +
+                " WHERE (u =:user OR r.driver=:user) AND r.date > now()";
+
+        Query query =  getHibernateTemplate()
+                .getSessionFactory()
+                .getCurrentSession()
+                .createQuery(hql);
+
+        query.setEntity("user", user);
+
+
+        return query.list();
+    }
 }

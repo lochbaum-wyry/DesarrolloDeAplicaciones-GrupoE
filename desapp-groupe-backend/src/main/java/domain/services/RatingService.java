@@ -20,6 +20,39 @@ public class RatingService
 {
     RateRepository rateRepository ;
     UserRepository userRepository ;
+
+    public RateRepository getRateRepository() {
+        return rateRepository;
+    }
+
+    public void setRateRepository(RateRepository rateRepository) {
+        this.rateRepository = rateRepository;
+    }
+
+    public RideRepository getRideRepository() {
+        return rideRepository;
+    }
+
+    public void setRideRepository(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public VehicleRepository getVehicleRepository() {
+        return vehicleRepository;
+    }
+
+    public void setVehicleRepository(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
+
     RideRepository rideRepository;
     VehicleRepository vehicleRepository;
 

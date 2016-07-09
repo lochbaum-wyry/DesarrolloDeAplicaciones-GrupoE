@@ -13,15 +13,16 @@
         <!--ACA EMPIEZA EL ADD ROUTE-->
     <div class="col-md-6 ">
       <div class="content-cal1">
-        <form>
+        <form name="addRouteForm">
           <fieldset>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error': addRouteForm.fixedCosts.$invalid }">
               <label for="fixedCosts">{{ 'fixed_costs' | translate }}:</label>
-              <input type="text" ng-model="addrf.fixedCosts" class="form-control" id="fixedCosts" placeholder="10.0" />
+              <input type="number" name="fixedCosts" ng-model="addrf.fixedCosts" class="form-control" id="fixedCosts" placeholder="10.0" required/>
+              <span ng-show=" addRouteForm.fixedCosts.$error.required">fixedCost is required</span>
             </div>
 
           </fieldset>
-        </form>
+        </form >
 
         <form class='form-inline'>
           <fieldset>
@@ -67,7 +68,7 @@
           </fieldset>
 
       </div>
-      <input class="btn" type="button" value="{{'agregar ruta' | translate}}" ng-click="addrf.addRoute()">
+      <input class="btn" type="button" ng-disabled="!addRouteForm.$valid" value="{{'agregar ruta' | translate}}" ng-click="addrf.addRoute()">
     </div>
 
     <!--ACA TERMINA EL ADD ROUTE-->
