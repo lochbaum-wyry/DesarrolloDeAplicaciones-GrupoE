@@ -113,6 +113,7 @@ public class Ride extends Entity
 
     public void addTakenSeat(TakenSeat takenSeat)
     {
+        takenSeat.setRide(this);
         this.takenSeats.add(takenSeat);
     }
 

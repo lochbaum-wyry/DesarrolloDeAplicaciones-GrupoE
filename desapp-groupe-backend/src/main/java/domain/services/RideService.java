@@ -150,4 +150,28 @@ public class RideService extends GenericService<Ride>
         User user = userRepository.findById(userId);
         return rideRepository.getFutureRides(user);
     }
+
+    public void setRideRepository(RideRepository rideRepository) {
+        this.rideRepository = rideRepository;
+    }
+
+    public void setRideRequestRepository(RideRequestRepository rideRequestRepository) {
+        this.rideRequestRepository = rideRequestRepository;
+    }
+
+    public SystemSettings getSystemSettings() {
+        return systemSettings;
+    }
+
+    public void setSystemSettings(SystemSettings systemSettings) {
+        this.systemSettings = systemSettings;
+    }
+
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 }

@@ -66,13 +66,9 @@ public class SetupExampleData {
             fede.setPoints(150000);
             userService.getUserRepository().update(fede);
 
-            Rate rate = new Rate(otro, fede, null, null, null, "maestro!! aca esta la prueba");
-
-            ratingService.getRateRepository().saveOrUpdate(rate);
 
             otro.setPoints(15000);
             userService.getUserRepository().update(otro);
-
 
             productsService.createProduct("Descuento de 10 % en Combustible", 2,10000);
             productsService.createProduct("El perdon de dios", 1,1000000000);
@@ -106,15 +102,29 @@ public class SetupExampleData {
             userService.addRoute(dan,route);
 
 
-            RideRequest rr = rideService.requestRide(fede,dan,new DateTime(),route,route.getRoutePoints().get(0),route.getRoutePoints().get(1));
+            DateTime date = new DateTime(2016,7,29,9,30);
+
+            RideRequest rr = rideService.requestRide(fede,dan,date,route,route.getRoutePoints().get(0),route.getRoutePoints().get(1));
             rideService.acceptRideRequest(rr);
 
+            DateTime date2 = new DateTime(2015,7,29,9,30);
 
-            DateTime date = new DateTime(2016,5,6,8,45);
+            RideRequest rr2 = rideService.requestRide(fede,dan,date2,route,route.getRoutePoints().get(0),route.getRoutePoints().get(1));
+            rideService.acceptRideRequest(rr2);
+
+
             RoutePoint boardingAt = route.getRoutePoints().get(0);
             RoutePoint getOffAt = route.getRoutePoints().get(1);
             RideRequest rideRequest = new RideRequest(fede,dan,date,route, boardingAt, getOffAt);
             rideService.requestRide(rideRequest);
+
+
+
+            Ride ride = rideService.getRideRepository().findById(1);
+
+            Rate rate = new Rate(otro, fede,ride, RateType.Accompany, RateValue.GOOD, "maestro!! alto viaje, nos vemos la proxima ;)");
+
+            ratingService.rate(rate);
 
 
         } catch (SingUpException e)
