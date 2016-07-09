@@ -132,6 +132,10 @@
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>
 
+	<bean id="persistence.notificationrepository" class="domain.repositories.NotificationRepository" >
+		<property name="sessionFactory" ref="persistence.sessionFactory" />
+	</bean>
+
 	<bean id="persistence.routerepository" class="domain.repositories.RouteRepository" >
 		<property name="sessionFactory" ref="persistence.sessionFactory" />
 	</bean>

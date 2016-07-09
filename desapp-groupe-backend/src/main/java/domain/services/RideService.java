@@ -70,12 +70,13 @@ public class RideService extends GenericService<Ride>
     {
         Ride ride = getOrCreateRideForRequest(rideRequest);
 
-        ride.validateSeatAvailableInSection(rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
+        RoutePoint boardingAt = rideRequest.getBoardingAt();
+        RoutePoint getOffAt = rideRequest.getGetOffAt();
 
-        ride.takeSeat(rideRequest.getRequester(), rideRequest.getBoardingAt(), rideRequest.getGetOffAt());
+        ride.validateSeatAvailableInSection(boardingAt, getOffAt);
+        ride.takeSeat(rideRequest.getRequester(), boardingAt, getOffAt);
 
         rideRepository.saveOrUpdate(ride);
-
         rideRequestRepository.delete(rideRequest);
 
         return ride;
@@ -89,15 +90,6 @@ public class RideService extends GenericService<Ride>
             rideRequestRepository.deleteById(rideRequestId);
     }
 
-//    public List<Ride> getRidesOfUserAsDriver(User user)
-//    {
-//        return null;
-//    }
-//
-//    public List<Ride> getRidesOfUserAsPassenger(User user)
-//    {
-//        return null;
-//    }
 
     private Ride getOrCreateRideForRequest(RideRequest rideRequest)
     {

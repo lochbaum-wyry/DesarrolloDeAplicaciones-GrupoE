@@ -2,13 +2,14 @@ package domain.servicesRest;
 
 import domain.*;
 import domain.exceptions.NoSeatsAvailableException;
-import domain.services.RatingService;
-import domain.services.RideService;
-import domain.services.RouteService;
-import domain.services.UserService;
+import domain.notifications.RideAcceptedNotification;
+import domain.notifications.RideRejectedNotification;
+import domain.notifications.RideRequestedNotification;
+import domain.services.*;
 import domain.servicesRest.daos.RateDTO;
 import domain.servicesRest.daos.RideRequestDTO;
 import org.joda.time.DateTime;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
@@ -24,13 +25,15 @@ public class RideServiceRest
     RideService rideService;
     RouteService routeService;
     RatingService ratingService;
+    private NotificationService notificationService;
 
-    public RideServiceRest(RideService rideService, UserService userService, RouteService routeService,RatingService ratingService)
+    public RideServiceRest(RideService rideService, UserService userService, RouteService routeService,RatingService ratingService, NotificationService notificationService)
     {
         this.userService = userService;
         this.rideService = rideService;
         this.routeService = routeService;
         this.ratingService = ratingService;
+        this.notificationService = notificationService;
     }
 
     public RideServiceRest(){}
@@ -77,6 +80,7 @@ public class RideServiceRest
     public Response cancelRideRequests(@PathParam("rideRequestId") final int rideRequestId)
     {
         rideService.cancelRideRequest(rideRequestId);
+
         Response response = Response.ok().tag("cancelled_request_msg").build();
         return response;
     }
@@ -88,6 +92,10 @@ public class RideServiceRest
     {
         RideRequest rideRequest = rideService.getRideRequestRepository().findById(rideRequestId);
         rideService.rejectRideRequest(rideRequest);
+
+        Notification notification = new RideRejectedNotification(rideRequest.getDriver(), rideRequest);
+        notificationService.create(notification);
+
         Response response = Response.ok().tag("rejected_request_msg").build();
         return response;
     }
@@ -100,10 +108,21 @@ public class RideServiceRest
         Response response;
         RideRequest rideRequest = rideService.getRideRequestRepository().findById(rideRequestId);
         try {
-            rideService.acceptRideRequest(rideRequest);
+            Ride ride = rideService.acceptRideRequest(rideRequest);
+
+            Notification notification = new RideAcceptedNotification(rideRequest.getRequester(), ride);
+            notificationService.create(notification);
+
             response = Response.ok().tag("accepted_request_msg").build();
-        } catch (NoSeatsAvailableException e) {
+
+        } catch (NoSeatsAvailableException e)
+        {
             response = Response.serverError().tag(e.getMessage()).build();
+            e.printStackTrace();
+        } catch (DataAccessException e)
+        {
+            response = Response.serverError().tag(e.getMessage()).build();
+            e.printStackTrace();
         }
         return response;
     }
@@ -125,8 +144,14 @@ public class RideServiceRest
     public Response requestRide(final RideRequestDTO rideRequestDTO)
     {
         Response response;
+
         RideRequest rideRequest = rideRequestFromDTO(rideRequestDTO);
         rideService.requestRide(rideRequest);
+
+        Notification notification = new RideRequestedNotification(rideRequest.getDriver(), rideRequest);
+        notificationService.create(notification);
+
+
         response = Response.ok().tag("request_sent_msg").build();
         return response;
     }

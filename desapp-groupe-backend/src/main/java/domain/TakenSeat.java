@@ -1,11 +1,14 @@
 package domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import domain.services.ReducedUserSerializer;
 
 public class TakenSeat extends Entity
 {
     @JsonIgnore
     private Ride ride;
+    @JsonSerialize(using= ReducedUserSerializer.class)
     private User passenger;
     private RoutePoint boardingAt;
     private RoutePoint getOffAt;

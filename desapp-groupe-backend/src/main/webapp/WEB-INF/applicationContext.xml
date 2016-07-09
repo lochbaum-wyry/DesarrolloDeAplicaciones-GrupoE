@@ -37,6 +37,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
             <ref bean="productRest"/>
             <ref bean="post"/>
             <ref bean="chat"/>
+            <ref bean="notification"/>
         </jaxrs:serviceBeans>
         <jaxrs:extensionMappings>
             <entry key="json" value="application/json" />
@@ -84,7 +85,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 
     <bean id="rideRest" class="domain.servicesRest.RideServiceRest">
         <constructor-arg>
-            <ref bean="services.ride" />
+            <ref bean="services.rideRequest" />
         </constructor-arg>
         <constructor-arg>
             <ref bean="services.user" />
@@ -95,11 +96,23 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.rating" />
         </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.notification" />
+        </constructor-arg>
     </bean>
 
     <bean id="post" class="domain.servicesRest.PostServiceRest">
         <constructor-arg>
             <ref bean="services.post" />
+        </constructor-arg>
+    </bean>
+
+    <bean id="notification" class="domain.servicesRest.NotificationServiceRest">
+        <constructor-arg>
+            <ref bean="services.notification" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.user" />
         </constructor-arg>
     </bean>
 
@@ -114,7 +127,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
             <ref bean="services.user" />
         </constructor-arg>
         <constructor-arg>
-            <ref bean="services.ride" />
+            <ref bean="services.rideRequest" />
         </constructor-arg>
         <constructor-arg>
             <ref bean="services.post" />
@@ -123,7 +136,7 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
 
     <!--<bean id="rideRest" class="domain.servicesRest.RideServiceRest">-->
         <!--<constructor-arg>-->
-            <!--<ref bean="services.ride" />-->
+            <!--<ref bean="services.rideRequest" />-->
         <!--</constructor-arg>-->
     <!--</bean>-->
 

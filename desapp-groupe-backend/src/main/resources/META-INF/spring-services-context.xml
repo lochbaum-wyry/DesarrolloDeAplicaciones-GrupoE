@@ -34,7 +34,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="services.ride" class="domain.services.RideService">
+	<bean id="services.rideRequest" class="domain.services.RideService">
 		<constructor-arg>
 			<ref bean="persistence.riderepository" />
 		</constructor-arg>
@@ -94,6 +94,12 @@
 	<bean id="services.tokenService" class="domain.services.UserTokenService">
 		<constructor-arg>
 			<ref bean="persistence.usertoken" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="services.notification" class="domain.services.NotificationService">
+		<constructor-arg>
+			<ref bean="persistence.notificationrepository" />
 		</constructor-arg>
 	</bean>
 
