@@ -31,13 +31,13 @@ function webShopCtrl($localStorage,webShopService,SessionService,AlertService) {
             AlertService.failureAlert(error);
         };
 
-        if(vm.user.points >= product.cost){
+        if(vm.user.points >= product.cost && product.stock > 0){
             webShopService.changeProduct(vm.user.id,product) 
                 .then(onSuccess)
                 .catch(onFailure);
         }
         else
-          AlertService.failureAlert("No tienes puntos suficientes");
+          AlertService.failureAlert("No tienes puntos suficientes o no hay stock de ese Producto");
 
     };
 
