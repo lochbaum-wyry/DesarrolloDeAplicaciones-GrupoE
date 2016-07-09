@@ -36,12 +36,12 @@ public class RatingServiceTest extends AbstractServiceTest{
 
 
     @Test
-    public void test_rateDriverOfRide() throws RatingException {
+    public void test_rateDriverOfRide() throws RatingException
+    {
         User rater = UserBuilder.aUser().build();
-        User driver = UserBuilder.aUser().build();
         userRepository.save(rater);
-        userRepository.save(driver);
 
+        User driver = aPersistedDriver();
 
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
         rideRepository.save(ride);
@@ -58,12 +58,10 @@ public class RatingServiceTest extends AbstractServiceTest{
     @Test
     public void test_rateVehicleOfRide() throws RatingException {
         User rater = UserBuilder.aUser().build();
-        User driver = UserBuilder.aUser().build();
         userRepository.save(rater);
-        userRepository.save(driver);
 
-        Vehicle vehicle = VehicleBuilder.aVehicle().build();
-        vehicle.setOwner(driver);
+        User driver = aPersistedDriver();
+        Vehicle vehicle = driver.getVehicle();
 
         Ride ride = RideBuilder.aRide().withDriver(driver).withVehicle(vehicle).build();
         rideRepository.save(ride);
@@ -84,11 +82,11 @@ public class RatingServiceTest extends AbstractServiceTest{
         userRepository.save(rater);
         userRepository.save(rateado);
 
-
-        User driver = UserBuilder.aUser().build();
+        User driver = aPersistedDriver();
 
         Ride ride = RideBuilder.aRide().withDriver(driver).build();
         rideRepository.save(ride);
+
 
         Rate rate = new Rate(rater, rateado, ride, RateType.Accompany, RateValue.GOOD, "un capo el pibe");
         rate.setVehicle(driver.getVehicle());
