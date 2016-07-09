@@ -55,15 +55,17 @@ function userDataCtrl(SessionService,UserService,AlertService) {
       };
 
       UserService.addVehicle(vm.user.id,vehicle)
-        .then(onSuccess)
+        .then(onSuccessNoAlert)
         .catch(onFailure);
   	}
 
 
 
     function onSuccess(result){
-    	AlertService.successAlert("Los cambios fueron guardados con Exito");
+      AlertService.successAlert("Los cambios fueron guardados con Exito");
     };
+
+    function onSuccessNoAlert(result){ };
 
     function onFailure(error){
       AlertService.failureAlert(error);
