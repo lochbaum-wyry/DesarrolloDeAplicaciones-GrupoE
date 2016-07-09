@@ -10,6 +10,7 @@ import org.joda.time.DateTime;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -147,5 +148,11 @@ public class RideService extends GenericService<Ride>
     public Ride getRateablesFrom(int rideId, int userId) {
         //falta hacer los filtros bien
         return rideRepository.findById(rideId);
+    }
+
+    @Transactional
+    public List<Ride> getFutureRides(int userId) {
+        User user = userRepository.findById(userId);
+        return rideRepository.getFutureRides(user);
     }
 }

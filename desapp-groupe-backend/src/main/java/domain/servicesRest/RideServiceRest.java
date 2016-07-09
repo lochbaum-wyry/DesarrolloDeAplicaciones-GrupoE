@@ -46,6 +46,16 @@ public class RideServiceRest
         return list;
     }
 
+
+
+    @GET
+    @Path("getFutureRides/{userId}")
+    @Produces("application/json")
+    public List<Ride> getFutureRides(@PathParam("userId") final int userId){
+        List<Ride> rides = rideService.getFutureRides(userId);
+        return rides;
+    }
+
     @GET
     @Path("getRateablesRides/{userId}")
     @Produces("application/json")

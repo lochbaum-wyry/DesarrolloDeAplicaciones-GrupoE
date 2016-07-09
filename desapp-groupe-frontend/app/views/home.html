@@ -67,20 +67,16 @@
       <tr>
         <td><strong>{{'dia' | translate}}</strong></td>
         <td><strong>{{'hora' | translate}}</strong></td>
-        <td><strong>{{'origen' | translate}}</strong></td>
-        <td><strong>{{'destino' | translate}}</strong></td>
-        <td><strong>{{'intencion' | translate}}</strong></td>
+        <td><strong>{{'conductor' | translate}}</strong></td>
         <td><strong>{{'costo' | translate}}</strong></td>
       </tr>
       </thead>
-      <tbody dir-paginate="route in user.routes | itemsPerPage: 8">
-      <tr ng-model="route.selected">
-        <td>Lunes</td>
-        <td>9:30</td>
-        <td>Ranelagh</td>
-        <td>Capital</td>
-        <td>Trabajo</td>
-        <td>{{route.fixedCosts | currency}}</td>
+      <tbody dir-paginate="ride in rides | itemsPerPage: 8">
+      <tr ng-model="ride.selected">
+        <td>{{ride.date | date:'d-MMM'}}</td>
+        <td>{{ride.date | date:'H:m'}}</td>
+        <td>{{ride.driver.name}}</td>
+        <td>{{ride.route.fixedCosts | currency}}</td>
       </tr>
       </tbody>
       </table>

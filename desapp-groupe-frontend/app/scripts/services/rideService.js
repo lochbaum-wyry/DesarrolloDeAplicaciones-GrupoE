@@ -19,6 +19,7 @@ function RideService($http,$log) {
         rejectRequest: rejectRequest,
         getRateablesFromRide: getRateablesFromRide,
         getRateablesRides: getRateablesRides,
+        getFutureRides:getFutureRides,
         acceptRequest: acceptRequest
     };
 
@@ -40,6 +41,10 @@ function RideService($http,$log) {
 
     function getRateablesFromRide(rideId,userId){
         return $http.get(url + '/getRateablesFrom/' + rideId + '/' + userId).then(onSuccess).catch(onFail);
+    }
+
+    function getFutureRides(userId){
+        return $http.get(url + '/getFutureRides/' + userId).then(onSuccess).catch(onFail);
     }
 
     function requestRide(data) {
