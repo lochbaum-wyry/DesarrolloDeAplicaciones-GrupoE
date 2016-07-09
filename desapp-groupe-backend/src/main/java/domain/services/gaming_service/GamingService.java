@@ -59,7 +59,8 @@ public class GamingService
         for (int i = 0 ; i < rows.size() ; i++)
         {
             Object [] row = (Object [] )rows.get(i);
-            User driver = (User) row[0];
+            int id = (int)row[0];
+            User driver = userRepository.findById(id);
             result.add(driver);
         }
         return result ;
