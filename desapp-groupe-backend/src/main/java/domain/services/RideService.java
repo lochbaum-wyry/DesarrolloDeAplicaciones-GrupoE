@@ -63,7 +63,7 @@ public class RideService extends GenericService<Ride>
     public void rejectRideRequest(RideRequest rideRequest)
     {
         rideRequest.reject();
-        rideRequestRepository.save(rideRequest);
+        rideRequestRepository.update(rideRequest);
     }
 
     @Transactional
@@ -77,8 +77,11 @@ public class RideService extends GenericService<Ride>
         ride.validateSeatAvailableInSection(boardingAt, getOffAt);
         ride.takeSeat(rideRequest.getRequester(), boardingAt, getOffAt);
 
+        rideRequest.accept();
+        rideRequestRepository.update(rideRequest);
+
         rideRepository.saveOrUpdate(ride);
-        rideRequestRepository.delete(rideRequest);
+//        rideRequestRepository.delete(rideRequest);
 
         return ride;
     }
