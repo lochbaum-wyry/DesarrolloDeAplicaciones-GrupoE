@@ -5,10 +5,7 @@ import domain.NotificationType;
 import domain.Ride;
 import domain.User;
 
-/**
- * Created by prospero on 7/8/16.
- */
-public class RideNotification extends Notification {
+abstract public class RideNotification extends Notification {
 
     private Ride ride;
 

@@ -2,16 +2,34 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
-    <class name="domain.RoutePoint">
+    <class name="domain.Notification" table="Notifications">
         <id column="ID" name="id">
             <generator class="native" />
         </id>
 
+        <discriminator column="type" />
+
         <many-to-one name="receiver" class="domain.User" column="receiver"/>
-        <property name="type"/>
-        <property name="msg"/>
         <property name="seen"/>
         <property name="timestamp" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
+        <property name="type" insert="false" update="false"/>
 
+
+        <!--RideRequested, RideAccepted, RideRejected, WallPost, IncomingMessage;-->
+        <subclass name="domain.notifications.RideRequestedNotification" discriminator-value="0">
+            <many-to-one name="rideRequest" class="domain.RideRequest"/>
+        </subclass>
+        <subclass name="domain.notifications.RideAcceptedNotification" discriminator-value="1">
+            <many-to-one name="ride" class="domain.Ride"/>
+        </subclass>
+        <subclass name="domain.notifications.RideRejectedNotification" discriminator-value="2">
+            <many-to-one name="rideRequest" class="domain.RideRequest"/>
+        </subclass>
+        <subclass name="domain.notifications.WallPostNotification" discriminator-value="3">
+            <many-to-one name="msgFrom" class="domain.User"/>
+        </subclass>
+        <subclass name="domain.notifications.InconmingMessageNotification" discriminator-value="4">
+            <many-to-one name="msgFrom" class="domain.User"/>
+        </subclass>
     </class>
 </hibernate-mapping>

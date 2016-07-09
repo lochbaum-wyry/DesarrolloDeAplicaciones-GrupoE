@@ -1,7 +1,6 @@
 package domain.repositories;
 
 import domain.Notification;
-import domain.RoutePoint;
 import domain.User;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;

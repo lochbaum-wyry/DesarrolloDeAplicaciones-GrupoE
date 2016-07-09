@@ -3,6 +3,7 @@ package domain.services;
 import domain.Notification;
 import domain.User;
 import domain.repositories.NotificationRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,11 +38,13 @@ public class NotificationService
         return notificationRepository.notificationsFor(user);
     }
 
+    @Transactional
     public void create(Notification notification)
     {
         notificationRepository.save(notification);
     }
 
+    @Transactional
     public void markSeen(Notification notification)
     {
         notification.setSeen(true);

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import domain.services.ReducedUserSerializer;
 import org.joda.time.DateTime;
 
-public class Notification extends Entity
+abstract public class Notification extends Entity
 {
     @JsonSerialize(using= ReducedUserSerializer.class)
     private User receiver ;
