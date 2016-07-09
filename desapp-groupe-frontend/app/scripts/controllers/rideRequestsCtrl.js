@@ -41,11 +41,12 @@ function RideRequestsCtrl(RideService,SessionService) {
        .catch(onFailAccept);
 
     function onSuccAccept(data) {
-      vm.requestedRides = vm.requestedRides.filter( hasId.bind( this ) );
-      function hasId (rideReq) { return rideReq.id != this; }
+      getRideRequests();
+      // vm.requestedRides = vm.requestedRides.filter( hasId.bind( this ) );
+      // function hasId (rideReq) { return rideReq.id != this; }
     }
 
-    function onFailAccept(error) { infoModal("failed_cancelling_request", 'error');  }
+    function onFailAccept(error) { infoModal("failed_accepting_request", 'error');  }
   }
 
   function rejectRequest(requestId) {    
@@ -54,12 +55,14 @@ function RideRequestsCtrl(RideService,SessionService) {
        .catch(onFailReject);
 
     function onSuccReject(data) {
-      vm.requestedRides = vm.requestedRides.filter( hasId.bind( this ) );
-      function hasId (rideReq) { return rideReq.id != this; }
+        getRideRequests();
+
+      // vm.requestedRides = vm.requestedRides.filter( hasId.bind( this ) );
+      // function hasId (rideReq) { return rideReq.id != this; }
     }
 
 
-    function onFailReject(error) { infoModal("failed_cancelling_request", 'error');  }
+    function onFailReject(error) { infoModal("failed_rejecting_request", 'error');  }
   }
 
 
