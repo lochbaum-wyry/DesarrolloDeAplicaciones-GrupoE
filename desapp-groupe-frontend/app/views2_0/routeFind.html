@@ -1,100 +1,115 @@
-  <!---->
-  <!--ACA EMPIEZA EL CODIGO DEL FIND-->
-  <!--<div class="header-main">-->
-  <div class = "col-md-12 header-right">
-  <flash-message>
-    <div class="my-flash">{{ flash.text }}</div>
-  </flash-message>
-    <div class="head-colum3">
-          <!--ACA EMPIEZA EL FORMULARIO-->
-          <div class="col-md-3">
-            <div class="content-cal1">
-              <form>
-                <div class="form-group">
-                  <label for="subeEn">{{'sube en' | translate}}:</label>
-                  <input type="text" class="form-control" id="subeEn" placeholder="{{'an_address' | translate}}"/>
-                  <!-- <input type="text" class="form-control" id="subeEn" placeholder="{{'an_address' | translate}}" ng-model='rf.departureInput' ng-enter="rf.setPointFromAddress('departure')"/> -->
-                </div>
-                <div class="form-group">
-                  <label for="bajaEn">{{'baja en' | translate}}:</label>
-                  <input type="text" class="form-control" id="bajaEn" placeholder="{{'an_address' | translate}}" ng-model='rf.arrivalInput' ng-enter="rf.setPointFromAddress('arrival')"/>
-                </div>
-                <div class="form-group">
-                  <label for="dateTime">{{'fecha y hora' | translate}}:</label>
-                  <div class="dropdown">
-                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
-                      <div class="input-group"><input type="text" class="form-control" data-ng-model="rf.selDate"><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                      </div>
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                      <datetimepicker data-ng-model="rf.selDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment' }" />
-                    </ul>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <input class="btn" type="button" ng-click="rf.getRideProposals()" value="{{'buscar' | translate}}">
-                </div>
-              </form>
-            </div>
-          </div>
-          <!--ACA TERMINAR EL FORMULARIO-->
-          <!--ACA EMPIEZA EL MAP-->
-          <div class = "col-md-6">
-              <div id="mapRouteFind"></div>
-          </div>
-          <!--ACA TERMINAR EL MAP-->
-          <!--ACA EMPIEZA LA LISTA DE RESULTADOS-->
-          <div class = "col-md-3 list-group"> 
 
-            <a ng-repeat="rp in rf.rideProposals" class='list-group-item' href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
-              <div class="row">
-                <div class="section-box">
-                  <div class="col-xs-3 col-md-3 text-center">                      
-                    <img style='max-width:70% ; max-height:70%' ng-src='{{rp.driver.image}}'/>
-                  </div>
-                  <h4>
-                    {{ rp.driver.name }} {{ rp.driver.lastName}} ({{ rp.driver.userName }})
-                  </h4>
-                </div>
-              </div>
-              <p class="list-group-item-text" >
-                <ul class="list list-unstyled"   style='font-size: 12px'>
-                  <li>
-                    <strong>{{ 'sube en' | translate }}</strong>: 
-                    {{ rp.boardingPoint.latitude }},{{ rp.boardingPoint.longitude }} 
-                  </li>
-                  <li>
-                    <strong>{{ 'baja en' | translate }}</strong>: 
-                    {{ rp.getOffPoint.latitude }},{{ rp.getOffPoint.longitude }} 
-                  </li>
-                  <li>
-                    <strong>{{ 'hora_partida' | translate }}</strong>:
-                    {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
-                  </li>
-                </ul>
-                <!--                       
-                <ul class="list list-unstyled">
-                  <li><span><i class="glyphicon glyphicon-calendar"></i>{{'10:35'}}</span></li>
-                    <li><span><i class="glyphicon glyphicon-comment"></i> 2 comments</span></li>
-                    <li>
-                       <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star"></span>
-                        <span class="glyphicon glyphicon-star-empty"></span>
-                    </li>
-                </ul>                 
-                -->
-              </p>
-            </a>
-          </div>
-
-
-          <button class='btn' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
-        </div>
-      <!--ACA TERMINA LA LISTA DE RESULTADOS-->
-     </div>
+<div class="row">
+  <div class = "col-md-12 col-sm-12 col-xs-12">
+    <flash-message>
+      <div class="my-flash">{{ flash.text }}</div>
+    </flash-message>
   </div>
 </div>
-</div>
-<!--ACA TERMINA EL CODIGO DEL FIND-->
+
+<div class='row'>
+
+  <div class = "col-md-3 col-sm-3 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>{{'route_configuration'  | translate}}<small></small></h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br>
+        <form >
+          <div class="form-group">
+            <label for="subeEn" >{{'sube en' | translate}}:</label>
+            <input type="text" class="form-control" id="subeEn" placeholder="{{'an_address' | translate}}" ng-model='rf.departureInput' ng-enter="rf.setPointFromAddress('departure')"/>
+          </div>
+
+          <div class="form-group">
+            <label for="bajaEn" class='control-label'>{{'baja en' | translate}}:</label>
+
+              <input type="text" class="form-control" id="bajaEn" placeholder="{{'an_address' | translate}}" ng-model='rf.arrivalInput' ng-enter="rf.setPointFromAddress('arrival')"/>
+          </div>
+
+          <div class="form-group">
+            <label for="dateTime"  class="control-label ">{{'fecha y hora' | translate}}:</label>
+            <div class="dropdown">
+              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
+                <div class="input-group">
+                  <input data-date-time-input="dd, D MMM hh:mm" type="text" class="form-control" data-ng-model="rf.selDate">
+                  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                </div>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="rf.selDate" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment' }" />
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+              <button class="btn btn-success" type="button" ng-click="rf.getRideProposals()" >{{'buscar' | translate}}</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!--ACA EMPIEZA MAP DEL ADD ROUTE-->
+  <div class = "col-md-6 col-sm-6 col-xs-12">
+      <div id='mapRouteFind'></div>
+  </div>
+
+
+
+
+    <!--ACA EMPIEZA LA LISTA DE RESULTADOS-->
+    <div class = "col-md-3 col-sm-3 col-xs-12 list-group"> 
+
+      <a ng-repeat="rp in rf.rideProposals" class='list-group-item' href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
+        <div class="row">
+          <div class="section-box">
+            <div class="col-xs-3 col-md-3 text-center">                      
+              <img style='max-width:70% ; max-height:70%' ng-src='{{rp.driver.image}}'/>
+            </div>
+            <h4>
+              {{ rp.driver.name }} {{ rp.driver.lastName}} ({{ rp.driver.userName }})
+            </h4>
+          </div>
+        </div>
+        <p class="list-group-item-text" >
+          <ul class="list list-unstyled"   style='font-size: 12px'>
+            <li>
+              <strong>{{ 'sube en' | translate }}</strong>: 
+              {{ rp.boardingPoint.latitude }},{{ rp.boardingPoint.longitude }} 
+            </li>
+            <li>
+              <strong>{{ 'baja en' | translate }}</strong>: 
+              {{ rp.getOffPoint.latitude }},{{ rp.getOffPoint.longitude }} 
+            </li>
+            <li>
+              <strong>{{ 'hora_partida' | translate }}</strong>:
+              {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
+            </li>
+          </ul>
+        </p>
+      </a>
+    </div>
+
+
+    <button class='btn' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
+
+
+
+
+</div>  
+
+
+
+
+

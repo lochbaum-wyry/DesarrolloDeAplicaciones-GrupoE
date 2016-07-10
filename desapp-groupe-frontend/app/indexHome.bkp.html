@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Subí que te llevo</title>
+  <!-- <link rel="stylesheet" href="styles/main.css"> -->
+  <link href="/styleHome/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="/jsHome/jquery-1.11.0.min.js"></script>
+  <script src="/jsHome/bootstrap.js"></script>
+  <!-- Custom Theme files -->
+  <link href="/styleHome/style.css" rel="stylesheet" type="text/css" media="all"/>
+  <link rel="import" rel="import" href="bower_components/google-signin/google-signin.html">
+  <!-- Custom Theme files -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+  <!--Google Fonts-->
+<!--   <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lato:100,300,400,700,900' rel='stylesheet' type='text/css'>
+ -->
+
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/moment/locale/en-ie.js"></script>
+
+  <link rel="stylesheet" href="/jsLibs/angular-bootstrap-datetimepicker/css/datetimepicker.css"/>
+  <link rel="stylesheet" href="bower-components/angular-flash-alert/dist/angular-flash.min.css"/>
+
+</head>
+<body ng-app="desappGrupoeFrontendApp">
+<!--header start here-->
+<div class="headerHome">
+  <div class="logo">
+    <h3>Subi<span>QueTeLlevo</span></h3>
+  </div>
+  <!---->
+  <div class="headerHome-main1">
+    <div class=" headerHome-right1">
+      <div class="top-nav">
+        <nav class="navbar ">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" ng-controller='NavBarCtrl as nav'>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">{{'home' | translate}}<span class="sr-only">(current)</span></a></li>
+            <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'viajes' | translate}}<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li ng-show="nav.user.vehicle"><a href="#toDrive">{{'to_drive' | translate}}</a></li>
+              <li ><a href="#toTake">{{'to_take' | translate}}</a></li>
+              <li ng-show="nav.user.vehicle"><a href="#rideRequests">{{'solicitudes' | translate}}</a></li>
+              <li><a href="#requestedRides">{{'solicitados' | translate}}</a></li>
+              <li><a href="#rateRide">{{'calificar viaje' | translate}}</a></li>
+            </ul>
+            </li>
+            <li class="dropdown" ng-show='nav.user.vehicle'>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{'recorridos' | translate}}<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#user_routes">{{'mis rutas' | translate}}</a></li>
+                <li><a href="#addRoute">{{'agregar recorrido' | translate}}</a></li>
+              </ul>
+            </li>
+            <li><a href="#chats">{{'chats' | translate}}</a></li>
+            <li><a href="#webshop">{{'webShop' | translate}}</a></li>
+            <li><a href="#routeFind">{{'buscar recorrido' | translate}}</a></li>
+            <li ><a href="#rankings" ng-click="nav.ranking()">{{'rankings' | translate}}</a></li>
+          </ul>
+          <ul>
+            <li class="dropdown pull-right">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {{nav.user.name}}<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#user_data">{{'datos personales' | translate}}</a></li>
+              <li><a href='#' ng-click='nav.logout()'>{{'salir' | translate}}</a></li>
+            </ul>
+            </li>
+          </ul>
+        </div>
+        </nav>
+      </div>
+    </div>
+    <div class="clearfix">
+    </div>
+  </div>
+
+  <!-- NG-VIEW: Aca es donde mete el contenido el ngRoute, no tocar -->
+  <div ng-view=""></div>
+  <!-- FIN NG-VIEW -->
+
+
+</div>
+<div id='defaultMap'></div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
+<!-- <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script> -->
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script type="text/javascript" src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-flash-alert/dist/angular-flash.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/ngstorage/ngStorage.js"></script>
+<script src="jsLibs/dateTimeInput.js"></script>
+<script src="bower_components/angular-translate/angular-translate.js"></script>
+<script type="text/javascript" src="/jsLibs/angular-bootstrap-datetimepicker/js/datetimepicker.js"></script>
+<script type="text/javascript" src="/jsLibs/angular-bootstrap-datetimepicker/js/datetimepicker.templates.js"></script>
+
+<!-- endbower -->
+<!-- endbuild -->
+
+<script src="scripts/translations.js"></script>
+<script src="scripts/translations/trans.addRoute.js"></script>
+<script src="scripts/translations/trans.routeFind.js"></script>
+<script src="scripts/translations/trans.requestedRides.js"></script>
+<script src="scripts/translations/allTogetherTmp.js"></script>
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<!-- Directives -->
+<script src="scripts/directives/ngEnter.js"></script>
+<!-- Services -->
+<script src="scripts/map.js"></script>
+<script src="scripts/services/GoogleMapsService.js"></script>
+<script src="scripts/services/GMRouteService.js"></script>
+<script src="scripts/services/GmSubiConvHelpers.js"></script>
+<script src="scripts/services/userService.js"></script>
+<script src="scripts/services/postService.js"></script>
+<script src="scripts/services/sessionService.js"></script>
+<script src="scripts/services/routeService.js"></script>
+<script src="scripts/services/rideService.js"></script>
+<script src="scripts/services/rankingService.js"></script>
+<script src="scripts/services/authService.js"></script>
+<script src="scripts/services/webShopService.js"></script>
+<script src="scripts/services/chatService.js"></script>
+<script src="scripts/services/rateService.js"></script>
+<script src="scripts/services/alertService.js"></script>
+
+<!-- Controllers -->
+<script src="scripts/controllers/userCtrl.js"></script>
+<script src="scripts/controllers/addRouteCtrl.js"></script>
+<script src="scripts/controllers/profileCtrl.js"></script>
+<script src="scripts/controllers/navBarCtrl.js"></script>
+<script src="scripts/controllers/rideRequestsCtrl.js"></script>
+<script src="scripts/controllers/requestedRidesCtrl.js"></script>
+<script src="scripts/controllers/routeFindCtrl.js"></script>
+<script src="scripts/controllers/rankingCtrl.js"></script>
+<script src="scripts/controllers/webShopCtrl.js"></script>
+<script src="scripts/controllers/chatCtrl.js"></script>
+<script src="scripts/controllers/rateRideCtrl.js"></script>
+<script src="scripts/controllers/userDataCtrl.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuHSg0SPQeuyyCIo6GC60Qw-ENLX--LLI&signed_in=true&libraries=places&callback=initMap" async defer></script>
+
+<!-- endbuild -->
+</body>
+</html>

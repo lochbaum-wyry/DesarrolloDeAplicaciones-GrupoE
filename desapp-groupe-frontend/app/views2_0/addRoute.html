@@ -1,63 +1,69 @@
-<div class = "col-md-12 header-right">
-  <flash-message>
-    <div class="my-flash">{{ flash.text }}</div>
-  </flash-message>
-  <div class="head-colum3">
+<div class="row">
+  <div class = "col-md-12 col-sm-12 col-xs-12">
+    <flash-message>
+      <div class="my-flash">{{ flash.text }}</div>
+    </flash-message>
+  </div>
+</div>
 
-  	<!--ACA EMPIEZA MAP DEL ADD ROUTE-->
-    <div class = "col-md-6 ">
-        <div id='mapAddRoute'></div>
-    </div>
-  	<!--ACA TERMINA MAP DEL ADD ROUTE-->
+<div class='row'>
+  <!--ACA EMPIEZA MAP DEL ADD ROUTE-->
+  <div class = "col-md-6 col-sm-6 col-xs-12">
+      <div id='mapAddRoute'></div>
+  </div>
+  <!--ACA TERMINA MAP DEL ADD ROUTE-->
 
-        <!--ACA EMPIEZA EL ADD ROUTE-->
-    <div class="col-md-6 ">
-      <div class="content-cal1">
-        <form name="addRouteForm">
-          <fieldset>
-            <div class="form-group" ng-class="{ 'has-error': addRouteForm.fixedCosts.$invalid }">
-              <label for="fixedCosts">{{ 'fixed_costs' | translate }}:</label>
+
+  <div class = "col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>{{'route_configuration'  | translate}}<small></small></h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+        <br>
+        <form class="form-horizontal form-label-left" id='addRouteForm' name='addRouteForm'>
+
+          <div class="form-group" ng-class="{ 'has-error': addRouteForm.fixedCosts.$invalid }">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fixedCosts">{{ 'fixed_costs' | translate }}:</label>
+            <div class="col-md-9 col-sm-9 col-xs-12">
               <input type="number" name="fixedCosts" ng-model="addrf.fixedCosts" class="form-control" id="fixedCosts" placeholder="10.0" required/>
               <span ng-show=" addRouteForm.fixedCosts.$error.required">fixedCost is required</span>
             </div>
+          </div>
 
-          </fieldset>
-        </form >
-
-        <form class='form-inline'>
           <fieldset>
             <legend>{{'add_schedule'|translate}}</legend>
 
-            <div class="form-group">
-              <select ng-model="addrf.scheduleDay" class="form-control col-xs-2" id="scheduleDay">
-                <option value="0" >{{'monday' | translate }}</option>
-                <option value="1">{{'tuesday' | translate }}</option>
-                <option value="2">{{'wednesday' | translate }}</option>
-                <option value="3">{{'thursday' | translate }}</option>
-                <option value="4">{{'friday' | translate }}</option>
-                <option value="5">{{'saturday' | translate }}</option>
-                <option value="6">{{'sunday' | translate }}</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <div class="dropdown">
-                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
-                    <div class="input-group">
-                      <input data-date-time-input="H:mm" type="text" class="form-control" data-ng-model="addrf.scheduleDepartureTime"/>
-                      <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="addrf.scheduleDepartureTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment', startView: 'hour' }" ></datetimepicker>
-                  </ul>
+              <div class="col-md-5 col-sm-5 col-xs-12 form-group has-feedback">
+                <select ng-model="addrf.scheduleDay" class="form-control has-feedback-left" id="scheduleDay">
+                  <option value="0" >{{'monday' | translate }}</option>
+                  <option value="1">{{'tuesday' | translate }}</option>
+                  <option value="2">{{'wednesday' | translate }}</option>
+                  <option value="3">{{'thursday' | translate }}</option>
+                  <option value="4">{{'friday' | translate }}</option>
+                  <option value="5">{{'saturday' | translate }}</option>
+                  <option value="6">{{'sunday' | translate }}</option>
+                </select>
               </div>
-            </div>
-            <button id='add_schedule_btn' class="btn" type="button" ng-click="addrf.addSchedule()">{{'add_schedule_btn'|translate}}</button>
-          </fieldset>
-        </form>
 
-        <form>
+              <div class="col-md-4 col-sm-4 col-xs-12 form-group has-feedback">
+                <div class="dropdown">
+                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
+                      <div class="input-group">
+                        <input data-date-time-input="H:mm" type="text" class="form-control" data-ng-model="addrf.scheduleDepartureTime"/>
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                      </div>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                      <datetimepicker data-ng-model="addrf.scheduleDepartureTime" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment', startView: 'hour' }" ></datetimepicker>
+                    </ul>
+                </div>
+              </div>
+
+              <button id='add_schedule_btn' class="btn" type="button" ng-click="addrf.addSchedule()">{{'add_schedule_btn'|translate}}</button>
+          </fieldset>
+
           <fieldset>
             <legend>{{'schedules'|translate}}</legend>
             <ul class='list-group' >
@@ -67,11 +73,18 @@
             </ul>
           </fieldset>
 
+          <div class="ln_solid"></div>
+          <div class="form-group">
+            <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+              <button class="btn btn-success" type="button"  ng-disabled="!addRouteForm.$valid" value="{{'agregar ruta' | translate}}" ng-click="addrf.addRoute()">Submit</button>
+            </div>
+          </div>
+
+        </form>
       </div>
-      <input class="btn" type="button" ng-disabled="!addRouteForm.$valid" value="{{'agregar ruta' | translate}}" ng-click="addrf.addRoute()">
     </div>
-
-    <!--ACA TERMINA EL ADD ROUTE-->
-
   </div>
+
 </div>
+
+
