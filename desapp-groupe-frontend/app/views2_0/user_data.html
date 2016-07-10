@@ -1,0 +1,58 @@
+<div class = "col-md-12 header-right">
+  <flash-message>
+    <div class="my-flash">{{ flash.text }}</div>
+  </flash-message>
+	<div class = "col-md-3 ">
+	</div>
+	<div class = "col-md-6 ">
+		<div class = "content-cal1">
+		<form name="userForm">
+          <div class="avari-info">
+            <h2>{{'editar Perfil' | translate}}</h2>
+          </div>
+          <div class="form-group " ng-class="{ 'has-error': userForm.name.$invalid }">
+            <p for="name">{{'nombre' | translate}}:</p>
+            <input name="name" type="text"  class="form-control" ng-model="ud.name" required>
+            <span ng-show="userForm.name.$error.required">Name is required</span>
+          </div>
+          <div class="form-group " ng-class="{ 'has-error': userForm.lastName.$invalid }">
+            <p for="lastName">{{'apellido' | translate}}:</p>
+            <input name="lastName" type="text"  class="form-control" ng-model="ud.lastName" required>
+            <span ng-show="userForm.lastName.$error.required">lastName is required</span>
+          </div>
+          <div class="form-group " ng-class="{ 'has-error': userForm.userName.$invalid }">
+            <p for="userName">{{'apellido' | translate}}:</p>
+            <input name="userName" type="text"  class="form-control" ng-model="ud.userName" required>
+            <span ng-show="userForm.userName.$error.required">userName is required</span>
+          </div>
+          <div class="form-group " ng-class="{ 'has-error': userForm.image.$invalid }">
+            <p for="image">{{'imagen' | translate}}:</p>
+            <input name="image" type="url"  class="form-control" ng-model="ud.image" required>
+            <span ng-show="userForm.image.$error.required">image is required</span>
+          </div>
+        </form>
+        <div class="form-group ">
+        	<p for="hasVehicle">{{'tieneVehiculo' | translate}}:</p>
+        	<input type='checkbox' ng-click="ud.toggleShowVehicle()" />
+        </div>
+          <div id='div_del_formulario'  >
+  			<form ng-show="ud.showVehicle" name="vehicleForm">
+  				<div class="form-group " ng-class="{ 'has-error': vehicleForm.capacity.$invalid }">
+            		<p for="capacity">{{'capacidad' | translate}}:</p>
+            		<input name="capacity" type="number"  class="form-control" ng-model="ud.capacity" required>
+          		</div>
+          		<div class="form-group " ng-class="{ 'has-error': vehicleForm.oilWastePerKmInLts.$invalid }">
+            		<p for="oilWastePerKmInLts">{{'combustiblePorHora' | translate}}:</p>
+            		<input name="oilWastePerKmInLts" id='oilWastePerKmInLts' type="number"  class="form-control" ng-model="ud.oilWastePerKmInLts" required>
+          		</div>
+  			</form> 
+		  </div>
+		  	<div class="form-group">
+            	<input class="btn" type="button" ng-click="ud.back()" value="{{'volver' | translate}}">
+            	<input class="btn" type="button" ng-click="ud.save()" ng-disabled="!userForm.$valid" value="{{'guardar' | translate}}">
+        	</div>
+		</div>
+	</div>
+	<div class = "col-md-3 ">
+	</div>
+</div>

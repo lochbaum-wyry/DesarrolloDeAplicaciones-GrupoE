@@ -1,0 +1,47 @@
+<div class = "col-md-12 header-right">
+	<div class = "col-md-3 ">
+      <div class = "content-cal1">
+          <div class="avari-info">
+            <h2>{{'chats' | translate}}</h2>
+          </div>
+          <div class="form-group">
+            <label for="nombre">{{'nombre' | translate}}:</label>
+            <input type="text"  class="form-control" ng-model="ct.search" placeholder="{{'nombre' | translate}}">
+          </div>
+          <div class="list-group" dir-paginate="user in ct.users | filter:ct.search | itemsPerPage: 6">
+           <a href="" value ='user' ng-click="ct.getChatByUser(user.id)" class="list-group-item" ">
+             {{user.name}} 
+           </a>
+          </div>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+      </div>
+    </div>
+
+	<div class = "col-md-9 " ng-show="!!ct.chatSelected.messages" >
+      <div class = "content-cal1">
+      <div class="avari-info">
+            <h2>{{ct.chatSelected.name}}</h2>
+      </div>
+      <div class="list-group" ng-repeat="message in ct.chatSelected.messages">
+           <p value ='message' class="list-group-item" ">
+             <span>{{message.sender.name}} : {{message.content}}</span>
+             <span class="pull-right">{{message.timestamp.millis | date:'EEE  H:mm'}}</span>
+           </p>
+          </div>
+      <div class="panel-collapse collapse" id="collapseOne">
+                <div class="panel-body">
+                  <ul class="chat">
+                  </ul>
+                </div>
+      </div>
+      <div class="panel-footer" >
+          <div class="input-group">
+              <input id="btn-input" type="text" ng-model="ct.text" class="form-control input-sm" placeholder="" />
+              <span class="input-group-btn">
+                  <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="ct.sendMessage()">
+                  Send</button>
+              </span>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class='row'>
+  <div class='col-xs-12'>
+  <table class='table table-stripped table-bordered'>
+    <thead>
+      <th>{{ "driver" | translate }}</th>
+      <th>{{ "from" | translate }}</th>
+      <th>{{"to"| translate}}</th>
+      <th>{{"departureTime" | translate}}</th>
+      <th>&nbsp;</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat='rr in rrc.rideRequests'>
+        <td>{{rr.driver.name}}</td>
+        <td>{{rr.boardingAt.latitude }}, {{rr.boardingAt.longitude }}</td>
+        <td>{{rr.getOffAt.latitude }}, {{rr.getOffAt.longitude }}</td>
+        <td>{{rr.date | date: 'EEE, dd MMM hh:mm'}}</td>
+        <td><button ng-click='rrc.acceptRequest(rr.id)' class='btn btn-small'>{{'accept_request_btn' | translate }}</button><button ng-click='rrc.acceptRequest(rr.id)' class='btn btn-small'>{{'reject_request_btn' | translate }}</button></td>
+
+      </tr>
+    </tbody>
+
+  </table>
+  </div>
+</div>

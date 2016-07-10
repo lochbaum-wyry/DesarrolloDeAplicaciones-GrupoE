@@ -1,0 +1,100 @@
+<div class='row'>
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+
+    <div class="x_panel fixed_height_390">
+      <div class="x_content">
+
+        <div class="flex">
+          <ul class="list-inline widget_profile_box">
+            <li><a>&nbsp;</a></li>
+            <li>
+              <img ng-src="{{user.image}}" alt="{{user.name}}" class="img-circle profile_img">
+            </li>
+            <li><a>&nbsp;</a></li>
+          </ul>
+        </div>
+
+        <h3 class="name">{{user.name}}</h3>
+
+        <div class="flex">
+          <ul class="list-inline count2">
+            <li>
+              <span class='fa fa-thumbs-o-up'></span>
+              <h3>{{user.goodRateCount}}</h3>
+            </li>
+            <li>
+              <span class='fa fa-thumbs-o-down'></span>
+              <h3>{{user.badRateCount}}</h3>
+            </li>
+            <li>
+              <span>{{'Total' | translate}}</span>
+              <h3>{{user.totalRateCount}}</h3>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>{{'proximos viajes' | translate}} <small> <!-- subittulo --> </small></h2>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th><strong>{{'dia' | translate}}</strong></th>
+              <th><strong>{{'hora' | translate}}</strong></th>
+              <th><strong>{{'conductor' | translate}}</strong></th>
+              <th><strong>{{'costo' | translate}}</strong></th>
+            </tr>
+          </thead>
+          <tbody dir-paginate="ride in rides | itemsPerPage: 8">
+          <tr ng-model="ride.selected">
+            <td>{{ride.date | date:'d-MMM'}}</td>
+            <td>{{ride.date | date:'H:m'}}</td>
+            <td>{{ride.driver.name}}</td>
+            <td>{{ride.route.fixedCosts | currency}}</td>
+          </tr>
+          </tbody>
+        </table>
+        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-3 col-sm-12 col-xs-12">
+
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>{{'comentarios' | translate}}<small> <!-- subittulo --> </small></h2>
+        <div class="clearfix"></div>
+      </div>
+
+      <ul class="list-unstyled top_profiles scroll-view">
+        <li class="media event"  id="comments-list"  dir-paginate="rate in rates | itemsPerPage: 2">
+          <a class="pull-left profile_pic">
+            <img class="img-circle profile_img" src={{rate.rater.image}} alt=""/>
+          </a>
+          <div class="media-body">
+            <a href="" class='title' ng-click="userProfile(rate.rater.id)">{{rate.rater.name}}</a>
+            <p><small>{{rate.date | date: 'EEE, dd MMM hh:mm'}}</small>
+            <p>{{rate.comment}}</p>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+
+    </div>
+  </div>
+
+
+
+</div>
