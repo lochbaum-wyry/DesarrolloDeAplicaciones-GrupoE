@@ -67,6 +67,9 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
 
     function onSuccess(response) { 
       vm.rideProposals = response ;
+      
+      addAddressToProposals();
+
       if (vm.rideProposals.length > 0) {
         selectRideProposal(0);
       }
@@ -75,6 +78,31 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
     function onFailure(error) {
       AlertService.failureAlert("failed_getting_proposals", 'error');
      }
+  }
+
+  function addAddressToProposals() {
+    for (var i = 0 ; i < vm.rideProposals.length; i++) {
+      
+      var rideProposal = vm.rideProposals[i]
+      
+      var bpLatLng = GmSubiConv.latLngFromRoutePoint(rideProposal.boardingPoint); 
+      GoogleMapsService.addressFromLatLng(bpLatLng,  assignAddressToProposal.bind([i, 'boardingAddress']) );
+
+      var gopLatLng = GmSubiConv.latLngFromRoutePoint(rideProposal.getOffPoint); 
+      GoogleMapsService.addressFromLatLng(gopLatLng, assignAddressToProposal.bind([i, 'getOffAddress']) );
+
+      function assignAddressToProposal(address) {
+        var idx = this[0]; 
+        var whichOne = this[1]; 
+        var rideProposals = [] ;
+        vm.rideProposals[idx][whichOne] = address;
+        rideProposals = vm.rideProposals; 
+        vm.rideProposals = [] ; 
+        vm.rideProposals = rideProposals; 
+      }
+
+    }
+
   }
 
   function selectRideProposal(index)

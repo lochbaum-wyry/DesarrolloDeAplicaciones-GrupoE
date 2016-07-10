@@ -12,11 +12,10 @@
   <div class = "col-md-3 col-sm-3 col-xs-12">
     <div class="x_panel">
       <div class="x_title">
-        <h2>{{'route_configuration'  | translate}}<small></small></h2>
+        <h2>{{'pretended_ride'  | translate}}<small></small></h2>
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-        <br>
         <form >
           <div class="form-group">
             <label for="subeEn" >{{'sube en' | translate}}:</label>
@@ -61,51 +60,54 @@
 
 
   <!--ACA EMPIEZA MAP DEL ADD ROUTE-->
-  <div class = "col-md-6 col-sm-6 col-xs-12">
+  <div class = "col-md-5 col-sm-5 col-xs-12">
       <div id='mapRouteFind'></div>
   </div>
 
 
+  <div class="col-md-4 col-sm-4 col-xs-12">
 
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>{{'found_rides' | translate}}<small> <!-- subittulo --> </small></h2>
+        <div class="clearfix"></div>
+      </div>
 
-    <!--ACA EMPIEZA LA LISTA DE RESULTADOS-->
-    <div class = "col-md-3 col-sm-3 col-xs-12 list-group"> 
+      <ul class="list-unstyled top_profiles scroll-view">
+        <li class="media event"  id="comments-list"  dir-paginate="rp in rf.rideProposals | itemsPerPage: 5" >
+          <a class="pull-left profile_pic" ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
+            <img class="img-circle profile_img" src={{rp.driver.image}} alt=""/>
+          </a>
+          <div class="media-body">
+            <a href="" class='title' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">{{ rp.driver.name }}</a>
+            <p><small>{{rate.date | date: 'EEE, dd MMM hh:mm'}}</small>
 
-      <a ng-repeat="rp in rf.rideProposals" class='list-group-item' href="javascript:" title='Seleccionar recorrido' style='display:block' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
-        <div class="row">
-          <div class="section-box">
-            <div class="col-xs-3 col-md-3 text-center">                      
-              <img style='max-width:70% ; max-height:70%' ng-src='{{rp.driver.image}}'/>
-            </div>
-            <h4>
-              {{ rp.driver.name }} {{ rp.driver.lastName}} ({{ rp.driver.userName }})
-            </h4>
+            <p class="list-group-item-text" >
+              <ul class="list list-unstyled">
+                <li>
+                  <small>{{ 'sube en' | translate }}</small>: 
+                  {{ rp.boardingAddress }} 
+                </li>
+                <li>
+                  <small>{{ 'baja en' | translate }}</small>: 
+                  {{ rp.getOffAddress }} 
+                </li>
+                <li>
+                  <small>{{ 'hora_partida' | translate }}</small>:
+                  {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
+                </li>
+              </ul>
+            </p>
+
+            </p>
           </div>
-        </div>
-        <p class="list-group-item-text" >
-          <ul class="list list-unstyled"   style='font-size: 12px'>
-            <li>
-              <strong>{{ 'sube en' | translate }}</strong>: 
-              {{ rp.boardingPoint.latitude }},{{ rp.boardingPoint.longitude }} 
-            </li>
-            <li>
-              <strong>{{ 'baja en' | translate }}</strong>: 
-              {{ rp.getOffPoint.latitude }},{{ rp.getOffPoint.longitude }} 
-            </li>
-            <li>
-              <strong>{{ 'hora_partida' | translate }}</strong>:
-              {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
-            </li>
-          </ul>
-        </p>
-      </a>
+        </li>
+      </ul>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
     </div>
 
-
     <button class='btn' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
-
-
-
+  </div>
 
 </div>  
 
