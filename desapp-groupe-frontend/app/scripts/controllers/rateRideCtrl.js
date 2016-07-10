@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('RateRideCtrl', RateRideCtrl);
 
 /* @ngInject */
-function RateRideCtrl(RouteService,RideService,SessionService) {
+function RateRideCtrl(RouteService,RideService,SessionService,AlertService) {
   /* RateRideCtrl */ var vm = this;
   /* String */ vm.ERROR_MSG = null;
 
@@ -34,7 +34,7 @@ function RateRideCtrl(RouteService,RideService,SessionService) {
     }
 
     function onFailure(error) {
-      infoModal('error');
+      AlertService.failureAlert('No se encontraron Rates calificables');
      }
   }
 
@@ -48,7 +48,7 @@ function RateRideCtrl(RouteService,RideService,SessionService) {
     }
 
     function onFailure(error) {
-      infoModal('error');
+      AlertService.failureAlert('No se encontraron Rates calificables');
      }
   }
 
@@ -73,11 +73,11 @@ function RateRideCtrl(RouteService,RideService,SessionService) {
       vm.rateType = "";
       vm.rateValue = {};
       vm.comment = "";
-      infoModal('Succes Rate');
+      AlertService.successAlert('Succes Rate');
     }
 
     function onFailure(error) {
-      infoModal('error');
+      AlertService.failureAlert('No Succes Rates');
      }
   }
 
@@ -111,7 +111,7 @@ function RateRideCtrl(RouteService,RideService,SessionService) {
     if (type && type=='error') {
       msg = "Error: " + msg; 
     }
-    alert(msg);
+    AlertService.failureAlert(msg);
   }
 
 

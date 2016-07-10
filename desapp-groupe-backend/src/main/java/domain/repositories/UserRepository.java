@@ -109,7 +109,7 @@ public class UserRepository extends HibernateGenericDao<User> implements
 
     public List getMostEfficientDriversInMonthYear(Integer month, Integer year, Integer cant)
     {
-        String hql =    "SELECT r.driver, AVG(r.efficiencyPercentage) as percentage " +
+        String hql =    "SELECT r.driver.id, AVG(r.efficiencyPercentage) as percentage " +
                         "FROM " + Ride.class.getName() + " r "+
                         "WHERE month(r.date) = :month and year(r.date) = :year " +
                         "GROUP BY r.driver.id " +

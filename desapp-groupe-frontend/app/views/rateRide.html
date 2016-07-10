@@ -1,4 +1,7 @@
 <div class = "col-md-12 header-right">
+  <flash-message>
+    <div class="my-flash">{{ flash.text }}</div>
+  </flash-message>
     <div class="head-colum3">
         <div class="col-md-3 list-group">
         	<a href="" ng-repeat="r in rrc.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' ng-click="rrc.getRateablesFromRide(r.id)">
