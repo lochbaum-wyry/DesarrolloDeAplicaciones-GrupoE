@@ -9,6 +9,7 @@ function RankingCtrl(RankingService,$localStorage) {
   vm.ranking = {};
   vm.rankingSelected = [];
   vm.dateSelected = new Date() ;
+  vm.bestsSelected = true;
 
   /* String */ vm.ERROR_MSG;
 
@@ -47,16 +48,32 @@ function RankingCtrl(RankingService,$localStorage) {
               .catch(onFailure);
   };
 
+  vm.getBests = function(){
+    vm.rankingSelected.selected = vm.rankingSelected.bests;
+    vm.bestsSelected = true;
+  };
+
+  vm.getWorsts = function(){
+    vm.rankingSelected.selected = vm.rankingSelected.worsts;
+    vm.bestsSelected = false;
+  };
+
   vm.getDrivers = function(){
-    vm.rankingSelected = vm.ranking.bestDrivers;
+    vm.rankingSelected.bests = vm.ranking.bestDrivers;
+    vm.rankingSelected.worsts = vm.ranking.worstDrivers;
+    vm.rankingSelected.selected = vm.rankingSelected.bests;
   };  
 
   vm.getPassengers = function(){
-    vm.rankingSelected = vm.ranking.bestPassenger;
+    vm.rankingSelected.bests = vm.ranking.bestPassenger;
+    vm.rankingSelected.worsts = vm.ranking.worstPassenger;
+    vm.rankingSelected.selected = vm.rankingSelected.bests;
   };
 
   vm.getvehicles = function(){
-    vm.rankingSelected = vm.ranking.bestVehicles;
+    vm.rankingSelected.bests = vm.ranking.bestVehicles;
+    vm.rankingSelected.worsts = vm.ranking.worstVehicles;
+    vm.rankingSelected.selected = vm.rankingSelected.bests;
   };
 
   vm.getRanking();
