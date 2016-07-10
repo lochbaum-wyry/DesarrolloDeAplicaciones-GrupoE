@@ -1,27 +1,40 @@
-<div class = "col-md-12 header-right">
+<div class='row'>
+
   <flash-message>
     <div class="my-flash">{{ flash.text }}</div>
   </flash-message>
-    <div class="head-colum3">
-        <div class="col-md-3 list-group">
-        	<a href="" ng-repeat="r in rrc.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' ng-click="rrc.getRateablesFromRide(r.id)">
-              <div class="row">
-                <div class="section-box">
-                  <div class="col-xs-3 col-md-3 text-center">                      
-                    <img style='max-width:70% ; max-height:70%' ng-src='{{r.driver.image}}'/>
-                  </div>
-                  <h4>
-                    {{ r.diver.name }} {{ r.driver.lastName}} ({{ r.driver.userName }})
-                  </h4>
-                  <h4>
-                    {{r.date | date}}
-                  </h4>
-                </div>
+
+  <div class="col-md-3 col-sm-3 col-xs-12">
+   <div class="x_panel">
+    <div class="x_content">
+      <div class="form-group">
+        <a href="" ng-repeat="r in rrc.rateablesRides" class='list-group-item' title='Recorridos Transcurridos' ng-click="rrc.getRateablesFromRide(r.id)">
+          <div class="row">
+            <div class="section-box ">
+              <div class="col-xs-3 col-md-3 text-center">                      
+                <img style='max-width:70% ; max-height:70%' ng-src='{{r.driver.image}}'/>
               </div>
-            </a>
-        </div>
-      </div>
-    <div class="col-md-5 list-group" ng-show='rrc.rideSelected != null' >
+                <p class="list-group-item-text" >
+                  <ul class="list list-unstyled">
+                    <li>
+                      {{ r.diver.name }} {{ r.driver.lastName}} ({{ r.driver.userName }})
+                    </li>
+                    <li>
+                      {{r.date | date}}
+                    </li>
+                  </ul>
+                </p>
+            </div>
+          </div>
+        </a> 
+      </div> 
+    </div>
+   </div> 
+  </div>
+
+  <div class="col-md-5 col-sm-5 col-xs-12 list-group" ng-show='rrc.rideSelected != null'>
+   <div class="x_panel">
+    <div class="x_content">
       <div class="content-cal1 btn" ng-click="rrc.selectDriver()">
         <p> Conductor : {{rrc.rideSelected.driver.name}}<p> 
       </div>
@@ -29,23 +42,29 @@
         <p> Vehiculo <p>
       </div>
         <a href="" ng-repeat="tk in rrc.rideSelected.takenSeats" class='list-group-item' title='Votar Compañero' ng-click="rrc.selectUser(tk.passenger)">
-              <div class="row">
-                <div class="section-box">
-                  <div class="col-xs-3 col-md-3 text-center">                      
-                    <img style='max-width:70% ; max-height:70%' ng-src=''/>
-                  </div>
-                  <h4>
-                    {{ tk.passenger.name }} {{ tk.passenger.lastName}} ({{ tk.passenger.userName }})
-                  </h4>
-                </div>
+          <div class="row">
+            <div class="section-box">
+              <div class="col-xs-3 col-md-3 text-center">                      
+                <img class="img-circle"style='max-width:70% ; max-height:70%' ng-src='{{tk.passenger.image}}'/>
               </div>
-            </a>
+              <h4>
+                {{ tk.passenger.name }} {{ tk.passenger.lastName}} ({{ tk.passenger.userName }})
+              </h4>
+            </div>
           </div>
+        </a>  
+    </div>
+   </div> 
+  </div>
 
-    <div class="col-md-4" ng-show='rrc.userSelected != null'>
-      <div class="content-cal1">
-          {{rrc.title}}
-        <div class="btn-group btn-group-lg form-group" role="group" aria-label="">
+  <div class="col-md-4 col-sm-4 col-xs-12 list-group" ng-show='rrc.userSelected != null'>
+   <div class="x_panel">
+    <div class="x_title">
+      <h2>{{rrc.title}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="btn-group btn-group-lg form-group" role="group" aria-label="">
             <button type="button" class="btn btn-default glyphicon glyphicon-thumbs-up" ng-click="rrc.goodRate()"></button>
             <button type="button" class="btn btn-default glyphicon glyphicon-thumbs-down" ng-click="rrc.badRate()"></button>
         </div>
@@ -58,8 +77,11 @@
             <input class="btn" type="button" ng-click="rrc.rate()" value="{{'Ratear' | translate}}">
           </div>
         </form>
-      </div>
     </div>
+   </div> 
+  </div>
+
+
 
 
 </div>

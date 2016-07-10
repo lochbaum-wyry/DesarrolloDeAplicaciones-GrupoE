@@ -1,29 +1,38 @@
-<div class = "col-md-12 header-right">
+<div class='row'>
+
   <flash-message>
     <div class="my-flash">{{ flash.text }}</div>
   </flash-message>
-	<div class = "col-md-3 ">
-      <div class = "content-cal1">
-      	<form>
-          <div class="avari-info">
-            <h2>{{'filtro' | translate}}</h2>
-          </div>
-          <div class="form-group">
+  <div class="col-md-3 col-sm-3 col-xs-12">
+   <div class="x_panel">
+    <form>
+    <div class="x_title">
+      <h2>{{'filtro' | translate}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="form-group">
             <label for="nombre">{{'nombre' | translate}}:</label>
             <input type="text"  class="form-control" ng-model="ws.search" placeholder="{{'nombre' | translate}}">
           </div>
-        </form>
-      </div>
     </div>
-	<div class = "col-md-9 ">
-      <div class = "content-cal1">
-      	<table class="table table-hover ">
-      <div class="avari-info">
-            <h2>{{'productos' | translate}}</h2>
-      </div>
-      <div>
-        <h4>{{'mis puntos' | translate}}: {{ws.user.points}}</h4>
-      </div>
+    </form>
+   </div> 
+  </div>
+
+  <div class="col-md-9 col-sm-9 col-xs-12">
+   <div class="x_panel">
+    
+    <div class="x_title">
+      <h2>{{'productos' | translate}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_title">
+      <h4>{{'mis puntos' | translate}}: {{ws.user.points}}</h4>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <table class="table">
       <thead>
       <tr>
         <td><strong>{{'producto' | translate}}</strong></td>
@@ -36,11 +45,17 @@
         <td>{{product.name}}</td>
         <td>{{product.cost | currency}}</td>
         <td>{{product.stock | number}}</td>
-        <td><button type="button" ng-click="ws.changeProduct(product)"class = "btn btn-primary glyphicon glyphicon-ok-sign"></button></td>
+        <td><button type="button" ng-click="ws.changeProduct(product)" class ="btn btn-success glyphicon glyphicon-ok-sign"></button></td>
       </tr>
       </tbody>
       </table>
         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
-      </div>
     </div>
+    </table>
+   </div> 
+  </div>
+
+
+
+
 </div>

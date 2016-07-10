@@ -8,13 +8,13 @@
           <ul class="list-inline widget_profile_box">
             <li><a>&nbsp;</a></li>
             <li>
-              <img ng-src="{{user.image}}" alt="{{user.name}}" class="img-circle profile_img">
+              <img ng-src="{{user.image}}" alt="{{user.name}}" class="img img-circle profile_img">
             </li>
             <li><a>&nbsp;</a></li>
           </ul>
         </div>
 
-        <h3 class="name">{{user.name}}</h3>
+        <h3 class="name" ng-click="userProfile(user.id)">{{user.name}}</h3>
 
         <div class="flex">
           <ul class="list-inline count2">

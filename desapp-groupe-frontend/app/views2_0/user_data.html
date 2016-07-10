@@ -1,15 +1,20 @@
-<div class = "col-md-12 header-right">
+<div class='row'>
+
   <flash-message>
     <div class="my-flash">{{ flash.text }}</div>
   </flash-message>
-	<div class = "col-md-3 ">
-	</div>
-	<div class = "col-md-6 ">
-		<div class = "content-cal1">
-		<form name="userForm">
-          <div class="avari-info">
-            <h2>{{'editar Perfil' | translate}}</h2>
-          </div>
+
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+  </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+   <div class="x_panel">
+    <div class="x_title">
+      <h2>{{'editar Perfil' | translate}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+        <form name="userForm">
           <div class="form-group " ng-class="{ 'has-error': userForm.name.$invalid }">
             <p for="name">{{'nombre' | translate}}:</p>
             <input name="name" type="text"  class="form-control" ng-model="ud.name" required>
@@ -32,27 +37,31 @@
           </div>
         </form>
         <div class="form-group ">
-        	<p for="hasVehicle">{{'tieneVehiculo' | translate}}:</p>
-        	<input type='checkbox' ng-click="ud.toggleShowVehicle()" />
+          <p for="hasVehicle">{{'tieneVehiculo' | translate}}:</p>
+          <input type='checkbox' ng-click="ud.toggleShowVehicle()" />
         </div>
-          <div id='div_del_formulario'  >
-  			<form ng-show="ud.showVehicle" name="vehicleForm">
-  				<div class="form-group " ng-class="{ 'has-error': vehicleForm.capacity.$invalid }">
-            		<p for="capacity">{{'capacidad' | translate}}:</p>
-            		<input name="capacity" type="number"  class="form-control" ng-model="ud.capacity" required>
-          		</div>
-          		<div class="form-group " ng-class="{ 'has-error': vehicleForm.oilWastePerKmInLts.$invalid }">
-            		<p for="oilWastePerKmInLts">{{'combustiblePorHora' | translate}}:</p>
-            		<input name="oilWastePerKmInLts" id='oilWastePerKmInLts' type="number"  class="form-control" ng-model="ud.oilWastePerKmInLts" required>
-          		</div>
-  			</form> 
-		  </div>
-		  	<div class="form-group">
-            	<input class="btn" type="button" ng-click="ud.back()" value="{{'volver' | translate}}">
-            	<input class="btn" type="button" ng-click="ud.save()" ng-disabled="!userForm.$valid" value="{{'guardar' | translate}}">
-        	</div>
-		</div>
-	</div>
-	<div class = "col-md-3 ">
-	</div>
+        <div id='div_del_formulario'  >
+        <form ng-show="ud.showVehicle" name="vehicleForm">
+          <div class="form-group " ng-class="{ 'has-error': vehicleForm.capacity.$invalid }">
+                <p for="capacity">{{'capacidad' | translate}}:</p>
+                <input name="capacity" type="number"  class="form-control" ng-model="ud.capacity" required>
+              </div>
+              <div class="form-group " ng-class="{ 'has-error': vehicleForm.oilWastePerKmInLts.$invalid }">
+                <p for="oilWastePerKmInLts">{{'combustiblePorHora' | translate}}:</p>
+                <input name="oilWastePerKmInLts" id='oilWastePerKmInLts' type="number"  class="form-control" ng-model="ud.oilWastePerKmInLts" required>
+              </div>
+        </form> 
+      </div>
+      <div class="form-group">
+        <input class="btn" type="button" ng-click="ud.back()" value="{{'volver' | translate}}">
+        <input class="btn" type="button" ng-click="ud.save()" ng-disabled="!userForm.$valid" value="{{'guardar' | translate}}">
+      </div>
+    </div>
+   </div> 
+  </div>
+
+  <div class="col-md-3 col-xs-12 widget widget_tally_box">
+  </div>
+
+
 </div>

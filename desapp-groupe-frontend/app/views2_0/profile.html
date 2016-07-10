@@ -1,88 +1,73 @@
-<div class="header-main">
-  <!--header right start here-->
-  <div class="col-md-12 header-right">
+<div class='row'>
+
   <flash-message>
     <div class="my-flash">{{ flash.text }}</div>
   </flash-message>
-    <div class="header-right-blc1">
-    	<div class="col-md-3 joker-rows">
-        <div class="mask-img">
-          <div class="bridge-city">
-            <img class="img-circle img-profile" ng-src="{{p.user.image}}" alt="">
-          </div>
-          <div class="avari-info">
-            <h2>{{p.user.name}}</h2>
-          </div>
-          <div class="joker-block">
-            <div class="col-md-4 views">
-              <div class="joker-text">
-                <p>
-                  {{'votos buenos' | translate}}
-                </p>
-                <h4>{{p.user.goodRateCount}}</h4>
-              </div>
-              <div class="joker-bg-img">
-              </div>
-              <div class="clearfix">
-              </div>
-            </div>
-            <div class="col-md-4 views viewlines">
-              <div class="joker-text">
-                <p>
-                  {{'votos malos' | translate}}
-                </p>
-                <h4>{{p.user.badRateCount}}</h4>
-              </div>
-              <div class="joker-bg-img-user">
-              </div>
-              <div class="clearfix">
-              </div>
-            </div>
-            <div class="col-md-4 views">
-              <div class="joker-text">
-                <p>
-                  {{'total de votos' | translate}}
-                </p>
-                <h4>{{p.user.totalRateCount}}</h4>
-              </div>
-              <div class="joker-bg-img-comm">
-              </div>
-              <div class="clearfix">
-              </div>
-            </div>
-          </div>
-          <div class="clearfix">
-          </div>
+
+    <div class="col-md-3 col-xs-12 widget widget_tally_box">
+
+    <div class="x_panel fixed_height_390">
+      <div class="x_content">
+
+        <div class="flex">
+          <ul class="list-inline widget_profile_box">
+            <li><a>&nbsp;</a></li>
+            <li>
+              <img ng-src="{{p.user.image}}" alt="{{p.user.name}}" class="img img-circle profile_img">
+            </li>
+            <li><a>&nbsp;</a></li>
+          </ul>
+        </div>
+
+        <h3 class="name" ng-click="userProfile(p.user.id)">{{user.name}}</h3>
+
+        <div class="flex">
+          <ul class="list-inline count2">
+            <li>
+              <span class='fa fa-thumbs-o-up'></span>
+              <h3>{{p.user.goodRateCount}}</h3>
+            </li>
+            <li>
+              <span class='fa fa-thumbs-o-down'></span>
+              <h3>{{p.user.badRateCount}}</h3>
+            </li>
+            <li>
+              <span>{{'Total' | translate}}</span>
+              <h3>{{p.user.totalRateCount}}</h3>
+            </li>
+          </ul>
         </div>
       </div>
-
-
-      <div class = "col-md-6 ">
-      	<div class = "content-cal1">
-      		<div class="avari-info">
-            	<h2>{{'posts' | translate}}</h2>
-      		</div>
-      		<div class="input-group">
-              <input id="btn-input" type="text" ng-model="p.text" class="form-control input-sm" placeholder="" />
-              <span class="input-group-btn">
-                  <button class="btn btn-warning btn-sm" id="btn-chat" ng-click="p.sendPost()">
-                  Send</button>
-              </span>
-        	</div>
-      		<div class="list-group" dir-paginate="post in p.posts | itemsPerPage: 3">
-           		<a href="" value ='post' class="list-group-item" ng-model="post.selected">
-           			<p>Usuario : {{post.publisher.name}}</p>
-                <p>dueño de post : {{post.wallOwner.name}}</p>
-             		<p>{{post.content}}</p> 
-           		</a>
-        	</div>
-        	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
-      	</div>
-      </div>
-
-
-
     </div>
+  
   </div>
+
+  <div class="col-md-6 col-sm-6 col-xs-12">
+   <div class="x_panel">
+    <div class="x_title">
+      <h2>{{'posts' | translate}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+      <div class="input-group">
+        <input id="btn-input" type="text" ng-model="p.text" class="form-control input-sm" placeholder="" />
+          <span class="input-group-btn">
+            <button class="btn btn-success btn-sm" id="btn-chat" ng-click="p.sendPost()">
+            Send</button>
+          </span>
+      </div>
+      <div class="list-group" dir-paginate="post in p.posts | itemsPerPage: 3">
+        <a href="" value ='post' class="list-group-item" ng-model="post.selected">
+          <p>{{'usuario' | translate}} : {{post.publisher.name}}</p>
+          <p>{{'mensaje' | translate}} : {{post.content}}</p>
+        </a>
+      </div>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    </div>
+   </div> 
+  </div>
+
+
+
 
 </div>

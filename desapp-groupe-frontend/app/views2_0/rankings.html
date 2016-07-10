@@ -1,40 +1,50 @@
-<div class = "col-md-12 header-right">
-	<div class = "col-md-3 ">
-      <div class = "content-cal1">
-      	<form>
-          <div class="form-group">
-            <label for="anio">{{'año' | translate}} {{' y' | translate}} {{'mes' | translate}}:</label>
-            <div class="dropdown">
-                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
-                      <div class="input-group"><input data-date-time-input="MMMM YYYY" type="text" class="form-control" data-ng-model="rnk.dateSelected"/><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                      </div>
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                      <datetimepicker data-ng-model="rnk.dateSelected" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment',minView:'month', startView: 'year'}" />
-                    </ul>
+<div class='row'>
+
+  <flash-message>
+    <div class="my-flash">{{ flash.text }}</div>
+  </flash-message>
+
+  <div class="col-md-3 col-sm-3 col-xs-12">
+   <div class="x_panel">
+    <form>
+    <div class="x_content">
+      <div class="form-group">
+        <label for="anio">{{'año' | translate}} {{' y' | translate}} {{'mes' | translate}}:</label>
+        <div class="dropdown">
+          <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="">
+            <div class="input-group"><input data-date-time-input="MMMM YYYY" type="text" class="form-control" data-ng-model="rnk.dateSelected"/><span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+          </a>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <datetimepicker data-ng-model="rnk.dateSelected" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', modelType: 'moment',minView:'month', startView: 'year'}" />
+          </ul>
             </div>
           </div>
-          <div class="btn-group form-group btn-group-sm" role="group" aria-label="">
-  			<button type="button" class="btn " ng-click="rnk.getDrivers()">{{'conductores' | translate}}</button>
-  			<button type="button" class="btn " ng-click="rnk.getPassengers()">{{'pasajeros' | translate}}</button>
-  			<button type="button" class="btn " ng-click="rnk.getvehicles()">{{'vehiculos' | translate}}</button>
-		  </div>
-          <div class="form-group ">
-            <input class="btn" type="button" value="{{'buscar' | translate}}" id="" ng-click="rnk.getRankingForDate()">
-          </div>
-        </form>
+      <div class="btn-group form-group btn-group-sm" role="group" aria-label="">
+        <button type="button" class="btn " ng-click="rnk.getDrivers()">{{'conductores' | translate}}</button>
+        <button type="button" class="btn " ng-click="rnk.getPassengers()">{{'pasajeros' | translate}}</button>
+        <button type="button" class="btn " ng-click="rnk.getvehicles()">{{'vehiculos' | translate}}</button>
       </div>
+      <div class="form-group ">
+        <input class="btn" type="button" value="{{'buscar' | translate}}" id="" ng-click="rnk.getRankingForDate()">
+      </div>
+    </form>
     </div>
-	<div class = "col-md-9 ">
-      <div class = "content-cal1">
-      <div class="avari-info">
-        <h2>{{'ranking' | translate}}</h2>
-      </div>
-      <ul class="nav nav-tabs">
+   </div> 
+  </div>
+
+  <div class="col-md-9 col-sm-9 col-xs-12">
+   <div class="x_panel">
+    <div class="x_title">
+      <h2>{{'ranking' | translate}}</h2>
+      <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+    <ul class="nav nav-tabs">
         <li role="presentation" ng-class="{'active': rnk.bestsSelected}"><a ng-click="rnk.getBests()" href="">Bests</a></li>
         <li role="presentation" ng-class="{'active': !rnk.bestsSelected}"><a ng-click="rnk.getWorsts()" href="">Worsts</a></li>
-      </ul>
-      <table class="table table-hover ">
+    </ul>
+      <table class="table">
       <thead>
       <tr>
         <td><strong>{{'usuario' | translate}}</strong></td>
@@ -54,5 +64,10 @@
       </table>
       <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
       </div>
-    </div>
+   </div> 
+  </div>
+
+
+
+
 </div>

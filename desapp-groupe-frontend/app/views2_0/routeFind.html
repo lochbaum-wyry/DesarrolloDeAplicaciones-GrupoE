@@ -104,9 +104,10 @@
         </li>
       </ul>
       <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
+    <button class='btn btn-success' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
     </div>
 
-    <button class='btn' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
+    
   </div>
 
 </div>  
