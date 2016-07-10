@@ -150,11 +150,9 @@ function GoogleMapsService() {
   }
 
   function addressFromLatLng(address, onSuccCallback, onFailCallback) {
-    console.log(address);
     geocoder.geocode({'location': address}, function(results, status) {
-      console.log(status);
       if (status === google.maps.GeocoderStatus.OK) {
-        onSuccCallback(results[1].formatted_address);
+        onSuccCallback(results[0].formatted_address);
       } else {
         onFailCallback(status);
       }
