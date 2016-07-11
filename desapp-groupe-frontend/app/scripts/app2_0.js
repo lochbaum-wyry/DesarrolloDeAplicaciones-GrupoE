@@ -15,6 +15,7 @@ angular
     'pascalprecht.translate',
     'ngStorage',
     'ngResource',
+    'snapscroll',
     'ngRoute',
     'ngSanitize',
     'ngTouch',

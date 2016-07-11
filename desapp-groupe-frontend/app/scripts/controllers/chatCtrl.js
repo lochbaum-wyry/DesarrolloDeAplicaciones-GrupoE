@@ -4,7 +4,7 @@
 angular.module('desappGrupoeFrontendApp').controller('ChatCtrl', chatCtrl );
 
 /* @ngInject */
-function chatCtrl(SessionService,UserService,ChatService) {
+function chatCtrl(SessionService,UserService,ChatService,$location, $anchorScroll) {
   var vm = this; 
 
   /* String */ vm.ERROR_MSG = null;

@@ -32,15 +32,16 @@
       <h2>{{ct.chatSelected.name}}</h2>
       <div class="clearfix"></div>
     </div>
-    <div class="x_content">
+    <div class="x_content" >
 
-      <div class="list-group" ng-repeat="message in ct.chatSelected.messages">
+    <div style="overflow-y: auto; height: 200px;" class="nested ng-isolate-scope" snapscroll="" snap-index="nestedSnapIndex" ng-swipe-up="swipeUp($event)" ng-swipe-down="swipeDown($event)">
+      <div class="list-group" ng-repeat="message in ct.chatSelected.messages" >
         <p value ='message' class="list-group-item" ">
           <span>{{message.sender.name}} : {{message.content}}</span>
           <span class="pull-right">{{message.timestamp.millis | date:'EEE  H:mm'}}</span>
         </p>
       </div>
-      
+    </div>
       <div class="panel-collapse collapse" id="collapseOne">
         <div class="panel-body">
           <ul class="chat">
