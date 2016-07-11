@@ -17,23 +17,34 @@
         <form name="userForm">
           <div class="form-group " ng-class="{ 'has-error': userForm.name.$invalid }">
             <p for="name">{{'nombre' | translate}}:</p>
-            <input name="name" type="text"  class="form-control" ng-model="ud.name" required>
-            <span ng-show="userForm.name.$error.required">Name is required</span>
+            <input name="name" type="text"  class="form-control" ng-model="ud.name" required maxlength="15">
+            <div ng-messages="userForm.name.$error" role="alert">
+              <div ng-message="required">{{'Name is required' | translate}}</div>
+              <div ng-message="maxlength">{{'This field can be at most 15 characters long' | translate}}</div>
+            </div>
           </div>
           <div class="form-group " ng-class="{ 'has-error': userForm.lastName.$invalid }">
             <p for="lastName">{{'apellido' | translate}}:</p>
-            <input name="lastName" type="text"  class="form-control" ng-model="ud.lastName" required>
-            <span ng-show="userForm.lastName.$error.required">lastName is required</span>
+            <input name="lastName" type="text"  class="form-control" ng-model="ud.lastName" required maxlength="15">
+            <div ng-messages="userForm.lastName.$error" role="alert">
+              <div ng-message="required">{{'LastName is required' | translate}}</div>
+              <div ng-message="maxlength">{{'This field can be at most 15 characters long' | translate}}</div>
+            </div>
           </div>
           <div class="form-group " ng-class="{ 'has-error': userForm.userName.$invalid }">
-            <p for="userName">{{'apellido' | translate}}:</p>
-            <input name="userName" type="text"  class="form-control" ng-model="ud.userName" required>
-            <span ng-show="userForm.userName.$error.required">userName is required</span>
+            <p for="userName">{{'nombreDeUsuario' | translate}}:</p>
+            <input name="userName" type="text"  class="form-control" ng-model="ud.userName" required maxlength="15">
+            <div ng-messages="userForm.userName.$error" role="alert">
+              <div ng-message="required">{{'UserName is required' | translate}}</div>
+              <div ng-message="maxlength">{{'This field can be at most 15 characters long' | translate}}</div>
+            </div>
           </div>
           <div class="form-group " ng-class="{ 'has-error': userForm.image.$invalid }">
             <p for="image">{{'imagen' | translate}}:</p>
             <input name="image" type="url"  class="form-control" ng-model="ud.image" required>
-            <span ng-show="userForm.image.$error.required">image is required</span>
+            <div ng-messages="userForm.image.$error" role="alert">
+              <div ng-message="required">{{'Image is required' | translate}}</div>
+            </div>
           </div>
         </form>
         <div class="form-group ">

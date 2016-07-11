@@ -17,6 +17,7 @@ angular
     'ngResource',
     'snapscroll',
     'ngRoute',
+    'ngMessages',
     'ngSanitize',
     'ngTouch',
     'ui.bootstrap.datetimepicker',
