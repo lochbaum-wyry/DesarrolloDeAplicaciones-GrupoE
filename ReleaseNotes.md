@@ -6,9 +6,11 @@
 + Diagrama UML: https://github.com/lochbaum-wyry/DesarrolloDeAplicaciones-GrupoE/tree/master/desapp-groupe-backend/src/main/doc
 + Mockups: https://github.com/lochbaum-wyry/DesarrolloDeAplicaciones-GrupoE/tree/master/desapp-groupe-backend/src/main/doc
 + Prototipo Google maps: https://github.com/lochbaum-wyry/DesarrolloDeAplicaciones-GrupoE/tree/master/desapp-groupe-backend/src/main/doc
+
 ### Modelo
 + Modelo de objetos : __OK__ 
 + Clean code : __OK__
+
 ### Testing 
 + Modelo : __OK__ 
 + Servicios : __OK__ 
@@ -21,6 +23,7 @@
 + Datos fake: https://github.com/lochbaum-wyry/DesarrolloDeAplicaciones-GrupoE/blob/master/desapp-groupe-backend/src/main/java/domain/servicesRest/SetupExampleData.java
 + I18N : __OK__
 + Auditoria de servicios: Logs : __OK__ 
+
 ### Funcionalidad
 + Home: __OK__ 
 + Registrar usuarios : __OK__
@@ -35,6 +38,7 @@
 + Test de arquitectura : __NO__. No establecimos convenciones concretas, entonces no supimos que testear. 
 + Error handler de servicios : __OK__
 + Autenticar la app con Google : __OK__
+
 ### Funcionalidad
 + Buscar usuarios que realicen un recorrido similar : __OK__. Faltó ingreso de dirección para los puntos de salida y llegada
 + Aceptar solicitud de viaje : __OK__
