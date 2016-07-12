@@ -44,7 +44,10 @@
         <div class="clearfix"></div>
       </div>
       <div class="x_content">
-
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-class="{'active': ridesAsDriverSelected}"><a ng-click="getAsDriver()" href="">{{'as Driver' | translate}}</a></li>
+          <li role="presentation" ng-class="{'active': !ridesAsDriverSelected}"><a ng-click="getAsPassenger()" href="">{{'as Passenger' | translate}}</a></li>
+        </ul>
         <table class="table">
           <thead>
             <tr>
@@ -54,7 +57,7 @@
               <th><strong>{{'costo' | translate}}</strong></th>
             </tr>
           </thead>
-          <tbody dir-paginate="ride in rides | itemsPerPage: 8">
+          <tbody dir-paginate="ride in ridesSelected | itemsPerPage: 8">
           <tr ng-model="ride.selected">
             <td>{{ride.date | date:'d-MMM'}}</td>
             <td>{{ride.date | date:'H:m'}}</td>

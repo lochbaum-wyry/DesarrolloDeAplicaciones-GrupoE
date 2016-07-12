@@ -174,4 +174,16 @@ public class RideService extends GenericService<Ride>
     public void setUserRepository(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    @Transactional
+    public List<Ride> awaitingRidesAsDriver(int userId) {
+        User user = userRepository.findById(userId);
+        return rideRepository.awaitingRidesAsDriver(user);
+    }
+
+    @Transactional
+    public List<Ride> awaitingRidesAsPassenger(int userId) {
+        User user = userRepository.findById(userId);
+        return rideRepository.awaitingRidesAsPassenger(user);
+    }
 }

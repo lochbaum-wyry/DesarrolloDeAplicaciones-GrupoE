@@ -72,4 +72,37 @@ public class RideRepository extends HibernateGenericDao<Ride> implements
 
         return query.list();
     }
+
+    public List<Ride> awaitingRidesAsDriver(User user) {
+        String hql = "SELECT r " +
+                " FROM " + Ride.class.getName() + " r " +
+                " WHERE r.driver = :driver AND r.date > now()";
+
+        Query query =  getHibernateTemplate()
+                .getSessionFactory()
+                .getCurrentSession()
+                .createQuery(hql);
+
+        query.setEntity("driver", user);
+
+
+        return query.list();
+    }
+
+    public List<Ride> awaitingRidesAsPassenger(User user) {
+        String hql = "SELECT distinct r FROM " + TakenSeat.class.getName() + " ts " +
+                " INNER JOIN ts.passenger u " +
+                " INNER JOIN ts.ride r  " +
+                " WHERE u =:user AND r.date > now()";
+
+        Query query =  getHibernateTemplate()
+                .getSessionFactory()
+                .getCurrentSession()
+                .createQuery(hql);
+
+        query.setEntity("user", user);
+
+
+        return query.list();
+    }
 }

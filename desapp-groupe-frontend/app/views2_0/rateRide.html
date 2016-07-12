@@ -36,10 +36,10 @@
    <div class="x_panel">
     <div class="x_content">
       <div class="content-cal1 btn" ng-click="rrc.selectDriver()">
-        <p> Conductor : {{rrc.rideSelected.driver.name}}<p> 
+        <p> {{'conductor' | translate}} : {{rrc.rideSelected.driver.name}}<p> 
       </div>
       <div class="content-cal1 btn" ng-click="rrc.selectVehicle()">
-        <p> Vehiculo <p>
+        <p> {{'vehiculo' | translate}} <p>
       </div>
         <a href="" ng-repeat="tk in rrc.rideSelected.takenSeats" class='list-group-item' title='Votar Compañero' ng-click="rrc.selectUser(tk.passenger)">
           <div class="row">

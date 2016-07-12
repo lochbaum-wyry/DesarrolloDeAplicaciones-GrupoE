@@ -52,12 +52,30 @@ public class RideServiceRest
 
 
     @GET
+    @Path("awaitingRidesAsDriver/{userId}")
+    @Produces("application/json")
+    public List<Ride> awaitingRidesAsDriver(@PathParam("userId") final int userId){
+        List<Ride> rides = rideService.awaitingRidesAsDriver(userId);
+        return rides;
+    }
+
+    @GET
+    @Path("awaitingRidesAsPassenger/{userId}")
+    @Produces("application/json")
+    public List<Ride> awaitingRidesAsPassenger(@PathParam("userId") final int userId){
+        List<Ride> rides = rideService.awaitingRidesAsPassenger(userId);
+        return rides;
+    }
+
+    @GET
     @Path("getFutureRides/{userId}")
     @Produces("application/json")
     public List<Ride> getFutureRides(@PathParam("userId") final int userId){
         List<Ride> rides = rideService.getFutureRides(userId);
         return rides;
     }
+
+
 
     @GET
     @Path("getRateablesRides/{userId}")
