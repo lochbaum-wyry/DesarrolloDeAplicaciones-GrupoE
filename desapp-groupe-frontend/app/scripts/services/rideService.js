@@ -17,6 +17,8 @@ function RideService($http,$log) {
         cancelRequest: cancelRequest,
         rate: rate,
         rejectRequest: rejectRequest,
+        awaitingRidesAsDriver:awaitingRidesAsDriver,
+        awaitingRidesAsPassenger:awaitingRidesAsPassenger,
         getRateablesFromRide: getRateablesFromRide,
         getRateablesRides: getRateablesRides,
         getFutureRides:getFutureRides,
@@ -45,6 +47,14 @@ function RideService($http,$log) {
 
     function getFutureRides(userId){
         return $http.get(url + '/getFutureRides/' + userId).then(onSuccess).catch(onFail);
+    }
+
+    function awaitingRidesAsDriver(userId){
+        return $http.get(url + '/awaitingRidesAsDriver/' + userId).then(onSuccess).catch(onFail);
+    }
+
+    function awaitingRidesAsPassenger(userId){
+        return $http.get(url + '/awaitingRidesAsPassenger/' + userId).then(onSuccess).catch(onFail);
     }
 
     function requestRide(data) {

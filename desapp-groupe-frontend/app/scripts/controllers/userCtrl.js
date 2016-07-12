@@ -12,7 +12,11 @@ angular.module('desappGrupoeFrontendApp')
     $scope.ERROR_MSG = null;
     $scope.user = $localStorage.user;
     $scope.rates = [];
-    $scope.rides = [];
+    $scope.ridesAsDriverSelected = true;
+    $scope.ridesSelected = [];
+    $scope.ridesAsDriver = [];
+    $scope.ridesAsPassenger = [];
+
 
     var onSuccess,onFailure,userPromise;
 
@@ -30,16 +34,41 @@ angular.module('desappGrupoeFrontendApp')
         userPromise.catch(onFailure);
     };
 
-    $scope.getFutureRides = function(){
+    $scope.getAsDriver = function(){
+        $scope.ridesSelected = $scope.ridesAsDriver;
+        $scope.ridesAsDriverSelected = true;
+    };
+
+    $scope.getAsPassenger = function(){
+        $scope.ridesSelected = $scope.ridesAsPassenger;
+        $scope.ridesAsDriverSelected = false;
+    };
+
+    $scope.awaitingRidesAsDriver = function(){
         onSuccess = function (result){
-            $scope.rides =  result;
+            $scope.ridesAsDriver =  result;
+            $scope.ridesSelected = $scope.ridesAsDriver;
         };
 
         onFailure = function (error){
             $scope.ERROR_MSG = error;
         };
 
-        userPromise = RideService.getFutureRides($scope.user.id);
+        userPromise = RideService.awaitingRidesAsDriver($scope.user.id);
+        userPromise.then(onSuccess);
+        userPromise.catch(onFailure);
+    };
+
+    $scope.awaitingRidesAsPassenger = function(){
+        onSuccess = function (result){
+            $scope.ridesAsPassenger =  result;
+        };
+
+        onFailure = function (error){
+            $scope.ERROR_MSG = error;
+        };
+
+        userPromise = RideService.awaitingRidesAsPassenger($scope.user.id);
         userPromise.then(onSuccess);
         userPromise.catch(onFailure);
     };
@@ -79,6 +108,7 @@ angular.module('desappGrupoeFrontendApp')
     }
 
     $scope.getRates();
-    $scope.getFutureRides();
+    $scope.awaitingRidesAsDriver();
+    $scope.awaitingRidesAsPassenger();
 
   });
