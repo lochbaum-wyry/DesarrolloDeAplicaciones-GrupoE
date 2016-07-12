@@ -143,7 +143,7 @@
                           <span ng-show="!!n.sender">{{n.sender}}</span>
                           <span class="time">{{n.timestamp | date: 'EEE, dd MMM hh:mm'}}</span>
                         </span>
-                        <span class="message">{{n.msg}}</span>
+                        <span class="message">{{n.msg | translate }}</span>
                       </a>
                     </li>
                   </ul>
@@ -286,9 +286,11 @@
 
     <!-- * TRADUCCIONES  -->
       <script src="scripts/translations.js"></script>
-      <script src="scripts/translations/trans.addRoute.js"></script>
       <script src="scripts/translations/trans.routeFind.js"></script>
+      <script src="scripts/translations/trans.rideRequests.js"></script>
       <script src="scripts/translations/trans.requestedRides.js"></script>
+      <script src="scripts/translations/trans.notifications.js"></script>
+      <script src="scripts/translations/trans.addRoute.js"></script>
       <script src="scripts/translations/allTogetherTmp.js"></script>
 
     <!-- * MODULO  -->

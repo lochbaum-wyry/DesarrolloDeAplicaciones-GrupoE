@@ -12,7 +12,7 @@ function topBarCtrl(SessionService,$window, NotificationService) {
 
   vm.notifications = [];
 
-  setInterval(getNotifications,15000); 
+  setInterval(getNotifications,5000); 
 
   function getNotifications() {
   	NotificationService.notificationsFor(vm.user.id).then(onGetNotif).catch(function() {}); 
