@@ -40,3 +40,11 @@
 + Aceptar solicitud de viaje : __OK__
 + Calificar a un compañero de viaje, vehículo y conductor : __OK__ 
 + Enviar mensajes de manera publica y privada : __OK__ 
+
+## Agregados
++ Sistema de notificaciones
++ Edicion de datos personales
++ Ranking de conductores, pasajeros y vehículos
++ Comentarios
++ 
+
