@@ -8,7 +8,7 @@
           <ul class="list-inline widget_profile_box">
             <li><a>&nbsp;</a></li>
             <li>
-              <img ng-src="{{user.image}}" alt="{{user.name}}" class="img img-circle profile_img">
+              <img ng-src="{{user.image}}" alt="{{user.name}}" class="img img-circle profile_img"  ng-click="userProfile(user.id)">
             </li>
             <li><a>&nbsp;</a></li>
           </ul>
@@ -86,7 +86,7 @@
             <img class="img-circle profile_img" src={{rate.rater.image}} alt=""/>
           </a>
           <div class="media-body">
-            <a href="" class='title' ng-click="userProfile(rate.rater.id)">{{rate.rater.name}}</a>
+            <a href="" class='title'  ng-click="userProfile(rate.rater.id)">{{rate.rater.name}}</a>
             <p><small>{{rate.date | date: 'EEE, dd MMM hh:mm'}}</small>
             <p>{{rate.comment}}</p>
             </p>

@@ -49,7 +49,7 @@ function navBarCtrl(SessionService,$window, NotificationService) {
   function toRideAcceptedNotif(notification) {
 
     return { 
-      href: "#rideRequests",
+      href: "#home",
       image: notification.ride.driver.image,
       sender: notification.ride.driver.name, 
       timestamp: notification.timestamp, 
@@ -59,7 +59,7 @@ function navBarCtrl(SessionService,$window, NotificationService) {
 
   function toRideRejectedNotif(notification) {
     return { 
-      href: "#rideRequests",
+      href: "",
       image: notification.rideRequest.driver.image,
       sender: notification.rideRequest.driver.name, 
       timestamp: notification.timestamp, 
@@ -69,17 +69,17 @@ function navBarCtrl(SessionService,$window, NotificationService) {
 
   function toMessageNotif(notification) {
     return { 
-      href: "#rideRequests",
+      href: "#chats",
       image: notification.msgFrom.image,
       sender: notification.msgFrom.name, 
       timestamp: notification.timestamp, 
-      msg: "ride_rejected_notification"
+      msg: "incoming_message_notification"
     };
   }
 
   function toWallPostNotif(notification) {
     return { 
-      href: "#rideRequests",
+      href: "#profile/" + vm.user.id,
       image: notification.msgFrom.image,
       sender: notification.msgFrom.name, 
       timestamp: notification.timestamp, 

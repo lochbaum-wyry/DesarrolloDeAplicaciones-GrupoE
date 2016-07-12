@@ -109,6 +109,9 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.post" />
         </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.notification" />
+        </constructor-arg>
     </bean>
 
     <bean id="notification" class="domain.servicesRest.NotificationServiceRest">
@@ -124,6 +127,13 @@ http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd">
         <constructor-arg>
             <ref bean="services.chat" />
         </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.user" />
+        </constructor-arg>
+        <constructor-arg>
+            <ref bean="services.notification" />
+        </constructor-arg>
+
     </bean>
 
     <bean id="setup.exampleData" class="domain.servicesRest.SetupExampleData" init-method="init">

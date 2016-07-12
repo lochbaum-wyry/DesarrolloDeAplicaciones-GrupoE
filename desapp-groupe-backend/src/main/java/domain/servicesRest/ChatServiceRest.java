@@ -1,7 +1,12 @@
 package domain.servicesRest;
 
 import domain.Chat;
+import domain.Notification;
+import domain.User;
+import domain.notifications.InconmingMessageNotification;
 import domain.services.ChatService;
+import domain.services.NotificationService;
+import domain.services.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.*;
@@ -11,12 +16,17 @@ import javax.ws.rs.core.Response;
 @Path("chat")
 @Service
 public class ChatServiceRest {
+    private UserService userService;
     private ChatService chatService;
+    private NotificationService notificationService ;
 
     public ChatServiceRest(){}
 
-    public ChatServiceRest(ChatService chatService){
+    public ChatServiceRest(ChatService chatService, UserService userService , NotificationService notificationService)
+    {
         this.chatService = chatService;
+        this.userService = userService;
+        this.notificationService = notificationService ;
     }
 
     public ChatService getChatService() {
@@ -36,12 +46,19 @@ public class ChatServiceRest {
         Response response;
         try{
             chatService.sendMessage(senderId,chatId,content);
+
+            User sender = userService.getUserRepository().findById(senderId);
+            Chat chat= chatService.getChatRepository().findById(chatId);
+
+            for (User receiver : chat.getUsers() ) {
+                if (receiver.getId() != senderId)
+                    notificationService.create(new InconmingMessageNotification(sender, receiver)) ;
+            }
             response = Response.ok().build();
         }
         catch (Exception e ){
             e.getMessage();
             response = Response.serverError().build();
-
         }
         return response;
     }

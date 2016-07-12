@@ -2,6 +2,8 @@ package domain.servicesRest;
 
 
 import domain.Post;
+import domain.notifications.WallPostNotification;
+import domain.services.NotificationService;
 import domain.services.PostService;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,14 @@ import java.util.List;
 @Service
 public class PostServiceRest{
 
+    private NotificationService notificationService;
     private PostService postService;
 
     public PostServiceRest(){}
 
-    public PostServiceRest(PostService postService){
+    public PostServiceRest(PostService postService, NotificationService notificationService) {
         this.postService = postService;
+        this.notificationService = notificationService;
     }
 
     @POST
@@ -29,6 +33,7 @@ public class PostServiceRest{
         Response response;
         try{
             postService.createPost(post);
+            notificationService.create(new WallPostNotification(post.getWallOwner(), post.getPublisher()));
             response = Response.ok().build();
         }
         catch (Exception e ){

@@ -4,7 +4,7 @@ angular.module('desappGrupoeFrontendApp')
 	.factory('RideService',RideService);
 
 /* @ngInyect */
-function RideService($http,$log) {
+function RideService($http) {
     var url = 'http://localhost:8080/domain/servicesRest/ride';
 
     //////////////////////////
@@ -90,7 +90,6 @@ function onSuccess(response){
 }
 
 function onFail(error){
-    $log.error('Ocurrio un error: ' + error.data);
     return 'Ocurrio un error';
 }
 
