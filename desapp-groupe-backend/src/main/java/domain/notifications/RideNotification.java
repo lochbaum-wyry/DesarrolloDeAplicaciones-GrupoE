@@ -9,6 +9,7 @@ abstract public class RideNotification extends Notification {
 
     private Ride ride;
 
+    public RideNotification() {}
     public RideNotification(User receiver, Ride ride)
     {
         super();

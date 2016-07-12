@@ -112,6 +112,8 @@ public class UserService {
         newUser.setToken(googleOauthCredential);
         userRepository.update(newUser);
 
+        newUser = userRepository.findById(newUser.getId());
+
         return newUser;
     }
 

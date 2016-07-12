@@ -2,6 +2,7 @@ package domain.repositories;
 
 import domain.Notification;
 import domain.User;
+import domain.notifications.SystemNotification;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
@@ -18,12 +19,24 @@ public class NotificationRepository extends HibernateGenericDao<Notification> im
         return Notification.class;
     }
 
-    public List<Notification> notificationsFor(User user)
+
+    public List<SystemNotification> systemNotificationsFor(User user)
     {
-        String hql = "SELECT n FROM Notification n WHERE user = :user AND seen <> FALSE ";
+        String hql = "SELECT n FROM " + SystemNotification.class.getName() + " n "; // WHERE receiver = :user AND seen <> FALSE ";
         Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
 
-        query.setEntity("user", user) ;
+//        query.setEntity("user", user) ;
+
+        return query.list();
+    }
+
+
+    public List<Notification> notificationsFor(User user)
+    {
+        String hql = "SELECT n FROM Notification n " ; // WHERE receiver = :user AND seen <> FALSE ";
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql);
+
+//        query.setEntity("user", user) ;
 
         return query.list();
     }

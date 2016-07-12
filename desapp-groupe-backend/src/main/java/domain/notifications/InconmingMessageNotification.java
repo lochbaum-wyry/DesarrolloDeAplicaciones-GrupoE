@@ -12,10 +12,10 @@ public class InconmingMessageNotification extends Notification
 {
     @JsonSerialize(using= ReducedUserSerializer.class)
     private User msgFrom ;
-
+    public InconmingMessageNotification(){}
     public InconmingMessageNotification(User receiver, User msgFrom)
     {
-        super(receiver, NotificationType.IncomingMessage);
+        super(receiver, NotificationType.IncomingMessage.toString());
         this.setMsgFrom(msgFrom);
     }
 

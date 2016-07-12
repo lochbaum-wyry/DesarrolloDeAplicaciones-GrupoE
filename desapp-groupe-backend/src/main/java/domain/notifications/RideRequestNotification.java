@@ -12,6 +12,7 @@ public class RideRequestNotification extends Notification {
 
     private RideRequest rideRequest;
 
+    public RideRequestNotification() {}
     public RideRequestNotification(User receiver, RideRequest rideRequest)
     {
         super();

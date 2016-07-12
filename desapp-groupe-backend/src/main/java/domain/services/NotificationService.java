@@ -2,6 +2,7 @@ package domain.services;
 
 import domain.Notification;
 import domain.User;
+import domain.notifications.SystemNotification;
 import domain.repositories.NotificationRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +34,16 @@ public class NotificationService
         this.notificationRepository = notificationRepository;
     }
 
+    @Transactional
     public List<Notification> notificationsFor(User user)
     {
         return notificationRepository.notificationsFor(user);
+    }
+
+    @Transactional
+    public List<SystemNotification> systemNotificationsFor(User user)
+    {
+        return notificationRepository.systemNotificationsFor(user);
     }
 
     @Transactional

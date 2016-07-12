@@ -9,27 +9,30 @@
 
         <discriminator column="type" />
 
-        <many-to-one name="receiver" class="domain.User" column="receiver"/>
+        <many-to-one name="receiver" class="domain.User" column="receiver" lazy="false"/>
         <property name="seen"/>
         <property name="timestamp" type = "org.joda.time.contrib.hibernate.PersistentDateTime"/>
         <property name="type" insert="false" update="false"/>
 
 
-        <!--RideRequested, RideAccepted, RideRejected, WallPost, IncomingMessage;-->
-        <subclass name="domain.notifications.RideRequestedNotification" discriminator-value="0">
-            <many-to-one name="rideRequest" class="domain.RideRequest"/>
+        <!--RideRequested, RideAccepted, RideRejected, WallPost, IncomingMessage, System;-->
+        <subclass name="domain.notifications.RideRequestedNotification" discriminator-value="RideRequested" lazy="false">
+            <many-to-one name="rideRequest" class="domain.RideRequest" lazy="false"/>
         </subclass>
-        <subclass name="domain.notifications.RideAcceptedNotification" discriminator-value="1">
-            <many-to-one name="ride" class="domain.Ride"/>
+        <subclass name="domain.notifications.RideAcceptedNotification" discriminator-value="RideAccepted" lazy="false">
+            <many-to-one name="ride" class="domain.Ride" lazy="false"/>
         </subclass>
-        <subclass name="domain.notifications.RideRejectedNotification" discriminator-value="2">
-            <many-to-one name="rideRequest" class="domain.RideRequest"/>
+        <subclass name="domain.notifications.RideRejectedNotification" discriminator-value="RideRejected" lazy="false">
+            <many-to-one name="rideRequest" class="domain.RideRequest" lazy="false"/>
         </subclass>
-        <subclass name="domain.notifications.WallPostNotification" discriminator-value="3">
-            <many-to-one name="msgFrom" class="domain.User"/>
+        <subclass name="domain.notifications.WallPostNotification" discriminator-value="WallPost">
+            <many-to-one name="msgFrom" class="domain.User" lazy="false"/>
         </subclass>
-        <subclass name="domain.notifications.InconmingMessageNotification" discriminator-value="4">
-            <many-to-one name="msgFrom" class="domain.User"/>
+        <subclass name="domain.notifications.InconmingMessageNotification" discriminator-value="IncomingMessage" lazy="false">
+            <many-to-one name="msgFrom" class="domain.User" lazy="false"/>
+        </subclass>
+        <subclass name="domain.notifications.SystemNotification" discriminator-value="System" lazy="false">
+            <property name="msg"/>
         </subclass>
     </class>
 </hibernate-mapping>

@@ -1,20 +1,29 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.joda.ser.DateTimeSerializer;
 import domain.services.ReducedUserSerializer;
+import domain.servicesRest.serialization.JodaDateTimeDeserializer;
 import org.joda.time.DateTime;
 
 abstract public class Notification extends Entity
 {
-    @JsonSerialize(using= ReducedUserSerializer.class)
+//    @JsonSerialize(using= ReducedUserSerializer.class)
+    @JsonIgnore
     private User receiver ;
-    private NotificationType type ;
+
+    private String type ;
+
+    @JsonSerialize(using= DateTimeSerializer.class)
+    @JsonDeserialize(using= JodaDateTimeDeserializer.class)
     private DateTime timestamp ;
     private boolean seen = false  ;
 
     public Notification() { }
 
-    public Notification(User receiver, NotificationType type)
+    public Notification(User receiver, String type)
     {
         timestamp = new DateTime();
         this.receiver = receiver;
@@ -22,11 +31,11 @@ abstract public class Notification extends Entity
     }
 
 
-    public NotificationType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(NotificationType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

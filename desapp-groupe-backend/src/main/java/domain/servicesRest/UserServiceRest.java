@@ -6,10 +6,9 @@ import domain.*;
 import domain.builders.UserBuilder;
 import domain.exceptions.SingUpException;
 import domain.exceptions.SubiQueTeLlevoException;
-import domain.services.GoogleCredentialsService;
-import domain.services.RatingService;
-import domain.services.UserService;
-import domain.services.UserTokenService;
+import domain.notifications.InconmingMessageNotification;
+import domain.notifications.SystemNotification;
+import domain.services.*;
 import helpers.UserAuthorization;
 import helpers.UserTokenResponse;
 import org.springframework.stereotype.Service;
@@ -24,16 +23,18 @@ import java.util.List;
 public class UserServiceRest {
 
 
-     UserService userService;
-     GoogleCredentialsService googleCredentialsService;
-     UserTokenService userTokenService;
-     RatingService ratingService;
+    UserService userService;
+    GoogleCredentialsService googleCredentialsService;
+    UserTokenService userTokenService;
+    RatingService ratingService;
+    NotificationService notificationService ;
 
-    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService,RatingService ratingService) {
+    public UserServiceRest(UserService userService,GoogleCredentialsService googleCredentialsService,UserTokenService userTokenService,RatingService ratingService, NotificationService notificationService) {
         this.userService = userService;
         this.googleCredentialsService = googleCredentialsService;
         this.userTokenService = userTokenService;
         this.ratingService = ratingService;
+        this.notificationService = notificationService ;
     }
 
     public UserServiceRest(){}
@@ -73,7 +74,8 @@ public class UserServiceRest {
         } else {
             try {
                 realUser = signUp2(userinfoplus);
-
+                String msg = "Wellcome " + realUser.getName() + "!";
+                notificationService.create(new SystemNotification(realUser, msg));
             } catch (Exception e) {
                 realUser = null;
             }

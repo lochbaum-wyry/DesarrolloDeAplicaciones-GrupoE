@@ -14,9 +14,10 @@ public class WallPostNotification extends Notification {
     @JsonSerialize(using= ReducedUserSerializer.class)
     private User msgFrom ;
 
+    public WallPostNotification() {}
     public WallPostNotification(User receiver, User msgFrom)
     {
-        super(receiver, NotificationType.WallPost);
+        super(receiver, NotificationType.WallPost.toString());
         this.msgFrom = msgFrom;
     }
 
