@@ -52,7 +52,7 @@ public class ChatServiceRest {
 
             for (User receiver : chat.getUsers() ) {
                 if (receiver.getId() != senderId)
-                    notificationService.create(new InconmingMessageNotification(sender, receiver)) ;
+                    notificationService.create(new InconmingMessageNotification(receiver, sender)) ;
             }
             response = Response.ok().build();
         }
