@@ -73,38 +73,50 @@
         <div class="clearfix"></div>
       </div>
 
-      <ul class="list-unstyled top_profiles scroll-view">
-        <li class="media event"  id="comments-list"  dir-paginate="rp in rf.rideProposals | itemsPerPage: 5" >
-          <a class="pull-left profile_pic" ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">
-            <img class="img-circle profile_img" src={{rp.driver.image}} alt=""/>
-          </a>
-          <div class="media-body">
-            <a href="" class='title' ng-click="rf.selectRideProposal($index)" ng-class="{active:rf.selRideProposalIdx == $index}">{{ rp.driver.name }}</a>
-            <p><small>{{rate.date | date: 'EEE, dd MMM hh:mm'}}</small>
+      <div class="x_content">
 
-            <p class="list-group-item-text" >
-              <ul class="list list-unstyled">
-                <li>
-                  <small>{{ 'sube en' | translate }}</small>: 
-                  {{ rp.boardingAddress }} 
-                </li>
-                <li>
-                  <small>{{ 'baja en' | translate }}</small>: 
-                  {{ rp.getOffAddress }} 
-                </li>
-                <li>
-                  <small>{{ 'hora_partida' | translate }}</small>:
-                  {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }} 
-                </li>
-              </ul>
-            </p>
+        <!-- start accordion -->
+        <div aria-multiselectable="false" role="tablist" id="rideProposalsList" class="accordion">
+         
+            <!-- dir-paginate="rp in rf.rideProposals | itemsPerPage: 5" -->
 
-            </p>
+          <div id='panel{{$index}}' class="panel" ng-repeat="rp in rf.rideProposals" >
+            <a id='heading{{$index}}' class='panel-heading collapsed' aria-controls="collapse{{$index}}" aria-expanded="{{ ($index==0) ? 'true' : 'false'}}"  data-parent="#accordion" data-toggle="collapse" id="heading{{$index}}" role="tab" ng-click="rf.selectRideProposal($index)" href="javascript:;">
+
+              <h4 class="panel-title">{{ rp.driver.name }}<small> - {{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }}</small></h4>
+            </a>
+            <div  id="collapse{{$index}}" class="panel-collapse collapse" aria-labelledby="heading{{$index}}" role="tabpanel"  aria-expanded="{{ ($index==0) ? 'true' : 'false'}}">
+              <div class="panel-body">
+                <a href='' style='display:block'>
+                  <p class="list-group-item-text" >
+                    <ul class="list list-unstyled">
+                      <!-- <li> {{rate.date | date: 'EEE, dd MMM hh:mm'}} </li> -->
+                      <li>
+                        {{ 'sube en' | translate }}: 
+                        <strong>{{ rp.boardingAddress }} </strong>
+                      </li>
+                      <li>
+                        {{ 'baja en' | translate }}: 
+                        <strong>{{ rp.getOffAddress }} </strong>
+                      </li>
+                      <li>
+                        {{ 'hora_partida' | translate }}:
+                        <strong>{{ rp.departureDateTime | date: 'EEE, dd MMM hh:mm' }}</strong> 
+                      </li>
+                    </ul>
+                  </p>
+                </a>
+
+              </div>
+            </div>
           </div>
-        </li>
-      </ul>
-      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls>
-    <button class='btn btn-success' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
+          <!-- <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="bower_components/angularUtils-pagination/dirPagination.tpl.html"></dir-pagination-controls> -->
+
+        </div>
+        <!-- end of accordion -->
+      </div>
+
+      <button class='btn btn-success' ng-show='rf.selRideProposalIdx != null' ng-click="rf.requestRide()">{{ "request_ride" | translate }}</button>
     </div>
 
     

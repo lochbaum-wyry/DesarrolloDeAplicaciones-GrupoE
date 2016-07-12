@@ -33,6 +33,7 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
   vm.selectRideProposal = selectRideProposal;
   vm.parseTimestamp = parseTimestamp;
   vm.setPointFromAddress = setPointFromAddress;
+  vm.toggleProposalCollapse = toggleProposalCollapse;
   //---------------------------
   // Controller initialization
 
@@ -44,6 +45,15 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
   //--------------------------------
   // Scope functions implementation
   //--------------------------------
+  function toggleProposalCollapse(idx) {
+    var element = '#collapse' +  idx;
+    $(element).collapse('toggle');
+  }
+
+  function openProposalCollapse(idx) {
+    var element = '#collapse' +  idx;
+    $(element).collapse('show');
+  }
 
   function setPointFromAddress(whichPoint) {
     // switch (whichPoint) { 
@@ -72,6 +82,8 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
 
       if (vm.rideProposals.length > 0) {
         selectRideProposal(0);
+        toggleProposalCollapse(0);
+
       }
     }
 
@@ -90,26 +102,28 @@ function RouteFindCtrl(RouteService,RideService,SessionService,GoogleMapsService
 
       var gopLatLng = GmSubiConv.latLngFromRoutePoint(rideProposal.getOffPoint); 
       GoogleMapsService.addressFromLatLng(gopLatLng, assignAddressToProposal.bind([i, 'getOffAddress']) );
-
-      function assignAddressToProposal(address) {
-        var idx = this[0]; 
-        var whichOne = this[1]; 
-        var rideProposals = [] ;
-        vm.rideProposals[idx][whichOne] = address;
-        rideProposals = vm.rideProposals; 
-        vm.rideProposals = [] ; 
-        vm.rideProposals = rideProposals; 
-      }
-
     }
-
   }
+
+  function assignAddressToProposal(address) {
+    var idx = this[0]; 
+    var whichOne = this[1]; 
+    var rideProposals = [] ;
+    vm.rideProposals[idx][whichOne] = address;
+    rideProposals = vm.rideProposals; 
+    vm.rideProposals = [] ; 
+    vm.rideProposals = rideProposals; 
+  }
+
 
   function selectRideProposal(index)
   {
-    vm.selRideProposalIdx = index;
     // GoogleMapsService.clearMap();
-    renderRideProposal(index);
+    if (vm.selRideProposalIdx != index) {
+      vm.selRideProposalIdx = index;
+      renderRideProposal(index);
+    }
+    toggleProposalCollapse(index)
   }
 
   function requestRide() {

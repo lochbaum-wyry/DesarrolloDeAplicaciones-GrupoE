@@ -1,6 +1,5 @@
-  (function () {
+(function () {
 'use strict';
-
 angular.module('desappGrupoeFrontendApp').controller('AddRouteCtrl', AddRouteCtrl);
 
 function AddRouteCtrl(UserService,$localStorage, SessionService, GoogleMapsService, GMRouteService, GmSubiConv,AlertService) {

@@ -154,7 +154,8 @@ function GoogleMapsService() {
       if (status === google.maps.GeocoderStatus.OK) {
         onSuccCallback(results[0].formatted_address);
       } else {
-        onFailCallback(status);
+        if (onFailCallback != undefined)
+          onFailCallback(status);
       }
     });
   }
@@ -164,7 +165,8 @@ function GoogleMapsService() {
       if (status == google.maps.GeocoderStatus.OK) {
         onSuccCallback(results[0].geometry.location);
       } else {
-        onFailCallback(status);
+        if (onFailCallback != undefined)
+          onFailCallback(status);
       }
     });
   }
